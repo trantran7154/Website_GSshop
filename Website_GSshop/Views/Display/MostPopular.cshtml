@@ -1,0 +1,73 @@
+﻿@using Website_GSshop.Models
+@model List<Product>
+<div class="container-fluid">
+    <h3>Tìm kiếm phổ biến</h3>
+    <br />
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td rowspan="2">
+                    <div class="men-thumb-item">
+                        <img src="~/Content/Layout/images/m1.jpg" alt="">
+                    </div>
+                    <div class="item-info-product ">
+                        <h4>
+                            <a href="single.html">Almonds, 100g</a>
+                        </h4>
+                        <div class="info-product-price">
+                            <span class="item_price">20 Sản phẩm</span>
+                        </div>
+                    </div>
+                </td>
+                @for (var i = 0; i < 4; i++)
+                {
+                    <td>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/Layout/images/m1.jpg" alt="" style="width: 70px">
+                                </div>
+                            </div>
+                            <div class="-col-md-8 text-right">
+                                <div class="item-info-product ">
+                                    <h4>
+                                        <a href="single.html">Thực phẩm sấy khô</a>
+                                    </h4>
+                                    <div class="info-product-price">
+                                        <span class="item_price">20 Sản phẩm</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                @for (var i = 0; i < 4; i++)
+                {
+                    <td>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/Layout/images/m1.jpg" alt="" style="width: 70px">
+                                </div>
+                            </div>
+                            <div class="-col-md-8 text-right">
+                                <div class="item-info-product ">
+                                    <h4>
+                                        <a href="single.html">Thực phẩm sấy khô</a>
+                                    </h4>
+                                    <div class="info-product-price">
+                                        <span class="item_price">20 Sản phẩm</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>    
+</div>
+<br />
+<br />

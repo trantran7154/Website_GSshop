@@ -1,0 +1,28 @@
+﻿@using Website_GSshop.Models
+@model List<Product>
+<div class="container-fluid">
+    <h3>Danh mục ngành hàng</h3>
+    <br />
+    <table class="table table-bordered">
+        <tbody>
+            @for (var i = 0; i < 2; i++)
+            {
+                <tr>
+                    @for (var j = 0; j < 8; j++)
+                    {
+                        <td>
+                            <div class="item-info-product ">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/Layout/images/m1.jpg" alt="" style="width: 90px">
+                                </div>
+                                <span class="item_price">Áo thun</span>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+<br />

@@ -1,0 +1,54 @@
+﻿@using Website_GSshop.Models
+@model List<Product>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10">
+            <h3>Bộ sưu tập</h3>
+        </div>
+        <div class="col-sm-2">
+            <a href="#" class="text-primary"><b class="text-right">Xem thêm <i class="fa fa-angle-right"></i></b></a>
+        </div>
+    </div>
+    <br />
+    <table class="table table-bordered">
+        <tbody>
+            @for (var i = 0; i < 2; i++)
+            {
+                <tr>
+                    @for (var j = 0; j < 4; j++)
+                    {
+                        <td class="col-md-3">
+                            <div class="item-info-product ">
+                                <h4>
+                                    <a href="single.html">Chill ở nhà ></a>
+                                </h4>
+                                <div class="info-product-price">
+                                    <span class="item_price">20 Sản phẩm</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="men-thumb-item">
+                                        <img src="~/Content/Layout/images/m1.jpg" alt="" style="width: 90px">
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="men-thumb-item">
+                                        <img src="~/Content/Layout/images/m1.jpg" alt="" style="width: 90px">
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="men-thumb-item">
+                                        <img src="~/Content/Layout/images/m1.jpg" alt="" style="width: 90px">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+<br />
