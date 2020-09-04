@@ -146,6 +146,7 @@
     <Compile Include="Controllers\FooterController.cs" />
     <Compile Include="Controllers\HeaderController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\SellersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,7 +205,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CSS\StyleSheet1.css" />
+    <Content Include="Content\CSS\styleCSS.css" />
     <Content Include="Content\Layout\css\bootstrap.css" />
     <Content Include="Content\Layout\css\creditly.css" />
     <Content Include="Content\Layout\css\easy-responsive-tabs.css" />
@@ -269,6 +270,7 @@
     <Content Include="Content\Layout\images\mk9.jpg" />
     <Content Include="Content\Layout\images\move-up.png" />
     <Content Include="Content\Layout\images\nav.png" />
+    <Content Include="Content\Layout\images\nguoiban.png" />
     <Content Include="Content\Layout\images\nut1.png" />
     <Content Include="Content\Layout\images\pay1.png" />
     <Content Include="Content\Layout\images\pay2.png" />
@@ -318,7 +320,7 @@
     <Content Include="Content\UI\css\font-awesome.css" />
     <Content Include="Content\UI\css\nucleo-icons.css" />
     <Content Include="Content\UI\css\nucleo-svg.css" />
-    <Content Include="Content\UI\css\styleUI.css" />
+    <Content Include="Content\UI\css\StyleUI.css" />
     <Content Include="Content\UI\demo\demo.css" />
     <Content Include="Content\UI\demo\demo.js" />
     <Content Include="Content\UI\fonts\fontawesome-webfont.svg" />
@@ -617,6 +619,18 @@
     <Content Include="Views\Display\GSMall.cshtml" />
     <Content Include="Views\Display\Categories.cshtml" />
     <Content Include="Views\Display\JustForYou.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Account\LoginSeller.cshtml" />
+    <Content Include="Views\Sellers\Create.cshtml" />
+    <Content Include="Views\Sellers\Delete.cshtml" />
+    <Content Include="Views\Sellers\Details.cshtml" />
+    <Content Include="Views\Sellers\Edit.cshtml" />
+    <Content Include="Views\Sellers\Index.cshtml" />
+    <Content Include="Views\Account\UpdateInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

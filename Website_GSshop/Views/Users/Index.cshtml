@@ -1,0 +1,124 @@
+﻿@model IEnumerable<Website_GSshop.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.user_login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_pass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_nicename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_datecreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_token)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_datelogin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_fristname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_sex)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_birthday)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_pass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_nicename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_datecreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_token)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_role)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_datelogin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_fristname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_sex)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_birthday)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.user_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.user_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.user_id })
+        </td>
+    </tr>
+}
+
+</table>

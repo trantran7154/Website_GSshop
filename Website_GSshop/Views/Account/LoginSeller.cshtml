@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "LoginSeller";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
 <div class="section section-components">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
+        <div class="row">           
+            <div class="col-md-12">
                 <!-- Tabs with icons -->
                 <div class="nav-wrapper">
                     <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
@@ -44,17 +44,17 @@
                                         <script>
                                             function validateForm() {
                                                 // Bước 1: Lấy giá trị của username và password
-                                                var user_email = document.getElementById('user_email').value;
-                                                var user_pass = document.getElementById('user_pass').value;
+                                                var seller_email = document.getElementById('seller_email').value;
+                                                var seller_pass = document.getElementById('seller_pass').value;
                                                 // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
-                                                if (user_email == '' && user_pass == '') {
-                                                    document.getElementById("testlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email và mật khẩu.</b></div>"
+                                                if (seller_email == '' && seller_pass == '') {
+                                                    document.getElementById("testsellerlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email và mật khẩu.</b></div>"
                                                 }
-                                                else if (user_pass == '') {
-                                                    document.getElementById("testlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i > Bạn chưa nhập mật khẩu.</b></div>"
+                                                else if (seller_pass == '') {
+                                                    document.getElementById("testsellerlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i > Bạn chưa nhập mật khẩu.</b></div>"
                                                 }
-                                                else if (user_email == '') {
-                                                    document.getElementById("testlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email.</b></div>"
+                                                else if (seller_email == '') {
+                                                    document.getElementById("testsellerlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email.</b></div>"
                                                 }
                                                 else {
                                                     return true;
@@ -62,15 +62,15 @@
                                                 return false;
                                             }
                                         </script>
-                                        <form role="form" method="post" action="@Url.Action("Login","Account")" onsubmit="return validateForm()">
+                                        <form role="form" method="post" action="@Url.Action("LoginSeller","Account")" onsubmit="return validateForm()">
                                             <div class="col-md-12" style="background-color: #f1f1f1">
                                                 <br />
                                                 <div class="col-md-6">
                                                     <div class="styled-input agile-styled-input-top">
-                                                        <input type="text" placeholder="Email" id="user_email" name="user_email">
+                                                        <input type="text" placeholder="Email" id="seller_email" name="seller_email">
                                                     </div>
                                                     <div class="styled-input">
-                                                        <input type="password" placeholder="Mật khẩu" id="user_pass" name="user_pass">
+                                                        <input type="password" placeholder="Mật khẩu" id="seller_pass" name="seller_pass">
                                                         <br />
                                                     </div>
                                                     <div class="row">
@@ -84,16 +84,10 @@
                                                         </div>
                                                     </div>
                                                     <br />
-                                                    @Html.Raw(Session["testlogin"])
-                                                    <div id="testlogin"></div>
+                                                    @Html.Raw(Session["testsellerlogin"])
+                                                    <div id="testsellerlogin"></div>
                                                     <center><input type="submit" onclick="xuly()" value="ĐĂNG NHẬP"></center>
-                                                    <br />
-                                                </div>
-                                                <br />
-                                                <div class="col-md-1">
-                                                    <div class="hr-sect">Hoặc</div>                                                    
-                                                </div>
-                                                <div class="col-md-5">
+                                                    <div class="hr-sect">Hoặc</div>
                                                     <center>
                                                         <button class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Đăng nhập bằng tài khoản Facebook</button>
                                                         <br />
@@ -103,12 +97,18 @@
                                                         <br />
                                                     </center>
                                                 </div>
+                                                <br />
+                                                <div class="col-md-6">
+                                                    <img src="~/Content/Layout/images/nguoiban.png" style="width: 100%" />
+                                                </div>
+                                                <br />                                                
                                             </div>
+                                            <br />
                                         </form>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="clearfix"></div>
-                               </div>                                                             
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
                                 <div class="modal-body modal-body-sub_agile">
@@ -116,26 +116,27 @@
                                         <span class="fa fa-envelope-o" aria-hidden="true"></span>
                                     </div>
                                     <div class="modal_body_left modal_body_left1">
-                                        <h3>Chào mừng đến với GS Shop. Đăng ký ngay!</h3>
+                                        <center>
+                                            <h3>Chào mừng đến với GS Shop. Đăng ký ngay!</h3>
+                                        </center>
                                         <br />
                                         <script>
-                                            function valiSignUp() {
+                                            function valiSignUpSeller() {
                                                 // Bước 1: Lấy giá trị của username và password
-                                                var user_email = document.getElementById('user_emailres').value;
-                                                var user_pass = document.getElementById('user_passres').value;
-                                                var user_repeat = document.getElementById('user_repeat').value;
+                                                var seller_email = document.getElementById('seller_emailres').value;
+                                                var seller_pass = document.getElementById('seller_passres').value;
+                                                var seller_repeat = document.getElementById('seller_repeat').value;
                                                 // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
-                                                if (user_email == '' && user_pass == '') {
+                                                if (seller_email == '' && seller_pass == '') {
                                                     document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email và mật khẩu.</b></div>"
                                                 }
-                                                else if (user_pass == '') {
+                                                else if (seller_pass == '') {
                                                     document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i > Bạn chưa nhập mật khẩu.</b></div>"
                                                 }
-                                                else if (user_email == '') {
+                                                else if (seller_email == '') {
                                                     document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email.</b></div>"
                                                 }
-                                                else if (user_pass != user_repeat)
-                                                {
+                                                else if (seller_pass != seller_repeat) {
                                                     document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Mật khẩu nhập lại chưa đúng.</b></div>"
                                                 }
                                                 else {
@@ -144,32 +145,35 @@
                                                 return false;
                                             }
                                         </script>
-                                        <form role="form" method="post" action="@Url.Action("SignUp","Account")" onsubmit="return valiSignUp()">
+                                        <form role="form" method="post" action="@Url.Action("SignUpSeller","Account")" onsubmit="return valiSignUpSeller()">
                                             <div class="col-md-12" style="background-color: #f1f1f1">
                                                 <br />
                                                 <div class="col-md-6">
                                                     <div class="styled-input agile-styled-input-top">
-                                                        <input type="text" placeholder="Email" id="user_emailres" name="user_email">
+                                                        <input type="text" placeholder="Email" id="seller_emailres" name="seller_email">
                                                     </div>
                                                     <div class="styled-input">
-                                                        <input type="password" placeholder="Mật khẩu" id="user_passres" name="user_pass">
+                                                        <input type="password" placeholder="Mật khẩu" id="seller_passres" name="seller_pass">
                                                         <br />
                                                     </div>
                                                     <div class="styled-input">
-                                                        <input type="password" placeholder="Nhập lại mật khẩu" id="user_repeat" name="user_repeat">
+                                                        <input type="password" placeholder="Nhập lại mật khẩu" id="seller_repeat" name="seller_repeat">
                                                         <br />
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="checkbox" /> Ghi nhớ
+                                                        </div>
+                                                        <div class="col-md-6 text-right">
+                                                            <a href="#" style="font-size: 13px">
+                                                                Quên Mật Khẩu?
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                     <br />
-                                                    @Html.Raw(Session["testsignup"])
                                                     <div id="testsignup"></div>
                                                     <center><input type="submit" onclick="xuly()" value="ĐĂNG KÝ"></center>
-                                                    <br />
-                                                </div>
-                                                <br />
-                                                <div class="col-md-1">
                                                     <div class="hr-sect">Hoặc</div>
-                                                </div>
-                                                <div class="col-md-5">
                                                     <center>
                                                         <button class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Đăng nhập bằng tài khoản Facebook</button>
                                                         <br />
@@ -179,7 +183,13 @@
                                                         <br />
                                                     </center>
                                                 </div>
+                                                <br />
+                                                <div class="col-md-6">
+                                                    <img src="~/Content/Layout/images/nguoiban.png" style="width: 100%" />
+                                                </div>
+                                                <br />
                                             </div>
+                                            <br />
                                         </form>
                                         <div class="clearfix"></div>
                                     </div>
@@ -250,3 +260,4 @@
 </div>
 <br />
 <br />
+

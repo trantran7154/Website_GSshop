@@ -4293,7 +4293,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 .card-body {
     flex: 1 1 auto;
     padding: 1.5rem;
-    border: 1.2px solid #000;
     border-radius: 5px;
 }
 
@@ -16731,11 +16730,11 @@ textarea[resize=horizontal] {
 
 .nav-pills .nav-item:not(:last-child) {
     padding-right: 1rem
-}
+} 
 
 .nav-pills .nav-link {
     padding: .75rem 1rem;
-    color: #00b4d2;
+    color: #1ACCFD;
     font-weight: 500;
     font-size: .875rem;
     box-shadow: 0 4px 6px rgba(50,50,93,.11),0 1px 3px rgba(0,0,0,.08);
@@ -20913,3 +20912,4 @@ textarea[resize=horizontal] {
     .fade:not(.show) {
         opacity: 0
     }
+

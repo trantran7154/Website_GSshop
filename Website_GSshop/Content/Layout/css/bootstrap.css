@@ -4422,7 +4422,6 @@ tbody.collapse.in {
     min-width: 160px;
     padding: 5px 0;
     margin: 2px 0 0;
-    font-size: 14px;
     text-align: left;
     list-style: none;
     background-color: #fff;
@@ -8261,6 +8260,7 @@ button.close {
     }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
 
 
 
