@@ -72,9 +72,9 @@ namespace Website_GSshop.Controllers
             return View(user);
         }
         // Cập nhật thông tin cá nhân
-        public ActionResult UpdateInfo()
+        public PartialViewResult UpdateInfo()
         {
-            return View();
+            return PartialView();
         }
         // Quên mật khẩu người dùng   
         
