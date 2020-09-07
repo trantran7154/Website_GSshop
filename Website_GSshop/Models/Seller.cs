@@ -43,6 +43,7 @@ namespace Website_GSshop.Models
         public Nullable<System.DateTime> seller_datelogin { get; set; }
         public string seller_detail { get; set; }
         public string seller_description { get; set; }
+        public Nullable<int> seller_role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }

@@ -126,6 +126,7 @@
           <Property Name="seller_datelogin" Type="datetime" />
           <Property Name="seller_detail" Type="nvarchar(max)" />
           <Property Name="seller_description" Type="nvarchar(max)" />
+          <Property Name="seller_role" Type="int" />
         </EntityType>
         <EntityType Name="SubCategory">
           <Key>
@@ -164,11 +165,10 @@
           <Property Name="user_active" Type="bit" />
           <Property Name="user_address" Type="nvarchar" MaxLength="300" />
           <Property Name="user_telephone" Type="varchar" MaxLength="12" />
-          <Property Name="user_fristname" Type="nvarchar" MaxLength="50" />
-          <Property Name="user_lastname" Type="nvarchar" MaxLength="50" />
           <Property Name="user_image" Type="nvarchar" MaxLength="2000" />
           <Property Name="user_sex" Type="int" />
-          <Property Name="user_birthday" Type="date" />
+          <Property Name="user_provincecity" Type="nvarchar" MaxLength="100" />
+          <Property Name="user_district" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_ClassificationSubCategory_SubCategory">
           <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
@@ -489,6 +489,7 @@
           <Property Name="seller_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Seller" FromRole="Seller" ToRole="Product" />
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Seller" FromRole="Seller" ToRole="ReplyComment" />
+          <Property Name="seller_role" Type="Int32" />
         </EntityType>
         <EntityType Name="SubCategory">
           <Key>
@@ -529,13 +530,12 @@
           <Property Name="user_active" Type="Boolean" />
           <Property Name="user_address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="user_telephone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="user_fristname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="user_lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="user_image" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="user_sex" Type="Int32" />
-          <Property Name="user_birthday" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_User" FromRole="User" ToRole="Product" />
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_User" FromRole="User" ToRole="ReplyComment" />
+          <Property Name="user_provincecity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="user_district" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Product_Category_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
@@ -838,6 +838,7 @@
           <EntitySetMapping Name="Seller">
             <EntityTypeMapping TypeName="Data_GSShopModel.Seller">
               <MappingFragment StoreEntitySet="Seller">
+                <ScalarProperty Name="seller_role" ColumnName="seller_role" />
                 <ScalarProperty Name="seller_id" ColumnName="seller_id" />
                 <ScalarProperty Name="seller_login" ColumnName="seller_login" />
                 <ScalarProperty Name="seller_pass" ColumnName="seller_pass" />
@@ -889,6 +890,8 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="Data_GSShopModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="user_district" ColumnName="user_district" />
+                <ScalarProperty Name="user_provincecity" ColumnName="user_provincecity" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="user_login" ColumnName="user_login" />
                 <ScalarProperty Name="user_pass" ColumnName="user_pass" />
@@ -901,11 +904,8 @@
                 <ScalarProperty Name="user_active" ColumnName="user_active" />
                 <ScalarProperty Name="user_address" ColumnName="user_address" />
                 <ScalarProperty Name="user_telephone" ColumnName="user_telephone" />
-                <ScalarProperty Name="user_fristname" ColumnName="user_fristname" />
-                <ScalarProperty Name="user_lastname" ColumnName="user_lastname" />
                 <ScalarProperty Name="user_image" ColumnName="user_image" />
                 <ScalarProperty Name="user_sex" ColumnName="user_sex" />
-                <ScalarProperty Name="user_birthday" ColumnName="user_birthday" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

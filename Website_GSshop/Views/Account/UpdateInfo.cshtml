@@ -1,4 +1,10 @@
-﻿<!doctype html>
+﻿@using Website_GSshop.Models
+@model List<User>
+@{ 
+    String a = "@[A-Z0-9-]";
+    User user = (User)Session["user"];
+}
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -63,7 +69,37 @@
                 <div class="col-sm-8 col-sm-offset-2">
                     <div class="wizard-container">
                         <div class="card wizard-card" data-color="orange" id="wizardProfile">
-                            <form action="">
+                            <script>
+                                function valiInfo() {
+                                    var user_telephone = document.getElementById("user_telephone").value;
+                                    // regex telephone
+                                    var re_telephone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+                                    var user_email = document.getElementById("user_email").value;
+                                    // regex email
+                                    var re_email = /[A-Z0-9._%+-]+@a+.+.[A-Z]{2,4}/igm;
+                                    if (re_telephone.test(user_telephone) == false) {
+                                        if (user_telephone != "") {
+                                            document.getElementById("testInfo").innerHTML = "<div class='alert alert-danger text-center'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i>Số điện thoại không hợp lệ !</div>";
+                                        }
+                                        else {
+                                            document.getElementById("testInfo").innerHTML = "<div class='alert alert-danger text-center'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i>Số điện thoại không được bỏ trống !</div>";
+                                        }
+                                    }
+                                    else if (re_email.test(user_email) == false) {
+                                        if (user_email != "") {
+                                            document.getElementById("testInfo").innerHTML = "<div class='alert alert-danger text-center'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i>Email/Gmail không được bỏ trống !</div>";
+                                        }
+                                        else {
+                                            document.getElementById("testInfo").innerHTML = "<div class='alert alert-danger text-center'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i>Email/Gmail không được bỏ trống !</div>"; 
+                                        }
+                                    }
+                                    else {
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                            </script>
+                            <form action="@Url.Action("UpdateInfo","Account")" onsubmit="return valiInfo()" method="post">
                                 <!-- You can switch " data-color="orange" "  with one of the next bright colors: "blue", "green", "orange", "red", "azure" -->
                                 <div class="wizard-header text-center">
                                     <h2 class="wizard-title text-danger">THÔNG TIN CÁ NHÂN</h2>
@@ -97,7 +133,7 @@
                                                 <div class="picture-container">
                                                     <div class="picture">
                                                         <img src="~/Content/Info/img/default-avatar.jpg" class="picture-src" id="wizardPicturePreview" title="" />
-                                                        <input type="file" id="wizard-picture">
+                                                        <input type="file" id="wizard-picture" name="user_image">
                                                     </div>
                                                     <h6>Chọn Ảnh Đại Diện</h6>
                                                 </div>
@@ -105,17 +141,17 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Họ và tên</label>
-                                                    <input name="firstname" type="text" class="form-control" placeholder="* Trường bắt buộc">
+                                                    <input type="text" class="form-control" placeholder="* Trường bắt buộc" required="" name="user_nicename">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Số điện thoại</label>
-                                                    <input name="lastname" type="text" class="form-control" placeholder="* Trường bắt buộc">
+                                                    <input type="text" class="form-control" placeholder="* Trường bắt buộc" id="user_telephone" required="" name="user_telephone">
                                                 </div>
                                             </div>
                                             <div class="col-sm-10 col-sm-offset-1">
                                                 <div class="form-group">
                                                     <label>Email</label>
-                                                    <input name="email" type="email" class="form-control">
+                                                    <input type="email" class="form-control" placeholder="* Trường bắt buộc" id="user_email" required="" name="user_email" value="@user.user_email">
                                                 </div>
                                             </div>
                                         </div>
@@ -125,13 +161,13 @@
                                             <div class="col-sm-10 col-sm-offset-1">
                                                 <div class="form-group">
                                                     <label>Địa chỉ</label>
-                                                    <input type="text" class="form-control" placeholder="* Trường bắt buộc">
+                                                    <input type="text" class="form-control" placeholder="* Trường bắt buộc" required="" name="user_address">
                                                 </div>
                                             </div>
                                             <div class="col-sm-5 col-sm-offset-1">
                                                 <div class="form-group">
                                                     <label>Tỉnh/ Thành Phố <small>(* Trường bắt buộc)</small></label><br>
-                                                    <select name="country" class="form-control">
+                                                    <select class="form-control" name="user_provincecity">
                                                         <option value="Afghanistan"> Chọn Tỉnh/ Thành Phố </option>
                                                         <option value="Albania"> Albania </option>
                                                         <option value="Algeria"> Algeria </option>
@@ -147,7 +183,7 @@
                                             <div class="col-sm-5">
                                                 <div class="form-group">
                                                     <label>Quận/ Huyện <small>(* Trường bắt buộc)</small></label><br>
-                                                    <select name="country" class="form-control">
+                                                    <select class="form-control" name="user_district">
                                                         <option value="Afghanistan"> Chọn Quận/ Huyện </option>
                                                         <option value="Albania"> Albania </option>
                                                         <option value="Algeria"> Algeria </option>
@@ -162,14 +198,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <br />
+                                    <div id="testInfo"></div>
+                                </div>                                
                                 <div class="wizard-footer">
                                     <div class="pull-right">
-                                        <input type='button' class='btn btn-next btn-fill btn-warning btn-wd' name='next' value='Tiếp Tục' />
-                                        <input type='button' class='btn btn-finish btn-fill btn-warning btn-wd' name='finish' value='Lưu Thông Tin' />
+                                        <input type='button' class='btn btn-next btn-fill btn-warning btn-wd' value='Tiếp Tục' />
+                                        <input type='submit' class='btn btn-finish btn-fill btn-warning btn-wd' value='Lưu Thông Tin' />
                                     </div>
                                     <div class="pull-left">
-                                        <input type='button' class='btn btn-previous btn-default btn-wd' name='previous' value='Trở Về' />
+                                        <input type='button' class='btn btn-previous btn-default btn-wd' value='Trở Về' />
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -178,59 +216,7 @@
                     </div> <!-- wizard container -->
                 </div>
             </div><!-- end row -->
-        </div> <!--  big container -->       
-        <div class="fixed-plugin">
-            <div class="dropdown open">
-                <a href="#" data-toggle="dropdown">
-                    <i class="fa fa-cog fa-2x"> </i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="header-title">Examples</li>
-                    <li class="active">
-                        <a href="wizard-create-profile.html">
-                            <img src="~/Content/Info/img/wizard-create-profile.png">
-                            Create Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wizard-find-desk.html">
-                            <img src="~/Content/Info/img/wizard-find-desk.png">
-                            Find Desk
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wizard-list-place.html">
-                            <img src="~/Content/Info/img/wizard-list-place.png">
-                            List Your Place
-                        </a>
-                    </li>
-                    <li class="header-title">Colors</li>
-                    <li class="adjustments-line">
-                        <a href="javascript:void(0)" class="switch-trigger">
-                            <div class="text-center">
-                                <span class="badge filter badge-blue" data-color="blue"></span>
-                                <span class="badge filter badge-azure" data-color="azure"></span>
-                                <span class="badge filter badge-green" data-color="green"></span>
-                                <span class="badge filter badge-orange active" data-color="orange"></span>
-                                <span class="badge filter badge-red" data-color="red"></span>
-                            </div>
-                            <div class="clearfix"></div>
-                        </a>
-                    </li>
-                    <li class="tutorial">
-                        <div class="text-center">
-                            <a href="documentation/elements.html" target="_blank" class="btn btn-default btn-fill btn-block">Documentation</a>
-                        </div>
-                    </li>
-                    <li class="license">
-                        Personal License
-                        <div class="text-center">
-                            <a href="https://www.creative-tim.com/product/paper-bootstrap-wizard" target="_blank" class="btn btn-info btn-fill btn-block">Download, it's free!</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        </div> <!--  big container -->              
     </div>
 </body>
 <!--   Core JS Files   -->

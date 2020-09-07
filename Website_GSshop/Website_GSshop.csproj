@@ -205,7 +205,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CSS\StyleSheet1.css" />
+    <Content Include="Content\CSS\Style.css" />
     <Content Include="Content\Info\css\bootstrap.min.css" />
     <Content Include="Content\Info\css\demo.css" />
     <Content Include="Content\Info\css\paper-bootstrap-wizard.css" />

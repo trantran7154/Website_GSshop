@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -50,14 +51,13 @@ namespace Website_GSshop.Controllers
         [HttpPost]
         public ActionResult SignUp([Bind(Include = "user_id,user_login,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_fristname,user_lastname,user_image,user_sex,user_birthday")] User user, FormCollection f)
         {
-            String Email = f["user_email"].ToString();
-            User user_email = db.User.SingleOrDefault(n => n.user_email == Email);
+            User user_email = db.User.SingleOrDefault(n => n.user_email == user.user_email);
             if (user_email != null)
             {
                 Session["testsignup"] = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Tài khoản đã tồn tại.</b></div>";
                 return Redirect(Request.UrlReferrer.ToString());
             }
-            else if (ModelState.IsValid)
+            else
             {
                 Session["user"] = user;
                 user.user_datecreated = DateTime.Now;
@@ -67,17 +67,40 @@ namespace Website_GSshop.Controllers
                 user.user_active = true;
                 db.User.Add(user);
                 db.SaveChanges();
-                return Redirect("/Display/Index");
+                return Redirect("/Account/UpdateInfo");
             }
             return View(user);
         }
         // Cập nhật thông tin cá nhân
         public PartialViewResult UpdateInfo()
         {
+            User user = (User)Session["user"];
+            if (user == null)
+            {
+                Response.Redirect("/Account/Login");
+            }
             return PartialView();
+        }       
+        [HttpPost]
+        public ActionResult UpdateInfo(FormCollection f)
+        {
+            User user = (User)Session["user"];
+            String sNicname = f["user_nicename"].ToString();
+            String sTelephone = f["user_telephone"].ToString();
+            String sAddress = f["user_address"].ToString();
+            String sProvinceCity = f["user_provincecity"].ToString();
+            String sDistrict = f["user_district"].ToString();
+            db.User.Find(user.user_id).user_nicename = sNicname;
+            db.User.Find(user.user_id).user_address = sAddress;
+            db.User.Find(user.user_id).user_telephone = sTelephone;
+            db.User.Find(user.user_id).user_address = sAddress;
+            db.User.Find(user.user_id).user_provincecity = sProvinceCity;
+            db.User.Find(user.user_id).user_district = sDistrict;
+            db.SaveChanges();
+            return Redirect("/");
         }
         // Quên mật khẩu người dùng   
-        
+
         // Đăng nhập người bán
         public ActionResult LoginSeller()
         {

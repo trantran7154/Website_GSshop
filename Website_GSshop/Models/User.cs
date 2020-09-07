@@ -33,11 +33,10 @@ namespace Website_GSshop.Models
         public Nullable<bool> user_active { get; set; }
         public string user_address { get; set; }
         public string user_telephone { get; set; }
-        public string user_fristname { get; set; }
-        public string user_lastname { get; set; }
         public string user_image { get; set; }
         public Nullable<int> user_sex { get; set; }
-        public Nullable<System.DateTime> user_birthday { get; set; }
+        public string user_provincecity { get; set; }
+        public string user_district { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
