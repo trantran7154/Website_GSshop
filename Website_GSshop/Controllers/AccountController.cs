@@ -10,6 +10,9 @@ namespace Website_GSshop.Controllers
 {
     public class AccountController : Controller
     {
+        String home = "/Display/Index";
+        String update = "/Account/UpdateInfo";
+        String login = "/Account/Login";
         Data_GSShopEntities db = new Data_GSShopEntities();
         // GET: Login
         public ActionResult Login()
@@ -17,7 +20,7 @@ namespace Website_GSshop.Controllers
             User user = (User)Session["user"];
             if(user != null)
             {
-                return Redirect("/Display/Index");
+                return Redirect(home);
             }    
             return View();
         }       
@@ -33,7 +36,7 @@ namespace Website_GSshop.Controllers
                 Session["user"] = user;
                 db.User.Find(user.user_id).user_datelogin = DateTime.Now;
                 db.User.Find(user.user_id).user_token = Guid.NewGuid().ToString();
-                return Redirect("/Display/Index");
+                return Redirect(home);
             }               
             else
             {
@@ -45,7 +48,7 @@ namespace Website_GSshop.Controllers
         public ActionResult LogOut()
         {
             Session["user"] = null;
-            return Redirect("/Display/Index");
+            return Redirect(home);
         }
         // Đăng ký người dùng
         [HttpPost]
@@ -67,7 +70,7 @@ namespace Website_GSshop.Controllers
                 user.user_active = true;
                 db.User.Add(user);
                 db.SaveChanges();
-                return Redirect("/Account/UpdateInfo");
+                return Redirect(update);
             }
             return View(user);
         }
@@ -77,7 +80,7 @@ namespace Website_GSshop.Controllers
             User user = (User)Session["user"];
             if (user == null)
             {
-                Response.Redirect("/Account/Login");
+                Response.Redirect(login);
             }
             return PartialView();
         }       
@@ -101,7 +104,7 @@ namespace Website_GSshop.Controllers
             db.User.Find(user.user_id).user_district = sDistrict;
             Session["user"] = usernew;
             db.SaveChanges();
-            return Redirect("/");
+            return Redirect(home);
         }
         // Thông tin cá nhân
         public ActionResult Info()
@@ -109,7 +112,7 @@ namespace Website_GSshop.Controllers
             User user = (User)Session["user"];
             if (user == null)
             {
-                Response.Redirect("/Account/Login");
+                Response.Redirect(login);
             }
             return View();
         }
