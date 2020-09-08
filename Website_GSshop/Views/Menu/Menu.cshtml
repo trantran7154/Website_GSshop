@@ -1,7 +1,7 @@
 ﻿@using Website_GSshop.Models
 @model List<Category>
 @{
-    User sesus = (User)Session["user"];
+    User sesuser = (User)Session["user"];
 }
 <!-- header-bot-->
 <div class="header-bot">
@@ -18,13 +18,13 @@
         <!-- header-bot -->
         <div class="col-md-8 header">
             <!-- header lists -->
-            @if (sesus != null)
+            @if (sesuser != null)
             {
                 <ul class="text-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chào, @sesus.user_email</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chào, @sesuser.user_nicename</a>
                         <ul class="dropdown-menu">
-                            <li style="width: 100%; text-align: unset"><a href="/user/preferences"><i class="fa fa-smile-o"></i> Quản lý tài khoản</a></li>
+                            <li style="width: 100%; text-align: unset"><a href="/Account/Info"><i class="fa fa-smile-o"></i> Quản lý tài khoản</a></li>
                             <li style="width: 100%; text-align: unset"><a href="/help/support"><i class="fa fa-archive"></i> Đơn hàng của tôi</a></li>
                             <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-heart"></i> Danh sách yêu thích</a></li>
                             <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-bell"></i> Đơn hàng đã theo dõi</a></li>

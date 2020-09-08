@@ -1,0 +1,82 @@
+﻿@using Website_GSshop.Models
+@model User
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    User sesuser = (User)Session["user"];
+}
+<div class="emp-profile" style="background-color: #eff0f4">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="profile-work">
+                    <p style="color: black">Xin chào, @sesuser.user_nicename</p>
+                    <br />
+                    <p class="text-info" style="font-size: 16px">Quản lý tài khoản</p>
+                    &nbsp;&nbsp;<a href="">Thông tin cá nhân</a><br />
+                    &nbsp;&nbsp;<a href="">Số địa chỉ</a><br />
+                    &nbsp;&nbsp;<a href="">Tùy chọn thanh toán</a><br />
+                    &nbsp;&nbsp;<a href="">Mã giảm giá</a><br /><br />
+                    <p style="font-size: 16px; color: black">Đơn hàng của tôi</p>
+                    &nbsp;&nbsp;<a href="">Đơn hàng hủy trả</a><br />
+                    &nbsp;&nbsp;<a href="">Đơn đổi trả</a><br /><br />
+                    <p style="font-size: 16px; color: black">Nhận xét của tôi</p>
+                    <p style="font-size: 16px; color: black">Sản phẩm yêu thích & đơn hàng theo dõi</p>
+                    <p style="font-size: 16px; color: black">Bán hàng trên Lazada</p>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h4><b>Quản lý tài khoản</b></h4>
+                        <div class="container-fluid">
+                            <br />
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-4" style="background-color: #ffffff">
+                                        <br />
+                                        Thông tin cá nhân | <a href="#"><small>Chỉnh sửa</small></a>
+                                        <br />
+                                        <br />
+                                        <p>@sesuser.user_nicename</p>
+                                        <p>@sesuser.user_email</p>
+                                        <br />
+                                        <a href="#">Đăng ký nhận bản tin</a>
+                                        <br />
+                                        <br />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6" style="background-color: #ffffff">
+                                                    <br />
+                                                    Số địa chỉ | <a href="#"><small>Thêm</small></a>
+                                                    <br />
+                                                    <br />
+                                                    <p>Lưu thông tin địa chỉ giao hàng</p>
+                                                    <br />
+                                                    <i class="fa fa-map-marker" style="font-size: 55px"></i>
+                                                    <br />
+                                                    <br />
+                                                </div>
+                                                <div class="col-md-6" style="background-color: #ffffff; border-left: 2px solid #eff0f5">
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <p>Lưu thông địa chỉ thanh toán</p>
+                                                    <br />
+                                                    <br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

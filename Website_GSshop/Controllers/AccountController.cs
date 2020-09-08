@@ -85,19 +85,33 @@ namespace Website_GSshop.Controllers
         public ActionResult UpdateInfo(FormCollection f)
         {
             User user = (User)Session["user"];
+            User usernew = db.User.SingleOrDefault(n => n.user_id == user.user_id);
+            String sImage = f["user_image"].ToString();
             String sNicname = f["user_nicename"].ToString();
             String sTelephone = f["user_telephone"].ToString();
             String sAddress = f["user_address"].ToString();
             String sProvinceCity = f["user_provincecity"].ToString();
             String sDistrict = f["user_district"].ToString();
+            db.User.Find(user.user_id).user_image = sImage;
             db.User.Find(user.user_id).user_nicename = sNicname;
             db.User.Find(user.user_id).user_address = sAddress;
             db.User.Find(user.user_id).user_telephone = sTelephone;
             db.User.Find(user.user_id).user_address = sAddress;
             db.User.Find(user.user_id).user_provincecity = sProvinceCity;
             db.User.Find(user.user_id).user_district = sDistrict;
+            Session["user"] = usernew;
             db.SaveChanges();
             return Redirect("/");
+        }
+        // Thông tin cá nhân
+        public ActionResult Info()
+        {
+            User user = (User)Session["user"];
+            if (user == null)
+            {
+                Response.Redirect("/Account/Login");
+            }
+            return View();
         }
         // Quên mật khẩu người dùng   
 
