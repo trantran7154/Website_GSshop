@@ -1,60 +1,79 @@
 ﻿@using Website_GSshop.Models
 @model List<Product>
-<div class="container-fluid">
-    <h3>Dành cho bạn</h3>
-    <br />
-    <table class="table table-bordered">
-        <tbody>
-            @for (var i = 0; i < 4; i++)
-            {
-                <tr>
-                    @for (var j = 0; j < 6; j++)
+<center>
+    <div class="container-fluid">
+        <br />
+        <h2 class="head-style-2">
+            <img src="~/Content/Layout/images/icons8-fire-48.png" />Dành cho bạn
+        </h2>
+        <br />
+        <div class="layout">
+            <section class="inner">
+                <ul class="grid">
+                    @for (var i = 0; i < 20; i++)
                     {
-                        <td>
-                            <div class="product-men">
-                                <div class="men-pro-item simpleCart_shelfItem">
-                                    <div class="men-thumb-item">
-                                        <img src="~/Content/Layout/images/m1.jpg" alt="">
-                                        <span class="product-new-top">-30%</span>
-                                    </div>
-                                    <div class="item-info-product ">
-                                        <h4>
-                                            <a href="single.html">Almonds, 100g</a>
-                                        </h4>
-                                        <div class="info-product-price">
-                                            <span class="item_price">$149.00</span>
-                                            <del>$280.00</del>
+                        <li class="grid-tile">
+                            <div class="item">
+                                <span class="product-new-label1"><b class="test">- 40%</b></span>
+                                <span class="product-discount-label">
+                                    <b class="pnl-favorites">
+                                        <div class="pnl-ic-wrapper">
+                                            <span class="pnl-ic"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve"><path d="M22.6,6.5c-2.9,0-5.4,1.7-6.6,4.1c-1.2-2.4-3.7-4.1-6.6-4.1C5.3,6.5,2,9.8,2,13.9C2,23.7,15.8,29,15.8,29S30,23.6,30,13.9C30,9.8,26.7,6.5,22.6,6.5L22.6,6.5z"></path></svg></span>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="rating1">
-                                                    <span class="starRating">
-                                                        <input id="rating5" type="radio" name="rating" value="5">
-                                                        <label for="rating5">5</label>
-                                                        <input id="rating4" type="radio" name="rating" value="4">
-                                                        <label for="rating4">4</label>
-                                                        <input id="rating3" type="radio" name="rating" value="3" checked="">
-                                                        <label for="rating3">3</label>
-                                                        <input id="rating2" type="radio" name="rating" value="2">
-                                                        <label for="rating2">2</label>
-                                                        <input id="rating1" type="radio" name="rating" value="1">
-                                                        <label for="rating1">1</label>
-                                                    </span>
+                                    </b>
+                                </span>
+                                <div class="item-img" style="background-image: url('http://store.moma.org/dw/image/v2/BBQC_PRD/on/demandware.static/-/Sites-master-moma/default/dw952014b1/images/96511_a.jpg'); background-size: cover;"></div>
+                                <div class="item-pnl">
+                                    <div class="pnl-wrapper">
+                                        <div class="pnl-description">
+                                            <span class="pnl-label">Product Name</span>
+                                            <span class="pnl-price">$100,00</span>
+                                            <s class="text-danger">$150,00</s>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="rating1">
+                                                        <span class="starRating">
+                                                            <input id="rating5" type="radio" name="rating" value="5">
+                                                            <label for="rating5">5</label>
+                                                            <input id="rating4" type="radio" name="rating" value="4">
+                                                            <label for="rating4">4</label>
+                                                            <input id="rating3" type="radio" name="rating" value="3" checked="">
+                                                            <label for="rating3">3</label>
+                                                            <input id="rating2" type="radio" name="rating" value="2">
+                                                            <label for="rating2">2</label>
+                                                            <input id="rating1" type="radio" name="rating" value="1">
+                                                            <label for="rating1">1</label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p>TP.HCM</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>TP.HCM</p>
+                                        </div>
+                                        <div class="pnl-tocart2">
+                                            <div class="pnl-ic-wrapper">
+                                                <span class="pnl-ic"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve"><g><path d="M25.4,29H6.6c-1.7,0-3-1.4-2.8-2.9l1.9-13.8C5.9,11,6.6,10,8,10h16c1.4,0,2.1,1,2.3,2.3l1.9,13.8 C28.4,27.6,27.1,29,25.4,29z"></path><path d="M10.6,12.7V8.4C10.6,5.4,13,3,16,3h0c3,0,5.4,2.4,5.4,5.4v4.3"></path></g></svg></span>
                                             </div>
-                                        </div>                                       
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </td>
+                        </li>
                     }
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+                </ul>
+            </section>
+        </div>
+    </div>
+</center>
+<script>
+     /* Demo purposes only */
+  $(".hover").mouseleave(
+    function () {
+      $(this).removeClass("hover");
+    }
+  );
+</script>
 <br />
 <br />
