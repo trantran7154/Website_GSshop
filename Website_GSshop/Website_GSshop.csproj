@@ -141,12 +141,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\DisplayController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FooterController.cs" />
     <Compile Include="Controllers\HeaderController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\SellersController.cs" />
+    <Compile Include="Controllers\ViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -236,7 +238,7 @@
     <Content Include="Content\Layout\css\font-awesome.css" />
     <Content Include="Content\Layout\css\jquery-ui1.css" />
     <Content Include="Content\Layout\css\popuo-box.css" />
-    <Content Include="Content\Layout\css\style.css" />
+    <Content Include="Content\Layout\css\StyleLayout.css" />
     <Content Include="Content\Layout\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Layout\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Layout\images\1.png" />
@@ -255,6 +257,8 @@
     <Content Include="Content\Layout\images\a9.jpg" />
     <Content Include="Content\Layout\images\about.jpg" />
     <Content Include="Content\Layout\images\about2.jpg" />
+    <Content Include="Content\Layout\images\aokhoac.jpg" />
+    <Content Include="Content\Layout\images\aolen.jpg" />
     <Content Include="Content\Layout\images\arrow.png" />
     <Content Include="Content\Layout\images\banner1.jpg" />
     <Content Include="Content\Layout\images\banner2.jpg" />
@@ -268,6 +272,7 @@
     <Content Include="Content\Layout\images\d3.jpg" />
     <Content Include="Content\Layout\images\d4.jpg" />
     <Content Include="Content\Layout\images\d5.jpg" />
+    <Content Include="Content\Layout\images\gaubong.jpg" />
     <Content Include="Content\Layout\images\icons8-fire-48.png" />
     <Content Include="Content\Layout\images\icons8-united-kingdom-48.png" />
     <Content Include="Content\Layout\images\icons8-vietnam-48 %282%29.png" />
@@ -283,11 +288,14 @@
     <Content Include="Content\Layout\images\k7.jpg" />
     <Content Include="Content\Layout\images\k8.jpg" />
     <Content Include="Content\Layout\images\k9.jpg" />
+    <Content Include="Content\Layout\images\ke.jpg" />
+    <Content Include="Content\Layout\images\keosua.jpg" />
     <Content Include="Content\Layout\images\left.png" />
     <Content Include="Content\Layout\images\logo2.png" />
     <Content Include="Content\Layout\images\m1.jpg" />
     <Content Include="Content\Layout\images\m2.jpg" />
     <Content Include="Content\Layout\images\m3.jpg" />
+    <Content Include="Content\Layout\images\maychoigame.jpg" />
     <Content Include="Content\Layout\images\mk4.jpg" />
     <Content Include="Content\Layout\images\mk5.jpg" />
     <Content Include="Content\Layout\images\mk6.jpg" />
@@ -308,6 +316,7 @@
     <Content Include="Content\Layout\images\pay8.png" />
     <Content Include="Content\Layout\images\pay9.png" />
     <Content Include="Content\Layout\images\paypal.png" />
+    <Content Include="Content\Layout\images\quat.jpg" />
     <Content Include="Content\Layout\images\right.png" />
     <Content Include="Content\Layout\images\s1.jpg" />
     <Content Include="Content\Layout\images\s2.jpg" />
@@ -325,9 +334,12 @@
     <Content Include="Content\Layout\images\si.jpg" />
     <Content Include="Content\Layout\images\si2.jpg" />
     <Content Include="Content\Layout\images\si3.jpg" />
+    <Content Include="Content\Layout\images\son.jpg" />
     <Content Include="Content\Layout\images\star1.png" />
     <Content Include="Content\Layout\images\star22.png" />
     <Content Include="Content\Layout\images\tab3.png" />
+    <Content Include="Content\Layout\images\tainghe.jpg" />
+    <Content Include="Content\Layout\images\tivi.jpg" />
     <Content Include="Content\Layout\images\videoimg2.png" />
     <Content Include="Content\Layout\js\bootstrap.js" />
     <Content Include="Content\Layout\js\creditly.js" />
@@ -638,6 +650,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -680,9 +694,12 @@
     <Content Include="Views\Sellers\Index.cshtml" />
     <Content Include="Views\Account\UpdateInfo.cshtml" />
     <Content Include="Views\Account\Info.cshtml" />
+    <Content Include="Views\Shared\_MostPopular.cshtml" />
+    <Content Include="Views\View\MostPopularDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Ajax\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

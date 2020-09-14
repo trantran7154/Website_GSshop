@@ -2031,10 +2031,10 @@ pre {
     margin-left: 0;
 }
 
-    .row-no-gutters [class*="col-"] {
-        padding-right: 0;
-        padding-left: 0;
-    }
+.row-no-gutters [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
 
 .col-xs-1,
 .col-sm-1,

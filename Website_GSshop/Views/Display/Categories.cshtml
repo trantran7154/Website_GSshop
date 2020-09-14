@@ -5,7 +5,6 @@
         <img src="~/Content/Layout/images/icons8-fire-48.png" />Danh mục hàng
     </h2>
     <br />
-    <br />
     <table class="table table-bordered">
         <tbody>
             @for (var i = 0; i < 2; i++)
@@ -14,12 +13,19 @@
                     @for (var j = 0; j < 8; j++)
                     {
                         <td>
-                            <div class="item-info-product ">
-                                <div class="men-thumb-item">
-                                    <img src="~/Content/Layout/images/m1.jpg" alt="" style="width: 90px">
+                            <div class="product-men">
+                                <div class="men-pro-item simpleCart_shelfItem">
+                                    <div class="men-thumb-item">
+                                        <span class="product-new-top3"><b class="blink">New</b></span>
+                                        <img src="~/Content/Layout/images/ke.jpg" alt="" style="height: 100px ;width: 100px" />
+                                    </div>
+                                    <div class="item-info-product ">
+                                        <h4>
+                                            <a href="single.html">Kệ lưới</a>
+                                        </h4>
+                                    </div>
                                 </div>
-                                <span class="item_price">Áo thun</span>
-                            </div>
+							</div>
                         </td>
                     }
                 </tr>
@@ -27,5 +33,4 @@
         </tbody>
     </table>
 </div>
-<br />
 <br />

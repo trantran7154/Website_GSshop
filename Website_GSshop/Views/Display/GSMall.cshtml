@@ -1,37 +1,37 @@
 ﻿@using Website_GSshop.Models
 @model List<Product>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-10">
-            <h2 class="head-style-2">
-                <img src="~/Content/Layout/images/icons8-fire-48.png" />GSMall
-            </h2>
-            <br />
-        </div>
-        <div class="col-sm-2">
-            <a href="#" class="text-primary"><b class="text-right">Xem thêm <i class="fa fa-angle-right"></i></b></a>
-        </div>
-    </div>
+    <h2 class="head-style-2">
+        <img src="~/Content/Layout/images/icons8-fire-48.png" />GSMall
+    </h2>
     <br />
-    @for (var i = 0; i < 6; i++)
-    {
-        <div class="col-md-2">
-            <div class="card">
-                <img class="card-img-top" src="https://picsum.photos/200/150/?random">
-                <div class="card-block">
-                    <figure class="profile">
-                        <img src="https://picsum.photos/200/150/?random" class="profile-avatar" alt="">
-                    </figure>
-                    <center>
-                        <h5 class="card-title mt-3">Lotte Mart</h5>
-                        <div class="meta">
-                            <a>Lotte Mart</a>
+    <center>
+        <div class="btn-22">
+            <a href="@Url.Action("AllMostPopular","Ajax")" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace"><span class="span"><b>XEM TẤT CẢ</b></span></a>
+        </div>
+    </center>
+    <br />
+    <br />
+    <div class="row">
+        @for (var i = 0; i < 6; i++)
+        {
+            <div class="col-md-2">
+                <div class="card hovercard">
+                    <div class="cardheader" style="background-image: url('../../Content/Layout/images/gaubong.jpg'); ">
+                    </div>
+                    <div class="avatar1">
+                        <img src="~/Content/Layout/images/gaubong.jpg" alt="" />
+                    </div>
+                    <div class="info">
+                        <div class="title">
+                            <a target="_blank" href="https://scripteden.com/">benpai</a>
                         </div>
-                    </center>
+                        <div class="desc">benpai</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
 <br />
 <br />

@@ -1,20 +1,50 @@
 ﻿@using Website_GSshop.Models
 @model List<Product>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <center>
     <div class="container-fluid">
         <h2 class="head-style-2">
             <img src="~/Content/Layout/images/icons8-fire-48.png" />Tìm kiếm phổ biến
         </h2>
         <br />
-        <div class="btn-22">
-            <a href=""><span class="span">Hover over me</span></a>
-        </div>
-        <br />
-        <br />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="btn-22">
+                        <a href="@Url.Action("AllMostPopular","Ajax")" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace"><span class="span"><b><i class="fa fa-star" style="color: #e80505"></i> XEM TẤT CẢ</b></span></a>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <div class="col-md-3">
+                    <div class="btn-22">
+                        <a href="@Url.Action("MostPopularSale","Ajax")" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace"><span class="span"><b><i class="fa fa-percent" style="color: #e80505"></i> GIẢM GIÁ</b></span></a>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <div class="col-md-3">
+                    <div class="btn-22">
+                        <a href="@Url.Action("MostPopularView","Ajax")" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace"><span class="span"><b><i class="fa fa-eye" style="color: #e80505"></i> XEM NHIỀU</b></span></a>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <div class="col-md-3">
+                    <div class="btn-22">
+                        <a href="@Url.Action("MostPopularLove","Ajax")" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace"><span class="span"><b><i class="fa fa-heart" style="color: #e80505"></i> YÊU THÍCH</b></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>  
         <div class="layout">
             <section class="inner">
-                <ul class="grid">
-                    @for (var i = 0; i < 5; i++)
+                <ul class="grid" id="change">
+                    @foreach(var item in Model)
                     {
                         <li class="grid-tile">
                             <div class="item">
@@ -23,16 +53,25 @@
                                         <span class="pnl-ic"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve"><path d="M22.6,6.5c-2.9,0-5.4,1.7-6.6,4.1c-1.2-2.4-3.7-4.1-6.6-4.1C5.3,6.5,2,9.8,2,13.9C2,23.7,15.8,29,15.8,29S30,23.6,30,13.9C30,9.8,26.7,6.5,22.6,6.5L22.6,6.5z"></path></svg></span>
                                     </div>
                                 </div>
-                                <div class="item-img" style="background-color: #ffff00; background-image: url('http://store.moma.org/dw/image/v2/BBQC_PRD/on/demandware.static/-/Sites-master-moma/default/dw952014b1/images/96511_a.jpg'); background-size: contain;"></div>
+                                <div class="item-img" style="background-color: #ffff00; background-image: url('../../Content/Layout/images/@item.product_image'); background-size: contain"></div>
                                 <div class="item-pnl">
                                     <div class="pnl-wrapper">
                                         <div class="pnl-description">
-                                            <span class="pnl-label">Product Name</span>
-                                            <span class="pnl-price"><s class="text-danger">$120,00</s> &nbsp;$100,00</span>
+                                            <span class="pnl-label">@item.product_name</span>
+                                            <span class="pnl-price">@item.product_amount sản phẩm</span>
                                         </div>
-                                        <div class="pnl-tocart1">
-                                            <div class="pnl-ic-wrapper">
-                                                <span class="pnl-ic"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve"><g><path d="M25.4,29H6.6c-1.7,0-3-1.4-2.8-2.9l1.9-13.8C5.9,11,6.6,10,8,10h16c1.4,0,2.1,1,2.3,2.3l1.9,13.8 C28.4,27.6,27.1,29,25.4,29z"></path><path d="M10.6,12.7V8.4C10.6,5.4,13,3,16,3h0c3,0,5.4,2.4,5.4,5.4v4.3"></path></g></svg></span>
+                                        <div class="pnl-tocart3">
+                                            <div class="pnl-ic-wrapper1">
+                                                <?xml version="1.0" encoding="iso-8859-1" ?>
+                                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                                    <path style="fill:#4DBBEB;" d="M493.21,450.79c11.72,11.71,11.72,30.71,0,42.42c-5.86,5.86-13.53,8.79-21.21,8.79s-15.35-2.93-21.21-8.79l-96.57-96.57c15.77-12.4,30.02-26.65,42.42-42.42L493.21,450.79z" />
+                                                    <path style="fill:#FFF5CD;" d="M353.83,311.41l42.81,42.81c-12.4,15.77-26.65,30.02-42.42,42.42l-42.81-42.81v-0.01c16.27-11.81,30.6-26.14,42.41-42.41H353.83z" />
+                                                    <path style="fill:#4DBBEB;" d="M390,200c0,41.58-13.43,80.09-36.18,111.41c-11.81,16.27-26.14,30.6-42.41,42.41C280.09,376.57,241.58,390,200,390C95.23,390,10,304.77,10,200S95.23,10,200,10S390,95.23,390,200z" />
+                                                    <path style="fill:#BEE7F4;" d="M200,50c82.71,0,150,67.29,150,150s-67.29,150-150,150S50,282.71,50,200S117.29,50,200,50z" />
+                                                    <path d="M500.281,443.719l-133.48-133.48C388.546,277.485,400,239.555,400,200C400,89.72,310.28,0,200,0S0,89.72,0,200s89.72,200,200,200c39.556,0,77.486-11.455,110.239-33.198l36.895,36.895c0.005,0.005,0.01,0.01,0.016,0.016l96.568,96.568C451.276,507.838,461.319,512,472,512s20.724-4.162,28.278-11.716C507.837,492.731,512,482.687,512,472S507.837,451.269,500.281,443.719z M326.516,354.793c10.35-8.467,19.811-17.928,28.277-28.277l28.371,28.371c-8.628,10.183-18.094,19.65-28.277,28.277L326.516,354.793z M20,200c0-99.252,80.748-180,180-180s180,80.748,180,180c0,38.175-11.851,74.667-34.272,105.535c-11.217,15.453-24.739,28.976-40.192,40.192c0,0.001-0.001,0.001-0.002,0.002C274.667,368.149,238.175,380,200,380C100.748,380,20,299.252,20,200z M486.139,486.139c-3.78,3.78-8.801,5.861-14.139,5.861s-10.359-2.081-14.139-5.861l-88.795-88.795c10.127-8.691,19.587-18.15,28.277-28.277l88.798,88.798C489.919,461.639,492,466.658,492,472S489.919,482.361,486.139,486.139z" />
+                                                    <path d="M360,200c0-88.225-71.775-160-160-160S40,111.775,40,200s71.775,160,160,160S360,288.225,360,200z M200,340c-77.196,0-140-62.804-140-140S122.804,60,200,60s140,62.804,140,140S277.196,340,200,340z" />
+                                                    <path d="M306.317,169.995c5.155-1.981,7.729-7.766,5.748-12.922c-8.611-22.412-23.604-41.574-43.36-55.413 C248.479,87.49,224.721,80,200,80c-5.522,0-10,4.478-10,10s4.478,10,10,10c41.099,0,78.631,25.818,93.396,64.247 c1.528,3.976,5.317,6.416,9.337,6.416C303.925,170.663,305.138,170.448,306.317,169.995z" /><path d="M310,190c-5.52,0-10,4.48-10,10s4.48,10,10,10s10-4.48,10-10S315.52,190,310,190z" /><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+                                                </svg>
                                             </div>
                                         </div>
                                     </div>
@@ -45,259 +84,5 @@
         </div>
     </div>
 </center>
-<script>
-    'use strict';
-
-    function isIOSSafari() {
-        var userAgent;
-        userAgent = window.navigator.userAgent;
-        return userAgent.match(/iPad/i) || userAgent.match(/iPhone/i);
-    };
-
-    function isTouch() {
-        var isIETouch;
-        isIETouch = navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-        return [].indexOf.call(window, 'ontouchstart') >= 0 || isIETouch;
-    };
-
-    var isIOS = isIOSSafari(),
-        clickHandler = isIOS || isTouch() ? 'touchstart' : 'click';
-
-    function extend(a, b) {
-        for (var key in b) {
-            if (b.hasOwnProperty(key)) {
-                a[key] = b[key];
-            }
-        }
-        return a;
-    }
-
-    function Anima(el, options) {
-        this.el = el;
-        this.options = extend({}, this.options);
-        extend(this.options, options);
-
-        this.checked = false;
-
-        this.timeline = new mojs.Timeline();
-
-        for (var i = 0, len = this.options.tweens.length; i < len; ++i) {
-            this.timeline.add(this.options.tweens[i]);
-        }
-
-        var self = this;
-        this.el.addEventListener(clickHandler, function () {
-            if (self.checked) {
-                self.options.onUnCheck();
-            }
-            else {
-                self.options.onCheck();
-                self.timeline.start();
-            }
-            self.checked = !self.checked;
-        });
-    }
-
-    Anima.prototype.options = {
-        tweens: [
-            new mojs.Burst({
-                shape: 'circle',
-                isRunLess: true
-            })
-        ],
-        onCheck: function () { return false; },
-        onUnCheck: function () { return false; }
-    };
-
-    function createHeartIc(el) {
-        var el = el,
-            span = el.querySelector('span'),
-            svg = span.querySelector('svg'),
-            opacityCurve = mojs.easing.path('M0,0 C0,87 27,100 40,100 L40,0 L100,0'),
-            scaleCurve = mojs.easing.path('M0,0c0,80,39.2,100,39.2,100L40-100c0,0-0.7,106,60,106'),
-            burst = new mojs.Burst({
-                parent: el,
-                duration: 1200,
-                delay: 200,
-                shape: 'circle',
-                fill: '#E87171',
-                x: '50%', y: '50%',
-                opacity: { 1: 0 },
-                childOptions: {
-                    radius: { 6: 0 },
-                    type: 'line',
-                    stroke: '#E87171',
-                    strokeWidth: 2
-                },
-                radius: { 0: 32 },
-                count: 7,
-                //isSwirl: true,
-                isRunLess: true,
-                easing: mojs.easing.bezier(0.1, 1, 0.3, 1)
-            }),
-            heart = new Anima(el, {
-                tweens: [
-                    /* // ring animation
-                    new mojs.Transit({
-                        parent: el11,
-                        duration: 1000,
-                        delay: 100,
-                        type: 'circle',
-                        radius: {0: 95},
-                        fill: 'transparent',
-                        stroke: '#C0C1C3',
-                        strokeWidth: {50:0},
-                        opacity: 0.4,
-                        x: '50%',     
-                        y: '50%',
-                        isRunLess: true,
-                        easing: mojs.easing.bezier(0, 1, 0.5, 1)
-                    }),
-                    // ring animation
-                    new mojs.Transit({
-                        parent: el11,
-                        duration: 1800,
-                        delay: 300,
-                        type: 'circle',
-                        radius: {0: 80},
-                        fill: 'transparent',
-                        stroke: '#C0C1C3',
-                        strokeWidth: {40:0},
-                        opacity: 0.2,
-                        x: '50%',     
-                        y: '50%',
-                        isRunLess: true,
-                        easing: mojs.easing.bezier(0, 1, 0.5, 1)
-                    }), */
-                    // icon scale animation
-
-                    burst,
-
-                    new mojs.Tween({
-                        duration: 800,
-                        easing: mojs.easing.ease.out,
-                        onUpdate: function (progress) {
-                            var opacityProgress = opacityCurve(progress);
-                            span.style.opacity = opacityProgress;
-
-                            var scaleProgress = scaleCurve(progress);
-                            span.style.WebkitTransform = span.style.transform = 'scale3d(' + scaleProgress + ',' + scaleProgress + ',1)';
-
-                            var colorProgress = opacityCurve(progress);
-                            svg.style.fill = colorProgress >= 1 ? '#E87171' : 'none';
-                            svg.style.stroke = colorProgress >= 1 ? '#E87171' : '#a1a8ad';
-                        }
-                    })
-                ],
-                onUnCheck: function () {
-                    svg.style.fill = 'none';
-                    svg.style.stroke = '#a1a8ad';
-                }
-            });
-
-        return heart;
-    }
-
-
-    function createCartIc(el) {
-        var el = el,
-            span = el.querySelector('span'),
-            svg = span.querySelector('svg'),
-            body = svg.getElementsByTagName("path")[0],
-            opacityCurve = mojs.easing.path('M0,0 C0,87 27,100 40,100 L40,0 L100,0'),
-            scaleCurve = mojs.easing.path('M0,0c0,80,39.2,100,39.2,100L40-100c0,0-0.7,106,60,106'),
-            burst = new mojs.Burst({
-                parent: el,
-                duration: 1200,
-                delay: 200,
-                shape: 'circle',
-                fill: '#111111',
-                x: '50%', y: '50%',
-                opacity: { 1: 0 },
-                childOptions: {
-                    radius: { 6: 2 },
-                    type: 'line',
-                    stroke: '#111111',
-                    strokeWidth: 2
-                },
-                radius: { 0: 36 },
-                angle: 45,
-                count: 4,
-                //isSwirl: true,
-                isRunLess: true,
-                easing: mojs.easing.bezier(0.1, 1, 0.3, 1)
-            }),
-            heart = new Anima(el, {
-                tweens: [
-                    /* // ring animation
-                    new mojs.Transit({
-                        parent: el11,
-                        duration: 1000,
-                        delay: 100,
-                        type: 'circle',
-                        radius: {0: 95},
-                        fill: 'transparent',
-                        stroke: '#C0C1C3',
-                        strokeWidth: {50:0},
-                        opacity: 0.4,
-                        x: '50%',     
-                        y: '50%',
-                        isRunLess: true,
-                        easing: mojs.easing.bezier(0, 1, 0.5, 1)
-                    }),
-                    // ring animation
-                    new mojs.Transit({
-                        parent: el11,
-                        duration: 1800,
-                        delay: 300,
-                        type: 'circle',
-                        radius: {0: 80},
-                        fill: 'transparent',
-                        stroke: '#C0C1C3',
-                        strokeWidth: {40:0},
-                        opacity: 0.2,
-                        x: '50%',     
-                        y: '50%',
-                        isRunLess: true,
-                        easing: mojs.easing.bezier(0, 1, 0.5, 1)
-                    }), */
-                    // icon scale animation
-
-                    burst,
-
-                    new mojs.Tween({
-                        duration: 800,
-                        easing: mojs.easing.ease.out,
-                        onUpdate: function (progress) {
-                            var opacityProgress = opacityCurve(progress);
-                            span.style.opacity = opacityProgress;
-
-                            var scaleProgress = scaleCurve(progress);
-                            span.style.WebkitTransform = span.style.transform = 'scale3d(' + scaleProgress + ',' + scaleProgress + ',1)';
-
-                            var colorProgress = opacityCurve(progress);
-                            body.style.fill = colorProgress >= 1 ? '#111111' : 'none';
-                            svg.style.stroke = colorProgress >= 1 ? '#111111' : '#a1a8ad';
-                        }
-                    })
-                ],
-                onUnCheck: function () {
-                    body.style.fill = 'none';
-                    svg.style.stroke = '#a1a8ad';
-                }
-            });
-
-        return heart;
-    }
-
-
-    var hearts = document.getElementsByClassName('pnl-favorites'),
-        carts = document.getElementsByClassName('pnl-tocart');
-
-    for (var i = 0; i < hearts.length; i++) {
-        createHeartIc(hearts[i].querySelector('div'));
-        createCartIc(carts[i].querySelector('div'));
-    }
-</script>
 <br />
 <br />
