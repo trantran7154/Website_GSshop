@@ -15,5 +15,13 @@ namespace Website_GSshop.Controllers
         {
             return View(db.Product.ToList());
         }
+        public ActionResult CollectionsDetail()
+        {
+            return View(db.Product.ToList());
+        }
+        public ActionResult FlashSaleDetail()
+        {
+            return View(db.Product.ToList());
+        }
     }
 }

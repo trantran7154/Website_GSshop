@@ -266,6 +266,7 @@
     <Content Include="Content\Layout\images\banner4.jpg" />
     <Content Include="Content\Layout\images\bg1.jpg" />
     <Content Include="Content\Layout\images\close_1.png" />
+    <Content Include="Content\Layout\images\collection.jpg" />
     <Content Include="Content\Layout\images\contact2.jpg" />
     <Content Include="Content\Layout\images\d1.jpg" />
     <Content Include="Content\Layout\images\d2.jpg" />
@@ -696,6 +697,8 @@
     <Content Include="Views\Account\Info.cshtml" />
     <Content Include="Views\Shared\_MostPopular.cshtml" />
     <Content Include="Views\View\MostPopularDetail.cshtml" />
+    <Content Include="Views\View\CollectionsDetail.cshtml" />
+    <Content Include="Views\View\FlashSaleDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

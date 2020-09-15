@@ -1,13 +1,62 @@
 ﻿@using Website_GSshop.Models
 @model List<Product>
 <center>
-    <div class="container-fluid">
-        <br />
+    <div class="container-fluid">      
         <h2 class="head-style-2">
-            <img src="~/Content/Layout/images/icons8-fire-48.png"/>Deal Chớp Nhoáng
+            <img src="~/Content/Layout/images/icons8-fire-48.png" />Deal Chớp Nhoáng
         </h2>
-        <br />
         <div class="layout">
+            <div class="container-fluid">
+                <div class="row" style="background-color: ghostwhite; border-radius: 16px">
+                    <div class="col-md-1 mt-4">
+                        <span style="color: #fe5e09" class="float-left">Đang bán</span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row p-3">
+                            <span class="float-left">
+                                <span>Kết thúc trong&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <script>
+                                    // The data/time we want to countdown to
+                                    var countDownDate = new Date("Jul 25, 2021 16:37:52").getTime();
+                                    // Run myfunc every second
+                                    var myfunc = setInterval(function () {
+                                        var now = new Date().getTime();
+                                        var timeleft = countDownDate - now;
+                                        // Calculating the days, hours, minutes and seconds left
+                                        var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                        var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+                                        var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+                                        // Result is output to the specific element
+                                        document.getElementById("hours").innerHTML = hours
+                                        document.getElementById("mins").innerHTML = minutes
+                                        document.getElementById("secs").innerHTML = seconds
+                                        // Display the message when countdown is over
+                                        if (timeleft < 0) {
+                                            clearInterval(myfunc);
+                                            document.getElementById("hours").innerHTML = ""
+                                            document.getElementById("mins").innerHTML = ""
+                                            document.getElementById("secs").innerHTML = ""
+                                            document.getElementById("end").innerHTML = "TIME UP!!";
+                                        }
+                                    }, 1000);
+                                </script>
+                                <span class="badge badge-danger p-3" id="hours"></span>
+                                :
+                                <span class="badge badge-danger p-3" id="mins"></span>
+                                :
+                                <span class="badge badge-danger p-3" id="secs"></span>
+                                <b id="end"></b>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card-jfy-load-more J_LoadMore float-right">
+                            <a class="button1 J_LoadMoreButton text-info"><span style="color: #fe5e09">MUA SẮM TOÀN BỘ SẢN PHẨM</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
             <section class="inner">
                 <ul class="grid">
                     @for (var i = 0; i < 5; i++)
@@ -46,11 +95,19 @@
 </center>
 <script>
      /* Demo purposes only */
-  $(".hover").mouseleave(
-    function () {
-      $(this).removeClass("hover");
+    $(".hover").mouseleave(
+        function () {
+          $(this).removeClass("hover");
+        }
+    );
+    diff = 100000000;
+    function showTimer() {
+        hours = Math.floor(diff / (1000 * 60 * 60));
+        mins = Math.floor(diff / (1000 * 60));
+        secs = Math.floor(diff / 1000);
+        $('.count').html(hours + 'hours' + minutes + 'minutes' + seconds + ' seconds');
     }
-  );
+    setInterval(function () { showTimer() }, 1000); 
 </script>
 <br />
 <br />
