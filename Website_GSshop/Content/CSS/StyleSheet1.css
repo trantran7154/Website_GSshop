@@ -1902,6 +1902,18 @@
         font-size: 14px;
     }
 
+    .ic-dynamic-group-2 {
+        vertical-align: middle;
+    }
+
+    .ic-dynamic-badge {
+        display: inline-block;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-right: 6px;
+        vertical-align: middle;
+    }
+
     
 
 

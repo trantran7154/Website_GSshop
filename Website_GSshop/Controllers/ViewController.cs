@@ -23,5 +23,9 @@ namespace Website_GSshop.Controllers
         {
             return View(db.Product.ToList());
         }
+        public ActionResult CategoriesDetail()
+        {
+            return View(db.Product.ToList());
+        }
     }
 }

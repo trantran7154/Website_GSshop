@@ -700,6 +700,7 @@
     <Content Include="Views\View\MostPopularDetail.cshtml" />
     <Content Include="Views\View\CollectionsDetail.cshtml" />
     <Content Include="Views\View\FlashSaleDetail.cshtml" />
+    <Content Include="Views\View\CategoriesDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
