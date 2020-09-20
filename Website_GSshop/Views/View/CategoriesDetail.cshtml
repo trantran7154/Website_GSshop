@@ -4,6 +4,8 @@
     ViewBag.Title = "CategoriesDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <div class="container-fluid">
     <br />
     <nav aria-label="breadcrumb">
@@ -15,9 +17,9 @@
     </nav>
     <hr />
     <!-- product left -->
-    <div class="side-bar col-md-3">        
+    <div class="side-bar col-md-3">
         <div class="range">
-            <h3 class="agileits-sear-head">Danh mục liên quan</h3>    
+            <h3 class="agileits-sear-head">Danh mục liên quan</h3>
             <h4 class="mt-3 text-left">Lazada Gift Cards</h4>
         </div>
         <div class="left-side">
@@ -26,7 +28,7 @@
                 <li>
                     <input type="checkbox" class="checked" />
                     <span class="span">No Brand</span>
-                </li>               
+                </li>
             </ul>
         </div>
         <hr />
@@ -54,7 +56,7 @@
                     <input type="text" placeholder="Tối đa" class="form-control" />
                 </div>
                 <div class="col-md-2">
-                    <input type="button" class="btn btn-danger" value=">" />
+                    <button class="caret_right"><i class="fa fa-caret-right text-white" style="font-size: 26px; text-align: center"></i></button>
                 </div>
             </div>
         </div>
@@ -122,7 +124,7 @@
                     <span class="span">Email</span>
                 </li>
             </ul>
-        </div>       
+        </div>
     </div>
     <!-- //product left -->
     <!-- product right -->
@@ -149,8 +151,8 @@
                                 <option>Giá từ cao xuống thấp</option>
                             </select>
                         </td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-table" style="font-size: 25px"></i></td>
-                        <td>&nbsp;&nbsp;&nbsp;<i class="fa fa-th-list" style="font-size: 25px; color:#d3d3d3"></i></td>
+                        <td><a href="@Url.Action("Table","Ajax")" class="text-dark" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-table" style="font-size: 25px"></i></a></td>
+                        <td><a href="@Url.Action("TableList","Ajax")" class="text-dark" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace">&nbsp;&nbsp;&nbsp;<i class="fa fa-th-list" style="font-size: 25px; color:#d3d3d3"></i></a></td>
                     </tr>
                 </table>
             </div>
@@ -158,8 +160,8 @@
         <hr />
         <div class="layout">
             <center>
-                <div class="row">
-                    @for (var i = 0; i < 36; i++)
+                <div class="row" id="change">
+                    @foreach (var item in Model)
                     {
                         <div class="col-md-3">
                             <div class="p-box">
@@ -167,14 +169,14 @@
                                     <span class="label1 best-seller-label test mt-3 ml-2">Best seller</span>
                                     <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 p-heart mt-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 25.7143px; height: 16px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
                                 </div>
-                                <img src="~/Content/Layout/images/aokhoac.jpg" alt="" class="img1" />
+                                <img src="~/Content/Layout/images/@item.product_image" alt="" class="img1" />
                                 <div class="p-desc">
                                     <h4 class="p-category">Game 1k kỳ diệu</h4>
-                                    <h3 class="p-product">Áo khoác nam</h3>
+                                    <h3 class="p-product">@item.product_name</h3>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <span class="p-price">$949.00</span>
+                                        <span class="p-price">$@item.product_price</span>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="pill1 text-right">&nbsp;&nbsp;&nbsp;&nbsp;<b>Việt Nam</b>&nbsp;&nbsp;&nbsp;&nbsp;</div>

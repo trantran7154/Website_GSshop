@@ -207,7 +207,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CSS\StyleSheet1.css" />
+    <Content Include="Content\CSS\Style.css" />
     <Content Include="Content\Info\css\bootstrap.min.css" />
     <Content Include="Content\Info\css\demo.css" />
     <Content Include="Content\Info\css\paper-bootstrap-wizard.css" />
@@ -701,6 +701,8 @@
     <Content Include="Views\View\CollectionsDetail.cshtml" />
     <Content Include="Views\View\FlashSaleDetail.cshtml" />
     <Content Include="Views\View\CategoriesDetail.cshtml" />
+    <Content Include="Views\Shared\_Table.cshtml" />
+    <Content Include="Views\Shared\_TableList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

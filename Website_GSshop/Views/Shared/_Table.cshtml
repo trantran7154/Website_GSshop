@@ -1,0 +1,27 @@
+﻿@using Website_GSshop.Models
+@model List<Product>
+@foreach (var item in Model)
+{
+    <div class="col-md-3">
+        <div class="p-box">
+            <div class="p-top">
+                <span class="label1 best-seller-label test mt-3 ml-2">Best seller</span>
+                <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 p-heart mt-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 25.7143px; height: 16px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
+            </div>
+            <img src="~/Content/Layout/images/@item.product_image" alt="" class="img1" />
+            <div class="p-desc">
+                <h4 class="p-category">Game 1k kỳ diệu</h4>
+                <h3 class="p-product">@item.product_name</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="p-price">$@item.product_price</span>
+                </div>
+                <div class="col-md-6">
+                    <div class="pill1 text-right">&nbsp;&nbsp;&nbsp;&nbsp;<b>Việt Nam</b>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+}

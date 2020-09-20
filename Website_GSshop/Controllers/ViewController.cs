@@ -25,7 +25,7 @@ namespace Website_GSshop.Controllers
         }
         public ActionResult CategoriesDetail()
         {
-            return View(db.Product.ToList());
+            return View(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).Take(36).ToList());
         }
     }
 }

@@ -1713,6 +1713,15 @@
         margin: 0 auto;
     }
 
+    .img2 {
+        width: 200px;
+        grid-row: 2 / 3;
+        position: relative;
+        margin: 0 auto;
+        height: 205px;
+        margin-left: 15%;
+    }
+
     .p-desc {
         grid-row: 3 / 4;
         display: grid;
@@ -1914,12 +1923,21 @@
         vertical-align: middle;
     }
 
+    .caret_right {
+        background-color: orange; 
+        width: 39px; 
+        height: 34px; 
+        border-radius: 5px; 
+        border-color: orange;
+    }
+
     
 
 
 
 
    
+
 
 
 

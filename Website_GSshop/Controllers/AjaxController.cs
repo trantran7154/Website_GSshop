@@ -32,5 +32,17 @@ namespace Website_GSshop.Controllers
             List<Product> products = db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_love).Take(5).ToList();
             return PartialView("_MostPopular", products);
         }
+        //Lọc theo bảng
+        public PartialViewResult Table()
+        {
+            List<Product> products = db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).Take(36).ToList();
+            return PartialView("_Table", products);
+        }
+        //Lọc danh theo sách bảng
+        public PartialViewResult TableList()
+        {
+            List<Product> products = db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).Take(36).ToList();
+            return PartialView("_TableList", products);
+        }
     }
 }

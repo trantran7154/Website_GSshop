@@ -4,6 +4,8 @@
     ViewBag.Title = "MostPopularDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <div class="container-fluid">
     <br />
     <nav aria-label="breadcrumb">
@@ -108,7 +110,7 @@
                     <input type="text" placeholder="Tối đa" class="form-control" />
                 </div>
                 <div class="col-md-2">
-                    <input type="button" class="btn btn-danger" value=">" />
+                    <button class="caret_right"><i class="fa fa-caret-right text-white" style="font-size: 26px; text-align: center"></i></button>
                 </div>
             </div>
         </div>
@@ -291,8 +293,8 @@
                                 <option>Giá từ cao xuống thấp</option>
                             </select>
                         </td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-table" style="font-size: 25px"></i></td>
-                        <td>&nbsp;&nbsp;&nbsp;<i class="fa fa-th-list" style="font-size: 25px; color:#d3d3d3"></i></td>
+                        <td><a href="@Url.Action("Table","Ajax")" class="text-dark" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-table" style="font-size: 25px"></i></a></td>
+                        <td><a href="@Url.Action("TableList","Ajax")" class="text-dark" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace">&nbsp;&nbsp;&nbsp;<i class="fa fa-th-list" style="font-size: 25px; color:#d3d3d3"></i></a></td>
                     </tr>
                 </table>
             </div>
@@ -300,54 +302,33 @@
         <hr />
         <div class="layout">
             <center>
-                <div class="row">
-                @foreach (var item in Model)
-                {
-                    <div class="col-md-4">
-                        <article class="card product-card">
-                            <section class="card__image">
-                                <span class="label1 best-seller-label test">Best seller</span>
-                                <img src="~/Content/Layout/images/@item.product_image" alt="Bathroom suite">
-                                <div class="overlay-bar product-card__bar">
-                                    <span>
-                                        <img src="~/Content/Layout/images/@item.product_image" alt="Mode logo" style="height: 50px; width: 50px">
-                                    </span>
+                <div class="row" id="change">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-3">
+                            <div class="p-box">
+                                <div class="p-top">
+                                    <span class="label1 best-seller-label test mt-3 ml-2">Best seller</span>
+                                    <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 p-heart mt-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 25.7143px; height: 16px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
                                 </div>
-                            </section>
-                            <div class="card__content">
-                                <h1 class="product-card__title text">
-                                   @item.product_name
-                                </h1>
-                                <div class="product-card__prices">
-                                    <span class="price">@item.product_sale</span>
-                                    <span class="price-strikethrough">@item.product_price</span>
+                                <img src="~/Content/Layout/images/@item.product_image" alt="" class="img1" />
+                                <div class="p-desc">
+                                    <h4 class="p-category">Game 1k kỳ diệu</h4>
+                                    <h3 class="p-product">@item.product_name</h3>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="rating1 text-right">
-                                            <span class="starRating">
-                                                <input id="rating5" type="radio" name="rating" value="5">
-                                                <label for="rating5">5</label>
-                                                <input id="rating4" type="radio" name="rating" value="4">
-                                                <label for="rating4">4</label>
-                                                <input id="rating3" type="radio" name="rating" value="3" checked="">
-                                                <label for="rating3">3</label>
-                                                <input id="rating2" type="radio" name="rating" value="2">
-                                                <label for="rating2">2</label>
-                                                <input id="rating1" type="radio" name="rating" value="1">
-                                                <label for="rating1">1</label>
-                                            </span>
-                                        </div>
+                                        <span class="p-price">$@item.product_price</span>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="pill">Ho Chi Minh</div>
+                                        <div class="pill1 text-right">&nbsp;&nbsp;&nbsp;&nbsp;<b>Việt Nam</b>&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                     </div>
                                 </div>
                             </div>
-                        </article>
-                    </div>
-                }
-            </div>
+                            <br />
+                        </div>
+                    }
+                </div>
             </center>
         </div>
     </div>
