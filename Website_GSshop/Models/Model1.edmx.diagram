@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a72129a8022340549399aa97f3e448d8" Name="Diagram1" ZoomLevel="98">
+      <Diagram DiagramId="a72129a8022340549399aa97f3e448d8" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="Data_GSShopModel.Admin" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.Category" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.Comment" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
@@ -27,6 +27,9 @@
         <EntityTypeShape EntityType="Data_GSShopModel.ClassificationSubCategory" Width="1.5" PointX="7.5" PointY="12.875" />
         <AssociationConnector Association="Data_GSShopModel.FK_ClassificationSubCategory_SubCategory" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_Category_ClassificationSubCategory" />
+        <EntityTypeShape EntityType="Data_GSShopModel.View" Width="1.5" PointX="10.25" PointY="11.875" />
+        <AssociationConnector Association="Data_GSShopModel.FK_View_Product" />
+        <AssociationConnector Association="Data_GSShopModel.FK_View_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

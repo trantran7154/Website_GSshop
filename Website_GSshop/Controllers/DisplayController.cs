@@ -23,7 +23,7 @@ namespace Website_GSshop.Controllers
         // Hiển thị top 6 Deal chớp nhoáng
         public PartialViewResult FlashSale()
         {
-            return PartialView(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_sale).Take(6).ToList());
+            return PartialView(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_sale).Take(5).ToList());
         }
         // Hiển thị tìm kiếm phổ biến
         public PartialViewResult MostPopular()
@@ -33,22 +33,22 @@ namespace Website_GSshop.Controllers
         // Hiển thị bộ sưu tập
         public PartialViewResult Collections()
         {
-            return PartialView();
+            return PartialView(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).Take(8).ToList());
         }
         // Hiển thị thương hiệu hàng đầu
         public PartialViewResult GSMall()
         {
-            return PartialView();
+            return PartialView(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).Take(6).ToList());
         }
         // Hiển thị danh mục ngành hàng
         public PartialViewResult Categories()
         {
-            return PartialView();
+            return PartialView(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).Take(2).ToList());
         }
         // Dành riêng cho bạn
         public PartialViewResult JustForYou()
         {
-            return PartialView();
+            return PartialView(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).Take(20).ToList());
         }
     }
 }

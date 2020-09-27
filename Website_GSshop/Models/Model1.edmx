@@ -170,6 +170,15 @@
           <Property Name="user_provincecity" Type="nvarchar" MaxLength="100" />
           <Property Name="user_district" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="View">
+          <Key>
+            <PropertyRef Name="view_id" />
+          </Key>
+          <Property Name="view_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="view_date" Type="datetime" />
+        </EntityType>
         <Association Name="FK_ClassificationSubCategory_SubCategory">
           <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
           <End Role="ClassificationSubCategory" Type="Self.ClassificationSubCategory" Multiplicity="*" />
@@ -302,6 +311,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_View_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="View" Type="Self.View" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="View">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_View_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="View" Type="Self.View" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="View">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Data_GSShopModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -314,6 +347,7 @@
           <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View" EntityType="Self.View" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ClassificationSubCategory_SubCategory" Association="Self.FK_ClassificationSubCategory_SubCategory">
             <End Role="SubCategory" EntitySet="SubCategory" />
             <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
@@ -357,6 +391,14 @@
           <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="SubCategory" EntitySet="SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_View_Product" Association="Self.FK_View_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="View" EntitySet="View" />
+          </AssociationSet>
+          <AssociationSet Name="FK_View_User" Association="Self.FK_View_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="View" EntitySet="View" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -432,6 +474,7 @@
           <NavigationProperty Name="Seller" Relationship="Self.FK_Product_Seller" FromRole="Product" ToRole="Seller" />
           <NavigationProperty Name="User" Relationship="Self.FK_Product_User" FromRole="Product" ToRole="User" />
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Product" FromRole="Product" ToRole="ReplyComment" />
+          <NavigationProperty Name="View" Relationship="Data_GSShopModel.FK_View_Product" FromRole="Product" ToRole="View" />
         </EntityType>
         <EntityType Name="Product_Category">
           <Key>
@@ -536,6 +579,7 @@
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_User" FromRole="User" ToRole="ReplyComment" />
           <Property Name="user_provincecity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="user_district" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="View" Relationship="Data_GSShopModel.FK_View_User" FromRole="User" ToRole="View" />
         </EntityType>
         <Association Name="FK_Product_Category_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
@@ -701,6 +745,15 @@
             <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
             <End Role="Product_Category" EntitySet="Product_Category" />
           </AssociationSet>
+          <EntitySet Name="View" EntityType="Data_GSShopModel.View" />
+          <AssociationSet Name="FK_View_Product" Association="Data_GSShopModel.FK_View_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="View" EntitySet="View" />
+          </AssociationSet>
+          <AssociationSet Name="FK_View_User" Association="Data_GSShopModel.FK_View_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="View" EntitySet="View" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ClassificationSubCategory">
           <Key>
@@ -736,6 +789,41 @@
             </Principal>
             <Dependent Role="Product_Category">
               <PropertyRef Name="csc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="View">
+          <Key>
+            <PropertyRef Name="view_id" />
+          </Key>
+          <Property Name="view_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_View_Product" FromRole="View" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_View_User" FromRole="View" ToRole="User" />
+          <Property Name="view_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_View_Product">
+          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.View" Role="View" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="View">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_View_User">
+          <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.View" Role="View" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="View">
+              <PropertyRef Name="user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -918,6 +1006,16 @@
                 <ScalarProperty Name="csc_image" ColumnName="csc_image" />
                 <ScalarProperty Name="csc_name" ColumnName="csc_name" />
                 <ScalarProperty Name="csc_id" ColumnName="csc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View">
+            <EntityTypeMapping TypeName="Data_GSShopModel.View">
+              <MappingFragment StoreEntitySet="View">
+                <ScalarProperty Name="view_date" ColumnName="view_date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="view_id" ColumnName="view_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

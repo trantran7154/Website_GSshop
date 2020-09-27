@@ -12,55 +12,45 @@
         <br />
     </div>
 </div>
+<br />
 <center>
     <div class="container-fluid">
         <div class="row">
             @foreach (var item in Model)
             {
                 <div class="col-md-2">
-                    <article class="card product-card">
-                        <section class="card__image">
-                            <span class="label1 best-seller-label test">Best seller</span>
-                            <img src="~/Content/Layout/images/@item.product_image" alt="Bathroom suite">
-                            <div class="overlay-bar product-card__bar">
-                                <span>
-                                    <img src="~/Content/Layout/images/@item.product_image" alt="Mode logo" style="height: 50px; width: 50px">
+                    <div class="p-box">
+                        <div class="p-top">
+                            <span class="label1 best-seller-label test mt-2 ml-2">Best seller</span>
+                            <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 p-heart mt-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 25.7143px; height: 16px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
+                        </div>
+                        <div class="text-center p-4">
+                            <img id="main-image" src="https://i.imgur.com/oLXMXVW.jpg" width="300" />
+                        </div>
+                        <div class="p-desc">
+                            <a href="@Url.Action("ProductDetail", "View", new { @id = item.product_id })"><h3 class="p-category">@item.product_name</h3></a>
+                            <h5 class="text-danger">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</h5>
+                            <h5><s>@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</s> -10%</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span class="p-price">
+                                    <div class="p-stars">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <small class="text-dark">(6)</small>
+                                    </div>
                                 </span>
                             </div>
-                        </section>
-                        <div class="card__content">
-                            <h1 class="product-card__title text">
-                                @item.product_name
-                            </h1>
-                            <div class="product-card__prices">
-                                <span class="price">@item.product_sale</span>
-                                <br />
-                                <span class="price-strikethrough">@item.product_price</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="rating1">
-                                        <span class="starRating">
-                                            <input id="rating5" type="radio" name="rating" value="5">
-                                            <label for="rating5">5</label>
-                                            <input id="rating4" type="radio" name="rating" value="4">
-                                            <label for="rating4">4</label>
-                                            <input id="rating3" type="radio" name="rating" value="3" checked="">
-                                            <label for="rating3">3</label>
-                                            <input id="rating2" type="radio" name="rating" value="2">
-                                            <label for="rating2">2</label>
-                                            <input id="rating1" type="radio" name="rating" value="1">
-                                            <label for="rating1">1</label>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <br />
-                                    <div class="pill1 text-right">Ho Chi Minh</div>
-                                </div>
+                            <div class="col-md-6">
+                                <div class="pill1 text-right">&nbsp;&nbsp;&nbsp;&nbsp;<b>Việt Nam</b>&nbsp;&nbsp;&nbsp;&nbsp;</div>
                             </div>
                         </div>
-                    </article>
+                    </div>
+                    <br />
                 </div>
             }
         </div>
@@ -69,4 +59,5 @@
         <a class="button J_LoadMoreButton text-info">TẢI THÊM</a>
     </div>
 </center>
+
 

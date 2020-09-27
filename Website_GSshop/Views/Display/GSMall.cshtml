@@ -13,7 +13,7 @@
     <br />
     <br />
     <div class="row">
-        @for (var i = 0; i < 6; i++)
+        @foreach(var item in Model)
         {
             <div class="col-md-2">
                 <div class="card hovercard">
@@ -24,9 +24,9 @@
                     </div>
                     <div class="info">
                         <div class="title">
-                            <a target="_blank" href="https://scripteden.com/">benpai</a>
+                            <a href="@Url.Action("GSMallDetail","View", new {@id = item.product_id})">benpai</a>
                         </div>
-                        <div class="desc">benpai</div>
+                        <a href="@Url.Action("GSMallDetail","View", new {@id = item.product_id})"><div class="desc">benpai</div></a>
                     </div>
                 </div>
             </div>
