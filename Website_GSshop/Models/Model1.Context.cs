@@ -37,5 +37,7 @@ namespace Website_GSshop.Models
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<ClassificationSubCategory> ClassificationSubCategory { get; set; }
         public virtual DbSet<View> View { get; set; }
+        public virtual DbSet<Collection> Collection { get; set; }
+        public virtual DbSet<GSMall> GSMall { get; set; }
     }
 }

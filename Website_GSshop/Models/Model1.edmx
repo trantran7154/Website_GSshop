@@ -42,6 +42,19 @@
           <Property Name="csc_active" Type="bit" />
           <Property Name="subcategory_id" Type="int" />
         </EntityType>
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="collection_id" />
+          </Key>
+          <Property Name="collection_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="collection_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="collection_image1" Type="nvarchar" MaxLength="2000" />
+          <Property Name="collection_image2" Type="nvarchar" MaxLength="2000" />
+          <Property Name="collection_image3" Type="nvarchar" MaxLength="2000" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="collection_datecreate" Type="datetime" />
+          <Property Name="collection_active" Type="bit" />
+        </EntityType>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="comment_id" />
@@ -53,6 +66,19 @@
           <Property Name="product_id" Type="int" />
           <Property Name="seller_id" Type="int" />
           <Property Name="comment_spam" Type="bit" />
+        </EntityType>
+        <EntityType Name="GSMall">
+          <Key>
+            <PropertyRef Name="gsmall_id" />
+          </Key>
+          <Property Name="gsmall_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="gsmall_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="gsmall_slogan" Type="nvarchar" MaxLength="50" />
+          <Property Name="gsmall_active" Type="bit" />
+          <Property Name="gsmall_datecreate" Type="datetime" />
+          <Property Name="gsmall_bg" Type="nvarchar" MaxLength="2000" />
+          <Property Name="gsmall_image" Type="nvarchar" MaxLength="2000" />
+          <Property Name="product_id" Type="int" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -188,6 +214,30 @@
             </Principal>
             <Dependent Role="ClassificationSubCategory">
               <PropertyRef Name="subcategory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GSMall_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="GSMall" Type="Self.GSMall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="GSMall">
+              <PropertyRef Name="product_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -339,7 +389,9 @@
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassificationSubCategory" EntityType="Self.ClassificationSubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GSMall" EntityType="Self.GSMall" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Category" EntityType="Self.Product_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReplyComment" EntityType="Self.ReplyComment" Schema="dbo" store:Type="Tables" />
@@ -351,6 +403,14 @@
           <AssociationSet Name="FK_ClassificationSubCategory_SubCategory" Association="Self.FK_ClassificationSubCategory_SubCategory">
             <End Role="SubCategory" EntitySet="SubCategory" />
             <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_Product" Association="Self.FK_Collection_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GSMall_Product" Association="Self.FK_GSMall_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="GSMall" EntitySet="GSMall" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Category_Category" Association="Self.FK_Product_Category_Category">
             <End Role="Category" EntitySet="Category" />
@@ -475,6 +535,8 @@
           <NavigationProperty Name="User" Relationship="Self.FK_Product_User" FromRole="Product" ToRole="User" />
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Product" FromRole="Product" ToRole="ReplyComment" />
           <NavigationProperty Name="View" Relationship="Data_GSShopModel.FK_View_Product" FromRole="Product" ToRole="View" />
+          <NavigationProperty Name="Collection" Relationship="Data_GSShopModel.FK_Collection_Product" FromRole="Product" ToRole="Collection" />
+          <NavigationProperty Name="GSMall" Relationship="Data_GSShopModel.FK_GSMall_Product" FromRole="Product" ToRole="GSMall" />
         </EntityType>
         <EntityType Name="Product_Category">
           <Key>
@@ -754,6 +816,16 @@
             <End Role="User" EntitySet="User" />
             <End Role="View" EntitySet="View" />
           </AssociationSet>
+          <EntitySet Name="Collection" EntityType="Data_GSShopModel.Collection" />
+          <AssociationSet Name="FK_Collection_Product" Association="Data_GSShopModel.FK_Collection_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
+          <EntitySet Name="GSMall" EntityType="Data_GSShopModel.GSMall" />
+          <AssociationSet Name="FK_GSMall_Product" Association="Data_GSShopModel.FK_GSMall_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="GSMall" EntitySet="GSMall" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ClassificationSubCategory">
           <Key>
@@ -824,6 +896,58 @@
             </Principal>
             <Dependent Role="View">
               <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="collection_id" />
+          </Key>
+          <Property Name="collection_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="collection_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="collection_image1" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="collection_image2" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="collection_image3" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="product_id" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Collection_Product" FromRole="Collection" ToRole="Product" />
+          <Property Name="collection_datecreate" Type="DateTime" Precision="3" />
+          <Property Name="collection_active" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_Collection_Product">
+          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.Collection" Role="Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GSMall">
+          <Key>
+            <PropertyRef Name="gsmall_id" />
+          </Key>
+          <Property Name="gsmall_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gsmall_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gsmall_slogan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gsmall_active" Type="Boolean" />
+          <Property Name="gsmall_datecreate" Type="DateTime" Precision="3" />
+          <Property Name="gsmall_bg" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="gsmall_image" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="product_id" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_GSMall_Product" FromRole="GSMall" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_GSMall_Product">
+          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.GSMall" Role="GSMall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="GSMall">
+              <PropertyRef Name="product_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1016,6 +1140,34 @@
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="view_id" ColumnName="view_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collection">
+            <EntityTypeMapping TypeName="Data_GSShopModel.Collection">
+              <MappingFragment StoreEntitySet="Collection">
+                <ScalarProperty Name="collection_active" ColumnName="collection_active" />
+                <ScalarProperty Name="collection_datecreate" ColumnName="collection_datecreate" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="collection_image3" ColumnName="collection_image3" />
+                <ScalarProperty Name="collection_image2" ColumnName="collection_image2" />
+                <ScalarProperty Name="collection_image1" ColumnName="collection_image1" />
+                <ScalarProperty Name="collection_name" ColumnName="collection_name" />
+                <ScalarProperty Name="collection_id" ColumnName="collection_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GSMall">
+            <EntityTypeMapping TypeName="Data_GSShopModel.GSMall">
+              <MappingFragment StoreEntitySet="GSMall">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="gsmall_image" ColumnName="gsmall_image" />
+                <ScalarProperty Name="gsmall_bg" ColumnName="gsmall_bg" />
+                <ScalarProperty Name="gsmall_datecreate" ColumnName="gsmall_datecreate" />
+                <ScalarProperty Name="gsmall_active" ColumnName="gsmall_active" />
+                <ScalarProperty Name="gsmall_slogan" ColumnName="gsmall_slogan" />
+                <ScalarProperty Name="gsmall_name" ColumnName="gsmall_name" />
+                <ScalarProperty Name="gsmall_id" ColumnName="gsmall_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

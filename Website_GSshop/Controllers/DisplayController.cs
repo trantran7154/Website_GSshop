@@ -33,12 +33,12 @@ namespace Website_GSshop.Controllers
         // Hiển thị bộ sưu tập
         public PartialViewResult Collections()
         {
-            return PartialView(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).Take(8).ToList());
+            return PartialView(db.Collection.Where(n => n.collection_active == true).OrderByDescending(n => n.collection_datecreate).Take(8).ToList());
         }
         // Hiển thị thương hiệu hàng đầu
         public PartialViewResult GSMall()
         {
-            return PartialView(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).Take(6).ToList());
+            return PartialView(db.GSMall.Where(n => n.gsmall_active == true).OrderByDescending(n => n.gsmall_datecreate).Take(6).ToList());
         }
         // Hiển thị danh mục ngành hàng
         public PartialViewResult Categories()

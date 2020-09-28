@@ -17,11 +17,11 @@
                                 <div class="men-pro-item simpleCart_shelfItem">
                                     <div class="men-thumb-item">
                                         <span class="product-new-top3"><b class="blink">New</b></span>
-                                        <img src="~/Content/Layout/images/ke.jpg" alt="" style="height: 100px ;width: 100px" />
+                                        <img src="~/Content/Layout/images/@item.product_image" alt="" style="height: 100px ;width: 100px" />
                                     </div>
                                     <div class="item-info-product ">
                                         <h4>
-                                            <a href="@Url.Action("CategoriesDetail","View", new {@id = item.product_id})">Kệ lưới</a>
+                                            <a href="@Url.Action("CategoriesDetail","View", new {@id = item.product_id})">@item.product_name</a>
                                         </h4>
                                     </div>
                                 </div>

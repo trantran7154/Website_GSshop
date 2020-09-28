@@ -20,6 +20,8 @@ namespace Website_GSshop.Models
             this.Product_Category = new HashSet<Product_Category>();
             this.ReplyComment = new HashSet<ReplyComment>();
             this.View = new HashSet<View>();
+            this.Collection = new HashSet<Collection>();
+            this.GSMall = new HashSet<GSMall>();
         }
     
         public int product_id { get; set; }
@@ -51,5 +53,9 @@ namespace Website_GSshop.Models
         public virtual ICollection<ReplyComment> ReplyComment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<View> View { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Collection> Collection { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GSMall> GSMall { get; set; }
     }
 }

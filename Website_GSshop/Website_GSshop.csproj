@@ -161,7 +161,13 @@
     <Compile Include="Models\ClassificationSubCategory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Collection.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Comment.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GSMall.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
@@ -210,7 +216,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CSS\Style.css" />
+    <Content Include="Content\CSS\StyleSheet.css" />
     <Content Include="Content\Info\css\bootstrap.min.css" />
     <Content Include="Content\Info\css\demo.css" />
     <Content Include="Content\Info\css\paper-bootstrap-wizard.css" />
@@ -261,6 +267,7 @@
     <Content Include="Content\Layout\images\about.jpg" />
     <Content Include="Content\Layout\images\about2.jpg" />
     <Content Include="Content\Layout\images\aokhoac.jpg" />
+    <Content Include="Content\Layout\images\aokhoacnam.jpg" />
     <Content Include="Content\Layout\images\aolen.jpg" />
     <Content Include="Content\Layout\images\arrow.png" />
     <Content Include="Content\Layout\images\banner1.jpg" />
@@ -271,12 +278,37 @@
     <Content Include="Content\Layout\images\close_1.png" />
     <Content Include="Content\Layout\images\collection.jpg" />
     <Content Include="Content\Layout\images\contact2.jpg" />
+    <Content Include="Content\Layout\images\croptop1.jpg" />
+    <Content Include="Content\Layout\images\croptop2.jpg" />
+    <Content Include="Content\Layout\images\croptop3.jpg" />
     <Content Include="Content\Layout\images\d1.jpg" />
     <Content Include="Content\Layout\images\d2.jpg" />
     <Content Include="Content\Layout\images\d3.jpg" />
     <Content Include="Content\Layout\images\d4.jpg" />
     <Content Include="Content\Layout\images\d5.jpg" />
+    <Content Include="Content\Layout\images\dobonam.jpg" />
+    <Content Include="Content\Layout\images\dodung1.jpg" />
+    <Content Include="Content\Layout\images\dodung2.jpg" />
+    <Content Include="Content\Layout\images\dodung3.jpg" />
+    <Content Include="Content\Layout\images\dongho1.jpg" />
+    <Content Include="Content\Layout\images\dongho2.jpg" />
+    <Content Include="Content\Layout\images\dongho3.jpg" />
     <Content Include="Content\Layout\images\gaubong.jpg" />
+    <Content Include="Content\Layout\images\giay1.jpg" />
+    <Content Include="Content\Layout\images\giay2.jpg" />
+    <Content Include="Content\Layout\images\giay3.jpg" />
+    <Content Include="Content\Layout\images\gs1.jpg" />
+    <Content Include="Content\Layout\images\gs2.jpg" />
+    <Content Include="Content\Layout\images\gs3.jpg" />
+    <Content Include="Content\Layout\images\gs4.jpg" />
+    <Content Include="Content\Layout\images\gs5.jpg" />
+    <Content Include="Content\Layout\images\gs6.jpg" />
+    <Content Include="Content\Layout\images\gs_bg1.jpg" />
+    <Content Include="Content\Layout\images\gs_bg2.jpg" />
+    <Content Include="Content\Layout\images\gs_bg3.jpg" />
+    <Content Include="Content\Layout\images\gs_bg4.jpg" />
+    <Content Include="Content\Layout\images\gs_bg5.jpg" />
+    <Content Include="Content\Layout\images\gs_bg6.jpg" />
     <Content Include="Content\Layout\images\icons8-fire-48.png" />
     <Content Include="Content\Layout\images\icons8-united-kingdom-48.png" />
     <Content Include="Content\Layout\images\icons8-vietnam-48 %282%29.png" />
@@ -294,6 +326,9 @@
     <Content Include="Content\Layout\images\k9.jpg" />
     <Content Include="Content\Layout\images\ke.jpg" />
     <Content Include="Content\Layout\images\keosua.jpg" />
+    <Content Include="Content\Layout\images\khoacnam1.jpg" />
+    <Content Include="Content\Layout\images\khoacnam2.jpg" />
+    <Content Include="Content\Layout\images\khoacnam3.jpg" />
     <Content Include="Content\Layout\images\left.png" />
     <Content Include="Content\Layout\images\logo2.png" />
     <Content Include="Content\Layout\images\m1.jpg" />
@@ -321,6 +356,9 @@
     <Content Include="Content\Layout\images\pay9.png" />
     <Content Include="Content\Layout\images\paypal.png" />
     <Content Include="Content\Layout\images\quat.jpg" />
+    <Content Include="Content\Layout\images\quat1.jpg" />
+    <Content Include="Content\Layout\images\quat2.jpg" />
+    <Content Include="Content\Layout\images\quat3.jpg" />
     <Content Include="Content\Layout\images\right.png" />
     <Content Include="Content\Layout\images\s1.jpg" />
     <Content Include="Content\Layout\images\s2.jpg" />
@@ -339,6 +377,7 @@
     <Content Include="Content\Layout\images\si.jpg" />
     <Content Include="Content\Layout\images\si2.jpg" />
     <Content Include="Content\Layout\images\si3.jpg" />
+    <Content Include="Content\Layout\images\sominam.jpg" />
     <Content Include="Content\Layout\images\son.jpg" />
     <Content Include="Content\Layout\images\star1.png" />
     <Content Include="Content\Layout\images\star22.png" />
@@ -346,6 +385,9 @@
     <Content Include="Content\Layout\images\tainghe.jpg" />
     <Content Include="Content\Layout\images\tivi.jpg" />
     <Content Include="Content\Layout\images\videoimg2.png" />
+    <Content Include="Content\Layout\images\xe1.jpg" />
+    <Content Include="Content\Layout\images\xe2.jpg" />
+    <Content Include="Content\Layout\images\xe3.jpg" />
     <Content Include="Content\Layout\js\bootstrap.js" />
     <Content Include="Content\Layout\js\creditly.js" />
     <Content Include="Content\Layout\js\easing.js" />
