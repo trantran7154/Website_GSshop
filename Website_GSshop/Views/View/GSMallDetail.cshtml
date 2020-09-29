@@ -4,6 +4,22 @@
     ViewBag.Title = "GSMallDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style> 
+    .items {
+         width: 90%;
+         margin: 0px auto;
+         margin-top: 100px;  
+    }
+
+     .slick-slide {
+         margin: 10px
+     }
+
+     .slick-slide img {
+         width: 100%;
+         border: 0px solid #fff
+     }
+</style>
 <div class="container-fluid">
     <div class="pi-layout-container banner_img">
         <div class="banner_img2">
@@ -91,23 +107,14 @@
         </div>
     </div>
     <br>
-    <div class="container">
-        <div class="wrapper">
-            <div class="products">
-                <ul>
-                    @for (var i = 0; i < 14; i++)
-                    {
-                        <li>
-                            <div class="product-container">
-                                <img class="img1" src="~/Content/Layout/images/aolen.jpg" alt="" />
-                            </div>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
-        <div id="click2"><span class="left-arrow"></span></div>
-        <div id="click"><span class="right-arrow"></span></div>
+    <div class="items">
+        <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190720/gallery/preview/02_o_car.jpg"></div>
+        <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190715/gallery/preview/03_r_car.jpg"></div>
+        <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190714/gallery/preview/04_g_car.jpg"></div>
+        <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190714/gallery/preview/04_g_car.jpg"></div>
+        <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190714/gallery/preview/04_g_car.jpg"></div>
+        <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190714/gallery/preview/04_g_car.jpg"></div>
+        <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190714/gallery/preview/04_g_car.jpg"></div>
     </div>
     <br />
     <h2>Sản Phẩm Bán Chạy</h2>
@@ -199,6 +206,14 @@
             prevButton: '.swiper-button-prev',
         });
     })(); /* IIFE end */
+    $(document).ready(function () {
+        $('.items').slick({
+            infinite: true,
+            lazyLoad: 'ondemand',
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+    });
 </script>
 
 

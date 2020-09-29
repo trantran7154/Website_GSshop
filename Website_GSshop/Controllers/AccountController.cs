@@ -149,15 +149,25 @@ namespace Website_GSshop.Controllers
         }
         // Đăng ký người bán
         [HttpPost]
-        public ActionResult SignUpSeller([Bind(Include = "user_id,user_login,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_fristname,user_lastname,user_image,user_sex,user_birthday")] User user)
+        public ActionResult Create([Bind(Include = "seller_id,seller_login,seller_pass,seller_email,seller_telephone,seller_token,seller_slider1,seller_slider2,seller_slider3,seller_link1,seller_link2,seller_link3,seller_fristname,seller_lastname,seller_logo,seller_active,seller_nameshop,seller_datecreated,seller_address,seller_datelogin,seller_detail,seller_description")] Seller seller)
         {
-            if (ModelState.IsValid)
+            Seller seller_email = db.Seller.SingleOrDefault(n => n.seller_email == seller.seller_email);
+            if (seller_email != null)
             {
-                db.User.Add(user);
-                db.SaveChanges();
-                return Redirect("/Display/Index");
+                Session["testsignup"] = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Tài khoản đã tồn tại.</b></div>";
+                return Redirect(Request.UrlReferrer.ToString());
             }
-            return View(user);
+            else
+            {
+                Session["seller"] = seller;
+                seller.seller_token = Guid.NewGuid().ToString();
+                seller.seller_active = true;
+                seller.seller_datecreated = DateTime.Now;
+                seller.seller_datelogin = DateTime.Now;
+                db.SaveChanges();
+                return Redirect(home);
+            }
+            return View(seller);
         }
     }
 }
