@@ -19,6 +19,11 @@
          width: 100%;
          border: 0px solid #fff
      }
+
+    .splide__slide img {
+        width: 100%;
+        height: auto;
+    }
 </style>
 <div class="container-fluid">
     <div class="pi-layout-container banner_img">
@@ -104,6 +109,21 @@
                     <div class="banner_img54"></div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="secondary-slider" class="splide">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide">
+                    <img src="~/Content/Layout/images/aokhoac.jpg" />
+                </li>
+                <li class="splide__slide">
+                    <img src="~/Content/Layout/images/aokhoac.jpg" />
+                </li>
+                <li class="splide__slide">
+                    <img src="~/Content/Layout/images/aokhoac.jpg" />
+                </li>
+            </ul>
         </div>
     </div>
     <br>
@@ -213,6 +233,23 @@
             slidesToShow: 3,
             slidesToScroll: 3
         });
+    });
+    var thumbs = jQuery('#thumbnails').slippry({
+        // general elements & wrapper
+        slippryWrapper: '<div class="slippry_box thumbnails" />',
+        // options
+        transition: 'horizontal',
+        pager: false,
+        auto: false,
+        onSlideBefore: function (el, index_old, index_new) {
+            jQuery('.thumbs a img').removeClass('active');
+            jQuery('img', jQuery('.thumbs a')[index_new]).addClass('active');
+        }
+    });
+
+    jQuery('.thumbs a').click(function () {
+        thumbs.goToSlide($(this).data('slide'));
+        return false;
     });
 </script>
 

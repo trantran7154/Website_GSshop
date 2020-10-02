@@ -13,6 +13,7 @@ namespace Website_GSshop.Controllers
         String home = "/Display/Index";
         String update = "/Account/UpdateInfo";
         String login = "/Account/Login";
+        String loginseller = "/Account/LoginSeller";
         Data_GSShopEntities db = new Data_GSShopEntities();
         // GET: Login
         public ActionResult Login()
@@ -121,10 +122,10 @@ namespace Website_GSshop.Controllers
         // Đăng nhập người bán
         public ActionResult LoginSeller()
         {
-            User user = (User)Session["user"];
-            if (user != null)
+            Seller seller = (Seller)Session["seller"];
+            if (seller != null)
             {
-                return Redirect("/Display/Index");
+                return Redirect(home);
             }
             return View();
         }
@@ -133,13 +134,13 @@ namespace Website_GSshop.Controllers
         {
             String sEmail = f["seller_email"].ToString();
             String sPass = f["seller_pass"].ToString();
-            User user = db.User.Where(n => n.user_active == true && n.user_role == 2).SingleOrDefault(n => n.user_email == sEmail && n.user_pass == sPass);
-            if(user != null)
+            Seller seller = db.Seller.Where(n => n.seller_active == true && n.seller_role == 2).SingleOrDefault(n => n.seller_email == sEmail && n.seller_pass == sPass);
+            if(seller != null)
             {
-                Session["user"] = user;
-                db.User.Find(user.user_id).user_datelogin = DateTime.Now;
-                db.User.Find(user.user_id).user_token = Guid.NewGuid().ToString();
-                return Redirect("/Display/Index");
+                Session["seller"] = seller;
+                db.Seller.Find(seller.seller_id).seller_datecreated = DateTime.Now;
+                db.Seller.Find(seller.seller_id).seller_token = Guid.NewGuid().ToString();
+                return Redirect(home);
             }
             else
             {
@@ -168,6 +169,38 @@ namespace Website_GSshop.Controllers
                 return Redirect(home);
             }
             return View(seller);
+        }
+        // Cập nhật thông tin Seller
+        public PartialViewResult UpdateInfoSeller()
+        {
+            Seller seller = (Seller)Session["seller"];
+            if (seller == null)
+            {
+                Response.Redirect(loginseller);
+            }
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult UpdateInfoSeller(FormCollection f)
+        {
+            User user = (User)Session["user"];
+            User usernew = db.User.SingleOrDefault(n => n.user_id == user.user_id);
+            String sImage = f["user_image"].ToString();
+            String sNicname = f["user_nicename"].ToString();
+            String sTelephone = f["user_telephone"].ToString();
+            String sAddress = f["user_address"].ToString();
+            String sProvinceCity = f["user_provincecity"].ToString();
+            String sDistrict = f["user_district"].ToString();
+            db.User.Find(user.user_id).user_image = sImage;
+            db.User.Find(user.user_id).user_nicename = sNicname;
+            db.User.Find(user.user_id).user_address = sAddress;
+            db.User.Find(user.user_id).user_telephone = sTelephone;
+            db.User.Find(user.user_id).user_address = sAddress;
+            db.User.Find(user.user_id).user_provincecity = sProvinceCity;
+            db.User.Find(user.user_id).user_district = sDistrict;
+            Session["user"] = usernew;
+            db.SaveChanges();
+            return Redirect(home);
         }
     }
 }

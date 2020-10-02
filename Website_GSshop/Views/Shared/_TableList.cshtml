@@ -2,6 +2,30 @@
 @model List<Product>
 @foreach (var item in Model)
 {
+    <div class="row" hidden>
+        <div class="col-md-3">
+            <div class="ui three cards">
+                <div class="ui card">
+                    <div class="content">
+                        <div class="ui placeholder">
+                            <div class="rectangular image"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="ui placeholder">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
     <table class="col-md-12">
         <tr class="row">
             <td class="col-md-3 mt-5">
@@ -22,6 +46,7 @@
                 <span class="p-price text-orange" style="font-size: 20px">$ @item.product_price</span>
             </td>
         </tr>
-    </table>  
+    </table>
+
     <br />
 }
