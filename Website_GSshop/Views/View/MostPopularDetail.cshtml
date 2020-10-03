@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "MostPopularDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Product sesproduct = (Product)Session["product"];
 }
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
@@ -296,7 +297,7 @@
                             </select>
                         </td>
                         <td><a href="@Url.Action("Table","Ajax")" class="text-dark" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace" style="padding: 17px"><i class="fa fa-table" style="font-size: 25px"></i></a></td>
-                        <td><a href="@Url.Action("TableList","Ajax")" class="text-dark" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace" data-loading-text="#divLoad" style="padding: 5px"><i class="fa fa-th-list" style="font-size: 25px; color:#d3d3d3"></i></a></td>
+                        <td><a href="@Url.Action("TableList","Ajax")" class="text-dark" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace" data-loading-text="#divLoad" style="padding: 5px"><i class="fa fa-th-list" style="font-size: 25px"></i></a></td>
                     </tr>
                 </table>
             </div>
@@ -307,29 +308,6 @@
                 <div class="row" id="change">
                     @foreach (var item in Model)
                     {
-                        <div class="row" id="#divLoad">
-                            <div class="col-md-3">
-                                <div class="ui three cards">
-                                    <div class="ui card">
-                                        <div class="content">
-                                            <div class="ui placeholder">
-                                                <div class="rectangular image"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="ui placeholder">
-                                    <div class="line"></div>
-                                    <div class="line"></div>
-                                    <div class="line"></div>
-                                    <div class="line"></div>
-                                    <div class="line"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <br />
                         <div class="col-md-3">
                             <div class="p-box">
                                 <div class="p-top">
@@ -352,7 +330,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <span class="p-price">
-                                            <div class="p-stars">
+                                            <div class="p-stars mt-2">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -363,7 +341,7 @@
                                         </span>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="pill1 text-right">&nbsp;&nbsp;&nbsp;&nbsp;<b>Việt Nam</b>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                        <div class="pill1 text-right mt-2"><b>Việt Nam</b></div>
                                     </div>
                                 </div>
                             </div>

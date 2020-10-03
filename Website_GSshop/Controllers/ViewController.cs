@@ -14,6 +14,7 @@ namespace Website_GSshop.Controllers
         // Xem chi tiết các sản phẩm tìm kiếm phổ biến
         public ActionResult MostPopularDetail()
         {
+            Product product = (Product)Session["product"];
             return View(db.Product.Where(n => n.product_active == true).Take(40).ToList());
         }
         // Xem chi tiếêt sản phẩm của các bộ sưu tập

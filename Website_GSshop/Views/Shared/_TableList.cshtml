@@ -2,35 +2,11 @@
 @model List<Product>
 @foreach (var item in Model)
 {
-    <div class="row" hidden>
-        <div class="col-md-3">
-            <div class="ui three cards">
-                <div class="ui card">
-                    <div class="content">
-                        <div class="ui placeholder">
-                            <div class="rectangular image"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="ui placeholder">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-        </div>
-    </div>
-    <br />
-    <br />
     <table class="col-md-12">
         <tr class="row">
             <td class="col-md-3 mt-5">
                 <img src="~/Content/Layout/images/@item.product_image" alt="" class="img2" />
-                <span class="label1 best-seller-label test mt-3 ml-2">Best seller</span>
+                <span class="label1 best-seller-label test mt-3 ml-2" style="top: 10px">Best seller</span>
             </td>
             <td class="col-md-5 mt-7">
                 <h3 class="p-product">
@@ -43,7 +19,7 @@
                 <p class="mt-3 text-left">● Game 1k kỳ diệu</p>
             </td>
             <td class="col-md-2 mt-8">
-                <span class="p-price text-orange" style="font-size: 20px">$ @item.product_price</span>
+                <span class="p-price text-orange" style="font-size: 20px">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</span>
             </td>
         </tr>
     </table>
