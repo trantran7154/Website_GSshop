@@ -142,8 +142,6 @@
           <Property Name="seller_link1" Type="nvarchar" MaxLength="1000" />
           <Property Name="seller_link2" Type="nvarchar" MaxLength="1000" />
           <Property Name="seller_link3" Type="nvarchar" MaxLength="1000" />
-          <Property Name="seller_fristname" Type="nvarchar" MaxLength="50" />
-          <Property Name="seller_lastname" Type="nvarchar" MaxLength="50" />
           <Property Name="seller_logo" Type="nvarchar" MaxLength="1000" />
           <Property Name="seller_active" Type="bit" />
           <Property Name="seller_nameshop" Type="nvarchar" MaxLength="200" />
@@ -153,6 +151,9 @@
           <Property Name="seller_detail" Type="nvarchar(max)" />
           <Property Name="seller_description" Type="nvarchar(max)" />
           <Property Name="seller_role" Type="int" />
+          <Property Name="seller_nicename" Type="nvarchar" MaxLength="50" />
+          <Property Name="seller_provincecity" Type="nvarchar" MaxLength="100" />
+          <Property Name="seller_district" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="SubCategory">
           <Key>
@@ -582,8 +583,6 @@
           <Property Name="seller_link1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="seller_link2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="seller_link3" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="seller_fristname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="seller_lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="seller_logo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="seller_active" Type="Boolean" />
           <Property Name="seller_nameshop" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -595,6 +594,9 @@
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Seller" FromRole="Seller" ToRole="Product" />
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Seller" FromRole="Seller" ToRole="ReplyComment" />
           <Property Name="seller_role" Type="Int32" />
+          <Property Name="seller_nicename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="seller_provincecity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="seller_district" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SubCategory">
           <Key>
@@ -1050,6 +1052,9 @@
           <EntitySetMapping Name="Seller">
             <EntityTypeMapping TypeName="Data_GSShopModel.Seller">
               <MappingFragment StoreEntitySet="Seller">
+                <ScalarProperty Name="seller_district" ColumnName="seller_district" />
+                <ScalarProperty Name="seller_provincecity" ColumnName="seller_provincecity" />
+                <ScalarProperty Name="seller_nicename" ColumnName="seller_nicename" />
                 <ScalarProperty Name="seller_role" ColumnName="seller_role" />
                 <ScalarProperty Name="seller_id" ColumnName="seller_id" />
                 <ScalarProperty Name="seller_login" ColumnName="seller_login" />
@@ -1063,8 +1068,6 @@
                 <ScalarProperty Name="seller_link1" ColumnName="seller_link1" />
                 <ScalarProperty Name="seller_link2" ColumnName="seller_link2" />
                 <ScalarProperty Name="seller_link3" ColumnName="seller_link3" />
-                <ScalarProperty Name="seller_fristname" ColumnName="seller_fristname" />
-                <ScalarProperty Name="seller_lastname" ColumnName="seller_lastname" />
                 <ScalarProperty Name="seller_logo" ColumnName="seller_logo" />
                 <ScalarProperty Name="seller_active" ColumnName="seller_active" />
                 <ScalarProperty Name="seller_nameshop" ColumnName="seller_nameshop" />

@@ -70,23 +70,23 @@
                     <div class="wizard-container">
                         <div class="card wizard-card" data-color="orange" id="wizardProfile">
                             <script>
-                                function valiInfo() {
-                                    var user_telephone = document.getElementById("user_telephone").value;
+                                function valiInfoSeller() {
+                                    var seller_telephone = document.getElementById("seller_telephone").value;
                                     // regex telephone
                                     var re_telephone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-                                    var user_email = document.getElementById("user_email").value;
+                                    var seller_email = document.getElementById("seller_email").value;
                                     // regex email
                                     var re_email = /[A-Z0-9._%+-]+@a+.+.[A-Z]{2,4}/igm;
-                                    if (re_telephone.test(user_telephone) == false) {
-                                        if (user_telephone != "") {
+                                    if (re_telephone.test(seller_telephone) == false) {
+                                        if (seller_telephone != "") {
                                             document.getElementById("testInfo").innerHTML = "<div class='alert alert-danger text-center'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i>Số điện thoại không hợp lệ !</div>";
                                         }
                                         else {
                                             document.getElementById("testInfo").innerHTML = "<div class='alert alert-danger text-center'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i>Số điện thoại không được bỏ trống !</div>";
                                         }
                                     }
-                                    else if (re_email.test(user_email) == false) {
-                                        if (user_email != "") {
+                                    else if (re_email.test(seller_email) == false) {
+                                        if (seller_email != "") {
                                             document.getElementById("testInfo").innerHTML = "<div class='alert alert-danger text-center'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i>Email/Gmail không được bỏ trống !</div>";
                                         }
                                         else {
@@ -99,7 +99,7 @@
                                     return false;
                                 }
                             </script>
-                            <form action="@Url.Action("UpdateInfo","Account")" onsubmit="return valiInfo()" method="post">
+                            <form action="@Url.Action("UpdateInfoSeller","Account")" onsubmit="return valiInfoSeller()" method="post">
                                 <!-- You can switch " data-color="orange" "  with one of the next bright colors: "blue", "green", "orange", "red", "azure" -->
                                 <div class="wizard-header text-center">
                                     <h2 class="wizard-title text-danger">THÔNG TIN CÁ NHÂN</h2>
@@ -133,7 +133,7 @@
                                                 <div class="picture-container">
                                                     <div class="picture">
                                                         <img src="~/Content/Info/img/default-avatar.jpg" class="picture-src" id="wizardPicturePreview" title="" />
-                                                        <input type="file" id="wizard-picture" name="user_image">
+                                                        <input type="file" id="wizard-picture" name="seller_logo">
                                                     </div>
                                                     <h6>Chọn Ảnh Đại Diện</h6>
                                                 </div>
@@ -141,17 +141,17 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Họ và tên</label>
-                                                    <input type="text" class="form-control" placeholder="* Trường bắt buộc" required="" name="user_nicename">
+                                                    <input type="text" class="form-control" placeholder="* Trường bắt buộc" required="" name="seller_nicename">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Số điện thoại</label>
-                                                    <input type="text" class="form-control" placeholder="* Trường bắt buộc" id="user_telephone" required="" name="user_telephone">
+                                                    <input type="text" class="form-control" placeholder="* Trường bắt buộc" id="seller_telephone" required="" name="seller_telephone">
                                                 </div>
                                             </div>
                                             <div class="col-sm-10 col-sm-offset-1">
                                                 <div class="form-group">
                                                     <label>Email</label>
-                                                    <input type="email" class="form-control" placeholder="* Trường bắt buộc" id="user_email" required="" name="user_email" value="@user.user_email">
+                                                    <input type="email" class="form-control" placeholder="* Trường bắt buộc" id="seller_email" required="" name="seller_email" value="@seller.seller_email">
                                                 </div>
                                             </div>
                                         </div>
@@ -160,14 +160,20 @@
                                         <div class="row">
                                             <div class="col-sm-10 col-sm-offset-1">
                                                 <div class="form-group">
-                                                    <label>Địa chỉ</label>
-                                                    <input type="text" class="form-control" placeholder="* Trường bắt buộc" required="" name="user_address">
+                                                    <label>Tên gian hàng</label>
+                                                    <input type="text" class="form-control" placeholder="* Trường bắt buộc" required="" name="seller_nameshop">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-10 col-sm-offset-1">
+                                                <div class="form-group">
+                                                    <label>Địa chỉ kho</label>
+                                                    <input type="text" class="form-control" placeholder="* Trường bắt buộc" required="" name="seller_address">
                                                 </div>
                                             </div>
                                             <div class="col-sm-5 col-sm-offset-1">
                                                 <div class="form-group">
                                                     <label>Tỉnh/ Thành Phố <small>(* Trường bắt buộc)</small></label><br>
-                                                    <select class="form-control" name="user_provincecity">
+                                                    <select class="form-control" name="seller_provincecity">
                                                         <option value="Afghanistan"> Chọn Tỉnh/ Thành Phố </option>
                                                         <option value="Albania"> Albania </option>
                                                         <option value="Algeria"> Algeria </option>
@@ -183,7 +189,7 @@
                                             <div class="col-sm-5">
                                                 <div class="form-group">
                                                     <label>Quận/ Huyện <small>(* Trường bắt buộc)</small></label><br>
-                                                    <select class="form-control" name="user_district">
+                                                    <select class="form-control" name="seller_district">
                                                         <option value="Afghanistan"> Chọn Quận/ Huyện </option>
                                                         <option value="Albania"> Albania </option>
                                                         <option value="Algeria"> Algeria </option>

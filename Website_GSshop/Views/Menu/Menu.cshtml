@@ -2,6 +2,7 @@
 @model List<Category>
 @{
     User sesuser = (User)Session["user"];
+    Seller sellerer = (Seller)Session["seller"];
 }
 <!-- header-bot-->
 <div class="header-bot">
@@ -31,6 +32,28 @@
                             <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-star"></i> Nhận xét của tôi</a></li>
                             <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-times-circle"></i> Quản lý đơn hàng và đổi trả</a></li>
                             <li style="width: 100%; text-align: unset"><a href="/Account/LogOut"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                    <li style="border-right: none;">
+                        <a href="/Account/LogOut">
+                            <span class="fa fa-sign-out" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                </ul>
+            }
+            else if (sellerer != null)
+            {
+                <ul class="text-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chào, @sellerer.seller_nameshop</a>
+                        <ul class="dropdown-menu">
+                            <li style="width: 100%; text-align: unset"><a href="/Account/Info"><i class="fa fa-smile-o"></i> Quản lý tài khoản</a></li>
+                            <li style="width: 100%; text-align: unset"><a href="/help/support"><i class="fa fa-archive"></i> Đơn hàng của tôi</a></li>
+                            <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-heart"></i> Danh sách yêu thích</a></li>
+                            <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-bell"></i> Đơn hàng đã theo dõi</a></li>
+                            <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-star"></i> Nhận xét của tôi</a></li>
+                            <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-times-circle"></i> Quản lý đơn hàng và đổi trả</a></li>
+                            <li style="width: 100%; text-align: unset"><a href="/Account/LogOutSeller"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
                         </ul>
                     </li>
                     <li style="border-right: none;">

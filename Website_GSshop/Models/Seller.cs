@@ -33,8 +33,6 @@ namespace Website_GSshop.Models
         public string seller_link1 { get; set; }
         public string seller_link2 { get; set; }
         public string seller_link3 { get; set; }
-        public string seller_fristname { get; set; }
-        public string seller_lastname { get; set; }
         public string seller_logo { get; set; }
         public Nullable<bool> seller_active { get; set; }
         public string seller_nameshop { get; set; }
@@ -44,6 +42,9 @@ namespace Website_GSshop.Models
         public string seller_detail { get; set; }
         public string seller_description { get; set; }
         public Nullable<int> seller_role { get; set; }
+        public string seller_nicename { get; set; }
+        public string seller_provincecity { get; set; }
+        public string seller_district { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }

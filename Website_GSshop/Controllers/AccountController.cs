@@ -11,9 +11,10 @@ namespace Website_GSshop.Controllers
     public class AccountController : Controller
     {
         String home = "/Display/Index";
-        String update = "/Account/UpdateInfo";
         String login = "/Account/Login";
         String loginseller = "/Account/LoginSeller";
+        String update = "/Account/UpdateInfo";
+        String updateseller = "/Account/UpdateInfoSeller";
         Data_GSShopEntities db = new Data_GSShopEntities();
         // GET: Login
         public ActionResult Login()
@@ -45,7 +46,7 @@ namespace Website_GSshop.Controllers
                 return Redirect(Request.UrlReferrer.ToString());
             }
         }
-        // Đăng xuất người dùng và người bán
+        // Đăng xuất người dùng
         public ActionResult LogOut()
         {
             Session["user"] = null;
@@ -129,6 +130,12 @@ namespace Website_GSshop.Controllers
             }
             return View();
         }
+        // Đăng xuất người dùng
+        public ActionResult LogOutSeller()
+        {
+            Session["seller"] = null;
+            return Redirect(home);
+        }
         [HttpPost]
         public ActionResult LoginSeller(FormCollection f)
         {
@@ -150,7 +157,7 @@ namespace Website_GSshop.Controllers
         }
         // Đăng ký người bán
         [HttpPost]
-        public ActionResult Create([Bind(Include = "seller_id,seller_login,seller_pass,seller_email,seller_telephone,seller_token,seller_slider1,seller_slider2,seller_slider3,seller_link1,seller_link2,seller_link3,seller_fristname,seller_lastname,seller_logo,seller_active,seller_nameshop,seller_datecreated,seller_address,seller_datelogin,seller_detail,seller_description")] Seller seller)
+        public ActionResult SignUpSeller([Bind(Include = "seller_id,seller_login,seller_pass,seller_email,seller_telephone,seller_token,seller_slider1,seller_slider2,seller_slider3,seller_link1,seller_link2,seller_link3,seller_logo,seller_active,seller_nameshop,seller_datecreated,seller_address,seller_datelogin,seller_detail,seller_description,seller_role,seller_nicename,seller_provincecity,seller_district")] Seller seller)
         {
             Seller seller_email = db.Seller.SingleOrDefault(n => n.seller_email == seller.seller_email);
             if (seller_email != null)
@@ -165,8 +172,10 @@ namespace Website_GSshop.Controllers
                 seller.seller_active = true;
                 seller.seller_datecreated = DateTime.Now;
                 seller.seller_datelogin = DateTime.Now;
+                seller.seller_role = 2;
+                db.Seller.Add(seller);
                 db.SaveChanges();
-                return Redirect(home);
+                return Redirect(updateseller);
             }
             return View(seller);
         }
@@ -183,22 +192,24 @@ namespace Website_GSshop.Controllers
         [HttpPost]
         public ActionResult UpdateInfoSeller(FormCollection f)
         {
-            User user = (User)Session["user"];
-            User usernew = db.User.SingleOrDefault(n => n.user_id == user.user_id);
-            String sImage = f["user_image"].ToString();
-            String sNicname = f["user_nicename"].ToString();
-            String sTelephone = f["user_telephone"].ToString();
-            String sAddress = f["user_address"].ToString();
-            String sProvinceCity = f["user_provincecity"].ToString();
-            String sDistrict = f["user_district"].ToString();
-            db.User.Find(user.user_id).user_image = sImage;
-            db.User.Find(user.user_id).user_nicename = sNicname;
-            db.User.Find(user.user_id).user_address = sAddress;
-            db.User.Find(user.user_id).user_telephone = sTelephone;
-            db.User.Find(user.user_id).user_address = sAddress;
-            db.User.Find(user.user_id).user_provincecity = sProvinceCity;
-            db.User.Find(user.user_id).user_district = sDistrict;
-            Session["user"] = usernew;
+            Seller seller = (Seller)Session["seller"];
+            Seller sellernew = db.Seller.SingleOrDefault(n => n.seller_id == seller.seller_id);
+            String sLogo = f["seller_logo"].ToString();
+            String sNicname = f["seller_nicename"].ToString();
+            String sTelephone = f["seller_telephone"].ToString();
+            String sAddress = f["seller_address"].ToString();
+            String sProvinceCity = f["seller_provincecity"].ToString();
+            String sDistrict = f["seller_district"].ToString();
+            String sNameshop = f["seller_nameshop"].ToString();
+            db.Seller.Find(seller.seller_id).seller_logo = sLogo;
+            db.Seller.Find(seller.seller_id).seller_nicename = sNicname;
+            db.Seller.Find(seller.seller_id).seller_address = sAddress;
+            db.Seller.Find(seller.seller_id).seller_telephone = sTelephone;
+            db.Seller.Find(seller.seller_id).seller_address = sAddress;
+            db.Seller.Find(seller.seller_id).seller_provincecity = sProvinceCity;
+            db.Seller.Find(seller.seller_id).seller_district = sDistrict;
+            db.Seller.Find(seller.seller_id).seller_nameshop = sNameshop;
+            Session["seller"] = sellernew;
             db.SaveChanges();
             return Redirect(home);
         }

@@ -147,7 +147,6 @@
     <Compile Include="Controllers\FooterController.cs" />
     <Compile Include="Controllers\HeaderController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
-    <Compile Include="Controllers\SellersController.cs" />
     <Compile Include="Controllers\ViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
