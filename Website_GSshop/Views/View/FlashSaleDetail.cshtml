@@ -1,5 +1,5 @@
 ﻿@using Website_GSshop.Models
-@model List<Product>
+@model Product
 @{
     ViewBag.Title = "FlashSaleDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,11 +22,11 @@
                                                 </div>
                                             </b>
                                         </span>
-                                        <div class="item-img" style="background-image: url('http://store.moma.org/dw/image/v2/BBQC_PRD/on/demandware.static/-/Sites-master-moma/default/dw952014b1/images/96511_a.jpg'); background-size: cover;"></div>
+                                        <div class="item-img" style="background-image: url('../../Content/Layout/images/@Model.product_image'); background-size: cover;"></div>
                                         <div class="item-pnl">
                                             <div class="pnl-wrapper">
                                                 <div class="pnl-description">
-                                                    <span class="pnl-label">Product Name</span>
+                                                    <span class="pnl-label">@Model.product_name</span>
                                                     <span class="pnl-price"><s class="text-danger">$120,00</s> &nbsp;$100,00</span>
                                                 </div>
                                                 <div class="pnl-tocart">
@@ -124,8 +124,8 @@
                         </div>
                     </div>
                     <hr />
-                    <h2 class="text-orange">₫ 1,000</h2>
-                    <small><s>2,690,000</s> -99%</small>
+                    <h2 class="text-orange">₫ @{float pricesale = (float)Model.product_sale;} @pricesale.ToString("#,##0")</h2>
+                    <small><s>@{float price = (float)Model.product_price;} @price.ToString("#,##0")</s> -99%</small>
                     <br />
                     <br />
                     <div class="row">
@@ -189,20 +189,6 @@
                 <br />
                 <i class="fa fa-mail-reply"></i>&nbsp;&nbsp;&nbsp;Warranty not available
                 <hr />
-                <div class="guideApp">
-                    <div style="display: flex;">
-                        <div class="guideApp-qrcode">
-                            <canvas height="166" width="166" style="height: 111px; width: 111px;" data-spm-anchor-id="a2o4n.pdp.0.i0.33342403qg9i7D"></canvas>
-                        </div>
-                        <div class="wrap-guideApp">
-                            <img src="https://img.alicdn.com/tfs/TB1f4HzFbH1gK0jSZFwXXc7aXXa-96-96.png">
-                            <p>Tải ngay ứng dụng để được miễn phí vận chuyển!</p>
-                        </div>
-                    </div>
-                    <p class="text-left">
-                        <i class="fa fa-mobile-phone"></i> Quét mã QR để tải app
-                    </p>
-                </div>
                 <div class="mt-2" style="background-color: #fcfcfc">
                     <table class="table table-bordered">
                         <tr>

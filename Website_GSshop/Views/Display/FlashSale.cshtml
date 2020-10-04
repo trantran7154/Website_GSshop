@@ -75,12 +75,12 @@
                                 <div class="item-pnl">
                                     <div class="pnl-wrapper">
                                         <div class="pnl-description">
-                                            <a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})"><span class="pnl-label">@item.product_name</span></a>
+                                            <a href="@Url.Action("FlashSaleDetail","View", new {@id = item.product_id})"><span class="pnl-label">@item.product_name</span></a>
                                             <span class="pnl-price"><s class="text-danger">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</s>&nbsp;@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</span>
                                         </div>
                                         <div class="pnl-tocart">
                                             <div class="pnl-ic-wrapper">
-                                                <a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})">
+                                                <a href="@Url.Action("FlashSaleDetail","View", new {@id = item.product_id})">
                                                     <span class="pnl-ic"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve"><g><path d="M25.4,29H6.6c-1.7,0-3-1.4-2.8-2.9l1.9-13.8C5.9,11,6.6,10,8,10h16c1.4,0,2.1,1,2.3,2.3l1.9,13.8 C28.4,27.6,27.1,29,25.4,29z"></path><path d="M10.6,12.7V8.4C10.6,5.4,13,3,16,3h0c3,0,5.4,2.4,5.4,5.4v4.3"></path></g></svg></span>
                                                 </a>
                                             </div>

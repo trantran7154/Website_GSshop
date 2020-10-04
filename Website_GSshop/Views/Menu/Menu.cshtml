@@ -160,16 +160,7 @@
 <!-- navigation -->
 <div class="ban-top">
     <div class="container">
-        <div class="agileits-navi_search">
-            <form action="#" method="post">
-                <div id="agileinfo-nav_search" name="agileinfo_search" required="" class="dropdown">
-                    <a id="dLabel" data-toggle="dropdown" data-target="#" href="/page.html" style="text-decoration: none">
-                        <center>Danh Mục Sản Phẩm<span class="caret"></span></center>
-                    </a>
-                    @Html.Action("Category", "Display")
-                </div>
-            </form>
-        </div>
+        @Html.Action("Category", "Display")
         <div class="top_nav_left">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
