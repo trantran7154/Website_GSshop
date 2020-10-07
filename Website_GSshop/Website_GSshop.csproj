@@ -215,7 +215,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CSS\StyleSheet.css" />
+    <Content Include="Content\CSS\StyleSheet1.css" />
     <Content Include="Content\Info\css\bootstrap.min.css" />
     <Content Include="Content\Info\css\demo.css" />
     <Content Include="Content\Info\css\paper-bootstrap-wizard.css" />
@@ -885,7 +885,6 @@
     <Content Include="Views\Menu\Menu.cshtml" />
     <Content Include="Views\Display\Index.cshtml" />
     <Content Include="Views\Display\Category.cshtml" />
-    <Content Include="Views\Menu\MenuSeller.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Header\Header.cshtml" />
     <Content Include="Views\Footer\Footer.cshtml" />
@@ -918,6 +917,8 @@
     <Content Include="Views\View\GSMallDetail.cshtml" />
     <Content Include="Views\View\ProductDetail.cshtml" />
     <Content Include="Views\Account\UpdateInfoSeller.cshtml" />
+    <Content Include="Views\Menu\Menu_GSMall.cshtml" />
+    <Content Include="Views\Menu\Menu_Vouchers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

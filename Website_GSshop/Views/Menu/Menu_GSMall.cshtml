@@ -1,0 +1,181 @@
+﻿@{
+    ViewBag.Title = "Menu_GSMall";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-module-bx container-fluid mt-2" data-mod-id="bannerSlider">
+    <div class="lzdmall-card-banner-slider card-banner-slider J_NavScroll" data-mod-id="bannerSlider" data-spm="oslpbanner">
+        <section class="J_BannerSlider card-banner-slider-section" data-mode-name="banner-slider">
+            <div class="J_Content card-banner-slider-content">
+                <div class="J_MuiSlider card-banner-slider-list">
+                    <div class="J_Item card-banner-slider-item" data-index="0" style="background: rgb(239, 240, 245); display: block; z-index: 1; position: absolute; opacity: 1;">
+                        <div class="card-banner-slider-main-span">
+                            <a href="//pages.lazada.vn/wow/gcp/route/lazada/vn/upr_1000345_lazada/channel/vn/upr-router/vn?hybrid=1&amp;data_prefetch=true&amp;wh_pid=/lazada/channel/vn/khuyen-mai/lazmall-ngay-thuong-hieu&amp;scm=1003.4.icms-zebra-100029632-2876272.OTHER_6029278484_6629708" title="REALME SBD" data-url="//pages.lazada.vn/wow/gcp/route/lazada/vn/upr_1000345_lazada/channel/vn/upr-router/vn?hybrid=1&amp;data_prefetch=true&amp;wh_pid=/lazada/channel/vn/khuyen-mai/lazmall-ngay-thuong-hieu&amp;scm=1003.4.icms-zebra-100029632-2876272.OTHER_6029278484_6629708" exp-tracking="oslpbanner_exp">
+                                <img class="main-img" src="//laz-img-cdn.alicdn.com/images/ims-web/TB1cDNlU8r0gK0jSZFnXXbRRXXa.jpg" alt="REALME SBD">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-banner-slider-btn">
+                    <ul class="J_SliderNav card-banner-slider-nav">
+                        <li class="dot current" exp-tracking="oslpbanner_exp" data-url="//pages.lazada.vn/wow/gcp/route/lazada/vn/upr_1000345_lazada/channel/vn/upr-router/vn?hybrid=1&amp;data_prefetch=true&amp;wh_pid=/lazada/channel/vn/khuyen-mai/lazmall-ngay-thuong-hieu&amp;scm=1003.4.icms-zebra-100029632-2876272.OTHER_6029278484_6629708" data-aplus-ae="x1_4f244680" data-spm-anchor-id="a2o4n.officialstores.oslpbanner.i0.53996780NNMQgM">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="container-fluid mt-3">
+    <h1>Cửa hàng cho bạn</h1>
+    <div class="mt-3">
+        <div class="logo-slider">
+            <div class="logo-slide-track">
+                @for (var i = 0; i < 10; i++)
+                {
+                    <div class="slide text-center" style="border: 1px solid black; height: 230px">
+                        <img src="~/Content/Layout/images/aokhoacnam.jpg" alt="" />
+                        <p>Áo khoác</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    @for (var i = 0; i < 3; i++)
+    {
+        <div class="row mt-3 container-fluid">
+            <div class="col-md-6" style="background-color: #f9f9f9">
+                <div class="col-md-2">
+                    <img src="~/Content/Layout/images/aolen.jpg" style="height: 80px" class="mt-4" />
+                </div>
+                <div class="col-md-10 mt-3" style="padding: 0px">
+                    <h3>Linkee</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row mt-2 ml-2">
+                                <div class="col-md-4" style="border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; border-top-left-radius: 8px; border-bottom-left-radius: 8px; background-color: #1ACCFD; color: white">
+                                    GSMall
+                                </div>
+                                <div class="col-md-8" style="padding: 0px; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; border-top-right-radius: 8px; border-bottom-right-radius: 8px; background-color: #c1f5f4">
+                                    &nbsp; Hàng Chính Hãng
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <div class="container-fluid">
+                    <div class="row">
+                        @for (var j = 0; j < 3; j++)
+                        {
+                            <div class="col-md-4">
+                                <div class="p-box text-center">
+                                    <img src="~/Content/Layout/images/aolen.jpg" alt="" class="img1" />
+                                    <div class="p-desc text-center">
+                                        <h3 class="p-product">Áo khoác nam</h3>
+                                        <span class="p-price">₫ 75.000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" style="background-color: #f9f9f9; border-left: 1px solid black">
+                <div class="col-md-2">
+                    <img src="~/Content/Layout/images/aolen.jpg" style="height: 80px" class="mt-4" />
+                </div>
+                <div class="col-md-10 mt-3" style="padding: 0px">
+                    <h3>Linkee</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row mt-2 ml-2">
+                                <div class="col-md-4" style="border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; border-top-left-radius: 8px; border-bottom-left-radius: 8px; background-color: #1ACCFD; color: white">
+                                    GSMall
+                                </div>
+                                <div class="col-md-8" style="padding: 0px; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; border-top-right-radius: 8px; border-bottom-right-radius: 8px; background-color: #c1f5f4">
+                                    &nbsp; Hàng Chính Hãng
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <div class="container-fluid">
+                    <div class="row">
+                        @for (var k = 0; k < 3; k++)
+                        {
+                            <div class="col-md-4">
+                                <div class="p-box text-center">
+                                    <img src="~/Content/Layout/images/aolen.jpg" alt="" class="img1" />
+                                    <div class="p-desc text-center">
+                                        <h3 class="p-product">Áo khoác nam</h3>
+                                        <span class="p-price">₫ 75.000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="container-fluid mt-3">
+    <h1>Dành riêng cho bạn</h1>
+    <div class="layout mt-3">
+        <center>
+            <div class="row" id="change">
+                @for (var i = 0; i < 18; i++)
+                {
+                    <div class="col-md-2">
+                        <div class="p-box">
+                            <div class="p-top">
+                                <span class="label1 best-seller-label test mt-2 ml-2">Best seller</span>
+                                <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 p-heart mt-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 25.7143px; height: 16px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
+                            </div>
+                            <div class="text-center p-4">
+                                <img id="main-image" src="https://i.imgur.com/oLXMXVW.jpg" width="300" />
+                            </div>
+                            <div class="p-desc">
+                                <a href="#"><h3 class="p-category">Áo len</h3></a>
+                                <h5 class="text-danger">200.000 ₫</h5>
+                                <h5><s> 190.000 ₫</s> -10%</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span class="p-price">
+                                        <div class="p-stars mt-2">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <small class="text-dark">(6)</small>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="pill1 text-right mt-2"><b>Việt Nam</b></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                }
+            </div>
+        </center>
+    </div>
+    <div class="card-jfy-load-more J_LoadMore">
+        <a class="button J_LoadMoreButton text-info">TẢI THÊM</a>
+    </div>
+</div>

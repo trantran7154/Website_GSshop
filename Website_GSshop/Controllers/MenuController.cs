@@ -15,10 +15,14 @@ namespace Website_GSshop.Controllers
         {
             return PartialView(db.Category.Where(n => n.category_active == true).OrderBy(n => n.category_name).ToList());
         }
-        // Menu trang Người Bán
-        public PartialViewResult MenuSeller()
+        // Menu chính
+        public ActionResult Menu_GSMall()
         {
-            return PartialView(db.Category.Where(n => n.category_active == true).OrderBy(n => n.category_name).ToList());
+            return View(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).ToList());
+        }
+        public ActionResult Menu_Vouchers()
+        {
+            return View(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).ToList());
         }
     }
 }
