@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Data_GSShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="admin_id" />
+    </Key>
+    <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="admin_login" Type="varchar" MaxLength="50" />
+    <Property Name="admin_pass1" Type="varchar" MaxLength="50" />
+    <Property Name="admin_active" Type="bit" />
+    <Property Name="admin_token" Type="varchar" MaxLength="200" />
+    <Property Name="admin_role" Type="int" />
+    <Property Name="admin_datecreated" Type="datetime" />
+    <Property Name="admin_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="admin_email" Type="varchar" MaxLength="50" />
+    <Property Name="admin_pass2" Type="varchar" MaxLength="50" />
+    <Property Name="admin_datelogin" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="category_image" Type="nvarchar" MaxLength="1000" />
+    <Property Name="category_datecreated" Type="datetime" />
+    <Property Name="category_active" Type="bit" />
+  </EntityType>
+  <EntityType Name="ClassificationSubCategory">
+    <Key>
+      <PropertyRef Name="csc_id" />
+    </Key>
+    <Property Name="csc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="csc_name" Type="nvarchar" MaxLength="100" />
+    <Property Name="csc_image" Type="nvarchar" MaxLength="1000" />
+    <Property Name="csc_datecreate" Type="datetime" />
+    <Property Name="csc_active" Type="bit" />
+    <Property Name="subcategory_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Collection">
+    <Key>
+      <PropertyRef Name="collection_id" />
+    </Key>
+    <Property Name="collection_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="collection_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="collection_image1" Type="nvarchar" MaxLength="2000" />
+    <Property Name="collection_image2" Type="nvarchar" MaxLength="2000" />
+    <Property Name="collection_image3" Type="nvarchar" MaxLength="2000" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="collection_datecreate" Type="datetime" />
+    <Property Name="collection_active" Type="bit" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="comment_id" />
+    </Key>
+    <Property Name="comment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="comment_content" Type="nvarchar" MaxLength="1000" />
+    <Property Name="commet_datecreated" Type="datetime" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="seller_id" Type="int" />
+    <Property Name="comment_spam" Type="bit" />
+  </EntityType>
+  <EntityType Name="GSMall">
+    <Key>
+      <PropertyRef Name="gsmall_id" />
+    </Key>
+    <Property Name="gsmall_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="gsmall_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="gsmall_slogan" Type="nvarchar" MaxLength="50" />
+    <Property Name="gsmall_active" Type="bit" />
+    <Property Name="gsmall_datecreate" Type="datetime" />
+    <Property Name="gsmall_bg" Type="nvarchar" MaxLength="2000" />
+    <Property Name="gsmall_image" Type="nvarchar" MaxLength="2000" />
+    <Property Name="product_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="product_name" Type="nvarchar" MaxLength="100" />
+    <Property Name="product_image" Type="nvarchar" MaxLength="2000" />
+    <Property Name="product_datecreated" Type="datetime" />
+    <Property Name="product_active" Type="bit" />
+    <Property Name="product_note" Type="nvarchar" MaxLength="60" />
+    <Property Name="product_price" Type="money" />
+    <Property Name="product_ship" Type="bit" />
+    <Property Name="product_view" Type="int" />
+    <Property Name="product_love" Type="int" />
+    <Property Name="product_color" Type="nvarchar" MaxLength="50" />
+    <Property Name="product_size" Type="nvarchar" MaxLength="50" />
+    <Property Name="product_detail" Type="nvarchar(max)" />
+    <Property Name="product_description" Type="nvarchar(max)" />
+    <Property Name="product_option" Type="bit" />
+    <Property Name="product_sale" Type="money" />
+    <Property Name="product_amount" Type="int" />
+    <Property Name="product_dateedit" Type="datetime" />
+    <Property Name="seller_id" Type="int" />
+    <Property Name="user_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Product_Category">
+    <Key>
+      <PropertyRef Name="pc_id" />
+    </Key>
+    <Property Name="pc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="category_id" Type="int" />
+    <Property Name="csc_id" Type="int" />
+  </EntityType>
+  <EntityType Name="ReplyComment">
+    <Key>
+      <PropertyRef Name="replycomment_id" />
+    </Key>
+    <Property Name="replycomment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="replycomment_content" Type="nvarchar" MaxLength="1000" />
+    <Property Name="comment_id" Type="int" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="seller_id" Type="int" />
+    <Property Name="replycomment_spam" Type="bit" />
+  </EntityType>
+  <EntityType Name="Seller">
+    <Key>
+      <PropertyRef Name="seller_id" />
+    </Key>
+    <Property Name="seller_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="seller_login" Type="varchar" MaxLength="50" />
+    <Property Name="seller_pass" Type="varchar" MaxLength="50" />
+    <Property Name="seller_email" Type="varchar" MaxLength="50" />
+    <Property Name="seller_telephone" Type="varchar" MaxLength="12" />
+    <Property Name="seller_token" Type="varchar" MaxLength="200" />
+    <Property Name="seller_slider1" Type="nvarchar" MaxLength="1000" />
+    <Property Name="seller_slider2" Type="nvarchar" MaxLength="1000" />
+    <Property Name="seller_slider3" Type="nvarchar" MaxLength="1000" />
+    <Property Name="seller_link1" Type="nvarchar" MaxLength="1000" />
+    <Property Name="seller_link2" Type="nvarchar" MaxLength="1000" />
+    <Property Name="seller_link3" Type="nvarchar" MaxLength="1000" />
+    <Property Name="seller_logo" Type="nvarchar" MaxLength="1000" />
+    <Property Name="seller_active" Type="bit" />
+    <Property Name="seller_nameshop" Type="nvarchar" MaxLength="200" />
+    <Property Name="seller_datecreated" Type="datetime" />
+    <Property Name="seller_address" Type="nvarchar" MaxLength="500" />
+    <Property Name="seller_datelogin" Type="datetime" />
+    <Property Name="seller_detail" Type="nvarchar(max)" />
+    <Property Name="seller_description" Type="nvarchar(max)" />
+    <Property Name="seller_role" Type="int" />
+    <Property Name="seller_nicename" Type="nvarchar" MaxLength="50" />
+    <Property Name="seller_provincecity" Type="nvarchar" MaxLength="100" />
+    <Property Name="seller_district" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="SubCategory">
+    <Key>
+      <PropertyRef Name="subcategory_id" />
+    </Key>
+    <Property Name="subcategory_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subcategory_name" Type="nvarchar" MaxLength="100" />
+    <Property Name="subcategory_image" Type="nvarchar" MaxLength="1000" />
+    <Property Name="subcategory_datecreated" Type="datetime" />
+    <Property Name="subcategory_active" Type="bit" />
+    <Property Name="category_id" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_login" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_pass" Type="varchar" MaxLength="50" />
+    <Property Name="user_nicename" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_email" Type="varchar" MaxLength="100" />
+    <Property Name="user_datecreated" Type="datetime" />
+    <Property Name="user_token" Type="varchar" MaxLength="200" />
+    <Property Name="user_role" Type="int" />
+    <Property Name="user_datelogin" Type="datetime" />
+    <Property Name="user_active" Type="bit" />
+    <Property Name="user_address" Type="nvarchar" MaxLength="300" />
+    <Property Name="user_telephone" Type="varchar" MaxLength="12" />
+    <Property Name="user_image" Type="nvarchar" MaxLength="2000" />
+    <Property Name="user_sex" Type="int" />
+    <Property Name="user_provincecity" Type="nvarchar" MaxLength="100" />
+    <Property Name="user_district" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="View">
+    <Key>
+      <PropertyRef Name="view_id" />
+    </Key>
+    <Property Name="view_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="view_date" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_ClassificationSubCategory_SubCategory">
+    <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+    <End Role="ClassificationSubCategory" Type="Self.ClassificationSubCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="subcategory_id" />
+      </Principal>
+      <Dependent Role="ClassificationSubCategory">
+        <PropertyRef Name="subcategory_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Collection_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="Collection">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GSMall_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="GSMall" Type="Self.GSMall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="GSMall">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Category_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product_Category" Type="Self.Product_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="Product_Category">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Category_ClassificationSubCategory">
+    <End Role="ClassificationSubCategory" Type="Self.ClassificationSubCategory" Multiplicity="0..1" />
+    <End Role="Product_Category" Type="Self.Product_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassificationSubCategory">
+        <PropertyRef Name="csc_id" />
+      </Principal>
+      <Dependent Role="Product_Category">
+        <PropertyRef Name="csc_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Category_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Product_Category" Type="Self.Product_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="Product_Category">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Seller">
+    <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seller">
+        <PropertyRef Name="seller_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="seller_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReplyComment_Comment">
+    <End Role="Comment" Type="Self.Comment" Multiplicity="0..1" />
+    <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comment">
+        <PropertyRef Name="comment_id" />
+      </Principal>
+      <Dependent Role="ReplyComment">
+        <PropertyRef Name="comment_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReplyComment_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="ReplyComment">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReplyComment_Seller">
+    <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
+    <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seller">
+        <PropertyRef Name="seller_id" />
+      </Principal>
+      <Dependent Role="ReplyComment">
+        <PropertyRef Name="seller_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReplyComment_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="ReplyComment">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubCategory_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="SubCategory">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_View_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="View" Type="Self.View" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="View">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_View_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="View" Type="Self.View" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="View">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Data_GSShopModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassificationSubCategory" EntityType="Self.ClassificationSubCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GSMall" EntityType="Self.GSMall" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Category" EntityType="Self.Product_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReplyComment" EntityType="Self.ReplyComment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View" EntityType="Self.View" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ClassificationSubCategory_SubCategory" Association="Self.FK_ClassificationSubCategory_SubCategory">
+      <End Role="SubCategory" EntitySet="SubCategory" />
+      <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Collection_Product" Association="Self.FK_Collection_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Collection" EntitySet="Collection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GSMall_Product" Association="Self.FK_GSMall_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="GSMall" EntitySet="GSMall" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Category_Category" Association="Self.FK_Product_Category_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product_Category" EntitySet="Product_Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Category_ClassificationSubCategory" Association="Self.FK_Product_Category_ClassificationSubCategory">
+      <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
+      <End Role="Product_Category" EntitySet="Product_Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Category_Product" Association="Self.FK_Product_Category_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Product_Category" EntitySet="Product_Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Seller" Association="Self.FK_Product_Seller">
+      <End Role="Seller" EntitySet="Seller" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_User" Association="Self.FK_Product_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReplyComment_Comment" Association="Self.FK_ReplyComment_Comment">
+      <End Role="Comment" EntitySet="Comment" />
+      <End Role="ReplyComment" EntitySet="ReplyComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReplyComment_Product" Association="Self.FK_ReplyComment_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ReplyComment" EntitySet="ReplyComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReplyComment_Seller" Association="Self.FK_ReplyComment_Seller">
+      <End Role="Seller" EntitySet="Seller" />
+      <End Role="ReplyComment" EntitySet="ReplyComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReplyComment_User" Association="Self.FK_ReplyComment_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="ReplyComment" EntitySet="ReplyComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="SubCategory" EntitySet="SubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_View_Product" Association="Self.FK_View_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="View" EntitySet="View" />
+    </AssociationSet>
+    <AssociationSet Name="FK_View_User" Association="Self.FK_View_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="View" EntitySet="View" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
