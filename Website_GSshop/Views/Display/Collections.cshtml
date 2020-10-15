@@ -1,10 +1,10 @@
 ﻿@using Website_GSshop.Models
 @model List<Collection>
+<div class="container-fluid">
+    <h2 class="article-list__heading"><img src="~/Content/Layout/images/icons8-fire-48.png" width="40" /><a href="#">Bộ sưu tập</a></h2>
+</div>
 <center>
     <div class="container-fluid">
-        <h2 class="head-style-2">
-            <img src="~/Content/Layout/images/icons8-fire-48.png" />Bộ sưu tập
-        </h2>
         <br />
         <div class="btn-22">
             <a href="@Url.Action("AllMostPopular","Ajax")" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace"><span class="span"><b>XEM TẤT CẢ</b></span></a>
@@ -12,7 +12,7 @@
         <br />
         <br />
         <div class="masonry">
-            @foreach(var item in Model)
+            @foreach (var item in Model)
             {
                 <div class="item1">
                     <center>

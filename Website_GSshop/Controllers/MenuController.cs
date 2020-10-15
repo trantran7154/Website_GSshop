@@ -20,7 +20,18 @@ namespace Website_GSshop.Controllers
         {
             return View(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).ToList());
         }
+        //Menu voucher giảm giá từ các đối tác và thương hiệu nổi tiếng
         public ActionResult Menu_Vouchers()
+        {
+            return View(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).ToList());
+        }
+        //Menu nạp thẻ
+        public ActionResult Menu_TopUp()
+        {
+            return View(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).ToList());
+        }
+        //Menu 
+        public ActionResult Menu_LazGlobal()
         {
             return View(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).ToList());
         }

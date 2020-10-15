@@ -215,7 +215,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CSS\StyleSheet1.css" />
+    <Content Include="Content\CSS\CSSLayout.css" />
     <Content Include="Content\Info\css\bootstrap.min.css" />
     <Content Include="Content\Info\css\demo.css" />
     <Content Include="Content\Info\css\paper-bootstrap-wizard.css" />
@@ -919,6 +919,8 @@
     <Content Include="Views\Account\UpdateInfoSeller.cshtml" />
     <Content Include="Views\Menu\Menu_GSMall.cshtml" />
     <Content Include="Views\Menu\Menu_Vouchers.cshtml" />
+    <Content Include="Views\Menu\Menu_TopUp.cshtml" />
+    <Content Include="Views\Menu\Menu_LazGlobal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

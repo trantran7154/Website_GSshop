@@ -8,11 +8,10 @@
 <div class="header-bot">
     <div class="header-bot_inner_wthreeinfo_header_mid">
         <!-- header-bot-->
-        <div class="col-md-4 logo_agile">
+        <div class="col-md-4 logo_agile mt-5">
             <h1>
-                <a href="/Display/Index">
-                    <span>G</span><span>S</span> Shop
-                    <img src="~/Content/Layout/images/logo2.png" alt=" ">
+                <a class="footer__brand-anchor" href="/Display/Index" title="Home">
+                    <svg class="footer__brand-logo brand-logo brand-logo--dark"> <use xlink:href="#brand-logo"></use> </svg>
                 </a>
             </h1>
         </div>
@@ -83,12 +82,10 @@
             }
             <!-- //header lists -->
             <!-- search -->
-            <div class="agileits_search">
-                <form action="#" method="post">
-                    <input name="Search" type="search" placeholder="Tìm kiếm trên GS Shop" required="">
-                    <button type="submit" class="btn btn-default" aria-label="Left Align">
-                        <span class="fa fa-search" aria-hidden="true"> </span>
-                    </button>
+            <div class="agileits_search_1">
+                <form class="search navigate__search" action="/" target="_top" autocomplete="off" autocapitalize="off">
+                    <input id="home-search-bar" name="s" title="Search" aria-label="Search" class="search__input" type="text" placeholder="Nhập vào từ khóa cần tìm...">
+                    <button class="search__submit w-25" type="submit">TÌM KIẾM</button>
                 </form>
             </div>
             <!-- //search -->
@@ -181,13 +178,13 @@
                                 <a class="nav-stylehead" href="/Menu/Menu_GSMall"><i class="fa fa-shopping-basket"></i> GSMall</a>
                             </li>
                             <li class="">
-                                <a class="nav-stylehead" href="about.html"><i class="fa fa-percent"></i> Mã Giảm Giá</a>
+                                <a class="nav-stylehead" href="/Menu/Menu_Vouchers"><i class="fa fa-percent"></i> Mã Giảm Giá</a>
                             </li>
                             <li class="">
-                                <a class="nav-stylehead" href="about.html"><i class="fa fa-mobile"></i> Nạp Thẻ & eVoucher</a>
+                                <a class="nav-stylehead" href="/Menu/Menu_TopUp"><i class="fa fa-mobile"></i> Nạp Thẻ & eVoucher</a>
                             </li>
                             <li class="">
-                                <a class="nav-stylehead" href="about.html"><i class="fa fa-globe"></i> GSGlobal</a>
+                                <a class="nav-stylehead" href="/Menu/Menu_LazGlobal"><i class="fa fa-globe"></i> GSGlobal</a>
                             </li>
                         </ul>
                     </div>

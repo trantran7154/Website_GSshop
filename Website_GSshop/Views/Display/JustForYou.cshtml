@@ -1,16 +1,15 @@
 ﻿@using Website_GSshop.Models
 @model List<Product>
+<div class="container-fluid">
+    <h2 class="article-list__heading"><img src="~/Content/Layout/images/icons8-fire-48.png" width="40" /><a href="#">Dành cho bạn</a></h2>
+</div>
 <center>
     <div class="container-fluid">
-        <br />
-        <h2 class="head-style-2">
-            <img src="~/Content/Layout/images/icons8-fire-48.png" />Dành cho bạn
-        </h2>
         <br />
         <div class="layout">
             <section class="inner">
                 <ul class="grid">
-                    @foreach(var item in Model)
+                    @foreach (var item in Model)
                     {
                         <li class="grid-tile">
                             <div class="item">
@@ -61,12 +60,12 @@
     </div>
 </center>
 <script>
-     /* Demo purposes only */
-  $(".hover").mouseleave(
-    function () {
-      $(this).removeClass("hover");
-    }
-  );
+    /* Demo purposes only */
+    $(".hover").mouseleave(
+        function () {
+            $(this).removeClass("hover");
+        }
+    );
 </script>
 <br />
 <br />
