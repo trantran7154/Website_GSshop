@@ -4,193 +4,193 @@
     User sesuser = (User)Session["user"];
     Seller sellerer = (Seller)Session["seller"];
 }
-<!-- header-bot-->
-<div class="header-bot" style="position: sticky; position: -webkit-sticky; top: 0px; z-index: 1">
-    <div class="header-bot_inner_wthreeinfo_header_mid">
-        <!-- header-bot-->
-        <div class="col-md-4 logo_agile mt-5">
-            <h1>
-                <a class="footer__brand-anchor" href="/Display/Index" title="Home">
-                    <svg class="footer__brand-logo brand-logo brand-logo--dark"> <use xlink:href="#brand-logo"></use> </svg>
-                </a>
-            </h1>
-        </div>
-        <!-- header-bot -->
-        <div class="col-md-8 header">
-            <!-- header lists -->
-            @if (sesuser != null)
-            {
-                <ul class="text-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chào, @sesuser.user_nicename</a>
-                        <ul class="dropdown-menu">
-                            <li style="width: 100%; text-align: unset"><a href="/Account/Info"><i class="fa fa-smile-o"></i> Quản lý tài khoản</a></li>
-                            <li style="width: 100%; text-align: unset"><a href="/help/support"><i class="fa fa-archive"></i> Đơn hàng của tôi</a></li>
-                            <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-heart"></i> Danh sách yêu thích</a></li>
-                            <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-bell"></i> Đơn hàng đã theo dõi</a></li>
-                            <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-star"></i> Nhận xét của tôi</a></li>
-                            <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-times-circle"></i> Quản lý đơn hàng và đổi trả</a></li>
-                            <li style="width: 100%; text-align: unset"><a href="/Account/LogOut"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
-                        </ul>
-                    </li>
-                    <li style="border-right: none;">
-                        <a href="/Account/LogOut">
-                            <span class="fa fa-sign-out" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                </ul>
-            }
-            else if (sellerer != null)
-            {
-                <ul class="text-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chào, @sellerer.seller_nameshop</a>
-                        <ul class="dropdown-menu">
-                            <li style="width: 100%; text-align: unset"><a href="/Account/Info"><i class="fa fa-smile-o"></i> Quản lý tài khoản</a></li>
-                            <li style="width: 100%; text-align: unset"><a href="/help/support"><i class="fa fa-archive"></i> Đơn hàng của tôi</a></li>
-                            <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-heart"></i> Danh sách yêu thích</a></li>
-                            <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-bell"></i> Đơn hàng đã theo dõi</a></li>
-                            <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-star"></i> Nhận xét của tôi</a></li>
-                            <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-times-circle"></i> Quản lý đơn hàng và đổi trả</a></li>
-                            <li style="width: 100%; text-align: unset"><a href="/Account/LogOutSeller"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
-                        </ul>
-                    </li>
-                    <li style="border-right: none;">
-                        <a href="/Account/LogOut">
-                            <span class="fa fa-sign-out" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                </ul>
-            }
-            else
-            {
-                <ul class="text-right">
-                    <li>
-                        <span class="fa fa-phone" aria-hidden="true"></span> 0869 139 879
-                    </li>
-                    <li>
-                        <a href="/Account/Login">
-                            <span class="fa fa-unlock-alt" aria-hidden="true"></span> Đăng Nhập
-                        </a>
-                    </li>
-                    <li style=" border-right: none">
-                        <a href="/Account/LoginSeller">
-                            <span class="fa fa-shopping-bag" aria-hidden="true"></span> Kênh Người Bán
-                        </a>
-                    </li>
-                </ul>
-            }
-            <!-- //header lists -->
-            <!-- search -->
-            <div class="agileits_search_1">
-                <form class="search navigate__search" action="/" target="_top" autocomplete="off" autocapitalize="off">
-                    <input id="home-search-bar" name="s" title="Search" aria-label="Search" class="search__input" type="text" placeholder="Nhập vào từ khóa cần tìm...">
-                    <button class="search__submit w-25" type="submit">TÌM KIẾM</button>
-                </form>
+<div style="position: sticky; position: -webkit-sticky; top: 0px; z-index: 100; background-color: #fff">
+    <!-- header-bot-->
+    <div class="header-bot">
+        <div class="header-bot_inner_wthreeinfo_header_mid">
+            <!-- header-bot-->
+            <div class="col-md-4 logo_agile mt-5">
+                <h1>
+                    <a class="footer__brand-anchor" href="/Display/Index" title="Home">
+                        <svg class="footer__brand-logo brand-logo brand-logo--dark"> <use xlink:href="#brand-logo"></use> </svg>
+                    </a>
+                </h1>
             </div>
-            <!-- //search -->
-            <!-- cart details -->
-            <div class="top_nav_right">
-                <div class="wthreecartaits wthreecartaits2 cart cart box_1">
-                    <form action="#" method="post" class="last">
-                        <input type="hidden" name="cmd" value="_cart">
-                        <input type="hidden" name="display" value="1">
-                        <button class="w3view-cart" type="submit" name="submit" value="">
-                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                        </button>
+            <!-- header-bot -->
+            <div class="col-md-8 header">
+                <!-- header lists -->
+                @if (sesuser != null)
+                {
+                    <ul class="text-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chào, @sesuser.user_nicename</a>
+                            <ul class="dropdown-menu">
+                                <li style="width: 100%; text-align: unset"><a href="/Account/Info"><i class="fa fa-smile-o"></i> Quản lý tài khoản</a></li>
+                                <li style="width: 100%; text-align: unset"><a href="/help/support"><i class="fa fa-archive"></i> Đơn hàng của tôi</a></li>
+                                <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-heart"></i> Danh sách yêu thích</a></li>
+                                <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-bell"></i> Đơn hàng đã theo dõi</a></li>
+                                <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-star"></i> Nhận xét của tôi</a></li>
+                                <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-times-circle"></i> Quản lý đơn hàng và đổi trả</a></li>
+                                <li style="width: 100%; text-align: unset"><a href="/Account/LogOut"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                        <li style="border-right: none;">
+                            <a href="/Account/LogOut">
+                                <span class="fa fa-sign-out" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+                else if (sellerer != null)
+                {
+                    <ul class="text-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chào, @sellerer.seller_nameshop</a>
+                            <ul class="dropdown-menu">
+                                <li style="width: 100%; text-align: unset"><a href="/Account/Info"><i class="fa fa-smile-o"></i> Quản lý tài khoản</a></li>
+                                <li style="width: 100%; text-align: unset"><a href="/help/support"><i class="fa fa-archive"></i> Đơn hàng của tôi</a></li>
+                                <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-heart"></i> Danh sách yêu thích</a></li>
+                                <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-bell"></i> Đơn hàng đã theo dõi</a></li>
+                                <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-star"></i> Nhận xét của tôi</a></li>
+                                <li style="width: 100%; text-align: unset"><a href="/auth/logout"><i class="fa fa-times-circle"></i> Quản lý đơn hàng và đổi trả</a></li>
+                                <li style="width: 100%; text-align: unset"><a href="/Account/LogOutSeller"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                        <li style="border-right: none;">
+                            <a href="/Account/LogOut">
+                                <span class="fa fa-sign-out" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="text-right">
+                        <li>
+                            <span class="fa fa-phone" aria-hidden="true"></span> 0869 139 879
+                        </li>
+                        <li>
+                            <a href="/Account/Login">
+                                <span class="fa fa-unlock-alt" aria-hidden="true"></span> Đăng Nhập
+                            </a>
+                        </li>
+                        <li style=" border-right: none">
+                            <a href="/Account/LoginSeller">
+                                <span class="fa fa-shopping-bag" aria-hidden="true"></span> Kênh Người Bán
+                            </a>
+                        </li>
+                    </ul>
+                }
+                <!-- //header lists -->
+                <!-- search -->
+                <div class="agileits_search_1">
+                    <form class="search navigate__search" action="/" target="_top" autocomplete="off" autocapitalize="off">
+                        <input id="home-search-bar" name="s" title="Search" aria-label="Search" class="search__input" type="text" placeholder="Nhập vào từ khóa cần tìm...">
+                        <button class="search__submit w-25" type="submit">TÌM KIẾM</button>
                     </form>
                 </div>
+                <!-- //search -->
+                <!-- cart details -->
+                <div class="top_nav_right">
+                    <div class="wthreecartaits wthreecartaits2 cart cart box_1">
+                        <form action="#" method="post" class="last">
+                            <input type="hidden" name="cmd" value="_cart">
+                            <input type="hidden" name="display" value="1">
+                            <button class="w3view-cart" type="submit" name="submit" value="">
+                                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <!-- //cart details -->
+                <div class="clearfix"></div>
             </div>
-            <!-- //cart details -->
             <div class="clearfix"></div>
         </div>
-        <div class="clearfix"></div>
     </div>
-</div>
-<!-- signin Model -->
-<!-- //signin Model -->
-<!-- signup Model -->
-<!-- Modal2 -->
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body modal-body-sub_agile">
-                <div class="main-mailposi">
-                    <span class="fa fa-envelope-o" aria-hidden="true"></span>
+    <!-- Modal2 -->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal_body_left modal_body_left1">
-                    <h3 class="agileinfo_sign">Sign Up</h3>
-                    <p>
-                        Come join the Grocery Shoppy! Let's set up your Account.
-                    </p>
-                    <form action="#" method="post">
-                        <div class="styled-input agile-styled-input-top">
-                            <input type="text" placeholder="Name" name="Name" required="">
-                        </div>
-                        <div class="styled-input">
-                            <input type="email" placeholder="E-mail" name="Email" required="">
-                        </div>
-                        <div class="styled-input">
-                            <input type="password" placeholder="Password" name="password" id="password1" required="">
-                        </div>
-                        <div class="styled-input">
-                            <input type="password" placeholder="Confirm Password" name="Confirm Password" id="password2" required="">
-                        </div>
-                        <input type="submit" value="Sign Up">
-                    </form>
-                    <p>
-                        <a href="#">By clicking register, I agree to your terms</a>
-                    </p>
+                <div class="modal-body modal-body-sub_agile">
+                    <div class="main-mailposi">
+                        <span class="fa fa-envelope-o" aria-hidden="true"></span>
+                    </div>
+                    <div class="modal_body_left modal_body_left1">
+                        <h3 class="agileinfo_sign">Sign Up</h3>
+                        <p>
+                            Come join the Grocery Shoppy! Let's set up your Account.
+                        </p>
+                        <form action="#" method="post">
+                            <div class="styled-input agile-styled-input-top">
+                                <input type="text" placeholder="Name" name="Name" required="">
+                            </div>
+                            <div class="styled-input">
+                                <input type="email" placeholder="E-mail" name="Email" required="">
+                            </div>
+                            <div class="styled-input">
+                                <input type="password" placeholder="Password" name="password" id="password1" required="">
+                            </div>
+                            <div class="styled-input">
+                                <input type="password" placeholder="Confirm Password" name="Confirm Password" id="password2" required="">
+                            </div>
+                            <input type="submit" value="Sign Up">
+                        </form>
+                        <p>
+                            <a href="#">By clicking register, I agree to your terms</a>
+                        </p>
+                    </div>
                 </div>
             </div>
+            <!-- //Modal content-->
         </div>
-        <!-- //Modal content-->
     </div>
-</div>
-<!-- //Modal2 -->
-<!-- //signup Model -->
-<!-- //header-bot -->
-<!-- navigation -->
-<div class="ban-top">
-    <div class="container">
-        @Html.Action("Category", "Display")
-        <div class="top_nav_left">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                                aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+    <!-- //Modal2 -->
+    <!-- //signup Model -->
+    <!-- //header-bot -->
+    <!-- navigation -->
+    <div class="ban-top">
+        <div class="container">
+            @Html.Action("Category", "Display")
+            <div class="top_nav_left">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                                    aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav menu__list" style="display: block">
+                                <li class="">
+                                    <a class="nav-stylehead" href="/Menu/Menu_GSMall"><i class="fa fa-shopping-basket"></i> GSMall</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-stylehead" href="/Menu/Menu_Vouchers"><i class="fa fa-percent"></i> Mã Giảm Giá</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-stylehead" href="/Menu/Menu_TopUp"><i class="fa fa-mobile"></i> Nạp Thẻ & eVoucher</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-stylehead" href="/Menu/Menu_LazGlobal"><i class="fa fa-globe"></i> GSGlobal</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav menu__list" style="display: block">
-                            <li class="">
-                                <a class="nav-stylehead" href="/Menu/Menu_GSMall"><i class="fa fa-shopping-basket"></i> GSMall</a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="/Menu/Menu_Vouchers"><i class="fa fa-percent"></i> Mã Giảm Giá</a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="/Menu/Menu_TopUp"><i class="fa fa-mobile"></i> Nạp Thẻ & eVoucher</a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="/Menu/Menu_LazGlobal"><i class="fa fa-globe"></i> GSGlobal</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+                </nav>
+            </div>
         </div>
     </div>
 </div>
+
 
