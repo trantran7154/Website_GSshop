@@ -4,33 +4,26 @@
     <h2 class="article-list__heading"><img src="~/Content/Layout/images/icons8-fire-48.png" width="40" /><a href="#">Danh mục hàng</a></h2>
 </div>
 <div class="container-fluid">
-    <br />
-    <table class="table table-bordered">
-        <tbody>
-            @foreach (var item in Model)
+    <div class="container-fluid" style="background-color: #f9f9f9">
+        <nav class="mt-4">
+            @foreach (var item in Model.Take(2))
             {
-                <tr>
-                    @for (var j = 0; j < 8; j++)
+                <ul class="menu-categories">
+                    @foreach (var item1 in Model.Take(8))
                     {
-                        <td>
-                            <div class="product-men">
-                                <div class="men-pro-item simpleCart_shelfItem">
-                                    <div class="men-thumb-item">
-                                        <span class="product-new-top3"><b class="blink">New</b></span>
-                                        <img src="~/Content/Layout/images/@item.product_image" alt="" style="height: 100px ;width: 100px" />
-                                    </div>
-                                    <div class="item-info-product ">
-                                        <h4>
-                                            <a href="@Url.Action("CategoriesDetail","View", new {@id = item.product_id})">@item.product_name</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
+                        <li class="li">
+                            <a class="a" href="@Url.Action("CategoriesDetail","View", new {@id = item1.product_id}))">
+                                <img class="mt-2" src="~/Content/Layout/images/@item1.product_image" style="height: 130px; width: 130px">
+                                <br />
+                                <span class="text-dark">@item1.product_name</span>
+                            </a>
+                        </li>
                     }
-                </tr>
+                </ul>
             }
-        </tbody>
-    </table>
+        </nav>
+        <br />
+    </div>
 </div>
 <br />
+

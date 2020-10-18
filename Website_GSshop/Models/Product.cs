@@ -44,6 +44,7 @@ namespace Website_GSshop.Models
         public Nullable<System.DateTime> product_dateedit { get; set; }
         public Nullable<int> seller_id { get; set; }
         public Nullable<int> user_id { get; set; }
+        public Nullable<int> category_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_Category> Product_Category { get; set; }
@@ -57,5 +58,6 @@ namespace Website_GSshop.Models
         public virtual ICollection<Collection> Collection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GSMall> GSMall { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

@@ -34,6 +34,7 @@
         <AssociationConnector Association="Data_GSShopModel.FK_Collection_Product" />
         <EntityTypeShape EntityType="Data_GSShopModel.GSMall" Width="1.5" PointX="5.25" PointY="19" />
         <AssociationConnector Association="Data_GSShopModel.FK_GSMall_Product" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Product_Category" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

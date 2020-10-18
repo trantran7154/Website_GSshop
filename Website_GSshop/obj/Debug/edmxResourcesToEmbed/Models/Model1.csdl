@@ -27,6 +27,7 @@
     <Property Name="category_active" Type="Boolean" />
     <NavigationProperty Name="Product_Category" Relationship="Self.FK_Product_Category_Category" FromRole="Category" ToRole="Product_Category" />
     <NavigationProperty Name="SubCategory" Relationship="Self.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>
@@ -72,6 +73,8 @@
     <NavigationProperty Name="View" Relationship="Data_GSShopModel.FK_View_Product" FromRole="Product" ToRole="View" />
     <NavigationProperty Name="Collection" Relationship="Data_GSShopModel.FK_Collection_Product" FromRole="Product" ToRole="Collection" />
     <NavigationProperty Name="GSMall" Relationship="Data_GSShopModel.FK_GSMall_Product" FromRole="Product" ToRole="GSMall" />
+    <Property Name="category_id" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="Data_GSShopModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
   </EntityType>
   <EntityType Name="Product_Category">
     <Key>
@@ -362,6 +365,10 @@
       <End Role="Product" EntitySet="Product" />
       <End Role="GSMall" EntitySet="GSMall" />
     </AssociationSet>
+    <AssociationSet Name="FK_Product_Category" Association="Data_GSShopModel.FK_Product_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ClassificationSubCategory">
     <Key>
@@ -484,6 +491,18 @@
       </Principal>
       <Dependent Role="GSMall">
         <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Category">
+    <End Type="Data_GSShopModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="category_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

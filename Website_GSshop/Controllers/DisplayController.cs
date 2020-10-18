@@ -43,7 +43,7 @@ namespace Website_GSshop.Controllers
         // Hiển thị danh mục ngành hàng
         public PartialViewResult Categories()
         {
-            return PartialView(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).Take(2).ToList());
+            return PartialView(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).ToList());
         }
         // Dành riêng cho bạn
         public PartialViewResult JustForYou()
