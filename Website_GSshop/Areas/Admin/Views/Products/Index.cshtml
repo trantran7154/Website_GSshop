@@ -1,0 +1,146 @@
+﻿@model IEnumerable<Website_GSshop.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<p class="btn btn-success">
+    @Html.ActionLink("THÊM MỚI", "Create")
+</p>
+<table class="table table-bordered table-hover mt-4">
+    <tr class="table-info">
+        <th>
+            <span>Tên sản phẩm</span>
+        </th>
+        <th>
+            <span>Ảnh</span>
+        </th>
+        <th>
+            <span>Ngày tạo</span>
+        </th>
+        <th>
+            <span>Hoạt động</span>
+        </th>
+        <th>
+            <span>Ghi chú</span>
+        </th>
+        <th>
+           <span>Giá</span>
+        </th>
+        <th>
+            <span>Phương thức vận chuyển</span>
+        </th>
+        <th>
+            <span>Lượt xem</span>
+        </th>
+        <th>
+           <span>Yêu thích</span>
+        </th>
+        <th>
+            <span>Màu</span>
+        </th>
+        <th>
+            <span>Size</span>
+        </th>
+        <th>
+            <span>Chi tiết</span>
+        </th>
+        <th>
+            <span>Mô tả</span>
+        </th>
+        <th>
+            <span>Tùy chọn</span>
+        </th>
+        <th>
+            <span>Sale</span>
+        </th>
+        <th>
+            <span>Số lượng</span>
+        </th>
+        <th>
+            <span>Ngày sửa</span>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Seller.seller_login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.user_login)
+        </th>
+        <th>
+            <span>Tên danh mục</span>
+        </th>
+        <th>
+            <span>Công cụ</span>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_name)
+        </td>
+        <td>
+            <img src="~/Content/Layout/images/@item.product_image"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_datecreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_ship)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_view)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_love)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_size)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_detail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_option)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_sale)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_dateedit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Seller.seller_login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.user_login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.category_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.product_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.product_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.product_id })
+        </td>
+    </tr>
+}
+</table>

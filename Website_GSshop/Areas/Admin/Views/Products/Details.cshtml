@@ -1,0 +1,179 @@
+﻿@model Website_GSshop.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.product_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_datecreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_datecreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_ship)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_ship)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_view)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_view)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_love)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_love)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_detail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_option)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_option)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_sale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_sale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_dateedit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_dateedit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Seller.seller_login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Seller.seller_login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.user_login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.user_login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.category_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.category_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.product_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
