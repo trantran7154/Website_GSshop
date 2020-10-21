@@ -13,5 +13,9 @@ namespace Website_GSshop.Areas.Admin.Controllers
         {
             return View();
         }
+        public PartialViewResult CSS_Sematic()
+        {
+            return PartialView();
+        }
     }
 }
