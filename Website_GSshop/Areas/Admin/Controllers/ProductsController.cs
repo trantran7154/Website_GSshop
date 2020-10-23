@@ -50,9 +50,9 @@ namespace Website_GSshop.Areas.Admin.Controllers
         public ActionResult Create([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id")] Product product, HttpPostedFileBase fileUpload)
         {
             // Tên file ảnh sản phẩm
-            var fileimg = Path.GetFileName(fileUpload.FileName);
+            var fileimg_edit = Path.GetFileName(fileUpload.FileName);
             // Đưa tên ảnh vào đúng file
-            var pa = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg);
+            var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit);
             // Ảnh trống
             if (fileUpload == null)
             {
@@ -60,7 +60,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 return View(product);
             }
             //Nếu tên ảnh trùng
-            else if (System.IO.File.Exists(pa))
+            else if (System.IO.File.Exists(pa_eidt))
             {
                 ViewBag.ThongBao = "Ảnh đã tồn tại";
                 return View(product);
@@ -68,7 +68,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
             //Lưu pa vào name fileUpload
             else
             {
-                fileUpload.SaveAs(pa);
+                fileUpload.SaveAs(pa_eidt);
                 db.Product.Add(product);
                 product.product_image = fileUpload.FileName;
                 product.product_active = true;
@@ -102,19 +102,38 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id")] Product product)
+        [ValidateInput(false)]
+        public ActionResult Edit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id")] Product product, HttpPostedFileBase fileUpload)
         {
-            if (ModelState.IsValid)
+            // Tên file ảnh sản phẩm
+            var fileimg = Path.GetFileName(fileUpload.FileName);
+            // Đưa tên ảnh vào đúng file
+            var pa = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg);
+            // Ảnh trống
+            if (fileUpload == null)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.ThongBao = "Ảnh trống !";
+                return View(product);
             }
-            ViewBag.seller_id = new SelectList(db.Seller, "seller_id", "seller_login", product.seller_id);
-            ViewBag.user_id = new SelectList(db.User, "user_id", "user_login", product.user_id);
-            ViewBag.category_id = new SelectList(db.Category, "category_id", "category_name", product.category_id);
-            return View(product);
+            //Nếu tên ảnh trùng
+            else if (System.IO.File.Exists(pa))
+            {
+                ViewBag.ThongBao = "Ảnh đã tồn tại";
+                return View(product);
+            }
+            //Lưu pa vào name fileUpload
+            else
+            {
+                fileUpload.SaveAs(pa);
+                db.Product.Add(product);
+                product.product_image = fileUpload.FileName;
+                product.product_active = true;
+                product.product_option = true;
+                product.product_datecreated = DateTime.Now;
+                product.product_dateedit = DateTime.Now;
+                db.SaveChanges();
+                return Redirect(admin_qlsp);
+            }
         }
 
         // GET: Admin/Products/Delete/5
