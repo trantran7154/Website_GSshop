@@ -13,7 +13,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
     public class ReplyCommentsController : Controller
     {
         private Data_GSShopEntities db = new Data_GSShopEntities();
-        String amin_qlr = "/Admin/ReplyComments/Index";
+        String admin_qlr = "/Admin/ReplyComments/Index";
         // GET: Admin/ReplyComments
         public ActionResult Index()
         {

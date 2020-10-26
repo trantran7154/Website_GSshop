@@ -18,7 +18,7 @@ namespace Website_GSshop.Controllers
         // Hiển thị danh mục
         public PartialViewResult Category()
         {
-            return PartialView(db.Category.Where(n => n.category_active == true).OrderBy(n => n.category_name).ToList());
+            return PartialView(db.Category.Where(n => n.category_active == true).ToList());
         }
         // Hiển thị top 6 Deal chớp nhoáng
         public PartialViewResult FlashSale()

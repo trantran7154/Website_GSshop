@@ -66,5 +66,11 @@ namespace Website_GSshop.Controllers
             Session["categories"] = category;
             return View(db.Product.Where(n => n.category_id == id_categories).OrderByDescending(n => n.product_datecreated).ToList());
         }
+        //Phân loại sản phẩm theo danh mục
+        public ActionResult ProductCategoriesList(int? id)
+        {
+            List<Product> products = db.Product.Where(n => n.banner_id == id).ToList();
+            return View(products);
+        }
     }
 }

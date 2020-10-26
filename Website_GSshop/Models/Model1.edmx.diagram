@@ -35,6 +35,9 @@
         <EntityTypeShape EntityType="Data_GSShopModel.GSMall" Width="1.5" PointX="5.25" PointY="19" />
         <AssociationConnector Association="Data_GSShopModel.FK_GSMall_Product" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_Category" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Product_SubCategory" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Banner" Width="1.5" PointX="8.375" PointY="0.875" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Product_Banner" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

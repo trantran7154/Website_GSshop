@@ -1,0 +1,344 @@
+﻿@using Website_GSshop.Models
+@model List<Product>
+@{
+    ViewBag.Title = "ProductCategoriesList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <br />
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="background-color: #fff">
+            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Kết quả tìm kiếm</li>
+        </ol>
+    </nav>
+    <hr />
+    <!-- product left -->
+    <div class="side-bar col-md-3">
+        <div class="search-hotel">
+            <h3 class="agileits-sear-head">Tìm kiếm</h3>
+            <form action="#" method="post">
+                <input type="search" placeholder="Nhập tên sản phẩm ..." name="search" required="" />
+                <input type="submit" value=" " />
+            </form>
+        </div>
+        <div class="range">
+            <h3 class="agileits-sear-head">Danh mục liên quan</h3>
+            <ul style="list-style: none; color: #808080">
+                <li>Túi đeo chéo & Túi đeo vai nữ</li>
+                <li>Túi xách tay nữ</li>
+                <li>Ba lô nữ</li>
+                <li>Ví nữ</li>
+                <li>Túi đeo chéo nam</li>
+                <li>Túi tote nữ</li>
+                <li>Ba lô nam</li>
+                <li>Đồng hồ nữ sang trọng</li>
+                <li class="text-primary">Xem thêm</li>
+            </ul>
+        </div>
+        <div class="left-side">
+            <h3 class="agileits-sear-head">Thương hiệu</h3>
+            <ul>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Lita</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">pinfect</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">EOM</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">MOJOYCE</span>
+                </li>
+                <li class="text-primary">Xem thêm</li>
+            </ul>
+        </div>
+        <hr />
+        <div class="left-side">
+            <h3 class="agileits-sear-head">Dịch vụ</h3>
+            <ul>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Giao hàng miễn phí</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">GSGlobal</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Thanh toán khi nhận hàng</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Xử lý đơn hàng bởi GS</span>
+                </li>
+            </ul>
+        </div>
+        <hr />
+        <div class="left-side">
+            <h3 class="agileits-sear-head">Địa điểm</h3>
+            <ul>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Nội địa</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Nước ngoài</span>
+                </li>
+            </ul>
+        </div>
+        <hr />
+        <div class="left-side">
+            <h3 class="agileits-sear-head">Giá</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" placeholder="Tối thiểu" class="form-control" />
+                </div>
+                <div class="col-md-1 p-0">
+                    <b style="font-size: 20px">-</b>
+                </div>
+                <div class="col-md-4 p-0">
+                    <input type="text" placeholder="Tối đa" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <button class="caret_right"><i class="fa fa-caret-right text-white" style="font-size: 26px; text-align: center"></i></button>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="customer-rev left-side">
+            <h3 class="agileits-sear-head">Đánh giá</h3>
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <span>Trở lên</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <span>Trở lên</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <span>Trở lên</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <span>Trở lên</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <hr />
+        <div class="left-side">
+            <h3 class="agileits-sear-head">Nhóm màu</h3>
+            <ul>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Màu đen</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Màu hồng</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">White</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Màu đỏ</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Màu vàng</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Màu xám</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Green</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Màu nâu</span>
+                </li>
+                <li class="text-primary">Xem thêm</li>
+            </ul>
+        </div>
+        <hr />
+        <div class="left-side">
+            <h3 class="agileits-sear-head">Chất liệu vải</h3>
+            <ul>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Chất liệu khác</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Polyester</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Nhung</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Vải cotton</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Thun 4 chiều</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">SATIN</span>
+                </li>
+                <li class="text-primary">Xem thêm</li>
+            </ul>
+        </div>
+        <hr />
+        <div class="left-side">
+            <h3 class="agileits-sear-head">Họa tiết</h3>
+            <ul>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Trơn</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Họa tiết</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Hoạt hình</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Vải cotton</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Thun 4 chiều</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">SATIN</span>
+                </li>
+                <li class="text-primary">Xem thêm</li>
+            </ul>
+        </div>
+    </div>
+    <!-- //product left -->
+    <!-- product right -->
+    <div class="agileinfo-ads-display col-md-9" style="background-color: #f9f9f9">
+        <div class="layout">
+            <div class="row" id="change">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3">
+                        <div class="card-1">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row align-items-center time"><small><span class="product-new-label1"><b class="test">- 40%</b></span></small> </div>
+                                <div class="pr-3 row justify-content-end">
+                                    <div class="fa fa-heart-o like"></div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-2">
+                                <img src="~/Content/Layout/images/@item.product_image" width="250" />
+                            </div>
+                            <a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})" class="text-left text-dark"><h5 class="text-left mt-2">@item.product_name</h5></a>
+                            <span class="text-success">@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</span> <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 mt-1 ml-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 30px; height: 30px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
+                            <br />
+                            <s class="text-gray">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</s>
+                            <a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})">
+                                <div class="mt-1 button_voucher">
+                                    <span class="text font-button text-uppercase">Mua Ngay</span>
+                                </div>
+                            </a>
+                        </div>
+                        <br />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- //product right -->
+    <nav aria-label="Page navigation example" class="text-right">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<script>
+    function increaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('number').value = value;
+    }
+    function decreaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById('number').value = value;
+    }
+    function change_image(image) {
+        var image_container = document.getElementById("main-image");
+        image_container.src = image.src;
+    }
+</script>
+

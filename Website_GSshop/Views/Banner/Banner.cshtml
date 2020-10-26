@@ -1,0 +1,17 @@
+﻿@using Website_GSshop.Models
+@model List<Banner>
+<section class="navigate block-section">
+    <div class="navigate__content">
+        <p class="navigate__decorated-line"><span>MẶT HÀNG PHỔ BIẾN</span></p>
+        <ul class="navigate__categories">
+            @foreach (var item in Model)
+            {
+                <li class="navigate__category">
+                    <a class="navigate__anchor" href="@Url.Action("ProductCategoriesList","View", new {id = item.banner_id})">
+                        @Html.Raw(item.banner_svg)<p class="navigate__category-name">@item.banner_name</p>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</section>

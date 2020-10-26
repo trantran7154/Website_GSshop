@@ -21,6 +21,16 @@
           <Property Name="admin_pass2" Type="varchar" MaxLength="50" />
           <Property Name="admin_datelogin" Type="datetime" />
         </EntityType>
+        <EntityType Name="Banner">
+          <Key>
+            <PropertyRef Name="banner_id" />
+          </Key>
+          <Property Name="banner_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="banner_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="banner_svg" Type="nvarchar(max)" />
+          <Property Name="banner_active" Type="bit" />
+          <Property Name="banner_datecreated" Type="datetime" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="category_id" />
@@ -105,6 +115,8 @@
           <Property Name="seller_id" Type="int" />
           <Property Name="user_id" Type="int" />
           <Property Name="category_id" Type="int" />
+          <Property Name="subcategory_id" Type="int" />
+          <Property Name="banner_id" Type="int" />
         </EntityType>
         <EntityType Name="Product_Category">
           <Key>
@@ -166,6 +178,7 @@
           <Property Name="subcategory_datecreated" Type="datetime" />
           <Property Name="subcategory_active" Type="bit" />
           <Property Name="category_id" Type="int" />
+          <Property Name="subcategory_level" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -242,6 +255,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_Banner">
+          <End Role="Banner" Type="Self.Banner" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banner">
+              <PropertyRef Name="banner_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="banner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -299,6 +324,18 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="seller_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_SubCategory">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="subcategory_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="subcategory_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -400,6 +437,7 @@
         </Association>
         <EntityContainer Name="Data_GSShopModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassificationSubCategory" EntityType="Self.ClassificationSubCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
@@ -425,6 +463,10 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="GSMall" EntitySet="GSMall" />
           </AssociationSet>
+          <AssociationSet Name="FK_Product_Banner" Association="Self.FK_Product_Banner">
+            <End Role="Banner" EntitySet="Banner" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
@@ -443,6 +485,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Product_Seller" Association="Self.FK_Product_Seller">
             <End Role="Seller" EntitySet="Seller" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_SubCategory" Association="Self.FK_Product_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategory" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_User" Association="Self.FK_Product_User">
@@ -557,6 +603,10 @@
           <NavigationProperty Name="GSMall" Relationship="Data_GSShopModel.FK_GSMall_Product" FromRole="Product" ToRole="GSMall" />
           <Property Name="category_id" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="Data_GSShopModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <Property Name="subcategory_id" Type="Int32" />
+          <NavigationProperty Name="SubCategory" Relationship="Data_GSShopModel.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
+          <Property Name="banner_id" Type="Int32" />
+          <NavigationProperty Name="Banner" Relationship="Data_GSShopModel.FK_Product_Banner" FromRole="Product" ToRole="Banner" />
         </EntityType>
         <EntityType Name="Product_Category">
           <Key>
@@ -629,6 +679,8 @@
           <Property Name="category_id" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
           <NavigationProperty Name="ClassificationSubCategory" Relationship="Data_GSShopModel.FK_ClassificationSubCategory_SubCategory" FromRole="SubCategory" ToRole="ClassificationSubCategory" />
+          <Property Name="subcategory_level" Type="Boolean" />
+          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -850,6 +902,15 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
+          <AssociationSet Name="FK_Product_SubCategory" Association="Data_GSShopModel.FK_Product_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategory" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <EntitySet Name="Banner" EntityType="Data_GSShopModel.Banner" />
+          <AssociationSet Name="FK_Product_Banner" Association="Data_GSShopModel.FK_Product_Banner">
+            <End Role="Banner" EntitySet="Banner" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ClassificationSubCategory">
           <Key>
@@ -987,6 +1048,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_SubCategory">
+          <End Type="Data_GSShopModel.SubCategory" Role="SubCategory" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="subcategory_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="subcategory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Banner">
+          <Key>
+            <PropertyRef Name="banner_id" />
+          </Key>
+          <Property Name="banner_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="banner_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="banner_svg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="banner_active" Type="Boolean" />
+          <Property Name="banner_datecreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_Banner" FromRole="Banner" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Product_Banner">
+          <End Type="Data_GSShopModel.Banner" Role="Banner" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banner">
+              <PropertyRef Name="banner_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="banner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1037,6 +1133,8 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="Data_GSShopModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="banner_id" ColumnName="banner_id" />
+                <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
                 <ScalarProperty Name="category_id" ColumnName="category_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="product_name" ColumnName="product_name" />
@@ -1117,6 +1215,7 @@
           <EntitySetMapping Name="SubCategory">
             <EntityTypeMapping TypeName="Data_GSShopModel.SubCategory">
               <MappingFragment StoreEntitySet="SubCategory">
+                <ScalarProperty Name="subcategory_level" ColumnName="subcategory_level" />
                 <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
                 <ScalarProperty Name="subcategory_name" ColumnName="subcategory_name" />
                 <ScalarProperty Name="subcategory_image" ColumnName="subcategory_image" />
@@ -1205,6 +1304,17 @@
                 <ScalarProperty Name="gsmall_slogan" ColumnName="gsmall_slogan" />
                 <ScalarProperty Name="gsmall_name" ColumnName="gsmall_name" />
                 <ScalarProperty Name="gsmall_id" ColumnName="gsmall_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banner">
+            <EntityTypeMapping TypeName="Data_GSShopModel.Banner">
+              <MappingFragment StoreEntitySet="Banner">
+                <ScalarProperty Name="banner_datecreated" ColumnName="banner_datecreated" />
+                <ScalarProperty Name="banner_active" ColumnName="banner_active" />
+                <ScalarProperty Name="banner_svg" ColumnName="banner_svg" />
+                <ScalarProperty Name="banner_name" ColumnName="banner_name" />
+                <ScalarProperty Name="banner_id" ColumnName="banner_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

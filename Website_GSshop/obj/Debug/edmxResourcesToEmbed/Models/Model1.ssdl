@@ -16,6 +16,16 @@
     <Property Name="admin_pass2" Type="varchar" MaxLength="50" />
     <Property Name="admin_datelogin" Type="datetime" />
   </EntityType>
+  <EntityType Name="Banner">
+    <Key>
+      <PropertyRef Name="banner_id" />
+    </Key>
+    <Property Name="banner_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="banner_name" Type="nvarchar" MaxLength="100" />
+    <Property Name="banner_svg" Type="nvarchar(max)" />
+    <Property Name="banner_active" Type="bit" />
+    <Property Name="banner_datecreated" Type="datetime" />
+  </EntityType>
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="category_id" />
@@ -100,6 +110,8 @@
     <Property Name="seller_id" Type="int" />
     <Property Name="user_id" Type="int" />
     <Property Name="category_id" Type="int" />
+    <Property Name="subcategory_id" Type="int" />
+    <Property Name="banner_id" Type="int" />
   </EntityType>
   <EntityType Name="Product_Category">
     <Key>
@@ -121,6 +133,7 @@
     <Property Name="product_id" Type="int" />
     <Property Name="seller_id" Type="int" />
     <Property Name="replycomment_spam" Type="bit" />
+    <Property Name="replycomment_datecreated" Type="datetime" />
   </EntityType>
   <EntityType Name="Seller">
     <Key>
@@ -160,6 +173,7 @@
     <Property Name="subcategory_datecreated" Type="datetime" />
     <Property Name="subcategory_active" Type="bit" />
     <Property Name="category_id" Type="int" />
+    <Property Name="subcategory_level" Type="bit" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -236,6 +250,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Product_Banner">
+    <End Role="Banner" Type="Self.Banner" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banner">
+        <PropertyRef Name="banner_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="banner_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Product_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -293,6 +319,18 @@
       </Principal>
       <Dependent Role="Product">
         <PropertyRef Name="seller_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_SubCategory">
+    <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="subcategory_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="subcategory_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -394,6 +432,7 @@
   </Association>
   <EntityContainer Name="Data_GSShopModelStoreContainer">
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ClassificationSubCategory" EntityType="Self.ClassificationSubCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
@@ -419,6 +458,10 @@
       <End Role="Product" EntitySet="Product" />
       <End Role="GSMall" EntitySet="GSMall" />
     </AssociationSet>
+    <AssociationSet Name="FK_Product_Banner" Association="Self.FK_Product_Banner">
+      <End Role="Banner" EntitySet="Banner" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
     <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="Product" EntitySet="Product" />
@@ -437,6 +480,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Product_Seller" Association="Self.FK_Product_Seller">
       <End Role="Seller" EntitySet="Seller" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_SubCategory" Association="Self.FK_Product_SubCategory">
+      <End Role="SubCategory" EntitySet="SubCategory" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>
     <AssociationSet Name="FK_Product_User" Association="Self.FK_Product_User">

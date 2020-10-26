@@ -45,6 +45,8 @@ namespace Website_GSshop.Models
         public Nullable<int> seller_id { get; set; }
         public Nullable<int> user_id { get; set; }
         public Nullable<int> category_id { get; set; }
+        public Nullable<int> subcategory_id { get; set; }
+        public Nullable<int> banner_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_Category> Product_Category { get; set; }
@@ -59,5 +61,7 @@ namespace Website_GSshop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GSMall> GSMall { get; set; }
         public virtual Category Category { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
+        public virtual Banner Banner { get; set; }
     }
 }

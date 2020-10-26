@@ -39,5 +39,6 @@ namespace Website_GSshop.Models
         public virtual DbSet<View> View { get; set; }
         public virtual DbSet<Collection> Collection { get; set; }
         public virtual DbSet<GSMall> GSMall { get; set; }
+        public virtual DbSet<Banner> Banner { get; set; }
     }
 }

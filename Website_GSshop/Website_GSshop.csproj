@@ -151,9 +151,11 @@
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReplyCommentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SellersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Seller_ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\DisplayController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FooterController.cs" />
@@ -165,6 +167,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Admin.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Banner.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
@@ -366,6 +371,12 @@
     <Content Include="Content\Layout\images\d3.jpg" />
     <Content Include="Content\Layout\images\d4.jpg" />
     <Content Include="Content\Layout\images\d5.jpg" />
+    <Content Include="Content\Layout\images\dh1.jpg" />
+    <Content Include="Content\Layout\images\dh2.jpg" />
+    <Content Include="Content\Layout\images\dh3.jpg" />
+    <Content Include="Content\Layout\images\dh4.jpg" />
+    <Content Include="Content\Layout\images\dh5.jpg" />
+    <Content Include="Content\Layout\images\dh6.png" />
     <Content Include="Content\Layout\images\dobonam.jpg" />
     <Content Include="Content\Layout\images\dodung1.jpg" />
     <Content Include="Content\Layout\images\dodung2.jpg" />
@@ -999,6 +1010,8 @@
     <Content Include="Areas\Admin\Views\ReplyComments\Details.cshtml" />
     <Content Include="Areas\Admin\Views\ReplyComments\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ReplyComments\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Seller_Product\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Seller_Product\SellerProductDetail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1063,6 +1076,8 @@
     <Content Include="Views\Menu\Menu_TopUp.cshtml" />
     <Content Include="Views\Menu\Menu_LazGlobal.cshtml" />
     <Content Include="Views\Search\SearchResults.cshtml" />
+    <Content Include="Views\View\ProductCategoriesList.cshtml" />
+    <Content Include="Views\Banner\Banner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,7 +14,7 @@
                         <ul class="dropdown-menu">
                             @foreach (var item1 in item.SubCategory)
                             {
-                                if (item1.subcategory_active == true)
+                                if (item1.subcategory_level == true)
                                 {
                                     <li class="dropdown-submenu">
                                         <a href="#">@item1.subcategory_name</a>
@@ -28,7 +28,7 @@
                                 }
                                 else
                                 {
-                                    <li><a tabindex="-1" href="#">@item1.subcategory_name</a></li>
+                                    <li><a href="#">@item1.subcategory_name</a></li>
                                 }
                             }
                         </ul>

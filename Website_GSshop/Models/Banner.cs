@@ -12,26 +12,20 @@ namespace Website_GSshop.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SubCategory
+    public partial class Banner
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SubCategory()
+        public Banner()
         {
-            this.ClassificationSubCategory = new HashSet<ClassificationSubCategory>();
             this.Product = new HashSet<Product>();
         }
     
-        public int subcategory_id { get; set; }
-        public string subcategory_name { get; set; }
-        public string subcategory_image { get; set; }
-        public Nullable<System.DateTime> subcategory_datecreated { get; set; }
-        public Nullable<bool> subcategory_active { get; set; }
-        public Nullable<int> category_id { get; set; }
-        public Nullable<bool> subcategory_level { get; set; }
+        public int banner_id { get; set; }
+        public string banner_name { get; set; }
+        public string banner_svg { get; set; }
+        public Nullable<bool> banner_active { get; set; }
+        public Nullable<System.DateTime> banner_datecreated { get; set; }
     
-        public virtual Category Category { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClassificationSubCategory> ClassificationSubCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
     }
