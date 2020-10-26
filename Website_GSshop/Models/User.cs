@@ -23,7 +23,6 @@ namespace Website_GSshop.Models
         }
     
         public int user_id { get; set; }
-        public string user_login { get; set; }
         public string user_pass { get; set; }
         public string user_nicename { get; set; }
         public string user_email { get; set; }

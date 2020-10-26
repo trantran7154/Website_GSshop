@@ -22,7 +22,6 @@ namespace Website_GSshop.Models
         }
     
         public int seller_id { get; set; }
-        public string seller_login { get; set; }
         public string seller_pass { get; set; }
         public string seller_email { get; set; }
         public string seller_telephone { get; set; }

@@ -100,7 +100,6 @@
           <ScalarProperty Name="seller_nicename" ColumnName="seller_nicename" />
           <ScalarProperty Name="seller_role" ColumnName="seller_role" />
           <ScalarProperty Name="seller_id" ColumnName="seller_id" />
-          <ScalarProperty Name="seller_login" ColumnName="seller_login" />
           <ScalarProperty Name="seller_pass" ColumnName="seller_pass" />
           <ScalarProperty Name="seller_email" ColumnName="seller_email" />
           <ScalarProperty Name="seller_telephone" ColumnName="seller_telephone" />
@@ -151,7 +150,6 @@
           <ScalarProperty Name="user_district" ColumnName="user_district" />
           <ScalarProperty Name="user_provincecity" ColumnName="user_provincecity" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="user_login" ColumnName="user_login" />
           <ScalarProperty Name="user_pass" ColumnName="user_pass" />
           <ScalarProperty Name="user_nicename" ColumnName="user_nicename" />
           <ScalarProperty Name="user_email" ColumnName="user_email" />

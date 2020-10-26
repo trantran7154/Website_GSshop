@@ -1,0 +1,67 @@
+﻿@model Website_GSshop.Models.ReplyComment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ReplyComment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.replycomment_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.replycomment_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.replycomment_spam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.replycomment_spam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment.comment_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment.comment_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.product_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.product_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Seller.seller_pass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Seller.seller_pass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.user_pass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.user_pass)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.replycomment_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

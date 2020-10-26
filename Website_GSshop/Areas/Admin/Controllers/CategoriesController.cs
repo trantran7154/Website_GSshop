@@ -97,7 +97,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "category_id,category_name,category_image,category_datecreated,category_active")] Category category)
         {
             if (ModelState.IsValid)
@@ -126,7 +125,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
         // POST: Admin/Categories/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Category category = db.Category.Find(id);

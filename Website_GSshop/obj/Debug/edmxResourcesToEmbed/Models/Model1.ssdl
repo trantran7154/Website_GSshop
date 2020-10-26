@@ -127,7 +127,6 @@
       <PropertyRef Name="seller_id" />
     </Key>
     <Property Name="seller_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="seller_login" Type="varchar" MaxLength="50" />
     <Property Name="seller_pass" Type="varchar" MaxLength="50" />
     <Property Name="seller_email" Type="varchar" MaxLength="50" />
     <Property Name="seller_telephone" Type="varchar" MaxLength="12" />
@@ -177,7 +176,6 @@
       <PropertyRef Name="user_id" />
     </Key>
     <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="user_login" Type="nvarchar" MaxLength="50" />
     <Property Name="user_pass" Type="varchar" MaxLength="50" />
     <Property Name="user_nicename" Type="nvarchar" MaxLength="50" />
     <Property Name="user_email" Type="varchar" MaxLength="100" />

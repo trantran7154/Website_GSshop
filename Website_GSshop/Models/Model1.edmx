@@ -126,13 +126,13 @@
           <Property Name="product_id" Type="int" />
           <Property Name="seller_id" Type="int" />
           <Property Name="replycomment_spam" Type="bit" />
+          <Property Name="replycomment_datecreated" Type="datetime" />
         </EntityType>
         <EntityType Name="Seller">
           <Key>
             <PropertyRef Name="seller_id" />
           </Key>
           <Property Name="seller_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="seller_login" Type="varchar" MaxLength="50" />
           <Property Name="seller_pass" Type="varchar" MaxLength="50" />
           <Property Name="seller_email" Type="varchar" MaxLength="50" />
           <Property Name="seller_telephone" Type="varchar" MaxLength="12" />
@@ -182,7 +182,6 @@
             <PropertyRef Name="user_id" />
           </Key>
           <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="user_login" Type="nvarchar" MaxLength="50" />
           <Property Name="user_pass" Type="varchar" MaxLength="50" />
           <Property Name="user_nicename" Type="nvarchar" MaxLength="50" />
           <Property Name="user_email" Type="varchar" MaxLength="100" />
@@ -586,13 +585,13 @@
           <NavigationProperty Name="Product" Relationship="Self.FK_ReplyComment_Product" FromRole="ReplyComment" ToRole="Product" />
           <NavigationProperty Name="Seller" Relationship="Self.FK_ReplyComment_Seller" FromRole="ReplyComment" ToRole="Seller" />
           <NavigationProperty Name="User" Relationship="Self.FK_ReplyComment_User" FromRole="ReplyComment" ToRole="User" />
+          <Property Name="replycomment_datecreated" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Seller">
           <Key>
             <PropertyRef Name="seller_id" />
           </Key>
           <Property Name="seller_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="seller_login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="seller_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="seller_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="seller_telephone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
@@ -646,7 +645,6 @@
             <PropertyRef Name="user_id" />
           </Key>
           <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user_login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="user_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="user_nicename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="user_email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -1076,6 +1074,7 @@
           <EntitySetMapping Name="ReplyComment">
             <EntityTypeMapping TypeName="Data_GSShopModel.ReplyComment">
               <MappingFragment StoreEntitySet="ReplyComment">
+                <ScalarProperty Name="replycomment_datecreated" ColumnName="replycomment_datecreated" />
                 <ScalarProperty Name="replycomment_id" ColumnName="replycomment_id" />
                 <ScalarProperty Name="replycomment_content" ColumnName="replycomment_content" />
                 <ScalarProperty Name="comment_id" ColumnName="comment_id" />
@@ -1094,7 +1093,6 @@
                 <ScalarProperty Name="seller_nicename" ColumnName="seller_nicename" />
                 <ScalarProperty Name="seller_role" ColumnName="seller_role" />
                 <ScalarProperty Name="seller_id" ColumnName="seller_id" />
-                <ScalarProperty Name="seller_login" ColumnName="seller_login" />
                 <ScalarProperty Name="seller_pass" ColumnName="seller_pass" />
                 <ScalarProperty Name="seller_email" ColumnName="seller_email" />
                 <ScalarProperty Name="seller_telephone" ColumnName="seller_telephone" />
@@ -1145,7 +1143,6 @@
                 <ScalarProperty Name="user_district" ColumnName="user_district" />
                 <ScalarProperty Name="user_provincecity" ColumnName="user_provincecity" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="user_login" ColumnName="user_login" />
                 <ScalarProperty Name="user_pass" ColumnName="user_pass" />
                 <ScalarProperty Name="user_nicename" ColumnName="user_nicename" />
                 <ScalarProperty Name="user_email" ColumnName="user_email" />

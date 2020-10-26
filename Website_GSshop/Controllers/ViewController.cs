@@ -59,5 +59,12 @@ namespace Website_GSshop.Controllers
             db.SaveChanges();
             return View(product);
         }
+        // Xem chi tiết danh mục
+        public ActionResult CategoriesDetail(int id_categories = 0)
+        {
+            Category category = db.Category.SingleOrDefault(n => n.category_id == id_categories);
+            Session["categories"] = category;
+            return View(db.Product.Where(n => n.category_id == id_categories).OrderByDescending(n => n.product_datecreated).ToList());
+        }
     }
 }
