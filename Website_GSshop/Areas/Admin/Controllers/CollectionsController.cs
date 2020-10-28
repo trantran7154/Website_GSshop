@@ -127,16 +127,174 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "collection_id,collection_name,collection_image1,collection_image2,collection_image3,product_id,collection_datecreate,collection_active")] Collection collection)
+        public ActionResult Edit([Bind(Include = "collection_id,collection_name,collection_image1,collection_image2,collection_image3,product_id,collection_datecreate,collection_active")] Collection collection, HttpPostedFileBase collection_image1a, HttpPostedFileBase collection_image2a, HttpPostedFileBase collection_image3a)
         {
-            if (ModelState.IsValid)
+            db.Entry(collection).State = EntityState.Modified;
+            //Kiểm tra 1 một trong 3 ảnh bị trống
+            if(collection_image1a == null || collection_image2a == null || collection_image3a == null) 
             {
-                db.Entry(collection).State = EntityState.Modified;
+                Collection col = db.Collection.Find(Int32.Parse(collection.collection_id.ToString()));
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
+                return Redirect(admin_qlbst);
             }
-            ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
-            return View(collection);
+            //Cả 3 ảnh đều trống
+            else if(collection_image1a == null && collection_image2a == null && collection_image3a == null)
+            {
+                Collection col = db.Collection.Find(Int32.Parse(collection.collection_id.ToString()));
+                db.SaveChanges();
+                ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
+                return Redirect(admin_qlbst);
+            }
+            //Thay đổi ảnh 1
+            else if (collection_image1a == null && collection_image2a != null && collection_image3a != null)
+            {
+                // Tên file ảnh sản phẩm
+                var fileimg_edit1 = Path.GetFileName(collection_image1a.FileName);
+                // Đưa tên ảnh vào đúng file
+                var pa_eidt1 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit1);
+                // Ảnh trống
+                if (collection_image1a == null)
+                {
+                    ViewBag.ThongBao = "Ảnh 1 trống !";
+                    return View(collection);
+                }
+                //Nếu tên ảnh trùng
+                else if (System.IO.File.Exists(pa_eidt1))
+                {
+                    ViewBag.ThongBao = "Ảnh 1 đã tồn tại";
+                    return View(collection);
+                }
+                //Lưu pa vào name fileUpload
+                else
+                {
+                    collection_image1a.SaveAs(pa_eidt1);
+
+                    collection.collection_image1 = collection_image1a.FileName;
+                    db.SaveChanges();
+                    ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
+                    return Redirect(admin_qlbst);
+                }
+            }
+            //Thay đổi ảnh 2
+            else if (collection_image1a != null && collection_image2a == null && collection_image3a != null)
+            {
+                // Tên file ảnh sản phẩm
+                var fileimg_edit2 = Path.GetFileName(collection_image2a.FileName);
+                // Đưa tên ảnh vào đúng file
+                var pa_eidt2 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit2);
+                // Ảnh trống
+                if (collection_image2a == null)
+                {
+                    ViewBag.ThongBao = "Ảnh 2 trống !";
+                    return View(collection);
+                }
+                //Nếu tên ảnh trùng
+                else if (System.IO.File.Exists(pa_eidt2))
+                {
+                    ViewBag.ThongBao = "Ảnh 2 đã tồn tại";
+                    return View(collection);
+                }
+                //Lưu pa vào name fileUpload
+                else
+                {
+                    collection_image2a.SaveAs(pa_eidt2);
+
+                    collection.collection_image2 = collection_image2a.FileName;
+                    db.SaveChanges();
+                    ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
+                    return Redirect(admin_qlbst);
+                }
+            }
+            //Thay đổi ảnh 3
+            else if (collection_image1a != null && collection_image2a != null && collection_image3a == null)
+            {
+                // Tên file ảnh sản phẩm
+                var fileimg_edit3 = Path.GetFileName(collection_image1a.FileName);
+                // Đưa tên ảnh vào đúng file
+                var pa_eidt3 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit3);
+                // Ảnh trống
+                if (collection_image3a == null)
+                {
+                    ViewBag.ThongBao = "Ảnh 3 trống !";
+                    return View(collection);
+                }
+                //Nếu tên ảnh trùng
+                else if (System.IO.File.Exists(pa_eidt3))
+                {
+                    ViewBag.ThongBao = "Ảnh 3 đã tồn tại";
+                    return View(collection);
+                }
+                //Lưu pa vào name fileUpload
+                else
+                {
+                    collection_image1a.SaveAs(pa_eidt3);
+
+                    collection.collection_image1 = collection_image1a.FileName;
+                    db.SaveChanges();
+                    ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
+                    return Redirect(admin_qlbst);
+                }
+            }
+            //Ảnh không trống
+            else
+            {
+                // Tên file ảnh sản phẩm
+                var fileimg_edit1 = Path.GetFileName(collection_image1a.FileName);
+                var fileimg_edit2 = Path.GetFileName(collection_image2a.FileName);
+                var fileimg_edit3 = Path.GetFileName(collection_image3a.FileName);
+                // Đưa tên ảnh vào đúng file
+                var pa_eidt1 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit1);
+                var pa_eidt2 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit2);
+                var pa_eidt3 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit3);
+                // Ảnh trống
+                if (collection_image1a == null)
+                {
+                    ViewBag.ThongBao = "Ảnh 1 trống !";
+                    return View(collection);
+                }
+                else if (collection_image2a == null)
+                {
+                    ViewBag.ThongBao = "Ảnh 2 trống !";
+                    return View(collection);
+                }
+                else if (collection_image3a == null)
+                {
+                    ViewBag.ThongBao = "Ảnh 3 trống !";
+                    return View(collection);
+                }
+                //Nếu tên ảnh trùng
+                else if (System.IO.File.Exists(pa_eidt1))
+                {
+                    ViewBag.ThongBao = "Ảnh 1 đã tồn tại";
+                    return View(collection);
+                }
+                else if (System.IO.File.Exists(pa_eidt2))
+                {
+                    ViewBag.ThongBao = "Ảnh 2 đã tồn tại";
+                    return View(collection);
+                }
+                else if (System.IO.File.Exists(pa_eidt3))
+                {
+                    ViewBag.ThongBao = "Ảnh 3 đã tồn tại";
+                    return View(collection);
+                }
+                //Lưu pa vào name fileUpload
+                else
+                {
+                    collection_image1a.SaveAs(pa_eidt1);
+                    collection_image2a.SaveAs(pa_eidt2);
+                    collection_image3a.SaveAs(pa_eidt3);
+
+                    collection.collection_image1 = collection_image1a.FileName;
+                    collection.collection_image2 = collection_image2a.FileName;
+                    collection.collection_image3 = collection_image3a.FileName;
+                    collection.collection_datecreate = DateTime.Now;
+                    db.SaveChanges();
+                    ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
+                    return Redirect(admin_qlbst);
+                }
+            }
         }
 
         // GET: Admin/Collections/Delete/5

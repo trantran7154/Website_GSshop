@@ -71,7 +71,7 @@
                             <div class="text-center mt-2">
                                 <img src="~/Content/Layout/images/@item.product_image" width="250" />
                             </div>
-                            <a href="@Url.Action("FlashSaleDetail","View", new {@id = item.product_id})" class="text-left text-dark"><h4 class="text-left mt-2">@item.product_name</h4></a>
+                            <a href="@Url.Action("FlashSaleDetail","View", new {@id = item.product_id})" class="text-left text-dark"><h5 class="text-left mt-2">@item.product_name</h5></a>
                             <span class="text-success">@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</span> <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 mt-1 ml-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 30px; height: 30px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
                             <br />
                             <s class="text-gray">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</s>

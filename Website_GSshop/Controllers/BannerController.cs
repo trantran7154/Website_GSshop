@@ -15,5 +15,10 @@ namespace Website_GSshop.Controllers
         {
             return PartialView(db.Banner.Where(n => n.banner_active == true).ToList());
         }
+        // Quảng cáo
+        public ActionResult Advertise()
+        {
+            return View();
+        }
     }
 }

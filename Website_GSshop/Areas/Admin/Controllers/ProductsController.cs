@@ -103,36 +103,43 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id")] Product product, HttpPostedFileBase fileUpload)
+        public ActionResult Edit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id")] Product product, HttpPostedFileBase image)
         {
-            // Tên file ảnh sản phẩm
-            var fileimg = Path.GetFileName(fileUpload.FileName);
-            // Đưa tên ảnh vào đúng file
-            var pa = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg);
-            // Ảnh trống
-            if (fileUpload == null)
+            db.Entry(product).State = EntityState.Modified;
+            if(image == null)
             {
-                ViewBag.ThongBao = "Ảnh trống !";
-                return View(product);
-            }
-            //Nếu tên ảnh trùng
-            else if (System.IO.File.Exists(pa))
-            {
-                ViewBag.ThongBao = "Ảnh đã tồn tại";
-                return View(product);
-            }
-            //Lưu pa vào name fileUpload
-            else
-            {
-                fileUpload.SaveAs(pa);
-                db.Product.Add(product);
-                product.product_image = fileUpload.FileName;
-                product.product_active = true;
-                product.product_option = true;
-                product.product_datecreated = DateTime.Now;
-                product.product_dateedit = DateTime.Now;
+                Product pro = db.Product.Find(Int32.Parse(product.product_id.ToString()));
                 db.SaveChanges();
                 return Redirect(admin_qlsp);
+            }
+            else
+            {
+                // Tên file ảnh sản phẩm
+                var fileimg = Path.GetFileName(image.FileName);
+                // Đưa tên ảnh vào đúng file
+                var pa = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg);
+                // Ảnh trống
+                if (image == null)
+                {
+                    ViewBag.ThongBao = "Ảnh trống !";
+                    return View(product);
+                }
+                //Nếu tên ảnh trùng
+                else if (System.IO.File.Exists(pa))
+                {
+                    ViewBag.ThongBao = "Ảnh đã tồn tại";
+                    return View(product);
+                }
+                //Lưu pa vào name fileUpload
+                else
+                {
+                    image.SaveAs(pa);
+                    product.product_image = image.FileName;
+                    product.product_datecreated = DateTime.Now;
+                    product.product_dateedit = DateTime.Now;
+                    db.SaveChanges();
+                    return Redirect(admin_qlsp);
+                }
             }
         }
 
@@ -153,7 +160,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
         // POST: Admin/Products/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Product.Find(id);

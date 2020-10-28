@@ -4,6 +4,7 @@
     ViewBag.Title = "ProductCategoriesList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/CSS/banner.css" rel="stylesheet" />
 <div class="container-fluid">
     <br />
     <nav aria-label="breadcrumb">
@@ -277,23 +278,16 @@
                 @foreach (var item in Model)
                 {
                     <div class="col-md-3">
-                        <div class="card-1">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row align-items-center time"><small><span class="product-new-label1"><b class="test">- 40%</b></span></small> </div>
-                                <div class="pr-3 row justify-content-end">
-                                    <div class="fa fa-heart-o like"></div>
-                                </div>
-                            </div>
-                            <div class="text-center mt-2">
-                                <img src="~/Content/Layout/images/@item.product_image" width="250" />
-                            </div>
-                            <a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})" class="text-left text-dark"><h5 class="text-left mt-2">@item.product_name</h5></a>
-                            <span class="text-success">@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</span> <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 mt-1 ml-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 30px; height: 30px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
-                            <br />
-                            <s class="text-gray">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</s>
+                        <div id="banners">
                             <a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})">
-                                <div class="mt-1 button_voucher">
-                                    <span class="text font-button text-uppercase">Mua Ngay</span>
+                                <div id="targets"></div>
+                                <img id="products" src="~/Content/Layout/images/@item.product_image" width="250">
+                                <div id="badges">Save Now!</div>
+                                <div id="sales">
+                                    <span id="sales-text" style="font-size: 20px">@item.product_name</span><br />
+                                    <div class="mt-1 button_voucher">
+                                        <span class="text font-button text-uppercase">Mua Ngay</span>
+                                    </div>
                                 </div>
                             </a>
                         </div>

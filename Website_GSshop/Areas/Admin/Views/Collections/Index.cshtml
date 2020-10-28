@@ -215,55 +215,59 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                @using (Html.BeginForm("Edit", "Collections", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                                @using (Html.BeginForm("Edit", "Collections", FormMethod.Post, new { @class = "mb-4 ui form", @enctype = "multipart/form-data" }))
                                 {
-                                    <form method="post" class="mb-4 ui form">
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <input type="hidden" value="@item.collection_id" name="collection_id"/>
+                                    <input type="hidden" name="collection_image1" value="@item.collection_image1" />
+                                    <input type="hidden" name="collection_image2" value="@item.collection_image2" />
+                                    <input type="hidden" name="collection_image3" value="@item.collection_image3" />
+                                    <div class="field">
+                                        <label>Tên bô sưu tập</label>
+                                        <input type="text" name="collection_name" value="@item.collection_name" />
+                                    </div>
+                                    <div class="three fields">
                                         <div class="field">
-                                            <label>Tên bô sưu tập</label>
-                                            <input type="text" name="collection_name" value="@item.collection_name" />
+                                            <label>Ngày tạo</label>
+                                            <input type="date" name="collection_datecreate" value="@item.collection_datecreate.Value.Year-@(item.collection_datecreate.Value.Month < 10 ? "0" + item.collection_datecreate.Value.Month.ToString() : item.collection_datecreate.Value.Month.ToString())-@(item.collection_datecreate.Value.Day < 10 ? "0" + item.collection_datecreate.Value.Day.ToString() : item.collection_datecreate.Value.Day.ToString())"/>
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="date" name="collection_datecreated" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Mã sản phẩm</label>
-                                                <select name="product_id">
-                                                    @foreach(var item1 in Model.ToList())
-                                                    {
-                                                        <option>@item1.product_id</option>
-                                                    }
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="collection_active">
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
+                                        <div class="field">
+                                            <label>Mã sản phẩm</label>
+                                            <select name="product_id">
+                                                @foreach (var item1 in Model.ToList())
+                                                {
+                                                    <option>@item1.product_id</option>
+                                                }
+                                            </select>
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ảnh 1</label>
-                                                <input name="fileUpload" type="file" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh 2</label>
-                                                <input name="fileUpload" type="file" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh 3</label>
-                                                <input name="fileUpload" type="file" />
-                                            </div>
+                                        <div class="field">
+                                            <label>Hoạt động</label>
+                                            <select name="collection_active">
+                                                <option value="true" @(item.collection_active == true ? "selected" : "") >True</option>
+                                                <option value="false" @(item.collection_active == false ? "selected" : "")>False</option>
+                                            </select>
                                         </div>
-                                        <div class="ui error message"></div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> SỬA</button>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Ảnh 1</label>
+                                            <input name="collection_image1a" type="file" value="@item.collection_image1"/>
                                         </div>
-                                    </form>
+                                        <div class="field">
+                                            <label>Ảnh 2</label>
+                                            <input name="collection_image2a" type="file" value="@item.collection_image2"/>
+                                        </div>
+                                        <div class="field">
+                                            <label>Ảnh 3</label>
+                                            <input name="collection_image3a" type="file" value="@item.collection_image3"/>
+                                        </div>
+                                    </div>
+                                    <div class="ui error message"></div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> SỬA</button>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -305,6 +309,7 @@
                                 @using (Html.BeginForm("Details", "Collections", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.collection_id" />
                                         <div class="field">
                                             <label>Tên bô sưu tập</label>
                                             <input type="text" name="collection_name" value="@item.collection_name" disabled />
@@ -354,7 +359,7 @@
                         </div>
                     </div>
                 </div>
-                <!--//Sửa Bộ Sưu Tập-->
+                <!--//Xem Bộ Sưu Tập-->
                 <!--Xóa Bộ Sưu Tập-->
                 <div class="modal fade" id="@col_delete@item.collection_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
@@ -398,6 +403,7 @@
                                 @using (Html.BeginForm("Delete", "Collections", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.collection_id" name="collection_id"/>
                                         <div class="field">
                                             <label>Tên bô sưu tập</label>
                                             <input type="text" name="collection_name" value="@item.collection_name" disabled />

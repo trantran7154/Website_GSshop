@@ -19,11 +19,11 @@
                         <div class="text-center mt-2">
                             <img src="~/Content/Layout/images/@item.product_image" width="250" />
                         </div>
-                        <a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})" class="text-left text-dark"><h4 class="text-left mt-2">@item.product_name</h4></a>
+                        <a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})" class="text-left text-dark"><h5 class="text-left mt-2">@item.product_name</h5></a>
                         <span class="text-success">@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</span>
                         <br />
                         <s class="text-gray">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</s>
-                        <div class="container-fluid mt-1">
+                        <div class="mt-1">
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="p-stars">
