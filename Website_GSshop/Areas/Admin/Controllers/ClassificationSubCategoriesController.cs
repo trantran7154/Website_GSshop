@@ -99,16 +99,43 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "csc_id,csc_name,csc_image,csc_datecreate,csc_active,subcategory_id")] ClassificationSubCategory classificationSubCategory)
+        public ActionResult Edit([Bind(Include = "csc_id,csc_name,csc_image,csc_datecreate,csc_active,subcategory_id")] ClassificationSubCategory classificationSubCategory, HttpPostedFileBase fileUpload)
         {
-            if (ModelState.IsValid)
+            db.Entry(classificationSubCategory).State = EntityState.Modified;
+            if (fileUpload  == null)
             {
-                db.Entry(classificationSubCategory).State = EntityState.Modified;
+                ClassificationSubCategory sub = db.ClassificationSubCategory.Find(Int32.Parse(classificationSubCategory.csc_id.ToString()));
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(admin_qldmc);
             }
-            ViewBag.subcategory_id = new SelectList(db.SubCategory, "subcategory_id", "subcategory_name", classificationSubCategory.subcategory_id);
-            return View(classificationSubCategory);
+            else
+            {
+                // Tên file ảnh sản phẩm
+                var fileimg_edit = Path.GetFileName(fileUpload.FileName);
+                // Đưa tên ảnh vào đúng file
+                var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit);
+                // Ảnh trống
+                if (fileUpload == null)
+                {
+                    ViewBag.ThongBao = "Ảnh trống !";
+                    return View(classificationSubCategory);
+                }
+                //Nếu tên ảnh trùng
+                else if (System.IO.File.Exists(pa_eidt))
+                {
+                    ViewBag.ThongBao = "Ảnh đã tồn tại";
+                    return View(classificationSubCategory);
+                }
+                //Lưu pa vào name fileUpload
+                else
+                {
+                    fileUpload.SaveAs(pa_eidt);
+                    classificationSubCategory.csc_image = fileUpload.FileName;
+                    classificationSubCategory.csc_datecreate = DateTime.Now;
+                    db.SaveChanges();
+                    return Redirect(admin_qldmc);
+                }
+            }
         }
 
         // GET: Admin/ClassificationSubCategories/Delete/5

@@ -105,7 +105,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", gSMall.product_id);
             return View(gSMall);
         }
 
@@ -113,16 +112,58 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "gsmall_id,gsmall_name,gsmall_slogan,gsmall_active,gsmall_datecreate,gsmall_bg,gsmall_image,product_id")] GSMall gSMall)
+        public ActionResult Edit([Bind(Include = "gsmall_id,gsmall_name,gsmall_slogan,gsmall_active,gsmall_datecreate,gsmall_bg,gsmall_image,product_id")] GSMall gSMall, HttpPostedFileBase gsmall_bg1, HttpPostedFileBase gsmall_image1)
         {
-            if (ModelState.IsValid)
+            db.Entry(gSMall).State = EntityState.Modified;
+            if (gsmall_bg1 == null || gsmall_image1 == null)
             {
-                db.Entry(gSMall).State = EntityState.Modified;
+                GSMall gS = db.GSMall.Find(Int32.Parse(gSMall.gsmall_id.ToString()));
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(admin_qldt);
             }
-            ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", gSMall.product_id);
-            return View(gSMall);
+            else
+            {
+                // Tên file ảnh bộ sưu tập
+                var fileimg_edit1 = Path.GetFileName(gsmall_bg1.FileName);
+                var fileimg_edit2 = Path.GetFileName(gsmall_image1.FileName);
+                // Đưa tên ảnh vào đúng file
+                var pa_eidt1 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit1);
+                var pa_eidt2 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit2);
+                // Ảnh trống
+                if (gsmall_bg1 == null)
+                {
+                    ViewBag.ThongBao = "Ảnh nền trống !";
+                    return View(gSMall);
+                }
+                else if (gsmall_image1 == null)
+                {
+                    ViewBag.ThongBao = "Ảnh đại diện trống trống !";
+                    return View(gSMall);
+                }
+                //Nếu tên ảnh trùng
+                else if (System.IO.File.Exists(pa_eidt1))
+                {
+                    ViewBag.ThongBao = "Ảnh nền đã tồn tại";
+                    return View(gSMall);
+                }
+                else if (System.IO.File.Exists(pa_eidt2))
+                {
+                    ViewBag.ThongBao = "Ảnh đại diện đã tồn tại";
+                    return View(gSMall);
+                }
+                //Lưu pa vào name fileUpload
+                else
+                {
+                    gsmall_bg1.SaveAs(pa_eidt1);
+                    gsmall_image1.SaveAs(pa_eidt2);
+
+                    gSMall.gsmall_bg = gsmall_bg1.FileName;
+                    gSMall.gsmall_image = gsmall_image1.FileName;
+                    gSMall.gsmall_datecreate = DateTime.Now;
+                    db.SaveChanges();
+                    return Redirect(admin_qldt);
+                }
+            }
         }
 
         // GET: Admin/GSMalls/Delete/5

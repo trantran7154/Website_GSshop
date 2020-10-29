@@ -38,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.subcategory_name)
             </td>
             <td class="text-center">
-                <img src="~/Content/Layout/images/@item.subcategory_image" height="80" width="100" />
+                <img src="~/Content/Layout/images/@item.subcategory_image" height="100" width="100" />
             </td>
             <td class="text-center">
                 <span>@item.subcategory_datecreated.Value.Day/@item.subcategory_datecreated.Value.Month/@item.subcategory_datecreated.Value.Year</span>
@@ -196,6 +196,8 @@
                                 @using (Html.BeginForm("Edit", "SubCategories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.subcategory_id" name="subcategory_id"/>
+                                        <input type="hidden" value="@item.subcategory_image" name="subcategory_image"/>
                                         <div class="field">
                                             <label>Tên danh mục phụ</label>
                                             <input type="text" name="subcategory_name" value="@item.subcategory_name" />

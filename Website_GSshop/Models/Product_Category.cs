@@ -20,7 +20,7 @@ namespace Website_GSshop.Models
         public Nullable<int> csc_id { get; set; }
     
         public virtual Category Category { get; set; }
-        public virtual Product Product { get; set; }
         public virtual ClassificationSubCategory ClassificationSubCategory { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

@@ -53,10 +53,10 @@
                 <span>@item.gsmall_datecreate.Value.Day/@item.gsmall_datecreate.Value.Month/@item.gsmall_datecreate.Value.Year</span>
             </td>
             <td class="text-center">
-                <img src="~/Content/Layout/images/@item.gsmall_bg" height="90" width="100" />
+                <img src="~/Content/Layout/images/@item.gsmall_bg" height="100" width="100" />
             </td>
             <td class="text-center">
-                <img src="~/Content/Layout/images/@item.gsmall_image" height="90" width="100" />
+                <img src="~/Content/Layout/images/@item.gsmall_image" height="100" width="100" />
             </td>
             <td>
                 <div class="text-center">
@@ -156,15 +156,6 @@
                                                 <input type="date" name="gsmall_datecreated" />
                                             </div>
                                             <div class="field">
-                                                <label>Mã sản phẩm</label>
-                                                <select name="product_id">
-                                                    @foreach(var item1 in Model.ToList())
-                                                    {
-                                                        <option>@item1.product_id</option>
-                                                    }
-                                                </select>
-                                            </div>
-                                            <div class="field">
                                                 <label>Hoạt động</label>
                                                 <select name="gsmall_active">
                                                     <option>True</option>
@@ -218,6 +209,9 @@
                                 @using (Html.BeginForm("Edit", "GSMalls", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.gsmall_id" name="gsmall_id"/>
+                                        <input value="@item.gsmall_bg" name="gsmall_bg" type="hidden"/>
+                                        <input value="@item.gsmall_image" name="gsmall_image" type="hidden"/>
                                         <div class="two fields">
                                             <div class="field">
                                                 <label>Tên đối tác</label>
@@ -234,15 +228,6 @@
                                                 <input type="date" name="gsmall_datecreated" />
                                             </div>
                                             <div class="field">
-                                                <label>Mã sản phẩm</label>
-                                                <select name="product_id">
-                                                    @foreach (var item1 in Model.ToList())
-                                                    {
-                                                        <option>@item1.product_id</option>
-                                                    }
-                                                </select>
-                                            </div>
-                                            <div class="field">
                                                 <label>Hoạt động</label>
                                                 <select name="gsmall_active">
                                                     <option>True</option>
@@ -253,11 +238,11 @@
                                         <div class="two fields">
                                             <div class="field">
                                                 <label>Avatar</label>
-                                                <input name="fileUpload1" type="file" />
+                                                <input name="gsmall_image1" type="file" value="@item.gsmall_image"/>
                                             </div>
                                             <div class="field">
                                                 <label>Ảnh nền</label>
-                                                <input name="fileUpload2" type="file" />
+                                                <input name="gsmall_bg1" type="file" value="@item.gsmall_bg"/>
                                             </div>
                                         </div>
                                         <div class="ui error message"></div>
@@ -321,12 +306,6 @@
                                             <div class="field">
                                                 <label>Ngày tạo</label>
                                                 <input type="text" name="gsmall_datecreated" value="@item.gsmall_datecreate" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Mã sản phẩm</label>
-                                                <select name="gsmall_active" disabled>
-                                                    <option>@item.product_id</option>
-                                                </select>
                                             </div>
                                             <div class="field">
                                                 <label>Hoạt động</label>
@@ -414,12 +393,6 @@
                                             <div class="field">
                                                 <label>Ngày tạo</label>
                                                 <input type="text" name="gsmall_datecreated" value="@item.gsmall_datecreate" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Mã sản phẩm</label>
-                                                <select name="gsmall_active" disabled>
-                                                    <option>@item.product_id</option>
-                                                </select>
                                             </div>
                                             <div class="field">
                                                 <label>Hoạt động</label>

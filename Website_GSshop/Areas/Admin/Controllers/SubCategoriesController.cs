@@ -99,16 +99,43 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id")] SubCategory subCategory)
+        public ActionResult Edit([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id")] SubCategory subCategory, HttpPostedFileBase fileUpload)
         {
-            if (ModelState.IsValid)
+            db.Entry(subCategory).State = EntityState.Modified;
+            if (fileUpload == null)
             {
-                db.Entry(subCategory).State = EntityState.Modified;
+                SubCategory subCategorys = db.SubCategory.Find(Int32.Parse(subCategory.subcategory_id.ToString()));
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(admin_qldmp);
             }
-            ViewBag.category_id = new SelectList(db.Category, "category_id", "category_name", subCategory.category_id);
-            return View(subCategory);
+            else
+            {
+                // Tên file ảnh sản phẩm
+                var fileimg_edit = Path.GetFileName(fileUpload.FileName);
+                // Đưa tên ảnh vào đúng file
+                var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit);
+                // Ảnh trống
+                if (fileUpload == null)
+                {
+                    ViewBag.ThongBao = "Ảnh trống !";
+                    return View(subCategory);
+                }
+                //Nếu tên ảnh trùng
+                else if (System.IO.File.Exists(pa_eidt))
+                {
+                    ViewBag.ThongBao = "Ảnh đã tồn tại";
+                    return View(subCategory);
+                }
+                //Lưu pa vào name fileUpload
+                else
+                {
+                    fileUpload.SaveAs(pa_eidt);
+                    subCategory.subcategory_image = fileUpload.FileName;
+                    subCategory.subcategory_datecreated = DateTime.Now;
+                    db.SaveChanges();
+                    return Redirect(admin_qldmp);
+                }
+            }
         }
 
         // GET: Admin/SubCategories/Delete/5

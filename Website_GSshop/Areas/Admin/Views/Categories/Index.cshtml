@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.category_name)
             </td>
             <td class="text-center">
-                <img src="~/Content/Layout/images/@item.category_image" height="80" width="100" />
+                <img src="~/Content/Layout/images/@item.category_image" height="100" width="100" />
             </td>
             <td class="text-center">
                 <p>@item.category_datecreated.Value.Day/@item.category_datecreated.Value.Month/@item.category_datecreated.Value.Year</p>
@@ -210,6 +210,8 @@
                                 @using (Html.BeginForm("Edit", "Categories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.category_id" name="category_id"/>
+                                        <input type="hidden" value="@item.category_image" name="category_image"/>
                                         <div class="two fields">
                                             <div class="field">
                                                 <label>Tên danh mục</label>

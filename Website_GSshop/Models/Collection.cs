@@ -14,15 +14,21 @@ namespace Website_GSshop.Models
     
     public partial class Collection
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Collection()
+        {
+            this.Product = new HashSet<Product>();
+        }
+    
         public int collection_id { get; set; }
         public string collection_name { get; set; }
         public string collection_image1 { get; set; }
         public string collection_image2 { get; set; }
         public string collection_image3 { get; set; }
-        public Nullable<int> product_id { get; set; }
         public Nullable<System.DateTime> collection_datecreate { get; set; }
         public Nullable<bool> collection_active { get; set; }
     
-        public virtual Product Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Product { get; set; }
     }
 }

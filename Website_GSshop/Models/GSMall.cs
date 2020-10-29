@@ -14,6 +14,12 @@ namespace Website_GSshop.Models
     
     public partial class GSMall
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public GSMall()
+        {
+            this.Product = new HashSet<Product>();
+        }
+    
         public int gsmall_id { get; set; }
         public string gsmall_name { get; set; }
         public string gsmall_slogan { get; set; }
@@ -21,8 +27,8 @@ namespace Website_GSshop.Models
         public Nullable<System.DateTime> gsmall_datecreate { get; set; }
         public string gsmall_bg { get; set; }
         public string gsmall_image { get; set; }
-        public Nullable<int> product_id { get; set; }
     
-        public virtual Product Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Product { get; set; }
     }
 }

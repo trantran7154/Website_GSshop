@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Data_GSShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Data_GSShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="admin_id" />
@@ -61,7 +61,6 @@
           <Property Name="collection_image1" Type="nvarchar" MaxLength="2000" />
           <Property Name="collection_image2" Type="nvarchar" MaxLength="2000" />
           <Property Name="collection_image3" Type="nvarchar" MaxLength="2000" />
-          <Property Name="product_id" Type="int" />
           <Property Name="collection_datecreate" Type="datetime" />
           <Property Name="collection_active" Type="bit" />
         </EntityType>
@@ -88,7 +87,6 @@
           <Property Name="gsmall_datecreate" Type="datetime" />
           <Property Name="gsmall_bg" Type="nvarchar" MaxLength="2000" />
           <Property Name="gsmall_image" Type="nvarchar" MaxLength="2000" />
-          <Property Name="product_id" Type="int" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -117,6 +115,8 @@
           <Property Name="category_id" Type="int" />
           <Property Name="subcategory_id" Type="int" />
           <Property Name="banner_id" Type="int" />
+          <Property Name="collection_id" Type="int" />
+          <Property Name="gsmail_id" Type="int" />
         </EntityType>
         <EntityType Name="Product_Category">
           <Key>
@@ -231,30 +231,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Collection_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="Collection">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GSMall_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="GSMall" Type="Self.GSMall" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="GSMall">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_Banner">
           <End Role="Banner" Type="Self.Banner" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -312,6 +288,30 @@
             </Principal>
             <Dependent Role="Product_Category">
               <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Collection">
+          <End Role="Collection" Type="Self.Collection" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collection">
+              <PropertyRef Name="collection_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="collection_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_GSMall">
+          <End Role="GSMall" Type="Self.GSMall" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GSMall">
+              <PropertyRef Name="gsmall_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="gsmail_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -455,14 +455,6 @@
             <End Role="SubCategory" EntitySet="SubCategory" />
             <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
           </AssociationSet>
-          <AssociationSet Name="FK_Collection_Product" Association="Self.FK_Collection_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Collection" EntitySet="Collection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GSMall_Product" Association="Self.FK_GSMall_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="GSMall" EntitySet="GSMall" />
-          </AssociationSet>
           <AssociationSet Name="FK_Product_Banner" Association="Self.FK_Product_Banner">
             <End Role="Banner" EntitySet="Banner" />
             <End Role="Product" EntitySet="Product" />
@@ -482,6 +474,14 @@
           <AssociationSet Name="FK_Product_Category_Product" Association="Self.FK_Product_Category_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Product_Category" EntitySet="Product_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Collection" Association="Self.FK_Product_Collection">
+            <End Role="Collection" EntitySet="Collection" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_GSMall" Association="Self.FK_Product_GSMall">
+            <End Role="GSMall" EntitySet="GSMall" />
+            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Seller" Association="Self.FK_Product_Seller">
             <End Role="Seller" EntitySet="Seller" />
@@ -524,7 +524,8 @@
             <End Role="View" EntitySet="View" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Data_GSShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -544,6 +545,17 @@
           <Property Name="admin_pass2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="admin_datelogin" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Banner">
+          <Key>
+            <PropertyRef Name="banner_id" />
+          </Key>
+          <Property Name="banner_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="banner_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="banner_svg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="banner_active" Type="Boolean" />
+          <Property Name="banner_datecreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Banner" FromRole="Banner" ToRole="Product" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="category_id" />
@@ -553,9 +565,35 @@
           <Property Name="category_image" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="category_datecreated" Type="DateTime" Precision="3" />
           <Property Name="category_active" Type="Boolean" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
           <NavigationProperty Name="Product_Category" Relationship="Self.FK_Product_Category_Category" FromRole="Category" ToRole="Product_Category" />
           <NavigationProperty Name="SubCategory" Relationship="Self.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
-          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ClassificationSubCategory">
+          <Key>
+            <PropertyRef Name="csc_id" />
+          </Key>
+          <Property Name="csc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="csc_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="csc_image" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="csc_datecreate" Type="DateTime" Precision="3" />
+          <Property Name="csc_active" Type="Boolean" />
+          <Property Name="subcategory_id" Type="Int32" />
+          <NavigationProperty Name="SubCategory" Relationship="Self.FK_ClassificationSubCategory_SubCategory" FromRole="ClassificationSubCategory" ToRole="SubCategory" />
+          <NavigationProperty Name="Product_Category" Relationship="Self.FK_Product_Category_ClassificationSubCategory" FromRole="ClassificationSubCategory" ToRole="Product_Category" />
+        </EntityType>
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="collection_id" />
+          </Key>
+          <Property Name="collection_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="collection_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="collection_image1" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="collection_image2" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="collection_image3" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="collection_datecreate" Type="DateTime" Precision="3" />
+          <Property Name="collection_active" Type="Boolean" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Collection" FromRole="Collection" ToRole="Product" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -569,6 +607,19 @@
           <Property Name="seller_id" Type="Int32" />
           <Property Name="comment_spam" Type="Boolean" />
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Comment" FromRole="Comment" ToRole="ReplyComment" />
+        </EntityType>
+        <EntityType Name="GSMall">
+          <Key>
+            <PropertyRef Name="gsmall_id" />
+          </Key>
+          <Property Name="gsmall_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gsmall_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gsmall_slogan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gsmall_active" Type="Boolean" />
+          <Property Name="gsmall_datecreate" Type="DateTime" Precision="3" />
+          <Property Name="gsmall_bg" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="gsmall_image" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_GSMall" FromRole="GSMall" ToRole="Product" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -594,19 +645,21 @@
           <Property Name="product_dateedit" Type="DateTime" Precision="3" />
           <Property Name="seller_id" Type="Int32" />
           <Property Name="user_id" Type="Int32" />
+          <Property Name="category_id" Type="Int32" />
+          <Property Name="subcategory_id" Type="Int32" />
+          <Property Name="banner_id" Type="Int32" />
+          <Property Name="collection_id" Type="Int32" />
+          <Property Name="gsmail_id" Type="Int32" />
+          <NavigationProperty Name="Banner" Relationship="Self.FK_Product_Banner" FromRole="Product" ToRole="Banner" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Collection" Relationship="Self.FK_Product_Collection" FromRole="Product" ToRole="Collection" />
+          <NavigationProperty Name="GSMall" Relationship="Self.FK_Product_GSMall" FromRole="Product" ToRole="GSMall" />
           <NavigationProperty Name="Product_Category" Relationship="Self.FK_Product_Category_Product" FromRole="Product" ToRole="Product_Category" />
           <NavigationProperty Name="Seller" Relationship="Self.FK_Product_Seller" FromRole="Product" ToRole="Seller" />
+          <NavigationProperty Name="SubCategory" Relationship="Self.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
           <NavigationProperty Name="User" Relationship="Self.FK_Product_User" FromRole="Product" ToRole="User" />
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Product" FromRole="Product" ToRole="ReplyComment" />
-          <NavigationProperty Name="View" Relationship="Data_GSShopModel.FK_View_Product" FromRole="Product" ToRole="View" />
-          <NavigationProperty Name="Collection" Relationship="Data_GSShopModel.FK_Collection_Product" FromRole="Product" ToRole="Collection" />
-          <NavigationProperty Name="GSMall" Relationship="Data_GSShopModel.FK_GSMall_Product" FromRole="Product" ToRole="GSMall" />
-          <Property Name="category_id" Type="Int32" />
-          <NavigationProperty Name="Category" Relationship="Data_GSShopModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
-          <Property Name="subcategory_id" Type="Int32" />
-          <NavigationProperty Name="SubCategory" Relationship="Data_GSShopModel.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
-          <Property Name="banner_id" Type="Int32" />
-          <NavigationProperty Name="Banner" Relationship="Data_GSShopModel.FK_Product_Banner" FromRole="Product" ToRole="Banner" />
+          <NavigationProperty Name="View" Relationship="Self.FK_View_Product" FromRole="Product" ToRole="View" />
         </EntityType>
         <EntityType Name="Product_Category">
           <Key>
@@ -615,10 +668,10 @@
           <Property Name="pc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="product_id" Type="Int32" />
           <Property Name="category_id" Type="Int32" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category_Category" FromRole="Product_Category" ToRole="Category" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category_Product" FromRole="Product_Category" ToRole="Product" />
           <Property Name="csc_id" Type="Int32" />
-          <NavigationProperty Name="ClassificationSubCategory" Relationship="Data_GSShopModel.FK_Product_Category_ClassificationSubCategory" FromRole="Product_Category" ToRole="ClassificationSubCategory" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category_Category" FromRole="Product_Category" ToRole="Category" />
+          <NavigationProperty Name="ClassificationSubCategory" Relationship="Self.FK_Product_Category_ClassificationSubCategory" FromRole="Product_Category" ToRole="ClassificationSubCategory" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category_Product" FromRole="Product_Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="ReplyComment">
           <Key>
@@ -631,11 +684,11 @@
           <Property Name="product_id" Type="Int32" />
           <Property Name="seller_id" Type="Int32" />
           <Property Name="replycomment_spam" Type="Boolean" />
+          <Property Name="replycomment_datecreated" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Comment" Relationship="Self.FK_ReplyComment_Comment" FromRole="ReplyComment" ToRole="Comment" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ReplyComment_Product" FromRole="ReplyComment" ToRole="Product" />
           <NavigationProperty Name="Seller" Relationship="Self.FK_ReplyComment_Seller" FromRole="ReplyComment" ToRole="Seller" />
           <NavigationProperty Name="User" Relationship="Self.FK_ReplyComment_User" FromRole="ReplyComment" ToRole="User" />
-          <Property Name="replycomment_datecreated" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Seller">
           <Key>
@@ -660,12 +713,12 @@
           <Property Name="seller_datelogin" Type="DateTime" Precision="3" />
           <Property Name="seller_detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="seller_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Seller" FromRole="Seller" ToRole="Product" />
-          <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Seller" FromRole="Seller" ToRole="ReplyComment" />
           <Property Name="seller_role" Type="Int32" />
           <Property Name="seller_nicename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="seller_provincecity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="seller_district" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Seller" FromRole="Seller" ToRole="Product" />
+          <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Seller" FromRole="Seller" ToRole="ReplyComment" />
         </EntityType>
         <EntityType Name="SubCategory">
           <Key>
@@ -677,10 +730,10 @@
           <Property Name="subcategory_datecreated" Type="DateTime" Precision="3" />
           <Property Name="subcategory_active" Type="Boolean" />
           <Property Name="category_id" Type="Int32" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
-          <NavigationProperty Name="ClassificationSubCategory" Relationship="Data_GSShopModel.FK_ClassificationSubCategory_SubCategory" FromRole="SubCategory" ToRole="ClassificationSubCategory" />
           <Property Name="subcategory_level" Type="Boolean" />
-          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
+          <NavigationProperty Name="ClassificationSubCategory" Relationship="Self.FK_ClassificationSubCategory_SubCategory" FromRole="SubCategory" ToRole="ClassificationSubCategory" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -709,12 +762,47 @@
           <Property Name="user_telephone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="user_image" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="user_sex" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_User" FromRole="User" ToRole="Product" />
-          <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_User" FromRole="User" ToRole="ReplyComment" />
           <Property Name="user_provincecity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="user_district" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="View" Relationship="Data_GSShopModel.FK_View_User" FromRole="User" ToRole="View" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_User" FromRole="User" ToRole="Product" />
+          <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_User" FromRole="User" ToRole="ReplyComment" />
+          <NavigationProperty Name="View" Relationship="Self.FK_View_User" FromRole="User" ToRole="View" />
         </EntityType>
+        <EntityType Name="View">
+          <Key>
+            <PropertyRef Name="view_id" />
+          </Key>
+          <Property Name="view_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="view_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_View_Product" FromRole="View" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Self.FK_View_User" FromRole="View" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Product_Banner">
+          <End Role="Banner" Type="Self.Banner" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banner">
+              <PropertyRef Name="banner_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="banner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Category_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product_Category" Type="Self.Product_Category" Multiplicity="*" />
@@ -739,6 +827,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ClassificationSubCategory_SubCategory">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+          <End Role="ClassificationSubCategory" Type="Self.ClassificationSubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="subcategory_id" />
+            </Principal>
+            <Dependent Role="ClassificationSubCategory">
+              <PropertyRef Name="subcategory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Category_ClassificationSubCategory">
+          <End Role="ClassificationSubCategory" Type="Self.ClassificationSubCategory" Multiplicity="0..1" />
+          <End Role="Product_Category" Type="Self.Product_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassificationSubCategory">
+              <PropertyRef Name="csc_id" />
+            </Principal>
+            <Dependent Role="Product_Category">
+              <PropertyRef Name="csc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Collection">
+          <End Role="Collection" Type="Self.Collection" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collection">
+              <PropertyRef Name="collection_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="collection_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ReplyComment_Comment">
           <End Role="Comment" Type="Self.Comment" Multiplicity="0..1" />
           <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
@@ -748,6 +872,18 @@
             </Principal>
             <Dependent Role="ReplyComment">
               <PropertyRef Name="comment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_GSMall">
+          <End Role="GSMall" Type="Self.GSMall" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GSMall">
+              <PropertyRef Name="gsmall_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="gsmail_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -775,6 +911,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_SubCategory">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="subcategory_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="subcategory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -795,6 +943,18 @@
               <PropertyRef Name="product_id" />
             </Principal>
             <Dependent Role="ReplyComment">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_View_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="View" Type="Self.View" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="View">
               <PropertyRef Name="product_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -823,10 +983,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_View_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="View" Type="Self.View" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="View">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Data_GSShopEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Banner" EntityType="Self.Banner" />
           <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="ClassificationSubCategory" EntityType="Self.ClassificationSubCategory" />
+          <EntitySet Name="Collection" EntityType="Self.Collection" />
           <EntitySet Name="Comment" EntityType="Self.Comment" />
+          <EntitySet Name="GSMall" EntityType="Self.GSMall" />
           <EntitySet Name="Product" EntityType="Self.Product" />
           <EntitySet Name="Product_Category" EntityType="Self.Product_Category" />
           <EntitySet Name="ReplyComment" EntityType="Self.ReplyComment" />
@@ -834,6 +1010,15 @@
           <EntitySet Name="SubCategory" EntityType="Self.SubCategory" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="View" EntityType="Self.View" />
+          <AssociationSet Name="FK_Product_Banner" Association="Self.FK_Product_Banner">
+            <End Role="Banner" EntitySet="Banner" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_Category_Category" Association="Self.FK_Product_Category_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product_Category" EntitySet="Product_Category" />
@@ -842,9 +1027,25 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="SubCategory" EntitySet="SubCategory" />
           </AssociationSet>
+          <AssociationSet Name="FK_ClassificationSubCategory_SubCategory" Association="Self.FK_ClassificationSubCategory_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategory" />
+            <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category_ClassificationSubCategory" Association="Self.FK_Product_Category_ClassificationSubCategory">
+            <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
+            <End Role="Product_Category" EntitySet="Product_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Collection" Association="Self.FK_Product_Collection">
+            <End Role="Collection" EntitySet="Collection" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_ReplyComment_Comment" Association="Self.FK_ReplyComment_Comment">
             <End Role="Comment" EntitySet="Comment" />
             <End Role="ReplyComment" EntitySet="ReplyComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_GSMall" Association="Self.FK_Product_GSMall">
+            <End Role="GSMall" EntitySet="GSMall" />
+            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Category_Product" Association="Self.FK_Product_Category_Product">
             <End Role="Product" EntitySet="Product" />
@@ -852,6 +1053,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Product_Seller" Association="Self.FK_Product_Seller">
             <End Role="Seller" EntitySet="Seller" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_SubCategory" Association="Self.FK_Product_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategory" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_User" Association="Self.FK_Product_User">
@@ -862,6 +1067,10 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="ReplyComment" EntitySet="ReplyComment" />
           </AssociationSet>
+          <AssociationSet Name="FK_View_Product" Association="Self.FK_View_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="View" EntitySet="View" />
+          </AssociationSet>
           <AssociationSet Name="FK_ReplyComment_Seller" Association="Self.FK_ReplyComment_Seller">
             <End Role="Seller" EntitySet="Seller" />
             <End Role="ReplyComment" EntitySet="ReplyComment" />
@@ -870,219 +1079,11 @@
             <End Role="User" EntitySet="User" />
             <End Role="ReplyComment" EntitySet="ReplyComment" />
           </AssociationSet>
-          <EntitySet Name="ClassificationSubCategory" EntityType="Data_GSShopModel.ClassificationSubCategory" />
-          <AssociationSet Name="FK_ClassificationSubCategory_SubCategory" Association="Data_GSShopModel.FK_ClassificationSubCategory_SubCategory">
-            <End Role="SubCategory" EntitySet="SubCategory" />
-            <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Category_ClassificationSubCategory" Association="Data_GSShopModel.FK_Product_Category_ClassificationSubCategory">
-            <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
-            <End Role="Product_Category" EntitySet="Product_Category" />
-          </AssociationSet>
-          <EntitySet Name="View" EntityType="Data_GSShopModel.View" />
-          <AssociationSet Name="FK_View_Product" Association="Data_GSShopModel.FK_View_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="View" EntitySet="View" />
-          </AssociationSet>
-          <AssociationSet Name="FK_View_User" Association="Data_GSShopModel.FK_View_User">
+          <AssociationSet Name="FK_View_User" Association="Self.FK_View_User">
             <End Role="User" EntitySet="User" />
             <End Role="View" EntitySet="View" />
           </AssociationSet>
-          <EntitySet Name="Collection" EntityType="Data_GSShopModel.Collection" />
-          <AssociationSet Name="FK_Collection_Product" Association="Data_GSShopModel.FK_Collection_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Collection" EntitySet="Collection" />
-          </AssociationSet>
-          <EntitySet Name="GSMall" EntityType="Data_GSShopModel.GSMall" />
-          <AssociationSet Name="FK_GSMall_Product" Association="Data_GSShopModel.FK_GSMall_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="GSMall" EntitySet="GSMall" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Category" Association="Data_GSShopModel.FK_Product_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_SubCategory" Association="Data_GSShopModel.FK_Product_SubCategory">
-            <End Role="SubCategory" EntitySet="SubCategory" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <EntitySet Name="Banner" EntityType="Data_GSShopModel.Banner" />
-          <AssociationSet Name="FK_Product_Banner" Association="Data_GSShopModel.FK_Product_Banner">
-            <End Role="Banner" EntitySet="Banner" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="ClassificationSubCategory">
-          <Key>
-            <PropertyRef Name="csc_id" />
-          </Key>
-          <Property Name="csc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="csc_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="csc_image" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="csc_datecreate" Type="DateTime" Precision="3" />
-          <Property Name="csc_active" Type="Boolean" />
-          <Property Name="subcategory_id" Type="Int32" />
-          <NavigationProperty Name="SubCategory" Relationship="Data_GSShopModel.FK_ClassificationSubCategory_SubCategory" FromRole="ClassificationSubCategory" ToRole="SubCategory" />
-          <NavigationProperty Name="Product_Category" Relationship="Data_GSShopModel.FK_Product_Category_ClassificationSubCategory" FromRole="ClassificationSubCategory" ToRole="Product_Category" />
-        </EntityType>
-        <Association Name="FK_ClassificationSubCategory_SubCategory">
-          <End Type="Data_GSShopModel.SubCategory" Role="SubCategory" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.ClassificationSubCategory" Role="ClassificationSubCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SubCategory">
-              <PropertyRef Name="subcategory_id" />
-            </Principal>
-            <Dependent Role="ClassificationSubCategory">
-              <PropertyRef Name="subcategory_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Category_ClassificationSubCategory">
-          <End Type="Data_GSShopModel.ClassificationSubCategory" Role="ClassificationSubCategory" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Product_Category" Role="Product_Category" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassificationSubCategory">
-              <PropertyRef Name="csc_id" />
-            </Principal>
-            <Dependent Role="Product_Category">
-              <PropertyRef Name="csc_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="View">
-          <Key>
-            <PropertyRef Name="view_id" />
-          </Key>
-          <Property Name="view_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_id" Type="Int32" />
-          <Property Name="user_id" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_View_Product" FromRole="View" ToRole="Product" />
-          <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_View_User" FromRole="View" ToRole="User" />
-          <Property Name="view_date" Type="DateTime" Precision="3" />
-        </EntityType>
-        <Association Name="FK_View_Product">
-          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.View" Role="View" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="View">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_View_User">
-          <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.View" Role="View" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="View">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Collection">
-          <Key>
-            <PropertyRef Name="collection_id" />
-          </Key>
-          <Property Name="collection_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="collection_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="collection_image1" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="collection_image2" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="collection_image3" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="product_id" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Collection_Product" FromRole="Collection" ToRole="Product" />
-          <Property Name="collection_datecreate" Type="DateTime" Precision="3" />
-          <Property Name="collection_active" Type="Boolean" />
-        </EntityType>
-        <Association Name="FK_Collection_Product">
-          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Collection" Role="Collection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="Collection">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="GSMall">
-          <Key>
-            <PropertyRef Name="gsmall_id" />
-          </Key>
-          <Property Name="gsmall_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="gsmall_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="gsmall_slogan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="gsmall_active" Type="Boolean" />
-          <Property Name="gsmall_datecreate" Type="DateTime" Precision="3" />
-          <Property Name="gsmall_bg" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="gsmall_image" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="product_id" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_GSMall_Product" FromRole="GSMall" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK_GSMall_Product">
-          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.GSMall" Role="GSMall" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="GSMall">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Category">
-          <End Type="Data_GSShopModel.Category" Role="Category" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="category_id" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="category_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_SubCategory">
-          <End Type="Data_GSShopModel.SubCategory" Role="SubCategory" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SubCategory">
-              <PropertyRef Name="subcategory_id" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="subcategory_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Banner">
-          <Key>
-            <PropertyRef Name="banner_id" />
-          </Key>
-          <Property Name="banner_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="banner_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="banner_svg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="banner_active" Type="Boolean" />
-          <Property Name="banner_datecreated" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_Banner" FromRole="Banner" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK_Product_Banner">
-          <End Type="Data_GSShopModel.Banner" Role="Banner" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Banner">
-              <PropertyRef Name="banner_id" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="banner_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1106,6 +1107,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Banner">
+            <EntityTypeMapping TypeName="Data_GSShopModel.Banner">
+              <MappingFragment StoreEntitySet="Banner">
+                <ScalarProperty Name="banner_id" ColumnName="banner_id" />
+                <ScalarProperty Name="banner_name" ColumnName="banner_name" />
+                <ScalarProperty Name="banner_svg" ColumnName="banner_svg" />
+                <ScalarProperty Name="banner_active" ColumnName="banner_active" />
+                <ScalarProperty Name="banner_datecreated" ColumnName="banner_datecreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="Data_GSShopModel.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -1114,6 +1126,31 @@
                 <ScalarProperty Name="category_image" ColumnName="category_image" />
                 <ScalarProperty Name="category_datecreated" ColumnName="category_datecreated" />
                 <ScalarProperty Name="category_active" ColumnName="category_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassificationSubCategory">
+            <EntityTypeMapping TypeName="Data_GSShopModel.ClassificationSubCategory">
+              <MappingFragment StoreEntitySet="ClassificationSubCategory">
+                <ScalarProperty Name="csc_id" ColumnName="csc_id" />
+                <ScalarProperty Name="csc_name" ColumnName="csc_name" />
+                <ScalarProperty Name="csc_image" ColumnName="csc_image" />
+                <ScalarProperty Name="csc_datecreate" ColumnName="csc_datecreate" />
+                <ScalarProperty Name="csc_active" ColumnName="csc_active" />
+                <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collection">
+            <EntityTypeMapping TypeName="Data_GSShopModel.Collection">
+              <MappingFragment StoreEntitySet="Collection">
+                <ScalarProperty Name="collection_id" ColumnName="collection_id" />
+                <ScalarProperty Name="collection_name" ColumnName="collection_name" />
+                <ScalarProperty Name="collection_image1" ColumnName="collection_image1" />
+                <ScalarProperty Name="collection_image2" ColumnName="collection_image2" />
+                <ScalarProperty Name="collection_image3" ColumnName="collection_image3" />
+                <ScalarProperty Name="collection_datecreate" ColumnName="collection_datecreate" />
+                <ScalarProperty Name="collection_active" ColumnName="collection_active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1130,12 +1167,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="GSMall">
+            <EntityTypeMapping TypeName="Data_GSShopModel.GSMall">
+              <MappingFragment StoreEntitySet="GSMall">
+                <ScalarProperty Name="gsmall_id" ColumnName="gsmall_id" />
+                <ScalarProperty Name="gsmall_name" ColumnName="gsmall_name" />
+                <ScalarProperty Name="gsmall_slogan" ColumnName="gsmall_slogan" />
+                <ScalarProperty Name="gsmall_active" ColumnName="gsmall_active" />
+                <ScalarProperty Name="gsmall_datecreate" ColumnName="gsmall_datecreate" />
+                <ScalarProperty Name="gsmall_bg" ColumnName="gsmall_bg" />
+                <ScalarProperty Name="gsmall_image" ColumnName="gsmall_image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="Data_GSShopModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="banner_id" ColumnName="banner_id" />
-                <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
-                <ScalarProperty Name="category_id" ColumnName="category_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="product_name" ColumnName="product_name" />
                 <ScalarProperty Name="product_image" ColumnName="product_image" />
@@ -1156,23 +1203,27 @@
                 <ScalarProperty Name="product_dateedit" ColumnName="product_dateedit" />
                 <ScalarProperty Name="seller_id" ColumnName="seller_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
+                <ScalarProperty Name="banner_id" ColumnName="banner_id" />
+                <ScalarProperty Name="collection_id" ColumnName="collection_id" />
+                <ScalarProperty Name="gsmail_id" ColumnName="gsmail_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product_Category">
             <EntityTypeMapping TypeName="Data_GSShopModel.Product_Category">
               <MappingFragment StoreEntitySet="Product_Category">
-                <ScalarProperty Name="csc_id" ColumnName="csc_id" />
                 <ScalarProperty Name="pc_id" ColumnName="pc_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="csc_id" ColumnName="csc_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReplyComment">
             <EntityTypeMapping TypeName="Data_GSShopModel.ReplyComment">
               <MappingFragment StoreEntitySet="ReplyComment">
-                <ScalarProperty Name="replycomment_datecreated" ColumnName="replycomment_datecreated" />
                 <ScalarProperty Name="replycomment_id" ColumnName="replycomment_id" />
                 <ScalarProperty Name="replycomment_content" ColumnName="replycomment_content" />
                 <ScalarProperty Name="comment_id" ColumnName="comment_id" />
@@ -1180,16 +1231,13 @@
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="seller_id" ColumnName="seller_id" />
                 <ScalarProperty Name="replycomment_spam" ColumnName="replycomment_spam" />
+                <ScalarProperty Name="replycomment_datecreated" ColumnName="replycomment_datecreated" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Seller">
             <EntityTypeMapping TypeName="Data_GSShopModel.Seller">
               <MappingFragment StoreEntitySet="Seller">
-                <ScalarProperty Name="seller_district" ColumnName="seller_district" />
-                <ScalarProperty Name="seller_provincecity" ColumnName="seller_provincecity" />
-                <ScalarProperty Name="seller_nicename" ColumnName="seller_nicename" />
-                <ScalarProperty Name="seller_role" ColumnName="seller_role" />
                 <ScalarProperty Name="seller_id" ColumnName="seller_id" />
                 <ScalarProperty Name="seller_pass" ColumnName="seller_pass" />
                 <ScalarProperty Name="seller_email" ColumnName="seller_email" />
@@ -1209,19 +1257,23 @@
                 <ScalarProperty Name="seller_datelogin" ColumnName="seller_datelogin" />
                 <ScalarProperty Name="seller_detail" ColumnName="seller_detail" />
                 <ScalarProperty Name="seller_description" ColumnName="seller_description" />
+                <ScalarProperty Name="seller_role" ColumnName="seller_role" />
+                <ScalarProperty Name="seller_nicename" ColumnName="seller_nicename" />
+                <ScalarProperty Name="seller_provincecity" ColumnName="seller_provincecity" />
+                <ScalarProperty Name="seller_district" ColumnName="seller_district" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubCategory">
             <EntityTypeMapping TypeName="Data_GSShopModel.SubCategory">
               <MappingFragment StoreEntitySet="SubCategory">
-                <ScalarProperty Name="subcategory_level" ColumnName="subcategory_level" />
                 <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
                 <ScalarProperty Name="subcategory_name" ColumnName="subcategory_name" />
                 <ScalarProperty Name="subcategory_image" ColumnName="subcategory_image" />
                 <ScalarProperty Name="subcategory_datecreated" ColumnName="subcategory_datecreated" />
                 <ScalarProperty Name="subcategory_active" ColumnName="subcategory_active" />
                 <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="subcategory_level" ColumnName="subcategory_level" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1239,8 +1291,6 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="Data_GSShopModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="user_district" ColumnName="user_district" />
-                <ScalarProperty Name="user_provincecity" ColumnName="user_provincecity" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="user_pass" ColumnName="user_pass" />
                 <ScalarProperty Name="user_nicename" ColumnName="user_nicename" />
@@ -1254,67 +1304,18 @@
                 <ScalarProperty Name="user_telephone" ColumnName="user_telephone" />
                 <ScalarProperty Name="user_image" ColumnName="user_image" />
                 <ScalarProperty Name="user_sex" ColumnName="user_sex" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ClassificationSubCategory">
-            <EntityTypeMapping TypeName="Data_GSShopModel.ClassificationSubCategory">
-              <MappingFragment StoreEntitySet="ClassificationSubCategory">
-                <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
-                <ScalarProperty Name="csc_active" ColumnName="csc_active" />
-                <ScalarProperty Name="csc_datecreate" ColumnName="csc_datecreate" />
-                <ScalarProperty Name="csc_image" ColumnName="csc_image" />
-                <ScalarProperty Name="csc_name" ColumnName="csc_name" />
-                <ScalarProperty Name="csc_id" ColumnName="csc_id" />
+                <ScalarProperty Name="user_provincecity" ColumnName="user_provincecity" />
+                <ScalarProperty Name="user_district" ColumnName="user_district" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="View">
             <EntityTypeMapping TypeName="Data_GSShopModel.View">
               <MappingFragment StoreEntitySet="View">
-                <ScalarProperty Name="view_date" ColumnName="view_date" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="view_id" ColumnName="view_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Collection">
-            <EntityTypeMapping TypeName="Data_GSShopModel.Collection">
-              <MappingFragment StoreEntitySet="Collection">
-                <ScalarProperty Name="collection_active" ColumnName="collection_active" />
-                <ScalarProperty Name="collection_datecreate" ColumnName="collection_datecreate" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="collection_image3" ColumnName="collection_image3" />
-                <ScalarProperty Name="collection_image2" ColumnName="collection_image2" />
-                <ScalarProperty Name="collection_image1" ColumnName="collection_image1" />
-                <ScalarProperty Name="collection_name" ColumnName="collection_name" />
-                <ScalarProperty Name="collection_id" ColumnName="collection_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GSMall">
-            <EntityTypeMapping TypeName="Data_GSShopModel.GSMall">
-              <MappingFragment StoreEntitySet="GSMall">
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="gsmall_image" ColumnName="gsmall_image" />
-                <ScalarProperty Name="gsmall_bg" ColumnName="gsmall_bg" />
-                <ScalarProperty Name="gsmall_datecreate" ColumnName="gsmall_datecreate" />
-                <ScalarProperty Name="gsmall_active" ColumnName="gsmall_active" />
-                <ScalarProperty Name="gsmall_slogan" ColumnName="gsmall_slogan" />
-                <ScalarProperty Name="gsmall_name" ColumnName="gsmall_name" />
-                <ScalarProperty Name="gsmall_id" ColumnName="gsmall_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Banner">
-            <EntityTypeMapping TypeName="Data_GSShopModel.Banner">
-              <MappingFragment StoreEntitySet="Banner">
-                <ScalarProperty Name="banner_datecreated" ColumnName="banner_datecreated" />
-                <ScalarProperty Name="banner_active" ColumnName="banner_active" />
-                <ScalarProperty Name="banner_svg" ColumnName="banner_svg" />
-                <ScalarProperty Name="banner_name" ColumnName="banner_name" />
-                <ScalarProperty Name="banner_id" ColumnName="banner_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="view_date" ColumnName="view_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -119,7 +119,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
             return View(collection);
         }
 
@@ -135,7 +134,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
             {
                 Collection col = db.Collection.Find(Int32.Parse(collection.collection_id.ToString()));
                 db.SaveChanges();
-                ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
                 return Redirect(admin_qlbst);
             }
             //Cả 3 ảnh đều trống
@@ -143,7 +141,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
             {
                 Collection col = db.Collection.Find(Int32.Parse(collection.collection_id.ToString()));
                 db.SaveChanges();
-                ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
                 return Redirect(admin_qlbst);
             }
             //Thay đổi ảnh 1
@@ -172,7 +169,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
                     collection.collection_image1 = collection_image1a.FileName;
                     db.SaveChanges();
-                    ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
                     return Redirect(admin_qlbst);
                 }
             }
@@ -202,7 +198,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
                     collection.collection_image2 = collection_image2a.FileName;
                     db.SaveChanges();
-                    ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
                     return Redirect(admin_qlbst);
                 }
             }
@@ -232,7 +227,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
                     collection.collection_image1 = collection_image1a.FileName;
                     db.SaveChanges();
-                    ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
                     return Redirect(admin_qlbst);
                 }
             }
@@ -291,7 +285,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
                     collection.collection_image3 = collection_image3a.FileName;
                     collection.collection_datecreate = DateTime.Now;
                     db.SaveChanges();
-                    ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", collection.product_id);
                     return Redirect(admin_qlbst);
                 }
             }
@@ -314,9 +307,34 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
         // POST: Admin/Collections/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
             Collection collection = db.Collection.Find(id);
+            List<Product> products = db.Product.Where(n => n.collection_id == id).ToList();
+            foreach (var item in products)
+            {
+                List<Comment> comments = db.Comment.Where(n => n.product_id == item.product_id).ToList();
+                foreach (var item2 in comments)
+                {
+                    db.Comment.Remove(item2);
+                }
+                List<ReplyComment> rep = db.ReplyComment.Where(n => n.product_id == item.product_id).ToList();
+                foreach (var item3 in rep)
+                {
+                    db.ReplyComment.Remove(item3);
+                }
+                List<View> views = db.View.Where(n => n.product_id == item.product_id).ToList();
+                foreach (var item4 in views)
+                {
+                    db.View.Remove(item4);
+                }
+                List<Product_Category> pc = db.Product_Category.Where(n => n.product_id == item.product_id).ToList();
+                foreach (var item5 in pc)
+                {
+                    db.Product_Category.Remove(item5);
+                }
+                db.Product.Remove(item);
+            }
             db.Collection.Remove(collection);
             db.SaveChanges();
             return RedirectToAction("Index");

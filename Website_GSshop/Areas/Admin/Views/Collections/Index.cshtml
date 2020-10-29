@@ -45,13 +45,13 @@
                 @Html.DisplayFor(modelItem => item.collection_name)
             </td>
             <td class="text-center">
-                <img src="~/Content/Layout/images/@item.collection_image1" height="90" width="100" />
+                <img src="~/Content/Layout/images/@item.collection_image1" height="100" width="100" />
             </td>
             <td class="text-center">
-                <img src="~/Content/Layout/images/@item.collection_image2" height="90" width="100" />
+                <img src="~/Content/Layout/images/@item.collection_image2" height="100" width="100" />
             </td>
             <td class="text-center">
-                <img src="~/Content/Layout/images/@item.collection_image3" height="90" width="100" />
+                <img src="~/Content/Layout/images/@item.collection_image3" height="100" width="100" />
             </td>
             <td class="text-center">
                 <p>@item.collection_datecreate.Value.Day/@item.collection_datecreate.Value.Month/@item.collection_datecreate.Value.Year</p>
@@ -156,7 +156,7 @@
                                                 <select name="product_id">
                                                     @foreach(var item1 in Model.ToList())
                                                     {
-                                                        <option>@item1.product_id</option>
+                                                        <option>@item1.</option>
                                                     }
                                                 </select>
                                             </div>
@@ -237,7 +237,7 @@
                                             <select name="product_id">
                                                 @foreach (var item1 in Model.ToList())
                                                 {
-                                                    <option>@item1.product_id</option>
+                                                    <option>1</option>
                                                 }
                                             </select>
                                         </div>
@@ -323,7 +323,7 @@
                                                 <label>Mã sản phẩm</label>
                                                 <div class="field">
                                                     <select name="product_id" disabled>
-                                                        <option>@item.product_id</option>
+                                                        <option>1</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -403,7 +403,7 @@
                                 @using (Html.BeginForm("Delete", "Collections", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
-                                        <input type="hidden" value="@item.collection_id" name="collection_id"/>
+                                        <input type="hidden" value="@item.collection_id" name="collection_id" />
                                         <div class="field">
                                             <label>Tên bô sưu tập</label>
                                             <input type="text" name="collection_name" value="@item.collection_name" disabled />
@@ -417,7 +417,7 @@
                                                 <label>Mã sản phẩm</label>
                                                 <div class="field">
                                                     <select name="product_id" disabled>
-                                                        <option>@item.product_id</option>
+                                                        <option>1</option>
                                                     </select>
                                                 </div>
                                             </div>

@@ -38,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.csc_name)
             </td>
             <td class="text-center" width="250">
-                <img src="~/Content/Layout/images/@item.csc_image" height="90" width="100" />
+                <img src="~/Content/Layout/images/@item.csc_image" height="100" width="100" />
             </td>
             <td class="text-center">
                 <span>@item.csc_datecreate.Value.Day/@item.csc_datecreate.Value.Month/@item.csc_datecreate.Value.Year</span>
@@ -193,9 +193,11 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                @using (Html.BeginForm("Create", "ClassificationSubCategories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                                @using (Html.BeginForm("Edit", "ClassificationSubCategories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.csc_id" name="csc_id"/>
+                                        <input type="hidden" value="@item.csc_image" name="csc_image"/>
                                         <div class="two fields">
                                             <div class="field">
                                                 <label>Tên danh mục con</label>

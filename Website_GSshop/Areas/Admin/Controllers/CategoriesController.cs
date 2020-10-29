@@ -97,15 +97,43 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "category_id,category_name,category_image,category_datecreated,category_active")] Category category)
+        public ActionResult Edit([Bind(Include = "category_id,category_name,category_image,category_datecreated,category_active")] Category category, HttpPostedFileBase fileUpload)
         {
-            if (ModelState.IsValid)
+            db.Entry(category).State = EntityState.Modified;
+            if (fileUpload == null)
             {
-                db.Entry(category).State = EntityState.Modified;
+                Category categorys = db.Category.Find(Int32.Parse(category.category_id.ToString()));
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(admin_qldmc);
             }
-            return View(category);
+            else
+            {
+                // Tên file ảnh sản phẩm
+                var fileimg = Path.GetFileName(fileUpload.FileName);
+                // Đưa tên ảnh vào đúng file
+                var pa = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg);
+                // Ảnh trống
+                if (fileUpload == null)
+                {
+                    ViewBag.ThongBao = "Ảnh trống !";
+                    return View(category);
+                }
+                //Nếu tên ảnh trùng
+                else if (System.IO.File.Exists(pa))
+                {
+                    ViewBag.ThongBao = "Ảnh đã tồn tại";
+                    return View(category);
+                }
+                //Lưu pa vào name fileUpload
+                else
+                {
+                    fileUpload.SaveAs(pa);
+                    category.category_image = fileUpload.FileName;
+                    category.category_datecreated = DateTime.Now;
+                    db.SaveChanges();
+                    return Redirect(admin_qldmc);
+                }
+            }
         }
 
         // GET: Admin/Categories/Delete/5

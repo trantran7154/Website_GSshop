@@ -737,8 +737,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -759,13 +759,6 @@
     <Content Include="Content\Layout\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Layout\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Layout\fonts\glyphicons-halflings-regular.woff2" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Content\UI\css\argon-design-system.css.map" />
     <Content Include="Content\UI\fonts\fontawesome-webfont.eot" />
@@ -946,6 +939,13 @@
     <Content Include="Areas\Admin\Views\ReplyComments\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Seller_Product\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Seller_Product\SellerProductDetail.cshtml" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

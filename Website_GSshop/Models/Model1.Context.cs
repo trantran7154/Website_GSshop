@@ -26,8 +26,12 @@ namespace Website_GSshop.Models
         }
     
         public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<ClassificationSubCategory> ClassificationSubCategory { get; set; }
+        public virtual DbSet<Collection> Collection { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
+        public virtual DbSet<GSMall> GSMall { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Product_Category> Product_Category { get; set; }
         public virtual DbSet<ReplyComment> ReplyComment { get; set; }
@@ -35,10 +39,6 @@ namespace Website_GSshop.Models
         public virtual DbSet<SubCategory> SubCategory { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<ClassificationSubCategory> ClassificationSubCategory { get; set; }
         public virtual DbSet<View> View { get; set; }
-        public virtual DbSet<Collection> Collection { get; set; }
-        public virtual DbSet<GSMall> GSMall { get; set; }
-        public virtual DbSet<Banner> Banner { get; set; }
     }
 }
