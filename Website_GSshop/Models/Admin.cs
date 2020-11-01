@@ -25,5 +25,6 @@ namespace Website_GSshop.Models
         public string admin_email { get; set; }
         public string admin_pass2 { get; set; }
         public Nullable<System.DateTime> admin_datelogin { get; set; }
+        public Nullable<bool> admin_bin { get; set; }
     }
 }

@@ -34,6 +34,9 @@
             <span><i class="fa fa-toggle-on"></i> Hoạt động</span>
         </th>
         <th>
+            <span><i class="fa fa-trash-o"></i> Thùng rác</span>
+        </th>
+        <th>
             <span><i class="fa fa-cogs"></i> Công cụ</span>
         </th>
     </tr>
@@ -58,6 +61,9 @@
             </td>
             <td class="text-center">
                 @Html.DisplayFor(modelItem => item.collection_active)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.collection_bin)
             </td>
             <td width="120">
                 <div class="text-center">
@@ -309,7 +315,7 @@
                                 @using (Html.BeginForm("Details", "Collections", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
-                                        <input type="hidden" value="@item.collection_id" />
+                                        <input type="hidden" value="@item.collection_id" name="collection_id"/>
                                         <div class="field">
                                             <label>Tên bô sưu tập</label>
                                             <input type="text" name="collection_name" value="@item.collection_name" disabled />

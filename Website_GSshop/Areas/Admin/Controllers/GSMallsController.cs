@@ -19,7 +19,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var gSMall = db.GSMall.Include(g => g.Product);
-            return View(gSMall.ToList());
+            return View(gSMall.Where(n => n.gsmall_bin == true).ToList());
         }
 
         // GET: Admin/GSMalls/Details/5
@@ -48,7 +48,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "gsmall_id,gsmall_name,gsmall_slogan,gsmall_active,gsmall_datecreate,gsmall_bg,gsmall_image,product_id")] GSMall gSMall, HttpPostedFileBase fileUpload1, HttpPostedFileBase fileUpload2)
+        public ActionResult Create([Bind(Include = "gsmall_id,gsmall_name,gsmall_slogan,gsmall_active,gsmall_datecreate,gsmall_bg,gsmall_image,gsmall_bin")] GSMall gSMall, HttpPostedFileBase fileUpload1, HttpPostedFileBase fileUpload2)
         {
             // Tên file ảnh sản phẩm
             var fileimg_edit1 = Path.GetFileName(fileUpload1.FileName);
@@ -88,6 +88,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 gSMall.gsmall_image = fileUpload2.FileName;
                 gSMall.gsmall_datecreate = DateTime.Now;
                 gSMall.gsmall_active = true;
+                gSMall.gsmall_bin = true;
                 db.SaveChanges();
                 return Redirect(admin_qldt);
             }
@@ -112,7 +113,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "gsmall_id,gsmall_name,gsmall_slogan,gsmall_active,gsmall_datecreate,gsmall_bg,gsmall_image,product_id")] GSMall gSMall, HttpPostedFileBase gsmall_bg1, HttpPostedFileBase gsmall_image1)
+        public ActionResult Edit([Bind(Include = "gsmall_id,gsmall_name,gsmall_slogan,gsmall_active,gsmall_datecreate,gsmall_bg,gsmall_image,gsmall_bin")] GSMall gSMall, HttpPostedFileBase gsmall_bg1, HttpPostedFileBase gsmall_image1)
         {
             db.Entry(gSMall).State = EntityState.Modified;
             if (gsmall_bg1 == null || gsmall_image1 == null)
@@ -183,12 +184,13 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
         // POST: Admin/GSMalls/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(GSMall gSMall)
         {
-            GSMall gSMall = db.GSMall.Find(id);
-            db.GSMall.Remove(gSMall);
+            GSMall gs = db.GSMall.Find(Int32.Parse(gSMall.gsmall_id.ToString()));
+            gs.gsmall_bin = false;
+            gs.gsmall_active = false;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(admin_qldt);
         }
 
         protected override void Dispose(bool disposing)

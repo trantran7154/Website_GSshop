@@ -33,12 +33,10 @@ namespace Website_GSshop.Models
         public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<GSMall> GSMall { get; set; }
         public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<Product_Category> Product_Category { get; set; }
         public virtual DbSet<ReplyComment> ReplyComment { get; set; }
         public virtual DbSet<Seller> Seller { get; set; }
         public virtual DbSet<SubCategory> SubCategory { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<View> View { get; set; }
     }
 }

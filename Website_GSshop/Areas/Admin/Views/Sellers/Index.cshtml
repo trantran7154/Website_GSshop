@@ -305,6 +305,11 @@
                                 @using (Html.BeginForm("Edit", "Sellers", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.seller_id" name="seller_id"/>
+                                        <input type="hidden" value="@item.seller_logo" name="seller_logo"/>
+                                        <input type="hidden" value="@item.seller_slider1" name="seller_slider1"/>
+                                        <input type="hidden" value="@item.seller_slider2" name="seller_slider2"/>
+                                        <input type="hidden" value="@item.seller_slider3" name="seller_slider3"/>
                                         <div class="two fields">
                                             <div class="field">
                                                 <label>Email</label>
@@ -326,7 +331,7 @@
                                             </div>
                                             <div class="field">
                                                 <label>Logo</label>
-                                                <input name="fileUpload1" type="file">
+                                                <input name="fileUpload1" type="file" value="@item.seller_logo" />
                                             </div>
                                         </div>
                                         <div class="two fields">
@@ -405,15 +410,15 @@
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Slider 1</label>
-                                                <input name="fileUpload2" type="file">
+                                                <input name="fileUpload2" type="file" value="@item.seller_slider1">
                                             </div>
                                             <div class="field">
                                                 <label>Slider 2</label>
-                                                <input name="fileUpload3" type="file">
+                                                <input name="fileUpload3" type="file" value="@item.seller_slider2">
                                             </div>
                                             <div class="field">
                                                 <label>Slider 3</label>
-                                                <input name="fileUpload4" type="file">
+                                                <input name="fileUpload4" type="file" value="@item.seller_slider3">
                                             </div>
                                         </div>
                                         <div class="ui error message"></div>
@@ -484,7 +489,7 @@
                                             </div>
                                             <div class="field">
                                                 <label>Logo</label>
-                                                <img src="~/Content/Layout/images/@item.seller_logo" height="90" width="100" />
+                                                <img src="~/Content/Layout/images/@item.seller_logo" height="100" width="100" />
                                             </div>
                                         </div>
                                         <div class="two fields">
@@ -563,15 +568,15 @@
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Slider 1</label>
-                                                <img src="~/Content/Layout/images/@item.seller_slider1" height="90" width="100" />
+                                                <img src="~/Content/Layout/images/@item.seller_slider1" height="100" width="100" />
                                             </div>
                                             <div class="field">
                                                 <label>Slider 2</label>
-                                                <img src="~/Content/Layout/images/@item.seller_slider2" height="90" width="100" />
+                                                <img src="~/Content/Layout/images/@item.seller_slider2" height="100" width="100" />
                                             </div>
                                             <div class="field">
                                                 <label>Slider 3</label>
-                                                <img src="~/Content/Layout/images/@item.seller_slider3" height="90" width="100" />
+                                                <img src="~/Content/Layout/images/@item.seller_slider3" height="100" width="100" />
                                             </div>
                                         </div>
                                         <div class="ui error message"></div>

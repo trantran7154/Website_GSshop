@@ -15,6 +15,7 @@
     <Property Name="admin_email" Type="varchar" MaxLength="50" />
     <Property Name="admin_pass2" Type="varchar" MaxLength="50" />
     <Property Name="admin_datelogin" Type="datetime" />
+    <Property Name="admin_bin" Type="bit" />
   </EntityType>
   <EntityType Name="Banner">
     <Key>
@@ -25,6 +26,7 @@
     <Property Name="banner_svg" Type="nvarchar(max)" />
     <Property Name="banner_active" Type="bit" />
     <Property Name="banner_datecreated" Type="datetime" />
+    <Property Name="banner_bin" Type="bit" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -35,6 +37,7 @@
     <Property Name="category_image" Type="nvarchar" MaxLength="1000" />
     <Property Name="category_datecreated" Type="datetime" />
     <Property Name="category_active" Type="bit" />
+    <Property Name="category_bin" Type="bit" />
   </EntityType>
   <EntityType Name="ClassificationSubCategory">
     <Key>
@@ -46,6 +49,7 @@
     <Property Name="csc_datecreate" Type="datetime" />
     <Property Name="csc_active" Type="bit" />
     <Property Name="subcategory_id" Type="int" />
+    <Property Name="csc_bin" Type="bit" />
   </EntityType>
   <EntityType Name="Collection">
     <Key>
@@ -58,6 +62,7 @@
     <Property Name="collection_image3" Type="nvarchar" MaxLength="2000" />
     <Property Name="collection_datecreate" Type="datetime" />
     <Property Name="collection_active" Type="bit" />
+    <Property Name="collection_bin" Type="bit" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>
@@ -70,6 +75,7 @@
     <Property Name="product_id" Type="int" />
     <Property Name="seller_id" Type="int" />
     <Property Name="comment_spam" Type="bit" />
+    <Property Name="comment_bin" Type="bit" />
   </EntityType>
   <EntityType Name="GSMall">
     <Key>
@@ -82,6 +88,7 @@
     <Property Name="gsmall_datecreate" Type="datetime" />
     <Property Name="gsmall_bg" Type="nvarchar" MaxLength="2000" />
     <Property Name="gsmall_image" Type="nvarchar" MaxLength="2000" />
+    <Property Name="gsmall_bin" Type="bit" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -112,15 +119,7 @@
     <Property Name="banner_id" Type="int" />
     <Property Name="collection_id" Type="int" />
     <Property Name="gsmail_id" Type="int" />
-  </EntityType>
-  <EntityType Name="Product_Category">
-    <Key>
-      <PropertyRef Name="pc_id" />
-    </Key>
-    <Property Name="pc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="product_id" Type="int" />
-    <Property Name="category_id" Type="int" />
-    <Property Name="csc_id" Type="int" />
+    <Property Name="product_bin" Type="bit" />
   </EntityType>
   <EntityType Name="ReplyComment">
     <Key>
@@ -134,6 +133,7 @@
     <Property Name="seller_id" Type="int" />
     <Property Name="replycomment_spam" Type="bit" />
     <Property Name="replycomment_datecreated" Type="datetime" />
+    <Property Name="replycomment_bin" Type="bit" />
   </EntityType>
   <EntityType Name="Seller">
     <Key>
@@ -162,6 +162,7 @@
     <Property Name="seller_nicename" Type="nvarchar" MaxLength="50" />
     <Property Name="seller_provincecity" Type="nvarchar" MaxLength="100" />
     <Property Name="seller_district" Type="nvarchar" MaxLength="100" />
+    <Property Name="seller_bin" Type="bit" />
   </EntityType>
   <EntityType Name="SubCategory">
     <Key>
@@ -174,6 +175,7 @@
     <Property Name="subcategory_active" Type="bit" />
     <Property Name="category_id" Type="int" />
     <Property Name="subcategory_level" Type="bit" />
+    <Property Name="subcategory_bin" Type="bit" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -204,15 +206,7 @@
     <Property Name="user_sex" Type="int" />
     <Property Name="user_provincecity" Type="nvarchar" MaxLength="100" />
     <Property Name="user_district" Type="nvarchar" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="View">
-    <Key>
-      <PropertyRef Name="view_id" />
-    </Key>
-    <Property Name="view_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="product_id" Type="int" />
-    <Property Name="user_id" Type="int" />
-    <Property Name="view_date" Type="datetime" />
+    <Property Name="user_bin" Type="bit" />
   </EntityType>
   <Association Name="FK_ClassificationSubCategory_SubCategory">
     <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
@@ -247,42 +241,6 @@
       </Principal>
       <Dependent Role="Product">
         <PropertyRef Name="category_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Product_Category_Category">
-    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-    <End Role="Product_Category" Type="Self.Product_Category" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Category">
-        <PropertyRef Name="category_id" />
-      </Principal>
-      <Dependent Role="Product_Category">
-        <PropertyRef Name="category_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Product_Category_ClassificationSubCategory">
-    <End Role="ClassificationSubCategory" Type="Self.ClassificationSubCategory" Multiplicity="0..1" />
-    <End Role="Product_Category" Type="Self.Product_Category" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ClassificationSubCategory">
-        <PropertyRef Name="csc_id" />
-      </Principal>
-      <Dependent Role="Product_Category">
-        <PropertyRef Name="csc_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Product_Category_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-    <End Role="Product_Category" Type="Self.Product_Category" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="product_id" />
-      </Principal>
-      <Dependent Role="Product_Category">
-        <PropertyRef Name="product_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -406,30 +364,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_View_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-    <End Role="View" Type="Self.View" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="product_id" />
-      </Principal>
-      <Dependent Role="View">
-        <PropertyRef Name="product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_View_User">
-    <End Role="User" Type="Self.User" Multiplicity="0..1" />
-    <End Role="View" Type="Self.View" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="user_id" />
-      </Principal>
-      <Dependent Role="View">
-        <PropertyRef Name="user_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="Data_GSShopModelStoreContainer">
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
@@ -439,13 +373,11 @@
     <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GSMall" EntityType="Self.GSMall" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Product_Category" EntityType="Self.Product_Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReplyComment" EntityType="Self.ReplyComment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="View" EntityType="Self.View" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_ClassificationSubCategory_SubCategory" Association="Self.FK_ClassificationSubCategory_SubCategory">
       <End Role="SubCategory" EntitySet="SubCategory" />
       <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
@@ -457,18 +389,6 @@
     <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_Category_Category" Association="Self.FK_Product_Category_Category">
-      <End Role="Category" EntitySet="Category" />
-      <End Role="Product_Category" EntitySet="Product_Category" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_Category_ClassificationSubCategory" Association="Self.FK_Product_Category_ClassificationSubCategory">
-      <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
-      <End Role="Product_Category" EntitySet="Product_Category" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_Category_Product" Association="Self.FK_Product_Category_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="Product_Category" EntitySet="Product_Category" />
     </AssociationSet>
     <AssociationSet Name="FK_Product_Collection" Association="Self.FK_Product_Collection">
       <End Role="Collection" EntitySet="Collection" />
@@ -509,14 +429,6 @@
     <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="SubCategory" EntitySet="SubCategory" />
-    </AssociationSet>
-    <AssociationSet Name="FK_View_Product" Association="Self.FK_View_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="View" EntitySet="View" />
-    </AssociationSet>
-    <AssociationSet Name="FK_View_User" Association="Self.FK_View_User">
-      <End Role="User" EntitySet="User" />
-      <End Role="View" EntitySet="View" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

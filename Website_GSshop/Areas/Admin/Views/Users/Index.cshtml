@@ -74,7 +74,7 @@
                 @Html.DisplayFor(modelItem => item.user_active)
             </td>
             <td width="150" class="text-center">
-                <img src="~/Content/Layout/images/@item.user_image" height="90" width="100" />
+                <img src="~/Content/Layout/images/@item.user_image" height="100" width="100" />
             </td>
             <td width="120">
                 <div class="text-center">
@@ -270,6 +270,8 @@
                                 @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.user_id" name="user_id"/>
+                                        <input type="hidden" value="@item.user_image" name="user_image"/>
                                         <div class="two fields">
                                             <div class="field">
                                                 <label>Email</label>
@@ -414,7 +416,7 @@
                                             </div>
                                             <div class="field">
                                                 <label>Ảnh đại diện</label>
-                                                <img src="~/Content/Layout/images/@item.user_image" height="90" width="100" />
+                                                <img src="~/Content/Layout/images/@item.user_image" height="100" width="100" />
                                             </div>
                                         </div>
                                         <div class="three fields">
@@ -523,6 +525,7 @@
                                 @using (Html.BeginForm("Delete", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.user_id" name="user_id"/>
                                         <div class="two fields">
                                             <div class="field">
                                                 <label>Email</label>

@@ -22,6 +22,7 @@ namespace Website_GSshop.Models
         public Nullable<int> seller_id { get; set; }
         public Nullable<bool> replycomment_spam { get; set; }
         public Nullable<System.DateTime> replycomment_datecreated { get; set; }
+        public Nullable<bool> replycomment_bin { get; set; }
     
         public virtual Comment Comment { get; set; }
         public virtual Product Product { get; set; }

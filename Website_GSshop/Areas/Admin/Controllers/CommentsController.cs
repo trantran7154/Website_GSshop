@@ -17,7 +17,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // GET: Admin/Comments
         public ActionResult Index()
         {
-            return View(db.Comment.ToList());
+            return View(db.Comment.Where(n => n.comment_bin == true).ToList());
         }
 
         // GET: Admin/Comments/Details/5
@@ -110,12 +110,12 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
         // POST: Admin/Comments/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(Comment comment)
         {
-            Comment comment = db.Comment.Find(id);
-            db.Comment.Remove(comment);
+            Comment cmt = db.Comment.Find(Int32.Parse(comment.comment_id.ToString()));
+            cmt.comment_bin = false;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(admin_qlc);
         }
 
         protected override void Dispose(bool disposing)

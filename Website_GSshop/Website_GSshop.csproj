@@ -205,9 +205,6 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Product_Category.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ReplyComment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -221,9 +218,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\View.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -946,6 +940,10 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Seller_Product\ProductCreate.cshtml" />
+    <Content Include="Areas\Admin\Views\Seller_Product\ProductDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Seller_Product\ProductEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Seller_Product\ProductDelete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -18,7 +18,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var replyComment = db.ReplyComment.Include(r => r.Comment).Include(r => r.Product).Include(r => r.Seller).Include(r => r.User);
-            return View(replyComment.ToList());
+            return View(replyComment.Where(n => n.replycomment_bin == true).ToList());
         }
 
         // GET: Admin/ReplyComments/Details/5
@@ -51,7 +51,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "replycomment_id,replycomment_content,comment_id,user_id,product_id,seller_id,replycomment_spam")] ReplyComment replyComment)
+        public ActionResult Create([Bind(Include = "replycomment_id,replycomment_content,comment_id,user_id,product_id,seller_id,replycomment_spam,replycomment_datecreated,replycomment_bin")] ReplyComment replyComment)
         {
             if (replyComment == null)
             {
@@ -63,6 +63,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 db.ReplyComment.Add(replyComment);
                 replyComment.replycomment_datecreated = DateTime.Now;
                 replyComment.replycomment_spam = true;
+                replyComment.replycomment_bin = true;
                 db.SaveChanges();
                 return Redirect(admin_qlr);
             }
@@ -91,7 +92,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "replycomment_id,replycomment_content,comment_id,user_id,product_id,seller_id,replycomment_spam")] ReplyComment replyComment)
+        public ActionResult Edit([Bind(Include = "replycomment_id,replycomment_content,comment_id,user_id,product_id,seller_id,replycomment_spam,replycomment_datecreated,replycomment_bin")] ReplyComment replyComment)
         {
             if (ModelState.IsValid)
             {
@@ -123,12 +124,12 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
         // POST: Admin/ReplyComments/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(ReplyComment reply)
         {
-            ReplyComment replyComment = db.ReplyComment.Find(id);
-            db.ReplyComment.Remove(replyComment);
+            ReplyComment rep = db.ReplyComment.Find(Int32.Parse(reply.replycomment_id.ToString()));
+            rep.replycomment_bin = false;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(admin_qlr);
         }
 
         protected override void Dispose(bool disposing)

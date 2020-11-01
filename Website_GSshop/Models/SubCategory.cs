@@ -28,6 +28,7 @@ namespace Website_GSshop.Models
         public Nullable<bool> subcategory_active { get; set; }
         public Nullable<int> category_id { get; set; }
         public Nullable<bool> subcategory_level { get; set; }
+        public Nullable<bool> subcategory_bin { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

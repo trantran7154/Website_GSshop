@@ -27,6 +27,9 @@
             <span><i class="fa fa-toggle-on"></i> Hoạt động</span>
         </th>
         <th>
+            <span><i class="fa fa-trash-o"></i> Thùng rác</span>
+        </th>
+        <th>
             <span><i class="fa fa-cogs"></i> Công cụ</span>
         </th>
     </tr>
@@ -45,6 +48,9 @@
             </td>
             <td class="text-center">
                 @Html.DisplayFor(modelItem => item.csc_active)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.csc_bin)
             </td>
             <td>
                 <div class="text-center">
@@ -205,7 +211,7 @@
                                             </div>
                                             <div class="field">
                                                 <label>Ngày tạo</label>
-                                                <input type="date" name="csc_datecreated" />
+                                                <input type="date" name="csc_datecreated" value="@item.csc_datecreate.Value.Year-@(item.csc_datecreate.Value.Month < 10 ? "0" + item.csc_datecreate.Value.Month.ToString() : item.csc_datecreate.Value.Month.ToString())-@(item.csc_datecreate.Value.Day < 10 ? "0" + item.csc_datecreate.Value.Day.ToString() : item.csc_datecreate.Value.Day.ToString())"/>
                                             </div>
                                         </div>
                                         <div class="three fields">
@@ -358,6 +364,7 @@
                             @using (Html.BeginForm("Delete", "ClassificationSubCategories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                             {
                                 <form method="post" class="mb-4 ui form">
+                                    <input type="hidden" value="@item.csc_id" name="csc_id"/>
                                     <div class="two fields">
                                         <div class="field">
                                             <label>Tên danh mục con</label>

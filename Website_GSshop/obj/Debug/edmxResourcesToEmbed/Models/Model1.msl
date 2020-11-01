@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Admin">
       <EntityTypeMapping TypeName="Data_GSShopModel.Admin">
         <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="admin_bin" ColumnName="admin_bin" />
           <ScalarProperty Name="admin_id" ColumnName="admin_id" />
           <ScalarProperty Name="admin_login" ColumnName="admin_login" />
           <ScalarProperty Name="admin_pass1" ColumnName="admin_pass1" />
@@ -21,6 +22,7 @@
     <EntitySetMapping Name="Banner">
       <EntityTypeMapping TypeName="Data_GSShopModel.Banner">
         <MappingFragment StoreEntitySet="Banner">
+          <ScalarProperty Name="banner_bin" ColumnName="banner_bin" />
           <ScalarProperty Name="banner_id" ColumnName="banner_id" />
           <ScalarProperty Name="banner_name" ColumnName="banner_name" />
           <ScalarProperty Name="banner_svg" ColumnName="banner_svg" />
@@ -32,6 +34,7 @@
     <EntitySetMapping Name="Category">
       <EntityTypeMapping TypeName="Data_GSShopModel.Category">
         <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="category_bin" ColumnName="category_bin" />
           <ScalarProperty Name="category_id" ColumnName="category_id" />
           <ScalarProperty Name="category_name" ColumnName="category_name" />
           <ScalarProperty Name="category_image" ColumnName="category_image" />
@@ -43,6 +46,7 @@
     <EntitySetMapping Name="ClassificationSubCategory">
       <EntityTypeMapping TypeName="Data_GSShopModel.ClassificationSubCategory">
         <MappingFragment StoreEntitySet="ClassificationSubCategory">
+          <ScalarProperty Name="csc_bin" ColumnName="csc_bin" />
           <ScalarProperty Name="csc_id" ColumnName="csc_id" />
           <ScalarProperty Name="csc_name" ColumnName="csc_name" />
           <ScalarProperty Name="csc_image" ColumnName="csc_image" />
@@ -55,6 +59,7 @@
     <EntitySetMapping Name="Collection">
       <EntityTypeMapping TypeName="Data_GSShopModel.Collection">
         <MappingFragment StoreEntitySet="Collection">
+          <ScalarProperty Name="collection_bin" ColumnName="collection_bin" />
           <ScalarProperty Name="collection_id" ColumnName="collection_id" />
           <ScalarProperty Name="collection_name" ColumnName="collection_name" />
           <ScalarProperty Name="collection_image1" ColumnName="collection_image1" />
@@ -68,6 +73,7 @@
     <EntitySetMapping Name="Comment">
       <EntityTypeMapping TypeName="Data_GSShopModel.Comment">
         <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="comment_bin" ColumnName="comment_bin" />
           <ScalarProperty Name="comment_id" ColumnName="comment_id" />
           <ScalarProperty Name="comment_content" ColumnName="comment_content" />
           <ScalarProperty Name="commet_datecreated" ColumnName="commet_datecreated" />
@@ -81,6 +87,7 @@
     <EntitySetMapping Name="GSMall">
       <EntityTypeMapping TypeName="Data_GSShopModel.GSMall">
         <MappingFragment StoreEntitySet="GSMall">
+          <ScalarProperty Name="gsmall_bin" ColumnName="gsmall_bin" />
           <ScalarProperty Name="gsmall_id" ColumnName="gsmall_id" />
           <ScalarProperty Name="gsmall_name" ColumnName="gsmall_name" />
           <ScalarProperty Name="gsmall_slogan" ColumnName="gsmall_slogan" />
@@ -94,6 +101,7 @@
     <EntitySetMapping Name="Product">
       <EntityTypeMapping TypeName="Data_GSShopModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="product_bin" ColumnName="product_bin" />
           <ScalarProperty Name="product_id" ColumnName="product_id" />
           <ScalarProperty Name="product_name" ColumnName="product_name" />
           <ScalarProperty Name="product_image" ColumnName="product_image" />
@@ -122,19 +130,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Product_Category">
-      <EntityTypeMapping TypeName="Data_GSShopModel.Product_Category">
-        <MappingFragment StoreEntitySet="Product_Category">
-          <ScalarProperty Name="pc_id" ColumnName="pc_id" />
-          <ScalarProperty Name="product_id" ColumnName="product_id" />
-          <ScalarProperty Name="category_id" ColumnName="category_id" />
-          <ScalarProperty Name="csc_id" ColumnName="csc_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ReplyComment">
       <EntityTypeMapping TypeName="Data_GSShopModel.ReplyComment">
         <MappingFragment StoreEntitySet="ReplyComment">
+          <ScalarProperty Name="replycomment_bin" ColumnName="replycomment_bin" />
           <ScalarProperty Name="replycomment_id" ColumnName="replycomment_id" />
           <ScalarProperty Name="replycomment_content" ColumnName="replycomment_content" />
           <ScalarProperty Name="comment_id" ColumnName="comment_id" />
@@ -149,6 +148,7 @@
     <EntitySetMapping Name="Seller">
       <EntityTypeMapping TypeName="Data_GSShopModel.Seller">
         <MappingFragment StoreEntitySet="Seller">
+          <ScalarProperty Name="seller_bin" ColumnName="seller_bin" />
           <ScalarProperty Name="seller_id" ColumnName="seller_id" />
           <ScalarProperty Name="seller_pass" ColumnName="seller_pass" />
           <ScalarProperty Name="seller_email" ColumnName="seller_email" />
@@ -178,6 +178,7 @@
     <EntitySetMapping Name="SubCategory">
       <EntityTypeMapping TypeName="Data_GSShopModel.SubCategory">
         <MappingFragment StoreEntitySet="SubCategory">
+          <ScalarProperty Name="subcategory_bin" ColumnName="subcategory_bin" />
           <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
           <ScalarProperty Name="subcategory_name" ColumnName="subcategory_name" />
           <ScalarProperty Name="subcategory_image" ColumnName="subcategory_image" />
@@ -202,6 +203,7 @@
     <EntitySetMapping Name="User">
       <EntityTypeMapping TypeName="Data_GSShopModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="user_bin" ColumnName="user_bin" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="user_pass" ColumnName="user_pass" />
           <ScalarProperty Name="user_nicename" ColumnName="user_nicename" />
@@ -217,16 +219,6 @@
           <ScalarProperty Name="user_sex" ColumnName="user_sex" />
           <ScalarProperty Name="user_provincecity" ColumnName="user_provincecity" />
           <ScalarProperty Name="user_district" ColumnName="user_district" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="View">
-      <EntityTypeMapping TypeName="Data_GSShopModel.View">
-        <MappingFragment StoreEntitySet="View">
-          <ScalarProperty Name="view_id" ColumnName="view_id" />
-          <ScalarProperty Name="product_id" ColumnName="product_id" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="view_date" ColumnName="view_date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

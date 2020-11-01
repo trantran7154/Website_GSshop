@@ -18,7 +18,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // GET: Admin/Collections
         public ActionResult Index()
         {
-            var collection = db.Collection.Include(c => c.Product);
+            var collection = db.Collection.Where(c => c.collection_bin == true).Include(c => c.Product);
             return View(collection.ToList());
         }
 
@@ -48,7 +48,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "collection_id,collection_name,collection_image1,collection_image2,collection_image3,product_id,collection_datecreate,collection_active")] Collection collection, HttpPostedFileBase fileUpload1, HttpPostedFileBase fileUpload2, HttpPostedFileBase fileUpload3)
+        public ActionResult Create([Bind(Include = "collection_id,collection_name,collection_image1,collection_image2,collection_image3,collection_datecreate,collection_active,collection_bin")] Collection collection, HttpPostedFileBase fileUpload1, HttpPostedFileBase fileUpload2, HttpPostedFileBase fileUpload3)
         {
             // Tên file ảnh sản phẩm
             var fileimg_edit1 = Path.GetFileName(fileUpload1.FileName);
@@ -102,6 +102,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 collection.collection_image3 = fileUpload3.FileName;
                 collection.collection_datecreate = DateTime.Now;
                 collection.collection_active = true;
+                collection.collection_bin = true;
                 db.SaveChanges();
                 return Redirect(admin_qlbst);
             }
@@ -126,7 +127,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "collection_id,collection_name,collection_image1,collection_image2,collection_image3,product_id,collection_datecreate,collection_active")] Collection collection, HttpPostedFileBase collection_image1a, HttpPostedFileBase collection_image2a, HttpPostedFileBase collection_image3a)
+        public ActionResult Edit([Bind(Include = "collection_id,collection_name,collection_image1,collection_image2,collection_image3,collection_datecreate,collection_active,collection_bin")] Collection collection, HttpPostedFileBase collection_image1a, HttpPostedFileBase collection_image2a, HttpPostedFileBase collection_image3a)
         {
             db.Entry(collection).State = EntityState.Modified;
             //Kiểm tra 1 một trong 3 ảnh bị trống
@@ -307,37 +308,13 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
         // POST: Admin/Collections/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int? id)
+        public ActionResult DeleteConfirmed(Collection collection)
         {
-            Collection collection = db.Collection.Find(id);
-            List<Product> products = db.Product.Where(n => n.collection_id == id).ToList();
-            foreach (var item in products)
-            {
-                List<Comment> comments = db.Comment.Where(n => n.product_id == item.product_id).ToList();
-                foreach (var item2 in comments)
-                {
-                    db.Comment.Remove(item2);
-                }
-                List<ReplyComment> rep = db.ReplyComment.Where(n => n.product_id == item.product_id).ToList();
-                foreach (var item3 in rep)
-                {
-                    db.ReplyComment.Remove(item3);
-                }
-                List<View> views = db.View.Where(n => n.product_id == item.product_id).ToList();
-                foreach (var item4 in views)
-                {
-                    db.View.Remove(item4);
-                }
-                List<Product_Category> pc = db.Product_Category.Where(n => n.product_id == item.product_id).ToList();
-                foreach (var item5 in pc)
-                {
-                    db.Product_Category.Remove(item5);
-                }
-                db.Product.Remove(item);
-            }
-            db.Collection.Remove(collection);
+            Collection col = db.Collection.Find(Int32.Parse(collection.collection_id.ToString()));
+            col.collection_bin = false;
+            col.collection_active = false;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(admin_qlbst);
         }
 
         protected override void Dispose(bool disposing)

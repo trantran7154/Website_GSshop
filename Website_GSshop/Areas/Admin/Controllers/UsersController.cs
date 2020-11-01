@@ -99,15 +99,46 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "user_id,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_image,user_sex,user_provincecity,user_district")] User user)
+        public ActionResult Edit([Bind(Include = "user_id,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_image,user_sex,user_provincecity,user_district")] User user, HttpPostedFileBase fileUpload)
         {
-            if (ModelState.IsValid)
+            db.Entry(user).State = EntityState.Modified;
+            if (fileUpload == null)
             {
-                db.Entry(user).State = EntityState.Modified;
+                User users = db.User.Find(Int32.Parse(user.user_id.ToString()));
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(admin_qlu);
             }
-            return View(user);
+            else
+            {
+                // Tên file ảnh sản phẩm
+                var fileimg_edit = Path.GetFileName(fileUpload.FileName);
+                // Đưa tên ảnh vào đúng file
+                var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit);
+                // Ảnh trống
+                if (fileUpload == null)
+                {
+                    ViewBag.ThongBao = "Ảnh trống !";
+                    return View(user);
+                }
+                //Nếu tên ảnh trùng
+                else if (System.IO.File.Exists(pa_eidt))
+                {
+                    ViewBag.ThongBao = "Ảnh đã tồn tại";
+                    return View(user);
+                }
+                //Lưu pa vào name fileUpload
+                else
+                {
+                    fileUpload.SaveAs(pa_eidt);
+                    user.user_image = fileUpload.FileName;
+                    user.user_datecreated = DateTime.Now;
+                    user.user_token = Guid.NewGuid().ToString();
+                    user.user_role = 1;
+                    user.user_datelogin = DateTime.Now;
+                    db.SaveChanges();
+                    return Redirect(admin_qlu);
+                }
+            }
         }
 
         // GET: Admin/Users/Delete/5

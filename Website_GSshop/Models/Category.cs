@@ -18,7 +18,6 @@ namespace Website_GSshop.Models
         public Category()
         {
             this.Product = new HashSet<Product>();
-            this.Product_Category = new HashSet<Product_Category>();
             this.SubCategory = new HashSet<SubCategory>();
         }
     
@@ -27,11 +26,10 @@ namespace Website_GSshop.Models
         public string category_image { get; set; }
         public Nullable<System.DateTime> category_datecreated { get; set; }
         public Nullable<bool> category_active { get; set; }
+        public Nullable<bool> category_bin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_Category> Product_Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubCategory> SubCategory { get; set; }
     }

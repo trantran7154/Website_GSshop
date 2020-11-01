@@ -27,6 +27,7 @@ namespace Website_GSshop.Models
         public Nullable<System.DateTime> gsmall_datecreate { get; set; }
         public string gsmall_bg { get; set; }
         public string gsmall_image { get; set; }
+        public Nullable<bool> gsmall_bin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }

@@ -44,6 +44,7 @@ namespace Website_GSshop.Models
         public string seller_nicename { get; set; }
         public string seller_provincecity { get; set; }
         public string seller_district { get; set; }
+        public Nullable<bool> seller_bin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }

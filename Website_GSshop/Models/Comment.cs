@@ -27,6 +27,7 @@ namespace Website_GSshop.Models
         public Nullable<int> product_id { get; set; }
         public Nullable<int> seller_id { get; set; }
         public Nullable<bool> comment_spam { get; set; }
+        public Nullable<bool> comment_bin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReplyComment> ReplyComment { get; set; }

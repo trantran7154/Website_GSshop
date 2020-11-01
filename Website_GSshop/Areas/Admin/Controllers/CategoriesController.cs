@@ -18,7 +18,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // GET: Admin/Categories
         public ActionResult Index()
         {
-            return View(db.Category.ToList());
+            return View(db.Category.Where(n => n.category_bin == true).ToList());
         }
 
         // GET: Admin/Categories/Details/5
@@ -73,6 +73,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 category.category_image = fileUpload.FileName;
                 category.category_active = true;
                 category.category_datecreated = DateTime.Now;
+                category.category_bin = true;
                 db.SaveChanges();
                 return Redirect(admin_qldmc);
             }
@@ -130,6 +131,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
                     fileUpload.SaveAs(pa);
                     category.category_image = fileUpload.FileName;
                     category.category_datecreated = DateTime.Now;
+                    category.category_bin = true;
                     db.SaveChanges();
                     return Redirect(admin_qldmc);
                 }
@@ -153,12 +155,13 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
         // POST: Admin/Categories/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(Category category)
         {
-            Category category = db.Category.Find(id);
-            db.Category.Remove(category);
+            Category cate = db.Category.Find(Int32.Parse(category.category_id.ToString()));
+            cate.category_bin = false;
+            cate.category_active = false;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(admin_qldmc);
         }
 
         protected override void Dispose(bool disposing)

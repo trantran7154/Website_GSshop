@@ -14,21 +14,14 @@ namespace Website_GSshop.Models
     
     public partial class ClassificationSubCategory
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ClassificationSubCategory()
-        {
-            this.Product_Category = new HashSet<Product_Category>();
-        }
-    
         public int csc_id { get; set; }
         public string csc_name { get; set; }
         public string csc_image { get; set; }
         public Nullable<System.DateTime> csc_datecreate { get; set; }
         public Nullable<bool> csc_active { get; set; }
         public Nullable<int> subcategory_id { get; set; }
+        public Nullable<bool> csc_bin { get; set; }
     
         public virtual SubCategory SubCategory { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_Category> Product_Category { get; set; }
     }
 }

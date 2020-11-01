@@ -19,7 +19,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var classificationSubCategory = db.ClassificationSubCategory.Include(c => c.SubCategory);
-            return View(classificationSubCategory.ToList());
+            return View(classificationSubCategory.Where(n => n.csc_bin == true).ToList());
         }
 
         // GET: Admin/ClassificationSubCategories/Details/5
@@ -48,7 +48,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "csc_id,csc_name,csc_image,csc_datecreate,csc_active,subcategory_id")] ClassificationSubCategory classificationSubCategory, HttpPostedFileBase fileUpload)
+        public ActionResult Create([Bind(Include = "csc_id,csc_name,csc_image,csc_datecreate,csc_active,subcategory_id,csc_bin")] ClassificationSubCategory classificationSubCategory, HttpPostedFileBase fileUpload)
         {
             // Tên file ảnh sản phẩm
             var fileimg_edit = Path.GetFileName(fileUpload.FileName);
@@ -74,6 +74,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 classificationSubCategory.csc_image = fileUpload.FileName;
                 classificationSubCategory.csc_active = true;
                 classificationSubCategory.csc_datecreate = DateTime.Now;
+                classificationSubCategory.csc_bin = true;
                 db.SaveChanges();
                 return Redirect(admin_qldmc);
             }
@@ -99,7 +100,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "csc_id,csc_name,csc_image,csc_datecreate,csc_active,subcategory_id")] ClassificationSubCategory classificationSubCategory, HttpPostedFileBase fileUpload)
+        public ActionResult Edit([Bind(Include = "csc_id,csc_name,csc_image,csc_datecreate,csc_active,subcategory_id,csc_bin")] ClassificationSubCategory classificationSubCategory, HttpPostedFileBase fileUpload)
         {
             db.Entry(classificationSubCategory).State = EntityState.Modified;
             if (fileUpload  == null)
@@ -155,12 +156,13 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
         // POST: Admin/ClassificationSubCategories/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(ClassificationSubCategory classificationSubCategory)
         {
-            ClassificationSubCategory classificationSubCategory = db.ClassificationSubCategory.Find(id);
-            db.ClassificationSubCategory.Remove(classificationSubCategory);
+            ClassificationSubCategory csc = db.ClassificationSubCategory.Find(Int32.Parse(classificationSubCategory.csc_id.ToString()));
+            csc.csc_bin = false;
+            csc.csc_active = false;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(admin_qldmc);
         }
 
         protected override void Dispose(bool disposing)

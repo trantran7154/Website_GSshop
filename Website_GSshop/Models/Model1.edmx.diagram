@@ -13,31 +13,24 @@
         <EntityTypeShape EntityType="Data_GSShopModel.Comment" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.GSMall" Width="1.5" PointX="3" PointY="22.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.Product" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.Product_Category" Width="1.5" PointX="7.5" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.ReplyComment" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.Seller" Width="1.5" PointX="3" PointY="25.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.SubCategory" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.User" Width="1.5" PointX="3" PointY="32.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.View" Width="1.5" PointX="10.5" PointY="9.25" IsExpanded="true" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_Banner" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="Data_GSShopModel.FK_Product_Category_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_SubCategory_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ClassificationSubCategory_SubCategory" ManuallyRouted="false" />
-        <AssociationConnector Association="Data_GSShopModel.FK_Product_Category_ClassificationSubCategory" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_Collection" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Comment" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_GSMall" ManuallyRouted="false" />
-        <AssociationConnector Association="Data_GSShopModel.FK_Product_Category_Product" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_Seller" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_SubCategory" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_User" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="Data_GSShopModel.FK_View_Product" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Seller" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_User" ManuallyRouted="false" />
-        <AssociationConnector Association="Data_GSShopModel.FK_View_User" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

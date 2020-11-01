@@ -22,6 +22,9 @@
             <span><i class="fa fa-exclamation-triangle"></i> Spam</span>
         </th>
         <th>
+            <span><i class="fa fa-trash-o"></i> Thùng rác</span>
+        </th>
+        <th>
             <span><i class="fa fa-cogs"></i> Công cụ</span>
         </th>
     </tr>
@@ -37,6 +40,9 @@
             </td>
             <td class="text-center">
                 @Html.DisplayFor(modelItem => item.replycomment_spam)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.replycomment_bin)
             </td>
             <td>
                 <div class="text-center">
@@ -125,7 +131,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                @using (Html.BeginForm("Details", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                                @using (Html.BeginForm("Details", "ReplyComments", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
                                         <div class="two fields">
@@ -221,9 +227,10 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                @using (Html.BeginForm("Delete", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                                @using (Html.BeginForm("Delete", "ReplyComments", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.replycomment_id" name="replycomment_id"/>
                                         <div class="two fields">
                                             <div class="field">
                                                 <label>Nội dung</label>

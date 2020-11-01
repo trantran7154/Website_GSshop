@@ -33,6 +33,9 @@
             <span><i class="fa fa-image"></i> Ảnh nền</span>
         </th>
         <th>
+            <span><i class="fa fa-trash-o"></i> Thùng rác</span>
+        </th>
+        <th>
             <span><i class="fa fa-cogs"></i> Công cụ</span>
         </th>
     </tr>
@@ -57,6 +60,9 @@
             </td>
             <td class="text-center">
                 <img src="~/Content/Layout/images/@item.gsmall_image" height="100" width="100" />
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.gsmall_bin)
             </td>
             <td>
                 <div class="text-center">
@@ -150,7 +156,7 @@
                                                 <input type="text" name="gsmall_slogan" />
                                             </div>
                                         </div>
-                                        <div class="three fields">
+                                        <div class="two fields">
                                             <div class="field">
                                                 <label>Ngày tạo</label>
                                                 <input type="date" name="gsmall_datecreated" />
@@ -222,10 +228,10 @@
                                                 <input type="text" name="gsmall_slogan" value="@item.gsmall_slogan"/>
                                             </div>
                                         </div>
-                                        <div class="three fields">
+                                        <div class="two fields">
                                             <div class="field">
                                                 <label>Ngày tạo</label>
-                                                <input type="date" name="gsmall_datecreated" />
+                                                <input type="date" name="gsmall_datecreated" value="@item.gsmall_datecreate.Value.Year-@(item.gsmall_datecreate.Value.Month < 10 ? "0" + item.gsmall_datecreate.Value.Month.ToString() : item.gsmall_datecreate.Value.Month.ToString())-@(item.gsmall_datecreate.Value.Day < 10 ? "0" + item.gsmall_datecreate.Value.Day.ToString() : item.gsmall_datecreate.Value.Day.ToString())"/>
                                             </div>
                                             <div class="field">
                                                 <label>Hoạt động</label>
@@ -302,7 +308,7 @@
                                                 <input type="text" name="gsmall_slogan" value="@item.gsmall_slogan" disabled/>
                                             </div>
                                         </div>
-                                        <div class="three fields">
+                                        <div class="two fields">
                                             <div class="field">
                                                 <label>Ngày tạo</label>
                                                 <input type="text" name="gsmall_datecreated" value="@item.gsmall_datecreate" disabled />
@@ -376,9 +382,10 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                @using (Html.BeginForm("Delete", "Collections", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                                @using (Html.BeginForm("Delete", "GSMalls", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.gsmall_id" name="gsmall_id"/>
                                         <div class="two fields">
                                             <div class="field">
                                                 <label>Tên đối tác</label>
@@ -389,7 +396,7 @@
                                                 <input type="text" name="gsmall_slogan" value="@item.gsmall_slogan" disabled />
                                             </div>
                                         </div>
-                                        <div class="three fields">
+                                        <div class="two fields">
                                             <div class="field">
                                                 <label>Ngày tạo</label>
                                                 <input type="text" name="gsmall_datecreated" value="@item.gsmall_datecreate" disabled />
