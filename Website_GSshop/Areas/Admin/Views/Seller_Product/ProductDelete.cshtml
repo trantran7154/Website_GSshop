@@ -11,6 +11,7 @@ Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 @using (Html.BeginForm("ProductDelete", "Seller_Product", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
 {
     <form method="post" class="mb-4 ui form">
+        <input type="hidden" value="@Model.product_id" name="product_id"/>
         <div class="two fields">
             <div class="field">
                 <label>Tên sản phẩm</label>

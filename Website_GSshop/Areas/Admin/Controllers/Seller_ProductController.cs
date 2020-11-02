@@ -18,13 +18,13 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // GET: Admin/Seller_Product
         public ActionResult Index()
         {
-            return View(db.Seller.ToList());
+            return View(db.Seller.Where(n => n.seller_bin == true).ToList());
         }
 
         // Danh sách sản phẩm
         public ActionResult SellerProductDetail(int ? id)
         {
-            List<Product> products = db.Product.Where(n => n.seller_id == id).ToList();
+            List<Product> products = db.Product.Where(n => n.seller_id == id && n.product_bin == true).ToList();
             return View(products);
         }
 
@@ -53,7 +53,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult ProductCreate([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id")] Product product, HttpPostedFileBase fileUpload)
+        public ActionResult ProductCreate([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id,subcategory_id,banner_id,collection_id,gsmall_id,product_bin")] Product product, HttpPostedFileBase fileUpload)
         {
             // Tên file ảnh sản phẩm
             var fileimg_edit = Path.GetFileName(fileUpload.FileName);
@@ -110,7 +110,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult ProductEdit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id")] Product product, HttpPostedFileBase image)
+        public ActionResult ProductEdit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id,subcategory_id,banner_id,collection_id,gsmall_id,product_bin")] Product product, HttpPostedFileBase image)
         {
             db.Entry(product).State = EntityState.Modified;
             if (image == null)
@@ -169,9 +169,9 @@ namespace Website_GSshop.Areas.Admin.Controllers
         [HttpPost, ActionName("ProductDelete")]
         public ActionResult ProductDeleteConfirmed(Product product)
         {
-            Product pr = db.Product.Find(Int32.Parse(product.product_id.ToString()));
-            pr.product_bin = false;
-            pr.product_active = false;
+            Product pro = db.Product.Find(Int32.Parse(product.product_id.ToString()));
+            pro.product_bin = false;
+            pro.product_active = false;
             db.SaveChanges();
             return Redirect(admin_qlsps);
         }

@@ -42,6 +42,9 @@
             <span><i class="fa fa-image"></i> Ảnh</span>
         </th>
         <th>
+            <span><i class="fa fa-trash-o"></i> Thùng rác</span>
+        </th>
+        <th>
             <span><i class="fa fa-cogs"></i> Công cụ</span>
         </th>
     </tr>
@@ -76,7 +79,10 @@
             <td width="150" class="text-center">
                 <img src="~/Content/Layout/images/@item.user_image" height="100" width="100" />
             </td>
-            <td width="120">
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.user_bin)
+            </td>
+            <td width="130">
                 <div class="text-center">
                     <a href="@Url.Action("Edit","Users", new {id=item.user_id})" data-toggle="modal" data-target="#@user_edit@item.user_id">
                         <svg height="20" viewBox="0 -1 401.5411 401" width="20" xmlns="http://www.w3.org/2000/svg">
@@ -299,11 +305,11 @@
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Ngày tạo</label>
-                                                <input type="date" name="user_datecreated" />
+                                                <input type="date" name="user_datecreated" value="@item.user_datecreated.Value.Year-@(item.user_datecreated.Value.Month < 10 ? "0" + item.user_datecreated.Value.Month.ToString() : item.user_datecreated.Value.Month.ToString())-@(item.user_datecreated.Value.Day < 10 ? "0" + item.user_datecreated.Value.Day.ToString() : item.user_datecreated.Value.Day.ToString())"/>
                                             </div>
                                             <div class="field">
                                                 <label>Ngày đăng nhập</label>
-                                                <input type="date" name="user_datelogin" />
+                                                <input type="date" name="user_datelogin" value="@item.user_datecreated.Value.Year-@(item.user_datelogin.Value.Month < 10 ? "0" + item.user_datelogin.Value.Month.ToString() : item.user_datelogin.Value.Month.ToString())-@(item.user_datelogin.Value.Day < 10 ? "0" + item.user_datelogin.Value.Day.ToString() : item.user_datelogin.Value.Day.ToString())"/>
                                             </div>
                                             <div class="field">
                                                 <label>Vai trò</label>

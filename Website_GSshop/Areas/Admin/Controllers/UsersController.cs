@@ -18,7 +18,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // GET: Admin/Users
         public ActionResult Index()
         {
-            return View(db.User.ToList());
+            return View(db.User.Where(n => n.user_bin == true).ToList());
         }
 
         // GET: Admin/Users/Details/5
@@ -46,7 +46,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "user_id,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_image,user_sex,user_provincecity,user_district")] User user, HttpPostedFileBase fileUpload)
+        public ActionResult Create([Bind(Include = "user_id,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_image,user_sex,user_provincecity,user_district,user_bin")] User user, HttpPostedFileBase fileUpload)
         {
             // Tên file ảnh sản phẩm
             var fileimg_edit = Path.GetFileName(fileUpload.FileName);
@@ -75,6 +75,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 user.user_role = 1;
                 user.user_datelogin = DateTime.Now;
                 user.user_active = true;
+                user.user_bin = true;
                 db.SaveChanges();
                 return Redirect(admin_qlu);
             }
@@ -99,7 +100,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "user_id,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_image,user_sex,user_provincecity,user_district")] User user, HttpPostedFileBase fileUpload)
+        public ActionResult Edit([Bind(Include = "user_id,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_image,user_sex,user_provincecity,user_district,user_bin")] User user, HttpPostedFileBase fileUpload)
         {
             db.Entry(user).State = EntityState.Modified;
             if (fileUpload == null)
@@ -158,12 +159,13 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
         // POST: Admin/Users/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(User user)
         {
-            User user = db.User.Find(id);
-            db.User.Remove(user);
+            User us = db.User.Find(Int32.Parse(user.user_id.ToString()));
+            us.user_active = false;
+            us.user_bin = false;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(admin_qlu);
         }
 
         protected override void Dispose(bool disposing)

@@ -18,7 +18,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // GET: Admin/Sellers
         public ActionResult Index()
         {
-            return View(db.Seller.ToList());
+            return View(db.Seller.Where(n => n.seller_bin == true).ToList());
         }
 
         // GET: Admin/Sellers/Details/5
@@ -47,7 +47,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "seller_id,seller_pass,seller_email,seller_telephone,seller_token,seller_slider1,seller_slider2,seller_slider3,seller_link1,seller_link2,seller_link3,seller_logo,seller_active,seller_nameshop,seller_datecreated,seller_address,seller_datelogin,seller_detail,seller_description,seller_role,seller_nicename,seller_provincecity,seller_district")] Seller seller, HttpPostedFileBase fileUpload1, HttpPostedFileBase fileUpload2, HttpPostedFileBase fileUpload3, HttpPostedFileBase fileUpload4)
+        public ActionResult Create([Bind(Include = "seller_id,seller_pass,seller_email,seller_telephone,seller_token,seller_slider1,seller_slider2,seller_slider3,seller_link1,seller_link2,seller_link3,seller_logo,seller_active,seller_nameshop,seller_datecreated,seller_address,seller_datelogin,seller_detail,seller_description,seller_role,seller_nicename,seller_provincecity,seller_district,seller_bin")] Seller seller, HttpPostedFileBase fileUpload1, HttpPostedFileBase fileUpload2, HttpPostedFileBase fileUpload3, HttpPostedFileBase fileUpload4)
         {
             // Tên file ảnh sản phẩm
             var fileimg_edit1 = Path.GetFileName(fileUpload1.FileName);
@@ -117,6 +117,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 seller.seller_active = true;
                 seller.seller_datecreated = DateTime.Now;
                 seller.seller_datelogin = DateTime.Now;
+                seller.seller_bin = true;
                 db.SaveChanges();
                 return Redirect(admin_qls);
             }
@@ -142,7 +143,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "seller_id,seller_pass,seller_email,seller_telephone,seller_token,seller_slider1,seller_slider2,seller_slider3,seller_link1,seller_link2,seller_link3,seller_logo,seller_active,seller_nameshop,seller_datecreated,seller_address,seller_datelogin,seller_detail,seller_description,seller_role,seller_nicename,seller_provincecity,seller_district")] Seller seller, HttpPostedFileBase fileUpload1, HttpPostedFileBase fileUpload2, HttpPostedFileBase fileUpload3, HttpPostedFileBase fileUpload4)
+        public ActionResult Edit([Bind(Include = "seller_id,seller_pass,seller_email,seller_telephone,seller_token,seller_slider1,seller_slider2,seller_slider3,seller_link1,seller_link2,seller_link3,seller_logo,seller_active,seller_nameshop,seller_datecreated,seller_address,seller_datelogin,seller_detail,seller_description,seller_role,seller_nicename,seller_provincecity,seller_district,seller_bin")] Seller seller, HttpPostedFileBase fileUpload1, HttpPostedFileBase fileUpload2, HttpPostedFileBase fileUpload3, HttpPostedFileBase fileUpload4)
         {
             db.Entry(seller).State = EntityState.Modified;
             if (fileUpload1 == null || fileUpload2 == null || fileUpload3 == null || fileUpload4 == null)
@@ -243,12 +244,13 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
         // POST: Admin/Sellers/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(Seller seller)
         {
-            Seller seller = db.Seller.Find(id);
-            db.Seller.Remove(seller);
+            Seller se = db.Seller.Find(Int32.Parse(seller.seller_id.ToString()));
+            se.seller_active = false;
+            se.seller_bin = false;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(admin_qls);
         }
 
         protected override void Dispose(bool disposing)

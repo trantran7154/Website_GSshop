@@ -19,7 +19,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var subCategory = db.SubCategory.Include(s => s.Category);
-            return View(subCategory.ToList());
+            return View(subCategory.Where(s => s.subcategory_bin == true).ToList());
         }
 
         // GET: Admin/SubCategories/Details/5
@@ -48,7 +48,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id")] SubCategory subCategory, HttpPostedFileBase fileUpload)
+        public ActionResult Create([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id,subcategory_level,subcategory_bin")] SubCategory subCategory, HttpPostedFileBase fileUpload)
         {
             // Tên file ảnh sản phẩm
             var fileimg_edit = Path.GetFileName(fileUpload.FileName);
@@ -74,6 +74,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 subCategory.subcategory_image = fileUpload.FileName;
                 subCategory.subcategory_datecreated = DateTime.Now;
                 subCategory.subcategory_active = true;
+                subCategory.subcategory_bin = true;
                 db.SaveChanges();
                 return Redirect(admin_qldmp);
             }
@@ -99,7 +100,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id")] SubCategory subCategory, HttpPostedFileBase fileUpload)
+        public ActionResult Edit([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id,subcategory_level,subcategory_bin")] SubCategory subCategory, HttpPostedFileBase fileUpload)
         {
             db.Entry(subCategory).State = EntityState.Modified;
             if (fileUpload == null)
@@ -155,12 +156,13 @@ namespace Website_GSshop.Areas.Admin.Controllers
 
         // POST: Admin/SubCategories/Delete/5
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(SubCategory category)
         {
-            SubCategory subCategory = db.SubCategory.Find(id);
-            db.SubCategory.Remove(subCategory);
+            SubCategory sub = db.SubCategory.Find(Int32.Parse(category.subcategory_id.ToString()));
+            sub.subcategory_active = false;
+            sub.subcategory_bin = false;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(admin_qldmp);
         }
 
         protected override void Dispose(bool disposing)

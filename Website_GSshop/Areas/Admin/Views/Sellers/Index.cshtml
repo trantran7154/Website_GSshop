@@ -42,6 +42,9 @@
             <span><i class="fa fa-tag"></i> Vai trò</span>
         </th>
         <th>
+            <span><i class="fa fa-trash-o"></i> Thùng rác</span>
+        </th>
+        <th>
             <span><i class="fa fa-cogs"></i> Công cụ</span>
         </th>
     </tr>
@@ -76,7 +79,10 @@
             <td class="text-center">
                 @Html.DisplayFor(modelItem => item.seller_role)
             </td>
-            <td width="120">
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.seller_bin)
+            </td>
+            <td width="130">
                 <div class="text-center">
                     <a href="@Url.Action("Edit","Sellers", new {id=item.seller_id})" data-toggle="modal" data-target="#@sel_edit@item.seller_id">
                         <svg height="20" viewBox="0 -1 401.5411 401" width="20" xmlns="http://www.w3.org/2000/svg">
@@ -195,7 +201,7 @@
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Ngày tạo</label>
-                                                <input type="date" name="seller_datecreated" />
+                                                <input type="date" name="seller_datecreated"/>
                                             </div>
                                             <div class="field">
                                                 <label>Ngày đăng nhập</label>
@@ -347,11 +353,11 @@
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Ngày tạo</label>
-                                                <input type="date" name="seller_datecreated" />
+                                                <input type="date" name="seller_datecreated" value="@item.seller_datecreated.Value.Year-@(item.seller_datecreated.Value.Month < 10 ? "0" + item.seller_datecreated.Value.Month.ToString() : item.seller_datecreated.Value.Month.ToString())-@(item.seller_datecreated.Value.Day < 10 ? "0" + item.seller_datecreated.Value.Day.ToString() : item.seller_datecreated.Value.Day.ToString())"/>
                                             </div>
                                             <div class="field">
                                                 <label>Ngày đăng nhập</label>
-                                                <input type="date" name="seller_datelogin" />
+                                                <input type="date" name="seller_datelogin" value="@item.seller_datelogin.Value.Year-@(item.seller_datelogin.Value.Month < 10 ? "0" + item.seller_datelogin.Value.Month.ToString() : item.seller_datelogin.Value.Month.ToString())-@(item.seller_datelogin.Value.Day < 10 ? "0" + item.seller_datelogin.Value.Day.ToString() : item.seller_datelogin.Value.Day.ToString())"/>
                                             </div>
                                             <div class="field">
                                                 <label>Vai trò</label>
@@ -633,6 +639,7 @@
                                 @using (Html.BeginForm("Delete", "Sellers", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.seller_id" name="seller_id"/>
                                         <div class="two fields">
                                             <div class="field">
                                                 <label>Email</label>

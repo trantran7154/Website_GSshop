@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Website_GSshop.Models.SubCategory>
+﻿@using Website_GSshop.Models
+@model List<SubCategory>
 
 @{
     ViewBag.Title = "Index";
@@ -6,6 +7,7 @@
     var sub_edit = "subedit";
     var sub_detail = "subdetail";
     var sub_delete = "subdelete";
+    Data_GSShopEntities db = new Data_GSShopEntities();
 }
 @Html.Action("CSS_Sematic", "Home")
 <a href="/Admin/Home/Index">
@@ -27,6 +29,9 @@
             <span><i class="fa fa-toggle-on"></i> Họat động</span>
         </th>
         <th>
+            <span><i class="fa fa-trash-o"></i> Thùng rác</span>
+        </th>
+        <th>
             <span><i class="fa fa-cogs"></i> Công cụ</span>
         </th>
     </tr>
@@ -45,6 +50,9 @@
             </td>
             <td class="text-center">
                 @Html.DisplayFor(modelItem => item.subcategory_active)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.subcategory_bin)
             </td>
             <td>
                 <div class="text-center">
@@ -134,11 +142,14 @@
                                         </div>
                                         <div class="two fields">
                                             <div class="field">
-                                                <label>Mã danh mục chính</label>
+                                                <label>Tên danh mục chính</label>
                                                 <select name="category_id">
-                                                    @foreach (var item1 in Model.ToList())
+                                                    @{ 
+                                                        List<Category> categories = db.Category.ToList();
+                                                    }
+                                                    @foreach (var item1 in categories)
                                                     {
-                                                        <option>@item1.category_id</option>
+                                                        <option value="@item.category_id">@item1.category_name</option>
                                                     }
                                                 </select>
                                             </div>
@@ -205,7 +216,7 @@
                                         <div class="two fields">
                                             <div class="field">
                                                 <label>Ngày tạo</label>
-                                                <input type="date" name="subcategory_datecreated" />
+                                                <input type="date" name="subcategory_datecreated" value="@item.subcategory_datecreated.Value.Year-@(item.subcategory_datecreated.Value.Month < 10 ? "0" + item.subcategory_datecreated.Value.Month.ToString() : item.subcategory_datecreated.Value.Month.ToString())-@(item.subcategory_datecreated.Value.Day < 10 ? "0" + item.subcategory_datecreated.Value.Day.ToString() : item.subcategory_datecreated.Value.Day.ToString())"/>
                                             </div>
                                             <div class="field">
                                                 <label>Hoạt động</label>
@@ -217,11 +228,14 @@
                                         </div>
                                         <div class="two fields">
                                             <div class="field">
-                                                <label>Mã danh mục chính</label>
+                                                <label>Tên danh mục chính</label>
                                                 <select name="category_id">
-                                                    @foreach (var item1 in Model.ToList())
+                                                    @{
+                                                        List<Category> categories = db.Category.ToList();
+                                                    }
+                                                    @foreach (var item1 in categories)
                                                     {
-                                                        <option>@item1.category_id</option>
+                                                        <option value="@item.category_id">@item1.category_name</option>
                                                     }
                                                 </select>
                                             </div>
@@ -298,7 +312,7 @@
                                             <div class="field">
                                                 <label>Mã danh mục chính</label>
                                                 <select name="category_id" disabled>
-                                                    <option>@item.category_id</option>
+                                                    <option value="@item.category_id">@item.Category.category_name</option>
                                                 </select>
                                             </div>
                                             <div class="field">
@@ -360,6 +374,7 @@
                                 @using (Html.BeginForm("Delete", "SubCategories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
                                     <form method="post" class="mb-4 ui form">
+                                        <input type="hidden" value="@item.subcategory_id" name="subcategory_id"/>
                                         <div class="field">
                                             <label>Tên danh mục phụ</label>
                                             <input type="text" name="subcategory_name" value="@item.subcategory_name" disabled />
@@ -381,7 +396,7 @@
                                             <div class="field">
                                                 <label>Mã danh mục chính</label>
                                                 <select name="category_id" disabled>
-                                                    <option>@item.category_id</option>
+                                                    <option value="@item.category_id">@item.Category.category_name</option>
                                                 </select>
                                             </div>
                                             <div class="field">
