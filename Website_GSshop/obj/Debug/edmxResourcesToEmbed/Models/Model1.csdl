@@ -136,6 +136,7 @@
     <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Product" FromRole="Product" ToRole="ReplyComment" />
     <Property Name="product_bin" Type="Boolean" />
     <NavigationProperty Name="Favourite" Relationship="Data_GSShopModel.FK_Favourite_Product" FromRole="Product" ToRole="Favourite" />
+    <Property Name="product_related" Type="Int32" />
   </EntityType>
   <EntityType Name="ReplyComment">
     <Key>

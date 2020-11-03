@@ -47,6 +47,7 @@ namespace Website_GSshop.Models
         public Nullable<int> collection_id { get; set; }
         public Nullable<int> gsmail_id { get; set; }
         public Nullable<bool> product_bin { get; set; }
+        public Nullable<int> product_related { get; set; }
     
         public virtual Banner Banner { get; set; }
         public virtual Category Category { get; set; }

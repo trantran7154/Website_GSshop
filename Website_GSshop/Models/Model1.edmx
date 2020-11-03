@@ -135,6 +135,7 @@
           <Property Name="collection_id" Type="int" />
           <Property Name="gsmail_id" Type="int" />
           <Property Name="product_bin" Type="bit" />
+          <Property Name="product_related" Type="int" />
         </EntityType>
         <EntityType Name="ReplyComment">
           <Key>
@@ -619,6 +620,7 @@
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Product" FromRole="Product" ToRole="ReplyComment" />
           <Property Name="product_bin" Type="Boolean" />
           <NavigationProperty Name="Favourite" Relationship="Data_GSShopModel.FK_Favourite_Product" FromRole="Product" ToRole="Favourite" />
+          <Property Name="product_related" Type="Int32" />
         </EntityType>
         <EntityType Name="ReplyComment">
           <Key>
@@ -1093,6 +1095,7 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="Data_GSShopModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="product_related" ColumnName="product_related" />
                 <ScalarProperty Name="product_bin" ColumnName="product_bin" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="product_name" ColumnName="product_name" />

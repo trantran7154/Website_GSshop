@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="demo">
                         <ul id="lightSlider" class="ul_detail">
-                            @foreach (var item in products)
+                            @foreach (var item in products.Where(n => n.product_related == Model.product_related))
                             {
                                 <li data-thumb="/Content/Layout/images/@item.product_image" class="li_detail"> <img class="img_detail" src="~/Content/Layout/images/@item.product_image" /> </li>
                             }
@@ -85,7 +85,7 @@
                             }
                             else
                             {
-                                <button class="btn btn-light wishlist"> <i class="fa fa-heart"></i> </button>
+                                <button class="btn btn-light wishlist"> <i class="fa fa-heart"> @pr.Count</i> </button>
                             }
                         </form>
                     </div>

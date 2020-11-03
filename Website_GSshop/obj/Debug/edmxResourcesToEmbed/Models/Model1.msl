@@ -101,6 +101,7 @@
     <EntitySetMapping Name="Product">
       <EntityTypeMapping TypeName="Data_GSShopModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="product_related" ColumnName="product_related" />
           <ScalarProperty Name="product_bin" ColumnName="product_bin" />
           <ScalarProperty Name="product_id" ColumnName="product_id" />
           <ScalarProperty Name="product_name" ColumnName="product_name" />

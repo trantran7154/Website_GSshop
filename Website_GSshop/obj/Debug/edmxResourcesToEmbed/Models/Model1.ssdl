@@ -130,6 +130,7 @@
     <Property Name="collection_id" Type="int" />
     <Property Name="gsmail_id" Type="int" />
     <Property Name="product_bin" Type="bit" />
+    <Property Name="product_related" Type="int" />
   </EntityType>
   <EntityType Name="ReplyComment">
     <Key>
