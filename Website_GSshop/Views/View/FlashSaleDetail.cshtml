@@ -3,605 +3,183 @@
 @{
     ViewBag.Title = "FlashSaleDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    User sesus = (User)Session["user"];
+    Data_GSShopEntities db = new Data_GSShopEntities();
 }
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="layout">
-                        <section class="inner">
-                            <ul class="grid">
-                                <li>
-                                    <div class="item">
-                                        <span class="product-new-label"><b class="test">- 40%</b></span>
-                                        <span class="product-discount-label">
-                                            <b class="pnl-favorites">
-                                                <div class="pnl-ic-wrapper">
-                                                    <span class="pnl-ic"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve"><path d="M22.6,6.5c-2.9,0-5.4,1.7-6.6,4.1c-1.2-2.4-3.7-4.1-6.6-4.1C5.3,6.5,2,9.8,2,13.9C2,23.7,15.8,29,15.8,29S30,23.6,30,13.9C30,9.8,26.7,6.5,22.6,6.5L22.6,6.5z"></path></svg></span>
-                                                </div>
-                                            </b>
-                                        </span>
-                                        <div class="item-img" style="background-image: url('../../Content/Layout/images/@Model.product_image'); background-size: cover;"></div>
-                                        <div class="item-pnl">
-                                            <div class="pnl-wrapper">
-                                                <div class="pnl-description">
-                                                    <span class="pnl-label">@Model.product_name</span>
-                                                    <span class="pnl-price"><s class="text-danger">$120,00</s> &nbsp;$100,00</span>
-                                                </div>
-                                                <div class="pnl-tocart">
-                                                    <div class="pnl-ic-wrapper">
-                                                        <span class="pnl-ic"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve"><g><path d="M25.4,29H6.6c-1.7,0-3-1.4-2.8-2.9l1.9-13.8C5.9,11,6.6,10,8,10h16c1.4,0,2.1,1,2.3,2.3l1.9,13.8 C28.4,27.6,27.1,29,25.4,29z"></path><path d="M10.6,12.7V8.4C10.6,5.4,13,3,16,3h0c3,0,5.4,2.4,5.4,5.4v4.3"></path></g></svg></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </section>
+@{ 
+    List<Favourite> fa = db.Favourite.ToList();
+    List<Favourite> pr = db.Favourite.Where(n => n.product_id == Model.product_id && n.fa_bin == false).ToList();
+}
+<link href="~/Content/CSS/DetailProducts.css" rel="stylesheet" />
+<link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
+<div class="container-fluid" style="background-color: #f9f9f9">
+    <div class="container-fluid mt-2 mb-3" style="background-color: #f9f9f9">
+        <div class="row no-gutters">
+            <div class="col-md-5 pr-2">
+                <div class="card">
+                    <div class="demo">
+                        <ul id="lightSlider" class="ul_detail">
+                            <li data-thumb="https://i.imgur.com/KZpuufK.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/KZpuufK.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/GwiUmQA.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/GwiUmQA.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/DhKkTrG.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/DhKkTrG.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/kYWqL7k.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/kYWqL7k.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/c9uUysL.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/c9uUysL.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/KZpuufK.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/KZpuufK.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/GwiUmQA.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/GwiUmQA.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/DhKkTrG.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/DhKkTrG.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/kYWqL7k.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/kYWqL7k.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/c9uUysL.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/c9uUysL.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/KZpuufK.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/KZpuufK.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/GwiUmQA.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/GwiUmQA.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/DhKkTrG.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/DhKkTrG.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/kYWqL7k.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/kYWqL7k.jpg" /> </li>
+                            <li data-thumb="https://i.imgur.com/c9uUysL.jpg" class="li_detail"> <img class="img_detail" src="https://i.imgur.com/c9uUysL.jpg" /> </li>
+                        </ul>
                     </div>
-                    <br />
                 </div>
-                <div class="col-md-7 mt-3">
-                    <div class="crazy-deal-details pc" style="background-image: url('../../Content/Layout/images/sale.jpg');">
-                        <div class="crazy-deal-details-right" style="margin-left: 110px;">
-                            <time class="crazy-deal-details-countdown">
-                                Kết thúc sau 
-                                <span class="crazy-deal-details-countdown-time">
-                                    <script>
-                                        // The data/time we want to countdown to
-                                        var countDownDate = new Date("Jul 25, 2021 16:37:52").getTime();
-                                        // Run myfunc every second
-                                        var myfunc = setInterval(function () {
-                                            var now = new Date().getTime();
-                                            var timeleft = countDownDate - now;
-                                            // Calculating the days, hours, minutes and seconds left
-                                            var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                            var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-                                            var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-                                            // Result is output to the specific element
-                                            document.getElementById("hours").innerHTML = hours
-                                            document.getElementById("mins").innerHTML = minutes
-                                            document.getElementById("secs").innerHTML = seconds
-                                            // Display the message when countdown is over
-                                            if (timeleft < 0) {
-                                                clearInterval(myfunc);
-                                                document.getElementById("hours").innerHTML = ""
-                                                document.getElementById("mins").innerHTML = ""
-                                                document.getElementById("secs").innerHTML = ""
-                                                document.getElementById("end").innerHTML = "TIME UP!!";
-                                            }
-                                        }, 1000);
-                                    </script>
-                                    <span id="hours"></span>:<span id="mins"></span>:<span id="secs"></span>
-                                    <b id="end"></b>
-                                </span>
-                            </time>
-                            <div class="crazy-deal-details-process">
-                                <div class="crazy-deal-details-procressbar">
-                                    <div class="crazy-deal-details-procressbar-inner" style="width: 10%"></div>
+                <div class="card mt-2">
+                    <h6>Reviews</h6>
+                    <div class="d-flex flex-row">
+                        <div class="stars"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div> <span class="ml-1 font-weight-bold">4.6</span>
+                    </div>
+                    <hr>
+                    <div class="badges"> <span class="badge bg-dark ">All (230)</span> <span class="badge bg-dark "> <i class="fa fa-image"></i> 23 </span> <span class="badge bg-dark "> <i class="fa fa-comments-o"></i> 23 </span> <span class="badge bg-warning"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <span class="ml-1">2,123</span> </span> </div>
+                    <hr>
+                    <div class="comment-section">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-row align-items-center">
+                                <img src="https://i.imgur.com/o5uMfKo.jpg" class="rounded-circle profile-image">
+                                <div class="d-flex flex-column ml-1 comment-profile">
+                                    <div class="comment-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div> <span class="username">Lori Benneth</span>
                                 </div>
-                                <span class="crazy-deal-details-soldtext">3473 sold</span>
                             </div>
+                            <div class="date"> <span class="text-muted">2 May</span> </div>
                         </div>
-                    </div>
-                    <h3>[Game 1K kỳ diệu - Mở bán ngày 18/09/2020 - Chỉ hỗ trợ thanh toán bằng ví eM trên Lazada App]Nồi áp suất Philips HD2136/66</h3>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="rating1">
-                                <span class="starRating">
-                                    <input id="rating5" type="radio" name="rating" value="5">
-                                    <label for="rating5">5</label>
-                                    <input id="rating4" type="radio" name="rating" value="4">
-                                    <label for="rating4">4</label>
-                                    <input id="rating3" type="radio" name="rating" value="3">
-                                    <label for="rating3">3</label>
-                                    <input id="rating2" type="radio" name="rating" value="2">
-                                    <label for="rating2">2</label>
-                                    <input id="rating1" type="radio" name="rating" value="1">
-                                    <label for="rating1">1</label>
-                                </span>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-row align-items-center">
+                                <img src="https://i.imgur.com/tmdHXOY.jpg" class="rounded-circle profile-image">
+                                <div class="d-flex flex-column ml-1 comment-profile">
+                                    <div class="comment-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div> <span class="username">Timona Simaung</span>
+                                </div>
                             </div>
+                            <div class="date"> <span class="text-muted">12 May</span> </div>
                         </div>
-                        <div class="col-md-7">
-                            <a class="text-primary" href="#"><small>No Ratings</small></a>
-                        </div>
-                        <div class="col-md-1">
-                            <i class="fa fa-share-alt" style="font-size: 25px; color: #808080"></i>
-                        </div>
-                        <div class="col-md-1">
-                            <i class="fa fa-heart-o" style="font-size: 25px; color: #808080"></i>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-9">
-                            <small> Brand: <a href="#" class="text-primary">No Brand</a> | <a class="text-primary" href="#">More Lazada Gift Cards from No Brand</a></small>
-                        </div>
-                        <div class="col-md-3 text-right">
-                            <small style="color: #808080">Free Shipping</small>
-                        </div>
-                    </div>
-                    <hr />
-                    <h2 class="text-orange">₫ @{float pricesale = (float)Model.product_sale;} @pricesale.ToString("#,##0")</h2>
-                    <small><s>@{float price = (float)Model.product_price;} @price.ToString("#,##0")</s> -99%</small>
-                    <br />
-                    <br />
-                    <div class="row">
-                        <div class="col-md-3">
-                            Promotions
-                        </div>
-                        <div class="col-md-9">
-                            <select class="w-100 content1">
-                                <option class="w-100">Giảm thêm 30% giá trị đơn hàng với thẻ tín dụng Lazada Citi Platinum.</option>
-                                <option class="w-100">- Soạn tin nhắn “Lazada” gửi 6058. Sở hữu ngay thẻ tín dụng Lazada – Giảm thêm 30% mỗi Thứ Bảy, Chủ Nhật cùng voucher MIỄN PHÍ GIAO HÀNG cực hấp dẫn! Và nhận ngay quà tặng trị giá 5.200.000 VNĐ khi mở thẻ thành công. Điều kiện đăng ký: • Trên 21 tuổi. • Cư trú tại TP.HCM/ Hà Nội. • Thu nhập hàng tháng từ 8 triệu VNĐ trở lên, chuyển khoản ngân hàng.</option>
-                            </select>
-                        </div>
-                    </div>
-                    <br />
-                    <br />
-                    <div class="row">
-                        <div class="col-md-2">
-                            Quantity
-                        </div>
-                        <div class="col-md-10">
-                            <div class="product-count">
-                                <form class="form1">
-                                    <div class="badge badge-default p-3" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                                    <input type="number" id="number" value="0"/>
-                                    <div class="badge badge-default p-3" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="pdp-cart-concern">
-                        <button class="add-to-cart-buy-now-btn full-btn pdp-button pdp-button_type_text pdp-button_theme_yellow pdp-button_size_xl" data-spm-anchor-id="a2o4n.pdp.0.i11.12362403LIp74N"><span class="pdp-button-text"><span class="">Buy Now</span></span></button>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4 mt-4">
-            <div class="container-fluid" style="background-color: #fafafa">
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        Delivery Options
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="p-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div> <span class="ml-1">5.0</span>
                     </div>
-                    <div class="col-md-6 text-right">
-                        <i class="fa fa-info-circle"></i>
+                    <span class="font-weight-bold">IKEA x HAY Ypperlig Collection </span>
+                    <h4 class="font-weight-bold text-left">$3,444</h4>
+                    <div class="buttons">
+                        <form method="post" action="@Url.Action("Favourite","Favourite",new {id = Model.product_id})">
+                            <button class="btn btn-outline-warning btn-long cart">Add to Cart</button>
+                            <button class="btn btn-warning btn-long buy">Buy it Now</button>
+                            @if (sesus != null)
+                            {
+                                if (ViewBag.CountProduct == 0)
+                                {
+                                    <button class="btn btn-light wishlist" type="submit"> <i class="fa fa-heart"></i> @pr.Count</button>
+                                }
+                                else
+                                {
+                                    foreach (var item in fa.Where(n => n.user_id == sesus.user_id && n.product_id == Model.product_id && n.fa_bin == false))
+                                    {
+                                        <a href="@Url.Action("FavouriteDelete","Favourite",new {id = item.fa_id})" class="btn btn-light wishlist bg-green"> <i class="fa fa-heart"></i> @pr.Count</a>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <button class="btn btn-light wishlist"> <i class="fa fa-heart"></i> </button>
+                            }
+                        </form>
                     </div>
-                </div>
-                <br />
-                <i class="fa fa-mail-reply"></i>&nbsp;&nbsp;&nbsp;Will be sent to your email address within 24 hours
-                <hr />
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        Return & Warranty
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <i class="fa fa-info-circle"></i>
-                    </div>
-                </div>
-                <br />
-                <i class="fa fa-mail-reply"></i>&nbsp;&nbsp;&nbsp;Warranty not available
-                <br />
-                <br />
-                <i class="fa fa-mail-reply"></i>&nbsp;&nbsp;&nbsp;Warranty not available
-                <hr />
-                <div class="mt-2" style="background-color: #fcfcfc">
-                    <table class="table table-bordered">
-                        <tr>
-                            <td>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <small>Đang bán bởi</small>
-                                        <br />
-                                        <b>eM Wallet</b>
-                                    </div>
-                                    <div class="col-md-6 text-primary text-right">
-                                        <i class="fa fa-comments"></i> Trò Chuyện
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="table table-bordered">
-                        <tr>
-                            <td>
-                                <a href="#">Đánh giá tích cực</a>
-                                <br />
-                                <br />
-                                <br />
-                                <hidden>Không đủ thông tin</hidden>
-                            </td>
-                            <td>
-                                <a href="#">Tỷ lệ phản hồi</a>
-                                <br />
-                                <br />
-                                <br />
-                                <hidden>Không đủ thông tin</hidden>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="table table-bordered text-center">
-                        <tr>
-                            <td>
-                                <a href="#" class="text-primary">ĐẾN GIAN HÀNG</a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>           
-        </div>
-    </div>
-</div>
-<br />
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-10">
-            <div style="background-color: #c2c0c0; height: 60px">
-                <br />
-                <h4>Mô tả sản phẩm [Game 1K kỳ diệu - Mở bán ngày 18/09/2020 - Chỉ hỗ trợ thanh toán bằng ví eM trên Lazada App]Nồi áp suất Philips </h4>
-            </div>
-            <div class="container-fluid" style="background-color: #f6f6f6">
-                <div class="message message_platform_pc message_type_info mt-2" data-spm-anchor-id="a2o4n.pdp.product_detail.i0.498a2ce3NUrSzj">
-                    <span class="lazada lazada-ic-infoNotes lazada-icon message__icon"><i class="fa fa-info-circle"></i></span>
-                    <div class="message__text">
-                        <div class="message__item"> Sản phẩm này là tài sản cá nhân được bán bởi Nhà Bán Hàng Cá Nhân và không thuộc đối tượng phải chịu thuế GTGT. Do đó hóa đơn VAT không được cấp trong trường hợp này.&nbsp;</div>
-                    </div>
-                </div>
-                <ul class="ml-3 mt-2">
-                    <li>Sản phẩm tham gia game "1k kỳ diệu" trên GSShop.</li>
-                </ul>
-                <div class="mt-2">
-                    <strong style="font-weight: bold;">
-                        1. Đối tượng và phạm vi áp dụng:
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        · Khách hàng là người dùng ứng dụng thương mại điện tử Lazada và đã kích hoạt tài khoản người dùng Lazada.
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        · Khách hàng đã kích hoạt ví eM thành công.
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        · Khách hàng đã nạp tiền vào ví eM (giá trị nạp tiền tối thiểu là 50.000 VNĐ). · Tài khoản trong ví eM của khách hàng tại thời điểm tham gia chương trình khuyến mại phải còn tối thiểu 1.000 VNĐ.
-                    </strong>
-                </div>
-                <div>
-                    <strong>
-                        · Khách hàng phải chọn và đặt mua sản phẩm trong trang khuyến mại “1k kỳ diệu” của Lazada với hình thức thanh toán 1.000 đồng bằng “ví eM” thành công trong ngày (trước 00:00:00 ngày hôm sau) để tham gia chương trình.
-                    </strong>
-                </div>
-                <div class="mt-2">
-                    <strong style="font-weight: bold;">
-                        2. Thời gian diễn ra chương trình:
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        · Từ ngày 15/09/2020 đến ngày 30/09/2020 (bao gồm cả 2 ngày này).
-                    </strong>
-                </div>
-                <div class="mt-2">
-                    <strong style="font-weight: bold;">
-                        3. Cơ cấu giải thưởng:  Do số lượng quà tặng có hạn nên mỗi ngày trong thời gian diễn ra chương trình, hệ thống sẽ chọn ngẫu nhiên 6 người trong tổng số người đăng ký tham gia để được nhận quà tặng mà người tham gia đã chọn với giá trị của các quà tặng được nêu cụ thể trong trang khuyến mại “1k kỳ diệu”; các sản phẩm này có giá trị từ 308.000 Đồng đến 2.690.000 Đồng.
-                    </strong>
-                </div>
-                <div class="mt-2">
-                    <strong style="font-weight: bold;">
-                        4. Cách thức tham gia:
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        · Bước 1:
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        1. Khách hàng vào ứng dụng Lazada cài đặt trên điện thoại di động, tìm và chọn icon (mục) ví eM để được ứng dụng dẫn vào trang ví eM.
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        2. Trên trang ví eM sẽ thể hiện banner khuyến mãi cho chương trình có tên “1k kỳ diệu”.
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        3. Khách hàng nhấn chọn vào banner có tên “1k kỳ diệu” để vào trang khuyến mại “1k kỳ diệu”. Trên trang khuyến mại “1k kỳ diệu” sẽ thể hiện danh sách các sản phẩm khuyến mại mà khách hàng có thể lựa chọn để tham gia chương trình khuyến mại với giá sản phẩm được thể hiện bao gồm (1) giá trị thực của sản phẩm và (2) biểu tượng 1k để tham gia trúng thưởng.
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        · Bước 2: Khách hàng chọn sản phẩm có biểu tượng 1k và nhấp vào nút “Mua ngay”.
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        · Bước 3: Khách hàng chọn nút “Đặt hàng”.
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        · Bước 4: Khách hàng chọn “Ví eM” làm phương thức thanh toán cho sản phẩm đã chọn.
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        Lưu ý: Khách hàng phải dùng số dư trong tài khoản ví eM để thanh toán đơn hàng tham gia chương trình "1k kỳ diệu", mã giảm giá nhập vào áp dụng thanh toán đơn hàng này sẽ không được hoàn lại trong trường hợp khách hàng không trúng thưởng.
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        · Bước 5: Khách hàng chọn “Thanh toán” để xác nhận đơn hàng và tài khoản ví eM của khách hàng sẽ được tạm trừ đi 1.000đ.
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        · Bước 6: Ngay sau thời điểm khách hàng hoàn thành Bước 5, khách hàng sẽ nhận được xác nhận đơn hàng tham gia chương trình “1k kỳ diệu” hiển thị dưới dạng thông báo được gửi đến tài khoản Lazada của khách hàng.
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">
-                        · Bước 7: Mẫu tin nhắn xác nhận tham gia chương trình về cơ bản có nội dung như sau: “Bạn đã tham gia thành công chương trình "1k kỳ diệu” ngày 01/09/2020. Người thắng giải sẽ được công bố vào 12:00:00 ngày 02/09/2020.”
-                    </strong>
-                </div>
-                <div>
-                    <strong style="font-weight: bold;">Để biết thêm thông tin chi tiết, vui lòng xem thông tin tại ví eM trên Lazada App hoặc truy cập: https://pages.lazada.vn/wow/i/vn/VNCampaign/1d-mo-uoc?hybrid=1</strong>
-                </div>
-                <center class="mt-3">
-                    <div class="expand-button expand-cursor">
-                        <button class="pdp-view-more-btn pdp-button pdp-button_type_text pdp-button_theme_white pdp-button_size_m" data-spm-anchor-id="a2o4n.pdp.product_detail.i6.498a2ce3NUrSzj">XEM THÊM</button>
-                    </div>
-                </center>
-                <br />
-            </div>            
-            <div class="mt-3 customer-rev left-side">
-                <div style="background-color: #c2c0c0; height: 60px">
-                    <br />
-                    <h4>Đánh giá và nhận xét của [Game 1K kỳ diệu - Mở bán ngày 19/09/2020 - Chỉ hỗ trợ thanh toán bằng ví eM trên Lazada App]LHC618</h4>
-                </div>
-                <div class="container-fluid" style="background-color: #f6f6f6">
-                    <div class="row mt-3">
-                        <div class="col-md-3">
-                            <span><span style="font-size: 50px">0</span><span style="font-size: 30px; color:#808080">/5</span></span>
+                    <hr>
+                    <div class="product-description">
+                        <div><span class="font-weight-bold">Color:</span><span> blue</span></div>
+                        <div class="my-color">
+                            <label class="radio"> <input type="radio" name="gender" value="MALE" checked> <span class="red"></span> </label>
+                            <label class="radio"> <input type="radio" name="gender" value="FEMALE"> <span class="blue"></span> </label>
+                            <label class="radio"> <input type="radio" name="gender" value="FEMALE"> <span class="green"></span> </label>
+                            <label class="radio"> <input type="radio" name="gender" value="FEMALE"> <span class="orange"></span> </label>
+                        </div>
+                        <div class="d-flex flex-row align-items-center"> <i class="fa fa-calendar-check-o"></i> <span class="ml-1">Delivery from sweden, 15-45 days</span> </div>
+                        <div class="mt-2">
+                            <span class="font-weight-bold">Description</span>
                             <br />
-                            <i class="fa fa-star star" aria-hidden="true" style="font-size: 40px"></i>
-                            <i class="fa fa-star star" aria-hidden="true" style="font-size: 40px"></i>
-                            <i class="fa fa-star star" aria-hidden="true" style="font-size: 40px"></i>
-                            <i class="fa fa-star star" aria-hidden="true" style="font-size: 40px"></i>
-                            <i class="fa fa-star star" aria-hidden="true" style="font-size: 40px"></i>
+                            <span class="text-gray">The minimalist collaboration features chairs, lightening, Shelves, Sofas, Desks and various home accessories, all offering form and function at the same point.We use high-strength clamps and joinery techniques specially designed for engineered wood beds. Ergo, no irksome creaks - and you can sleep like a baby, well into adulthood!</span>
+                            <div class="bullets">
+                                <div class="d-flex align-items-center"> <span class="dot"></span> <span class="bullet-text">Best in Quality</span> </div>
+                                <div class="d-flex align-items-center"> <span class="dot"></span> <span class="bullet-text">Anti-creak joinery</span> </div>
+                                <div class="d-flex align-items-center"> <span class="dot"></span> <span class="bullet-text">Sturdy laminate surfaces</span> </div>
+                                <div class="d-flex align-items-center"> <span class="dot"></span> <span class="bullet-text">Relocation friendly design</span> </div>
+                                <div class="d-flex align-items-center"> <span class="dot"></span> <span class="bullet-text">High gloss, high style</span> </div>
+                                <div class="d-flex align-items-center"> <span class="dot"></span> <span class="bullet-text">Easy-access hydraulic storage</span> </div>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <span class="progress-wrap"><div class="pdp-review-progress"><div class="bar bg" data-spm-anchor-id="a2o4n.pdp.ratings_reviews.i1.498a2ce3NUrSzj"></div><div class="bar fg" style="width: 0%;"></div></div></span>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <span>0</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <span class="progress-wrap"><div class="pdp-review-progress"><div class="bar bg" data-spm-anchor-id="a2o4n.pdp.ratings_reviews.i1.498a2ce3NUrSzj"></div><div class="bar fg" style="width: 0%;"></div></div></span>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <span>0</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <span class="progress-wrap"><div class="pdp-review-progress"><div class="bar bg" data-spm-anchor-id="a2o4n.pdp.ratings_reviews.i1.498a2ce3NUrSzj"></div><div class="bar fg" style="width: 0%;"></div></div></span>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <span>0</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <span class="progress-wrap"><div class="pdp-review-progress"><div class="bar bg" data-spm-anchor-id="a2o4n.pdp.ratings_reviews.i1.498a2ce3NUrSzj"></div><div class="bar fg" style="width: 0%;"></div></div></span>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <span>0</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <span class="progress-wrap"><div class="pdp-review-progress"><div class="bar bg" data-spm-anchor-id="a2o4n.pdp.ratings_reviews.i1.498a2ce3NUrSzj"></div><div class="bar fg" style="width: 0%;"></div></div></span>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <span>0</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-5"></div>
-                    </div>
-                    <hr />
-                    <div class="mod-empty">
-                        <div class="imgWrap text-center">
-                            <img src="//laz-img-cdn.alicdn.com/tfs/TB1cXF1llTH8KJjy0FiXXcRsXXa-112-98.png" width="64">
-                        </div>
-                        <div>
-                            <p class="empty-text">Hiện chưa có nhận xét nào cho sản phẩm.</p>
-                            <p class="empty-text">Cho người khác biết ý kiến của bạn và trở thành người đầu tiên nhận xét sản phẩm này.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <div style="background-color: #c2c0c0; height: 60px">
-                        <br />
-                        <h4 class="text-left ml-4">Câu hỏi về sản phẩm này</h4>
-                    </div>
-                    <div>
-                        <div class="container-fluid" style="background-color: #f6f6f6">
-                            <div class="pdp-mod-qna">
-                                <div>
-                                    <i class="fa fa-question-circle-o lazada-noReview lazada-icon qna-empty-icon"></i>
-                                    <div class="qna-empty-text">Chưa có câu hỏi cho sản phẩm này.</div>
-                                    <div class="qna-empty-text">
-                                        <span><a class="pdp-link pdp-link_size_m pdp-link_theme_blue"><span>Đăng nhập</span></a> hoặc <a class="pdp-link pdp-link_size_m pdp-link_theme_blue"><span>Đăng ký</span></a> để đặt câu hỏi cho nhà bán hàng ngay và câu trả lời sẽ được hiển thị tại đây.</span>
-                                    </div>
-                                </div>
+                        <div class="mt-2"> <span class="font-weight-bold">Store</span> </div>
+                        <div class="d-flex flex-row align-items-center">
+                            <img src="https://i.imgur.com/N2fYgvD.png" class="rounded-circle store-image">
+                            <div class="d-flex flex-column ml-1 comment-profile">
+                                <div class="comment-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div> <span class="username">Rare Boutique</span> <small class="followers">25K Followers</small>
                             </div>
                         </div>
                     </div>
                 </div>
-                <h4 class="mt-3 text-left"><b>Sản phẩm từ cùng nhà bán hàng</b></h4>
-                <div class="row mt-3">
-                    @for (var i = 0; i < 4; i++)
-                    {
-                        <div class="col-md-3">
-                            <div class="p-box">
-                                <img src="~/Content/Layout/images/aolen.jpg" alt="" class="img1" />
-                                <div class="p-desc text-left">
-                                    <h3 class="p-product">Áo khoác nam</h3>
-                                    <div class="p-stars">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <span class="p-price">$949.00</span>
-                                </div>
+                <div class="card mt-2">
+                    <span>Similar items:</span>
+                    <div class="similar-products mt-2 d-flex flex-row">
+                        <div class="card border p-1" style="width: 9rem;margin-right: 3px;">
+                            <img src="https://i.imgur.com/KZpuufK.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h6 class="card-title">$1,999</h6>
                             </div>
                         </div>
-                    }
-                </div>
-                <h4 class="mt-3 text-left"><b>Những người xem sản phẩm này cũng xem thêm</b></h4>
-                <div class="row mt-3">
-                    @for (var i = 0; i < 4; i++)
-                    {
-                        <div class="col-md-3">
-                            <div class="p-box">
-                                <img src="~/Content/Layout/images/gaubong.jpg" alt="" class="img1" />
-                                <div class="p-desc">
-                                    <h3 class="p-product float-left">Áo khoác nam</h3>
-                                    <h4 class="text-orange float-left">1,000 ₫</h4>
-                                    <div class="p-stars">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
+                        <div class="card border p-1" style="width: 9rem;margin-right: 3px;">
+                            <img src="https://i.imgur.com/GwiUmQA.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h6 class="card-title">$1,699</h6>
                             </div>
                         </div>
-                    }
+                        <div class="card border p-1" style="width: 9rem;margin-right: 3px;">
+                            <img src="https://i.imgur.com/c9uUysL.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h6 class="card-title">$2,999</h6>
+                            </div>
+                        </div>
+                        <div class="card border p-1" style="width: 9rem;margin-right: 3px;">
+                            <img src="https://i.imgur.com/kYWqL7k.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h6 class="card-title">$3,999</h6>
+                            </div>
+                        </div>
+                        <div class="card border p-1" style="width: 9rem;">
+                            <img src="https://i.imgur.com/DhKkTrG.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h6 class="card-title">$999</h6>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <br />
             </div>
-        </div>
-        <div class="col-md-2">
-            <div style="background-color: #c2c0c0; height: 60px">
-                <br />
-                <h4 class="text-center">Quảng Cáo Sản Phẩm</h4>
-            </div>
-            @for (var i = 0; i < 6; i++)
-            {
-                <div class="p-box">
-                    <div class="p-top">
-                        <span class="p-price">$949.00</span>
-                        <i class="fa fa-heart p-heart mt-2"></i>
-                    </div>
-                    <img src="~/Content/Layout/images/aokhoac.jpg" alt="" class="img1" />
-                    <div class="p-desc">
-                        <h4 class="p-category">Thời Trang</h4>
-                        <h3 class="p-product">Áo khoác nam</h3>
-                        <div class="p-stars">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-            }
         </div>
     </div>
 </div>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+<script src='https://sachinchoolur.github.io/lightslider/dist/js/lightslider.js'></script>
 <script>
-    function increaseValue() {
-        var value = parseInt(document.getElementById('number').value, 10);
-        value = isNaN(value) ? 0 : value;
-        value++;
-        document.getElementById('number').value = value;
-    }
-
-    function decreaseValue() {
-        var value = parseInt(document.getElementById('number').value, 10);
-        value = isNaN(value) ? 0 : value;
-        value < 1 ? value = 1 : '';
-        value--;
-        document.getElementById('number').value = value;
-    }
+    $('#lightSlider').lightSlider({
+        gallery: true,
+        item: 1,
+        loop: true,
+        slideMargin: 0,
+        thumbItem: 9
+    });
 </script>
 
 

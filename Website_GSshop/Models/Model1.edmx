@@ -82,6 +82,16 @@
           <Property Name="comment_spam" Type="bit" />
           <Property Name="comment_bin" Type="bit" />
         </EntityType>
+        <EntityType Name="Favourite">
+          <Key>
+            <PropertyRef Name="fa_id" />
+          </Key>
+          <Property Name="fa_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fa_datereated" Type="datetime" />
+          <Property Name="fa_bin" Type="bit" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="user_id" Type="int" />
+        </EntityType>
         <EntityType Name="GSMall">
           <Key>
             <PropertyRef Name="gsmall_id" />
@@ -222,6 +232,30 @@
             </Principal>
             <Dependent Role="ClassificationSubCategory">
               <PropertyRef Name="subcategory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourite_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Favourite" Type="Self.Favourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Favourite">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourite_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Favourite" Type="Self.Favourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Favourite">
+              <PropertyRef Name="user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -376,6 +410,7 @@
           <EntitySet Name="ClassificationSubCategory" EntityType="Self.ClassificationSubCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favourite" EntityType="Self.Favourite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GSMall" EntityType="Self.GSMall" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReplyComment" EntityType="Self.ReplyComment" Schema="dbo" store:Type="Tables" />
@@ -386,6 +421,14 @@
           <AssociationSet Name="FK_ClassificationSubCategory_SubCategory" Association="Self.FK_ClassificationSubCategory_SubCategory">
             <End Role="SubCategory" EntitySet="SubCategory" />
             <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourite_Product" Association="Self.FK_Favourite_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Favourite" EntitySet="Favourite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourite_User" Association="Self.FK_Favourite_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Favourite" EntitySet="Favourite" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Banner" Association="Self.FK_Product_Banner">
             <End Role="Banner" EntitySet="Banner" />
@@ -575,6 +618,7 @@
           <NavigationProperty Name="User" Relationship="Self.FK_Product_User" FromRole="Product" ToRole="User" />
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Product" FromRole="Product" ToRole="ReplyComment" />
           <Property Name="product_bin" Type="Boolean" />
+          <NavigationProperty Name="Favourite" Relationship="Data_GSShopModel.FK_Favourite_Product" FromRole="Product" ToRole="Favourite" />
         </EntityType>
         <EntityType Name="ReplyComment">
           <Key>
@@ -673,6 +717,7 @@
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_User" FromRole="User" ToRole="Product" />
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_User" FromRole="User" ToRole="ReplyComment" />
           <Property Name="user_bin" Type="Boolean" />
+          <NavigationProperty Name="Favourite" Relationship="Data_GSShopModel.FK_Favourite_User" FromRole="User" ToRole="Favourite" />
         </EntityType>
         <Association Name="FK_Product_Banner">
           <End Role="Banner" Type="Self.Banner" Multiplicity="0..1" />
@@ -896,7 +941,52 @@
             <End Role="User" EntitySet="User" />
             <End Role="ReplyComment" EntitySet="ReplyComment" />
           </AssociationSet>
+          <EntitySet Name="Favourite" EntityType="Data_GSShopModel.Favourite" />
+          <AssociationSet Name="FK_Favourite_Product" Association="Data_GSShopModel.FK_Favourite_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Favourite" EntitySet="Favourite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourite_User" Association="Data_GSShopModel.FK_Favourite_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Favourite" EntitySet="Favourite" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Favourite">
+          <Key>
+            <PropertyRef Name="fa_id" />
+          </Key>
+          <Property Name="fa_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fa_datereated" Type="DateTime" Precision="3" />
+          <Property Name="fa_bin" Type="Boolean" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Favourite_Product" FromRole="Favourite" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_Favourite_User" FromRole="Favourite" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Favourite_Product">
+          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.Favourite" Role="Favourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Favourite">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourite_User">
+          <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.Favourite" Role="Favourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Favourite">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1121,6 +1211,17 @@
                 <ScalarProperty Name="user_sex" ColumnName="user_sex" />
                 <ScalarProperty Name="user_provincecity" ColumnName="user_provincecity" />
                 <ScalarProperty Name="user_district" ColumnName="user_district" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favourite">
+            <EntityTypeMapping TypeName="Data_GSShopModel.Favourite">
+              <MappingFragment StoreEntitySet="Favourite">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="fa_bin" ColumnName="fa_bin" />
+                <ScalarProperty Name="fa_datereated" ColumnName="fa_datereated" />
+                <ScalarProperty Name="fa_id" ColumnName="fa_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

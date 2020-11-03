@@ -222,5 +222,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Favourite">
+      <EntityTypeMapping TypeName="Data_GSShopModel.Favourite">
+        <MappingFragment StoreEntitySet="Favourite">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="fa_bin" ColumnName="fa_bin" />
+          <ScalarProperty Name="fa_datereated" ColumnName="fa_datereated" />
+          <ScalarProperty Name="fa_id" ColumnName="fa_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -135,6 +135,7 @@
     <NavigationProperty Name="User" Relationship="Self.FK_Product_User" FromRole="Product" ToRole="User" />
     <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Product" FromRole="Product" ToRole="ReplyComment" />
     <Property Name="product_bin" Type="Boolean" />
+    <NavigationProperty Name="Favourite" Relationship="Data_GSShopModel.FK_Favourite_Product" FromRole="Product" ToRole="Favourite" />
   </EntityType>
   <EntityType Name="ReplyComment">
     <Key>
@@ -233,6 +234,7 @@
     <NavigationProperty Name="Product" Relationship="Self.FK_Product_User" FromRole="User" ToRole="Product" />
     <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_User" FromRole="User" ToRole="ReplyComment" />
     <Property Name="user_bin" Type="Boolean" />
+    <NavigationProperty Name="Favourite" Relationship="Data_GSShopModel.FK_Favourite_User" FromRole="User" ToRole="Favourite" />
   </EntityType>
   <Association Name="FK_Product_Banner">
     <End Role="Banner" Type="Self.Banner" Multiplicity="0..1" />
@@ -456,5 +458,50 @@
       <End Role="User" EntitySet="User" />
       <End Role="ReplyComment" EntitySet="ReplyComment" />
     </AssociationSet>
+    <EntitySet Name="Favourite" EntityType="Data_GSShopModel.Favourite" />
+    <AssociationSet Name="FK_Favourite_Product" Association="Data_GSShopModel.FK_Favourite_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Favourite" EntitySet="Favourite" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favourite_User" Association="Data_GSShopModel.FK_Favourite_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Favourite" EntitySet="Favourite" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Favourite">
+    <Key>
+      <PropertyRef Name="fa_id" />
+    </Key>
+    <Property Name="fa_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fa_datereated" Type="DateTime" Precision="3" />
+    <Property Name="fa_bin" Type="Boolean" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="user_id" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Favourite_Product" FromRole="Favourite" ToRole="Product" />
+    <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_Favourite_User" FromRole="Favourite" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Favourite_Product">
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Favourite" Role="Favourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="Favourite">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favourite_User">
+    <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Favourite" Role="Favourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Favourite">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

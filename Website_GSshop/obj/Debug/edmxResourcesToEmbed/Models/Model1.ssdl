@@ -77,6 +77,16 @@
     <Property Name="comment_spam" Type="bit" />
     <Property Name="comment_bin" Type="bit" />
   </EntityType>
+  <EntityType Name="Favourite">
+    <Key>
+      <PropertyRef Name="fa_id" />
+    </Key>
+    <Property Name="fa_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fa_datereated" Type="datetime" />
+    <Property Name="fa_bin" Type="bit" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="user_id" Type="int" />
+  </EntityType>
   <EntityType Name="GSMall">
     <Key>
       <PropertyRef Name="gsmall_id" />
@@ -217,6 +227,30 @@
       </Principal>
       <Dependent Role="ClassificationSubCategory">
         <PropertyRef Name="subcategory_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favourite_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Favourite" Type="Self.Favourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="Favourite">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favourite_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Favourite" Type="Self.Favourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Favourite">
+        <PropertyRef Name="user_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -371,6 +405,7 @@
     <EntitySet Name="ClassificationSubCategory" EntityType="Self.ClassificationSubCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Favourite" EntityType="Self.Favourite" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GSMall" EntityType="Self.GSMall" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReplyComment" EntityType="Self.ReplyComment" Schema="dbo" store:Type="Tables" />
@@ -381,6 +416,14 @@
     <AssociationSet Name="FK_ClassificationSubCategory_SubCategory" Association="Self.FK_ClassificationSubCategory_SubCategory">
       <End Role="SubCategory" EntitySet="SubCategory" />
       <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favourite_Product" Association="Self.FK_Favourite_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Favourite" EntitySet="Favourite" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favourite_User" Association="Self.FK_Favourite_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Favourite" EntitySet="Favourite" />
     </AssociationSet>
     <AssociationSet Name="FK_Product_Banner" Association="Self.FK_Product_Banner">
       <End Role="Banner" EntitySet="Banner" />

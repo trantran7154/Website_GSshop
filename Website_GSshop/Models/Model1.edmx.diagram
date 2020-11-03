@@ -31,6 +31,9 @@
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Product" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Seller" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Favourite" Width="1.5" PointX="7.5" PointY="20.5" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Favourite_Product" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Favourite_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

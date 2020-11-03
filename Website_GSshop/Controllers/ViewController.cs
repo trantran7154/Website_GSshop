@@ -24,12 +24,20 @@ namespace Website_GSshop.Controllers
         // Xem chi tiết các sản phẩm sale mạnh
         public ActionResult FlashSaleDetail(int ? id)
         {
+            User user = (User)Session["user"];
             Product product = db.Product.SingleOrDefault(n => n.product_id == id);
             if (product == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
+            // Đếm số lượng yêu thích
+            if(user != null)
+            {
+                List<Favourite> fa = db.Favourite.Where(n => n.user_id == user.user_id && n.product_id == id && n.fa_bin == false).ToList();
+                ViewBag.CountProduct = fa.Count;
+            }
+
             Session["product"] = id;
             db.Product.Find(id).product_view++;
             db.SaveChanges();
