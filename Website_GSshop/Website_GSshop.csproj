@@ -276,7 +276,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CSS\banner.css" />
     <Content Include="Content\CSS\CSSLayout.css" />
-    <Content Include="Content\CSS\DetailProducts.css" />
+    <Content Include="Content\CSS\product_detail.css" />
     <Content Include="Content\Favicon\android-icon-144x144.png" />
     <Content Include="Content\Favicon\android-icon-192x192.png" />
     <Content Include="Content\Favicon\android-icon-36x36.png" />

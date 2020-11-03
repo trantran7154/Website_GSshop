@@ -237,3 +237,22 @@ label.radio input:checked+span::before {
 .card-body {
     padding: 0.3rem 0.3rem 0.2rem
 }
+
+.buttons .wishlist1 {
+    background-color: #ff7522;
+    border-color: #fff;
+}
+
+.buttons .wishlist1:hover {
+    background-color: #FFF;
+    border-color: #FF7522;
+    color: #FF7522;
+}
+
+.buttons .wishlist1:hover i {
+    color: #ff7522;
+}
+
+.buttons .wishlist1 i {
+    color: #fff;
+}
