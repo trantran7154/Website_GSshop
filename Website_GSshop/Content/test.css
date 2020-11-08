@@ -1,0 +1,9 @@
+﻿@acmedia (min-width: 992px) .menu-categories .col-lg-2 {
+    width: 11.666667%;
+    background-color: green;
+}
+
+.menu-categories .col-lg-2 {
+    width: 11.666667%;
+    background-color: red;
+}

@@ -1,0 +1,99 @@
+﻿@using Website_GSshop.Models
+@model List<Favourite>
+@{
+    ViewBag.Title = "FavouriteList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Data_GSShopEntities db = new Data_GSShopEntities();
+    User sesus = (User)Session["user"];
+}
+@{
+    List<Product> pr = db.Product.ToList();
+    List<Favourite> fa = db.Favourite.ToList();
+}
+<link href="~/Content/CSS/Favourite.css" rel="stylesheet" />
+<div class="container-fluid">
+    <div class="container-fluid py-5 mx-auto">
+        <div class="card py-4 px-4" style="background-color: #f9f9f9">
+            <div class="row justify-content-start px-3">
+                <div class="image-bg mr-3"> <img class="user-img fit-image" src="~/Content/Layout/images/gaubong.jpg"> </div>
+                <div class="text-left">
+                    <h2>@sesus.user_nicename</h2>
+                    <h5 class="mt-2"><i class="fa fa-heart-o"></i> @pr.Count() sản phẩm - <i class="fa fa-comments-o"></i> 8 bình luận - <i class="fa fa-clock-o"></i> Đang hoạt động</h5>
+                </div>
+            </div>
+            <div class="line bg-dark"></div>
+
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    foreach (var item1 in pr.Where(n => n.product_id == item.product_id))
+                    {
+                        <div class="col-md-2">
+                            <div class="card-1">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex flex-row align-items-center time"><small><span class="product-new-label1"><b class="test">- 40%</b></span></small> </div>
+                                    @if (sesus != null)
+                                    {
+                                        // Đếm yêu thích
+                                        var pc = fa.Where(n => n.product_id == item.product_id && n.fa_bin == false && n.user_id == sesus.user_id).ToList();
+                                        ViewBag.pc = pc.Count;
+                                        if (ViewBag.pc != 0)
+                                        {
+                                            foreach (var item2 in fa.Where(n => n.product_id == item.product_id && n.fa_bin == false && n.user_id == sesus.user_id))
+                                            {
+                                                <a href="@Url.Action("FavouriteIndexDelete","Favourite",new {id = item2.fa_id})" class="pr-3 row justify-content-end">
+                                                    <div class="fa fa-heart-o like bg-success"></div>
+                                                </a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="pr-3 row justify-content-end">
+                                                <div class="fa fa-heart-o like"></div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="pr-3 row justify-content-end text-right">
+                                            <div class="fa fa-heart-o like"></div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="text-center mt-2">
+                                    <img src="~/Content/Layout/images/@item1.product_image" width="250" />
+                                </div>
+                                <a class="text-left text-dark"><h5 class="text-left mt-2">@item1.product_name</h5></a>
+                                <span class="text-success">@{float pricesale = (float)item1.product_sale;} @pricesale.ToString("#,##0") ₫</span>
+                                <br />
+                                <s class="text-gray">@{float price = (float)item1.product_price;} @price.ToString("#,##0") ₫</s>
+                                <div class="mt-1">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <div class="p-stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <small class="text-dark">(6)</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <small style="font-size: 9px">TP.HCM</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+ 
+</script>
+
+

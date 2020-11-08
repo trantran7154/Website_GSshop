@@ -16,10 +16,17 @@ namespace Website_GSshop.Controllers
         {
             return View(db.Product.Where(n => n.product_active == true).Take(40).ToList());
         }
-        // Xem chi tiếêt sản phẩm của các bộ sưu tập
-        public ActionResult CollectionsDetail()
+        // Xem chi tiết sản phẩm của các bộ sưu tập
+        public ActionResult CollectionsDetail(int? id)
         {
-            return View(db.Product.ToList());
+            Product product = db.Product.SingleOrDefault(n => n.product_id == id);
+            if(product == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            db.SaveChanges();
+            return View(product);
         }
         // Xem chi tiết các sản phẩm sale mạnh
         public ActionResult FlashSaleDetail(int ? id)
@@ -44,23 +51,38 @@ namespace Website_GSshop.Controllers
             return View(product);
         }
         // Xem chi tiết các sản phẩm danh mục hàng
-        public ActionResult CategoriesDetail()
+        public ActionResult CategoryDetail(int? id)
         {
-            return View(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).Take(36).ToList());
+            Product pr = db.Product.SingleOrDefault(n => n.product_id == id);
+            if (pr == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            db.SaveChanges();
+            return View(pr);
         }
         // Xem chi tiết sản phẩm của các cửa hàng kinh doanh
-        public ActionResult GSMallDetail()
+        public ActionResult GSMallDetail(int? id)
         {
-            return View(db.Product.ToList());
+            GSMall gSMall = db.GSMall.Find(id);
+            return View(gSMall);
         }
         // Xem chi tiết thông tin các sản phẩm
         public ActionResult ProductDetail(int ? id)
         {
+            User user = (User)Session["user"];
             Product product = db.Product.SingleOrDefault(n => n.product_id == id);
             if (product == null)
             {
                 Response.StatusCode = 404;
                 return null;
+            }
+            // Đếm số lượng sản phẩm
+            if (user != null)
+            {
+                List<Favourite> fa = db.Favourite.Where(n => n.user_id == user.user_id && n.product_id == id && n.fa_bin == false).ToList();
+                ViewBag.ProductCount = fa.Count;
             }
             Session["product"] = id;
             db.Product.Find(id).product_view++;

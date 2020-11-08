@@ -5,23 +5,22 @@
 </div>
 <div class="container-fluid">
     <div class="container-fluid" style="background-color: #f9f9f9">
-        <nav class="mt-4">
-            @foreach (var item in Model.Take(2))
-            {
-                <ul class="menu-categories">
-                    @foreach (var item1 in Model.Take(8))
+        <div class="container-fluid">
+            <nav class="mt-4">
+                <ul class="menu-categories row">
+                    @foreach (var item in Model.Take(12))
                     {
-                        <li class="li">
-                            <a class="a" href="@Url.Action("CategoriesDetail","View", new {@id = item1.product_id}))">
-                                <img class="mt-2" src="~/Content/Layout/images/@item1.product_image" style="height: 130px; width: 130px">
+                        <li class="li col-lg-2">
+                            <a class="a" href="@Url.Action("CategoryDetail","View", new {id = item.product_id})">
+                                <img class="mt-2" src="~/Content/Layout/images/@item.product_image" style="height: 130px; width: 130px">
                                 <br />
-                                <span class="text-dark">@item1.product_name</span>
+                                <span class="text-dark">@item.product_name</span>
                             </a>
                         </li>
                     }
                 </ul>
-            }
-        </nav>
+            </nav>
+        </div>
         <br />
     </div>
 </div>

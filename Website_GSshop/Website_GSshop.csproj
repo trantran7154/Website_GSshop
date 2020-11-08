@@ -276,6 +276,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CSS\banner.css" />
     <Content Include="Content\CSS\CSSLayout.css" />
+    <Content Include="Content\CSS\Favourite.css" />
+    <Content Include="Content\CSS\login.css" />
     <Content Include="Content\CSS\product_detail.css" />
     <Content Include="Content\Favicon\android-icon-144x144.png" />
     <Content Include="Content\Favicon\android-icon-192x192.png" />
@@ -353,6 +355,7 @@
     <Content Include="Content\Layout\images\dongho1.jpg" />
     <Content Include="Content\Layout\images\dongho2.jpg" />
     <Content Include="Content\Layout\images\dongho3.jpg" />
+    <Content Include="Content\Layout\images\forgot.jpg" />
     <Content Include="Content\Layout\images\gaubong.jpg" />
     <Content Include="Content\Layout\images\giay.png" />
     <Content Include="Content\Layout\images\giay1.jpg" />
@@ -377,8 +380,9 @@
     <Content Include="Content\Layout\images\khoacnam2.jpg" />
     <Content Include="Content\Layout\images\khoacnam3.jpg" />
     <Content Include="Content\Layout\images\left.png" />
-    <Content Include="Content\Layout\images\logo2.png" />
+    <Content Include="Content\Layout\images\login.jpg" />
     <Content Include="Content\Layout\images\maychoigame.jpg" />
+    <Content Include="Content\Layout\images\nguoiban.png" />
     <Content Include="Content\Layout\images\pay1.png" />
     <Content Include="Content\Layout\images\pay2.png" />
     <Content Include="Content\Layout\images\pay3.png" />
@@ -577,6 +581,7 @@
     <Content Include="Content\Semantic-UI-CSS-master\themes\default\assets\fonts\icons.svg" />
     <Content Include="Content\Semantic-UI-CSS-master\themes\default\assets\fonts\outline-icons.svg" />
     <Content Include="Content\Semantic-UI-CSS-master\themes\default\assets\images\flags.png" />
+    <Content Include="Content\test.css" />
     <Content Include="Content\UI\css\argon-design-system.css" />
     <Content Include="Content\UI\css\font-awesome.css" />
     <Content Include="Content\UI\css\nucleo-icons.css" />
@@ -1021,12 +1026,13 @@
     <Content Include="Views\Favourites\Details.cshtml" />
     <Content Include="Views\Favourites\Edit.cshtml" />
     <Content Include="Views\Favourites\Index.cshtml" />
+    <Content Include="Views\View\CategoryDetail.cshtml" />
+    <Content Include="Views\Favourite\FavouriteList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Views\Ajax\" />
-    <Folder Include="Views\Favourite\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,10 +1,14 @@
 ﻿@using Website_GSshop.Models
 @model List<Product>
-@{ 
+@{
     User sesus = (User)Session["user"];
+    Data_GSShopEntities db = new Data_GSShopEntities();
+}
+@{ 
+    List<Favourite> fa = db.Favourite.ToList();
 }
 <div class="container-fluid">
-    <h2 class="article-list__heading"><img src="~/Content/Layout/images/icons8-fire-48.png" width="40"/><a href="#">Deal Chớp Nhoáng</a></h2>
+    <h2 class="article-list__heading"><img src="~/Content/Layout/images/icons8-fire-48.png" width="40" /><a href="#">Deal Chớp Nhoáng</a></h2>
 </div>
 <div class="container-fluid">
     <div class="layout">
@@ -67,25 +71,40 @@
                         <div class="card-1">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-row align-items-center time"><small><span class="product-new-label1"><b class="test">- 40%</b></span></small> </div>
-                                @if (sesus == null)
+                                @if (sesus != null)
+                                {
+                                    // Đếm yêu thích
+                                    var pc = fa.Where(n => n.product_id == item.product_id && n.fa_bin == false && n.user_id == sesus.user_id).ToList();
+                                    ViewBag.pc = pc.Count;
+                                    if (ViewBag.pc != 0)
+                                    {
+                                        foreach (var item1 in fa.Where(n => n.product_id == item.product_id && n.fa_bin == false && n.user_id == sesus.user_id))
+                                        {
+                                            <a href="@Url.Action("FavouriteIndexDelete","Favourite",new {id = item1.fa_id})" class="pr-3 row justify-content-end">
+                                                <div class="fa fa-heart-o like bg-success"></div>
+                                            </a>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="pr-3 row justify-content-end">
+                                            <div class="fa fa-heart-o like"></div>
+                                        </div>
+                                    }
+                                }
+                                else
                                 {
                                     <div class="pr-3 row justify-content-end">
                                         <div class="fa fa-heart-o like"></div>
                                     </div>
                                 }
-                                else
-                                {
-                                    <a href="@Url.Action("Favourite","Favourite",new {id = item.user_id})" class="pr-3 row justify-content-end">
-                                        <div class="fa fa-heart-o like bg-green"></div>
-                                    </a>
-                                }
                             </div>
                             <div class="text-center mt-2">
-                                <img src="~/Content/Layout/images/@item.product_image" width="250" />
+                                <img src="~/Content/Layout/images/@item.product_image" width="250"/>
                             </div>
                             <a href="@Url.Action("FlashSaleDetail","View", new {@id = item.product_id})" class="text-left text-dark"><h5 class="text-left mt-2 p-0">@item.product_name</h5></a>
-                            <span class="text-success">@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</span> <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 mt-1 ml-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 30px; height: 30px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
-                            <br/>
+                            <span class="text-success">@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</span> <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 mt-1 ml-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 20px; height: 20px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
+                            <br />
                             <s class="text-gray">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</s>
                             <a href="@Url.Action("FlashSaleDetail","View", new {@id = item.product_id})">
                                 <div class="mt-1 button_voucher">
@@ -101,10 +120,10 @@
     </div>
 </div>
 <script>
-     /* Demo purposes only */
+    /* Demo purposes only */
     $(".hover").mouseleave(
         function () {
-          $(this).removeClass("hover");
+            $(this).removeClass("hover");
         }
     );
     diff = 100000000;
@@ -114,7 +133,7 @@
         secs = Math.floor(diff / 1000);
         $('.count').html(hours + 'hours' + minutes + 'minutes' + seconds + ' seconds');
     }
-    setInterval(function () { showTimer() }, 1000); 
+    setInterval(function () { showTimer() }, 1000);
 </script>
 <br />
 <br />

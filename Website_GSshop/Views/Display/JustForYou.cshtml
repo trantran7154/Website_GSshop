@@ -1,5 +1,12 @@
 ﻿@using Website_GSshop.Models
 @model List<Product>
+@{ 
+    User sesus = (User)Session["user"];
+    Data_GSShopEntities db = new Data_GSShopEntities();
+}
+@{ 
+    List<Favourite> fa = db.Favourite.ToList();
+}
 <div class="container-fluid">
     <h2 class="article-list__heading"><img src="~/Content/Layout/images/icons8-fire-48.png" width="40" /><a href="#">Dành cho bạn</a></h2>
 </div>
@@ -12,9 +19,33 @@
                     <div class="card-1">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex flex-row align-items-center time"><small><span class="product-new-label1"><b class="test">- 40%</b></span></small> </div>
-                            <div class="pr-3 row justify-content-end">
-                                <div class="fa fa-heart-o like"></div>
-                            </div>
+                            @if (sesus != null)
+                            {
+                                // Đếm yêu thích
+                                var pc = fa.Where(n => n.product_id == item.product_id && n.fa_bin == false && n.user_id == sesus.user_id).ToList();
+                                ViewBag.pc = pc.Count;
+                                if (ViewBag.pc != 0)
+                                {
+                                    foreach (var item1 in fa.Where(n => n.product_id == item.product_id && n.fa_bin == false && n.user_id == sesus.user_id))
+                                    {
+                                        <a href="@Url.Action("FavouriteIndexDelete","Favourite",new {id = item1.fa_id})" class="pr-3 row justify-content-end">
+                                            <div class="fa fa-heart-o like bg-success"></div>
+                                        </a>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="pr-3 row justify-content-end">
+                                        <div class="fa fa-heart-o like"></div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="pr-3 row justify-content-end text-right">
+                                    <div class="fa fa-heart-o like"></div>
+                                </div>
+                            }
                         </div>
                         <div class="text-center mt-2">
                             <img src="~/Content/Layout/images/@item.product_image" width="250" />

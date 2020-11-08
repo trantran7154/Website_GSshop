@@ -1,8 +1,12 @@
 ﻿@using Website_GSshop.Models
-@model List<Product>
+@model Product
 @{
     ViewBag.Title = "CollectionsDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Data_GSShopEntities db = new Data_GSShopEntities();
+}
+@{ 
+    List<Product> pr = db.Product.ToList();
 }
 <div class="collection-product">
     <div class="collection-product-banner J_banner" data-spm-anchor-id="a2o4n.col_prod_list.0.i0.6cd1233dOrKToa" style="background-image: url('../../Content/Layout/images/collection.jpg');">
@@ -16,7 +20,7 @@
 <center>
     <div class="container-fluid">
         <div class="row">
-            @foreach (var item in Model)
+            @foreach (var item in pr.Where(n => n.collection_id == Model.collection_id))
             {
                 <div class="col-md-2">
                     <div class="p-box">
@@ -25,7 +29,7 @@
                             <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 p-heart mt-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 25.7143px; height: 16px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
                         </div>
                         <div class="text-center p-4">
-                            <img id="main-image" src="https://i.imgur.com/oLXMXVW.jpg" width="300" />
+                            <img id="main-image" src="~/Content/Layout/images/@item.product_image" width="300" />
                         </div>
                         <div class="p-desc">
                             <a href="@Url.Action("ProductDetail", "View", new { @id = item.product_id })"><h3 class="p-category">@item.product_name</h3></a>
@@ -34,7 +38,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <span class="p-price">
+                                <div class="p-price">
                                     <div class="p-stars">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -43,7 +47,7 @@
                                         <i class="fa fa-star"></i>
                                         <small class="text-dark">(6)</small>
                                     </div>
-                                </span>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="pill1 text-right">&nbsp;&nbsp;&nbsp;&nbsp;<b>Việt Nam</b>&nbsp;&nbsp;&nbsp;&nbsp;</div>
