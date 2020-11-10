@@ -5,7 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     Data_GSShopEntities db = new Data_GSShopEntities();
 }
-@{ 
+@{
+    GSMall gs = db.GSMall.SingleOrDefault(n => n.gsmall_id == Model.gsmail_id);
     List<Product> pr = db.Product.ToList();
 }
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
@@ -20,8 +21,53 @@
         </ol>
     </nav>
     <hr />
-    <div data-spm="card" data-spm-max-idx="7"><div class="c3AZOx"><a href="/son-thoi/3ce/?spm=a2o4n.searchlistcategory.card.1.4fc337469WdpuP&amp;&amp;from=onesearch_category_4640" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;"><div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP"><img src="//vn-live-02.slatic.net/original/3KniJQ6YQyNAp3UW6ggYsoCtWjk9FyjUUC.jpg" class="c36f5Z"><div class="c1DxTe"></div></div></a><a href="/son-thoi/vibely-123315462/?spm=a2o4n.searchlistcategory.card.2.4fc337469WdpuP&amp;&amp;from=onesearch_category_4640" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.2" style="width: 14.28%;"><div class="c1zjMN"><img src="//vn-test-11.slatic.net/p/7be5bc23eda8c98015d8f836694aa84d.png" class="c36f5Z"><div class="c1DxTe"></div></div></a><a href="/son-thoi/maybelline/?spm=a2o4n.searchlistcategory.card.3.4fc337469WdpuP&amp;&amp;from=onesearch_category_4640" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.3" style="width: 14.28%;"><div class="c1zjMN"><img src="//vn-live-01.slatic.net/original/e796447ee8bbd82d0c36435579033520.jpg" class="c36f5Z"><div class="c1DxTe"></div></div></a><a href="/son-thoi/innisfree/?spm=a2o4n.searchlistcategory.card.4.4fc337469WdpuP&amp;&amp;from=onesearch_category_4640" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.4" style="width: 14.28%;"><div class="c1zjMN"><img src="//vn-live-02.slatic.net/original/d5c52353be057825f65982aafee5f3ab.jpg" class="c36f5Z"><div class="c1DxTe"></div></div></a><a href="/son-thoi/kiss-beauty/?spm=a2o4n.searchlistcategory.card.5.4fc337469WdpuP&amp;&amp;from=onesearch_category_4640" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.5" style="width: 14.28%;"><div class="c1zjMN"><img src="//vn-test-11.slatic.net/p/mdc/4c234bed5c796bdee12d28b10b6be12f.jpg" class="c36f5Z"><div class="c1DxTe"></div></div></a><a href="/son-thoi/lameila/?spm=a2o4n.searchlistcategory.card.6.4fc337469WdpuP&amp;&amp;from=onesearch_category_4640" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.6" style="width: 14.28%;"><div class="c1zjMN"><img src="//vn-test-11.slatic.net/p/mdc/d69d96109f669b2a993a61be22d92f64.jpg" class="c36f5Z"><div class="c1DxTe"></div></div></a><a href="/son-thoi/bourjois/?spm=a2o4n.searchlistcategory.card.7.4fc337469WdpuP&amp;&amp;from=onesearch_category_4640" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.7" style="width: 14.28%;"><div class="c1zjMN"><img src="//vn-live-02.slatic.net/original/4d4973e1e95a622d5d1b96ef860bfe09.jpg" class="c36f5Z"><div class="c1DxTe"></div></div></a></div></div>
-    <br />
+    <div data-spm="card" data-spm-max-idx="7">
+        <div class="c3AZOx">
+            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
+                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
+                    <img src="~/Content/Layout/images/@gs.gsmall_img1" class="c36f5Z">
+                    <div class="c1DxTe"></div>
+                </div>
+            </a>
+            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
+                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
+                    <img src="~/Content/Layout/images/@gs.gsmall_img2" class="c36f5Z">
+                    <div class="c1DxTe"></div>
+                </div>
+            </a>
+            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
+                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
+                    <img src="~/Content/Layout/images/@gs.gsmall_img3" class="c36f5Z">
+                    <div class="c1DxTe"></div>
+                </div>
+            </a>
+            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
+                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
+                    <img src="~/Content/Layout/images/@gs.gsmall_img4" class="c36f5Z">
+                    <div class="c1DxTe"></div>
+                </div>
+            </a>
+            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
+                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
+                    <img src="~/Content/Layout/images/@gs.gsmall_img5" class="c36f5Z">
+                    <div class="c1DxTe"></div>
+                </div>
+            </a>
+            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
+                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
+                    <img src="~/Content/Layout/images/@gs.gsmall_img6" class="c36f5Z">
+                    <div class="c1DxTe"></div>
+                </div>
+            </a>
+            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
+                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
+                    <img src="~/Content/Layout/images/@gs.gsmall_img7" class="c36f5Z">
+                    <div class="c1DxTe"></div>
+                </div>
+            </a>
+        </div>
+        <br />
+    </div>
     <!-- product left -->
     <div class="side-bar col-md-3">
         <div class="range">
@@ -166,7 +212,7 @@
         <div class="layout">
             <center>
                 <div class="row" id="change">
-                    @foreach (var item in pr)
+                    @foreach (var item in pr.Where(n => n.gsmail_id == Model.gsmail_id))
                     {
                         <div class="col-md-3">
                             <div class="p-box">
@@ -184,7 +230,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <span class="p-price">
+                                        <div class="p-price">
                                             <div class="p-stars">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -193,7 +239,7 @@
                                                 <i class="fa fa-star"></i>
                                                 <small class="text-dark">(6)</small>
                                             </div>
-                                        </span>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="pill1 text-right">&nbsp;&nbsp;&nbsp;&nbsp;<b>Việt Nam</b>&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -225,4 +271,3 @@
         </ul>
     </nav>
 </div>
-

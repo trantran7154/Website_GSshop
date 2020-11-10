@@ -4,267 +4,209 @@
     ViewBag.Title = "LoginSeller";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    .active img {
-        border: 0px solid #333 !important;
-    }
-</style>
-<br />
-<div class="section section-components">
-    <div class="container">
-        <div class="row">           
-            <div class="col-md-12">
-                <!-- Tabs with icons -->
-                <div class="nav-wrapper">
-                    <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="fa fa-sign-in mr-2"></i>ĐĂNG NHẬP</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="fa fa-user-plus mr-2"></i>ĐĂNG KÝ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-key mr-2"></i>QUÊN MẬT KHẨU</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card shadow">
-                    <div class="card-body">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-                                <div class="modal-body modal-body-sub_agile">
-                                    <div class="main-mailposi">
-                                        <span class="fa fa-envelope-o" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="modal_body_left modal_body_left1">
-                                        <center>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <h3>Chào mừng đến với GS Shop. Đăng nhập ngay!</h3>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    Thành viên mới?<a href="#"> Đăng ký</a> tại đây.
-                                                </div>
-                                            </div>
-                                        </center>
-                                        <br />
-                                        <script>
-                                            function validateForm() {
-                                                // Bước 1: Lấy giá trị của username và password
-                                                var seller_email = document.getElementById('seller_email').value;
-                                                var seller_pass = document.getElementById('seller_pass').value;
-                                                // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
-                                                if (seller_email == '' && seller_pass == '') {
-                                                    document.getElementById("testsellerlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email và mật khẩu.</b></div>"
-                                                }
-                                                else if (seller_pass == '') {
-                                                    document.getElementById("testsellerlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i > Bạn chưa nhập mật khẩu.</b></div>"
-                                                }
-                                                else if (seller_email == '') {
-                                                    document.getElementById("testsellerlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email.</b></div>"
-                                                }
-                                                else {
-                                                    return true;
-                                                }
-                                                return false;
-                                            }
-                                        </script>
-                                        <form role="form" method="post" action="@Url.Action("LoginSeller","Account")" onsubmit="return validateForm()">
-                                            <div class="col-md-12" style="background-color: #f1f1f1">
-                                                <br />
-                                                <div class="col-md-6">
-                                                    <div class="styled-input agile-styled-input-top">
-                                                        <input type="text" placeholder="Email" id="seller_email" name="seller_email">
-                                                    </div>
-                                                    <div class="styled-input">
-                                                        <input type="password" placeholder="Mật khẩu" id="seller_pass" name="seller_pass">
-                                                        <br />
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <input type="checkbox" /> Ghi nhớ
-                                                        </div>
-                                                        <div class="col-md-6 text-right">
-                                                            <a href="#" style="font-size: 13px">
-                                                                Quên Mật Khẩu?
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <br />
-                                                    @Html.Raw(Session["testsellerlogin"])
-                                                    <div id="testsellerlogin"></div>
-                                                    <center><input type="submit" onclick="xuly()" value="ĐĂNG NHẬP"></center>
-                                                    <div class="hr-sect">Hoặc</div>
-                                                    <center>
-                                                        <button class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Đăng nhập bằng tài khoản Facebook</button>
-                                                        <br />
-                                                        <br />
-                                                        <button class="btn btn-danger"><i class="fa fa-google-plus"></i>&nbsp;&nbsp;Đăng nhập bằng tài khoản Google</button>
-                                                        <br />
-                                                        <br />
-                                                    </center>
-                                                </div>
-                                                <br />
-                                                <div class="col-md-6">
-                                                    <img src="~/Content/Layout/images/nguoiban.png" style="width: 100%; border: 0px solid white" />
-                                                </div>
-                                                <br />                                                
-                                            </div>
-                                            <br />
-                                        </form>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div class="clearfix"></div>
+<link href="~/Content/CSS/login.css" rel="stylesheet" />
+<div class="container-fluid mb-3" style="background-color: #f9f9f9">
+    <div class="tab_container mt-5 mb-5">
+        <input class="input" id="tab1" type="radio" name="tabs" checked>
+        <label class="label1" for="tab1"><i class="fa fa-sign-in"></i><span>ĐĂNG NHẬP</span></label>
+        <input class="input" id="tab2" type="radio" name="tabs">
+        <label class="label1" for="tab2"><i class="fa fa-user-plus"></i><span>ĐĂNG KÝ</span></label>
+        <input class="input" id="tab3" type="radio" name="tabs">
+        <label class="label1" for="tab3"><i class="fa fa-key"></i><span>QUÊN MẬT KHẨU</span></label>
+        <!--Đăng nhập-->
+        <section id="content1" class="tab-content section">
+            <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 mx-auto">
+                <div class="card0 border-0">
+                    <div class="row d-flex">
+                        <div class="col-md-5">
+                            <div class="card1 pb-5">
+                                <div class="row px-3 justify-content-center mt-6 mb-5">
+                                    <img src="~/Content/Layout/images/nguoiban.png" height="400" width="400" />
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
-                                <div class="modal-body modal-body-sub_agile">
-                                    <div class="main-mailposi">
-                                        <span class="fa fa-envelope-o" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card2 card border-0 px-4 py-5">
+                                <h3 class="mb-1 text-dark">Chào mừng đến với idlecat Shop.<br /> Đăng nhập ngay!</h3>
+                                <p class="mb-4 text-sm">Thành viên mới?  <a class="text-primary login">Đăng ký</a> tại đây.</p>
+                                <script>
+                                    function validateForm() {
+                                        // Bước 1: Lấy giá trị của username và password
+                                        var seller_email = document.getElementById('seller_email').value;
+                                        var seller_pass = document.getElementById('seller_pass').value;
+                                        // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
+                                        if (seller_email == '' && seller_pass == '') {
+                                            document.getElementById("testsellerlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email và mật khẩu.</b></div>"
+                                        }
+                                        else if (seller_pass == '') {
+                                            document.getElementById("testsellerlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i > Bạn chưa nhập mật khẩu.</b></div>"
+                                        }
+                                        else if (seller_email == '') {
+                                            document.getElementById("testsellerlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email.</b></div>"
+                                        }
+                                        else {
+                                            return true;
+                                        }
+                                        return false;
+                                    }
+                                </script>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="google"><span class="fa fa-google"></span><small class="pl-3 pr-1">Sign up with google</small></div>
                                     </div>
-                                    <div class="modal_body_left modal_body_left1">
-                                        <center>
-                                            <h3>Chào mừng đến với GS Shop. Đăng ký ngay!</h3>
-                                        </center>
-                                        <br />
-                                        <script>
-                                            function valiSignUpSeller() {
-                                                // Bước 1: Lấy giá trị của username và password
-                                                var seller_email = document.getElementById('seller_emailres').value;
-                                                var seller_pass = document.getElementById('seller_passres').value;
-                                                var seller_repeat = document.getElementById('seller_repeat').value;
-                                                // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
-                                                if (seller_email == '' && seller_pass == '') {
-                                                    document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email và mật khẩu.</b></div>"
-                                                }
-                                                else if (seller_pass == '') {
-                                                    document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i > Bạn chưa nhập mật khẩu.</b></div>"
-                                                }
-                                                else if (seller_email == '') {
-                                                    document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email.</b></div>"
-                                                }
-                                                else if (seller_pass != seller_repeat) {
-                                                    document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Mật khẩu nhập lại chưa đúng.</b></div>"
-                                                }
-                                                else {
-                                                    return true;
-                                                }
-                                                return false;
-                                            }
-                                        </script>
-                                        <form role="form" method="post" action="@Url.Action("SignUpSeller","Account")" onsubmit="return valiSignUpSeller()">
-                                            <div class="col-md-12" style="background-color: #f1f1f1">
-                                                <br />
-                                                <div class="col-md-6">
-                                                    <div class="styled-input agile-styled-input-top">
-                                                        <input type="text" placeholder="Email" id="seller_emailres" name="seller_email">
-                                                    </div>
-                                                    <div class="styled-input">
-                                                        <input type="password" placeholder="Mật khẩu" id="seller_passres" name="seller_pass">
-                                                        <br />
-                                                    </div>
-                                                    <div class="styled-input">
-                                                        <input type="password" placeholder="Nhập lại mật khẩu" id="seller_repeat" name="seller_repeat">
-                                                        <br />
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <input type="checkbox" /> Ghi nhớ
-                                                        </div>
-                                                        <div class="col-md-6 text-right">
-                                                            <a href="#" style="font-size: 13px">
-                                                                Quên Mật Khẩu?
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <br />
-                                                    <div id="testsignup"></div>
-                                                    <center><input type="submit" onclick="xuly()" value="ĐĂNG KÝ"></center>
-                                                    <div class="hr-sect">Hoặc</div>
-                                                    <center>
-                                                        <button class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Đăng nhập bằng tài khoản Facebook</button>
-                                                        <br />
-                                                        <br />
-                                                        <button class="btn btn-danger"><i class="fa fa-google-plus"></i>&nbsp;&nbsp;Đăng nhập bằng tài khoản Google</button>
-                                                        <br />
-                                                        <br />
-                                                    </center>
-                                                </div>
-                                                <br />
-                                                <div class="col-md-6">
-                                                    <img src="~/Content/Layout/images/nguoiban.png" style="width: 100%" />
-                                                </div>
-                                                <br />
-                                            </div>
-                                            <br />
-                                        </form>
-                                        <div class="clearfix"></div>
+                                    <div class="col-sm-6">
+                                        <div class="fb1"><span class="fa fa-facebook fa-facebook1"></span><small class="pl-3 pr-1">Sign up with facebook</small></div>
                                     </div>
-                                    <div class="clearfix"></div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
-                                <div class="modal-body modal-body-sub_agile">
-                                    <div class="main-mailposi">
-                                        <span class="fa fa-envelope-o" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="modal_body_left modal_body_left1">
-                                        <h3 class="alert-danger w-50">Nhập email/gmail để thay đổi mật khẩu.</h3>
-                                        <br />
-                                        <script>
-                                            function validateForm() {
-                                                // Bước 1: Lấy giá trị của username và password
-                                                var user_email = document.getElementById('user_email').value;
-                                                var user_pass = document.getElementById('user_pass').value;
-                                                // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
-                                                if (user_email == '' && user_pass == '') {
-                                                    document.getElementById("testlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email và mật khẩu.</b></div>"
-                                                }
-                                                else if (user_pass == '') {
-                                                    document.getElementById("testlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i > Bạn chưa nhập mật khẩu.</b></div>"
-                                                }
-                                                else if (user_email == '') {
-                                                    document.getElementById("testlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email.</b></div>"
-                                                }
-                                                else {
-                                                    return true;
-                                                }
-                                                return false;
-                                            }
-                                        </script>
-                                        <form role="form" method="post" action="@Url.Action("Login","Account")" onsubmit="return validateForm()">
-                                            <div class="col-md-12" style="background-color: #f1f1f1">
-                                                <br />
-                                                <div class="col-md-4">
-                                                    <center>
-                                                        <i class="fa fa-lock" style="font-size: 110px"></i>
-                                                    </center>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="styled-input agile-styled-input-top">
-                                                        <input type="text" placeholder="Nhập email/gmail đã đăng ký" id="user_email" name="user_email">
-                                                    </div>
-                                                    <br />
-                                                    @Html.Raw(Session["testlogin"])
-                                                    <div id="testlogin"></div>
-                                                    <center><input type="submit" onclick="xuly()" value="GỬI"></center>
-                                                    <br />
-                                                </div>
-                                                <br />
-                                            </div>
-                                        </form>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div class="clearfix"></div>
+                                <div class="row px-3 mt-1">
+                                    <div class="line"></div> <small class="text-muted or text-center">OR</small>
+                                    <div class="line"></div>
                                 </div>
+                                <form role="form" method="post" action="@Url.Action("LoginSeller","Account")" onsubmit="return validateForm()">
+                                    <div class="row px-3">
+                                        <label class="mb-0">
+                                            <span class="mb-0 text-sm text-dark">Email</span>
+                                        </label> <input class="input1" type="text" name="seller_email" id="seller_email">
+                                    </div>
+                                    <div class="row px-3">
+                                        <label class="mb-0">
+                                            <span class="mb-0 text-sm text-dark">Mật khẩu</span>
+                                        </label> <input class="input1" type="password" name="seller_pass" id="seller_pass">
+                                    </div>
+                                    @Html.Raw(Session["testsellerlogin"])
+                                    <div id="testlogin"></div>
+                                    <div class="row mb-4">
+                                        <div class="col-md-5"> <button class="btn btn-blue button3 text-center mb-1">ĐĂNG NHẬP</button> </div>
+                                        <div class="col-md-7 text-right"><a href="#"><u>Quên mật khẩu?</u></a></div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <!--//Đăng nhập-->
+        <!--Đăng ký-->
+        <section id="content2" class="tab-content section">
+            <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 mx-auto">
+                <div class="card0 border-0">
+                    <div class="row d-flex">
+                        <div class="col-md-5">
+                            <div class="card1 pb-5">
+                                <div class="row px-3 justify-content-center mt-6 mb-5">
+                                    <img src="~/Content/Layout/images/nguoiban.png" height="400" width="400" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card2 card border-0 px-4 py-5">
+                                <h3 class="mb-1 text-dark">Chào mừng đến với idlecat Shop.<br /> Đăng ký ngay!</h3>
+                                <script>
+                                    function valiSignUpSeller() {
+                                        // Bước 1: Lấy giá trị của username và password
+                                        var seller_email = document.getElementById('seller_emailres').value;
+                                        var seller_pass = document.getElementById('seller_passres').value;
+                                        var seller_repeat = document.getElementById('seller_repeat').value;
+                                        // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
+                                        if (seller_email == '' && seller_pass == '') {
+                                            document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email và mật khẩu.</b></div>"
+                                        }
+                                        else if (seller_pass == '') {
+                                            document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i > Bạn chưa nhập mật khẩu.</b></div>"
+                                        }
+                                        else if (seller_email == '') {
+                                            document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email.</b></div>"
+                                        }
+                                        else if (seller_pass != seller_repeat) {
+                                            document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Mật khẩu nhập lại chưa đúng.</b></div>"
+                                        }
+                                        else {
+                                            return true;
+                                        }
+                                        return false;
+                                    }
+                                </script>
+                                <div class="row mt-4">
+                                    <div class="col-sm-6">
+                                        <div class="google"><span class="fa fa-google"></span><small class="pl-3 pr-1">Sign up with google</small></div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="fb1"><span class="fa fa-facebook fa-facebook1"></span><small class="pl-3 pr-1">Sign up with facebook</small></div>
+                                    </div>
+                                </div>
+                                <div class="row px-3 mt-1">
+                                    <div class="line"></div> <small class="text-muted or text-center">OR</small>
+                                    <div class="line"></div>
+                                </div>
+                                <form role="form" method="post" action="@Url.Action("SignUpSeller","Account")" onsubmit="return valiSignUp()">
+                                    <div class="row mt-2">
+                                        <div class="col-md-6">
+                                            <label class="mb-0">
+                                                <span class="mb-0 text-sm text-dark">Tên shop</span>
+                                            </label> <input class="input1" type="text" name="seller_nameshop">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="mb-0">
+                                                <span class="mb-0 text-sm text-dark">Số điện thoại</span>
+                                            </label> <input class="input1" type="text" name="seller_telephone">
+                                        </div>
+                                    </div>
+                                    <div class="row px-3">
+                                        <label class="mb-0">
+                                            <span class="mb-0 text-sm text-dark">Email</span>
+                                        </label> <input class="input1" type="text" name="seller_email" id="seller_emailres">
+                                    </div>
+                                    <div class="row px-3">
+                                        <label class="mb-0">
+                                            <span class="mb-0 text-sm text-dark">Mật khẩu</span>
+                                        </label> <input class="input1" type="password" id="seller_passres" name="seller_pass">
+                                    </div>
+                                    <div class="row px-3">
+                                        <label class="mb-0">
+                                            <span class="mb-0 text-sm text-dark">Nhập lại mật khẩu</span>
+                                        </label> <input class="input1" type="password" name="seller_repeat" id="seller_repeat">
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-md-5"> <button class="btn btn-blue button3 text-center mb-1">ĐĂNG KÝ</button> </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--//Đăng ký-->
+        <!--Quên mật khẩu-->
+        <section id="content3" class="tab-content section">
+            <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 mx-auto">
+                <div class="card0 border-0">
+                    <div class="row d-flex">
+                        <div class="col-md-5">
+                            <div class="card1 pb-5">
+                                <div class="row px-3 justify-content-center mt-3 mb-5">
+                                    <img src="~/Content/Layout/images/forgot.jpg" height="400" width="500" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card2 card border-0 px-4 py-5">
+                                <h3 class="mb-1 text-dark">Nhập email/gmail để thay đổi <br /> mật khẩu mới.</h3>
+                                <div class="row px-3 mt-2">
+                                    <label class="mb-0">
+                                        <span class="mb-0 text-sm text-dark">Email</span>
+                                    </label> <input class="input1" type="email" name="email">
+                                </div>
+                                <div class="col-md-5 float-right"> <button class="btn btn-blue button3 text-center mb-1">LẤY LẠI MẬT KHẨU</button> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--//Quên mật khẩu-->
     </div>
 </div>
-<br />
-<br />
+
 

@@ -99,6 +99,13 @@
     <Property Name="gsmall_bg" Type="nvarchar" MaxLength="2000" />
     <Property Name="gsmall_image" Type="nvarchar" MaxLength="2000" />
     <Property Name="gsmall_bin" Type="bit" />
+    <Property Name="gsmall_img1" Type="nvarchar" MaxLength="200" />
+    <Property Name="gsmall_img2" Type="nvarchar" MaxLength="200" />
+    <Property Name="gsmall_img3" Type="nvarchar" MaxLength="200" />
+    <Property Name="gsmall_img4" Type="nvarchar" MaxLength="200" />
+    <Property Name="gsmall_img5" Type="nvarchar" MaxLength="200" />
+    <Property Name="gsmall_img6" Type="nvarchar" MaxLength="200" />
+    <Property Name="gsmall_img7" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="Product">
     <Key>

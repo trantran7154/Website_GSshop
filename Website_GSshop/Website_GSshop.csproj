@@ -154,6 +154,9 @@
     <Compile Include="Areas\Admin\Controllers\Seller_ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\SellerManagement\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\SellerManagement\Controllers\SellerManagementController.cs" />
+    <Compile Include="Areas\SellerManagement\SellerManagementAreaRegistration.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\DisplayController.cs" />
@@ -330,6 +333,7 @@
     <Content Include="Content\Info\js\paper-bootstrap-wizard.js" />
     <Content Include="Content\Layout\images\1.png" />
     <Content Include="Content\Layout\images\2.png" />
+    <Content Include="Content\Layout\images\3ce.jpg" />
     <Content Include="Content\Layout\images\about.jpg" />
     <Content Include="Content\Layout\images\about2.jpg" />
     <Content Include="Content\Layout\images\aokhoac.jpg" />
@@ -374,13 +378,18 @@
     <Content Include="Content\Layout\images\gs_bg5.jpg" />
     <Content Include="Content\Layout\images\gs_bg6.jpg" />
     <Content Include="Content\Layout\images\icons8-fire-48.png" />
+    <Content Include="Content\Layout\images\innisfree.jpg" />
     <Content Include="Content\Layout\images\ke.jpg" />
     <Content Include="Content\Layout\images\keosua.jpg" />
     <Content Include="Content\Layout\images\khoacnam1.jpg" />
     <Content Include="Content\Layout\images\khoacnam2.jpg" />
     <Content Include="Content\Layout\images\khoacnam3.jpg" />
+    <Content Include="Content\Layout\images\kissbeauty.jpg" />
+    <Content Include="Content\Layout\images\laneila.jpg" />
     <Content Include="Content\Layout\images\left.png" />
     <Content Include="Content\Layout\images\login.jpg" />
+    <Content Include="Content\Layout\images\mac.jpg" />
+    <Content Include="Content\Layout\images\maybelline.jpg" />
     <Content Include="Content\Layout\images\maychoigame.jpg" />
     <Content Include="Content\Layout\images\nguoiban.png" />
     <Content Include="Content\Layout\images\pay1.png" />
@@ -395,6 +404,7 @@
     <Content Include="Content\Layout\images\paypal.png" />
     <Content Include="Content\Layout\images\quat.jpg" />
     <Content Include="Content\Layout\images\right.png" />
+    <Content Include="Content\Layout\images\sacelady.jpg" />
     <Content Include="Content\Layout\images\sale.jpg" />
     <Content Include="Content\Layout\images\search.png" />
     <Content Include="Content\Layout\images\sominam.jpg" />
@@ -955,6 +965,15 @@
     <Content Include="Areas\Admin\Views\Seller_Product\ProductDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Seller_Product\ProductEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Seller_Product\ProductDelete.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\web.config" />
+    <Content Include="Areas\SellerManagement\Views\Shared\_LayoutSeller.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\SellerManagement\Index.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Products\Create.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Products\Details.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Products\Index.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\SellerManagement\CSS_Sematic.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1032,6 +1051,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\SellerManagement\Data\" />
     <Folder Include="Views\Ajax\" />
   </ItemGroup>
   <ItemGroup>

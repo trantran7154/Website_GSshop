@@ -104,6 +104,13 @@
           <Property Name="gsmall_bg" Type="nvarchar" MaxLength="2000" />
           <Property Name="gsmall_image" Type="nvarchar" MaxLength="2000" />
           <Property Name="gsmall_bin" Type="bit" />
+          <Property Name="gsmall_img1" Type="nvarchar" MaxLength="200" />
+          <Property Name="gsmall_img2" Type="nvarchar" MaxLength="200" />
+          <Property Name="gsmall_img3" Type="nvarchar" MaxLength="200" />
+          <Property Name="gsmall_img4" Type="nvarchar" MaxLength="200" />
+          <Property Name="gsmall_img5" Type="nvarchar" MaxLength="200" />
+          <Property Name="gsmall_img6" Type="nvarchar" MaxLength="200" />
+          <Property Name="gsmall_img7" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -580,6 +587,13 @@
           <Property Name="gsmall_image" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_GSMall" FromRole="GSMall" ToRole="Product" />
           <Property Name="gsmall_bin" Type="Boolean" />
+          <Property Name="gsmall_img1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="gsmall_img2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="gsmall_img3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="gsmall_img4" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="gsmall_img5" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="gsmall_img6" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="gsmall_img7" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -1081,6 +1095,13 @@
           <EntitySetMapping Name="GSMall">
             <EntityTypeMapping TypeName="Data_GSShopModel.GSMall">
               <MappingFragment StoreEntitySet="GSMall">
+                <ScalarProperty Name="gsmall_img7" ColumnName="gsmall_img7" />
+                <ScalarProperty Name="gsmall_img6" ColumnName="gsmall_img6" />
+                <ScalarProperty Name="gsmall_img5" ColumnName="gsmall_img5" />
+                <ScalarProperty Name="gsmall_img4" ColumnName="gsmall_img4" />
+                <ScalarProperty Name="gsmall_img3" ColumnName="gsmall_img3" />
+                <ScalarProperty Name="gsmall_img2" ColumnName="gsmall_img2" />
+                <ScalarProperty Name="gsmall_img1" ColumnName="gsmall_img1" />
                 <ScalarProperty Name="gsmall_bin" ColumnName="gsmall_bin" />
                 <ScalarProperty Name="gsmall_id" ColumnName="gsmall_id" />
                 <ScalarProperty Name="gsmall_name" ColumnName="gsmall_name" />

@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="Data_GSShopModel.GSMall" Width="1.5" PointX="3" PointY="22.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.Product" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.ReplyComment" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.Seller" Width="1.5" PointX="3" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Seller" Width="1.5" PointX="3" PointY="26.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.SubCategory" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.User" Width="1.5" PointX="3" PointY="32.375" IsExpanded="true" />

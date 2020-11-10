@@ -28,6 +28,13 @@ namespace Website_GSshop.Models
         public string gsmall_bg { get; set; }
         public string gsmall_image { get; set; }
         public Nullable<bool> gsmall_bin { get; set; }
+        public string gsmall_img1 { get; set; }
+        public string gsmall_img2 { get; set; }
+        public string gsmall_img3 { get; set; }
+        public string gsmall_img4 { get; set; }
+        public string gsmall_img5 { get; set; }
+        public string gsmall_img6 { get; set; }
+        public string gsmall_img7 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }

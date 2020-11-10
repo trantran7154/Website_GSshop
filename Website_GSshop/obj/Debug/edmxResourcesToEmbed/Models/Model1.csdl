@@ -96,6 +96,13 @@
     <Property Name="gsmall_image" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Product" Relationship="Self.FK_Product_GSMall" FromRole="GSMall" ToRole="Product" />
     <Property Name="gsmall_bin" Type="Boolean" />
+    <Property Name="gsmall_img1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="gsmall_img2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="gsmall_img3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="gsmall_img4" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="gsmall_img5" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="gsmall_img6" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="gsmall_img7" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Product">
     <Key>

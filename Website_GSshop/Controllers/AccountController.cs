@@ -15,6 +15,7 @@ namespace Website_GSshop.Controllers
         String loginseller = "/Account/LoginSeller";
         String update = "/Account/UpdateInfo";
         String updateseller = "/Account/UpdateInfoSeller";
+        String manage = "/SellerManagement/SellerManagement/Index";
         Data_GSShopEntities db = new Data_GSShopEntities();
         // GET: Login
         public ActionResult Login()
@@ -147,7 +148,7 @@ namespace Website_GSshop.Controllers
                 Session["seller"] = seller;
                 db.Seller.Find(seller.seller_id).seller_datecreated = DateTime.Now;
                 db.Seller.Find(seller.seller_id).seller_token = Guid.NewGuid().ToString();
-                return Redirect(home);
+                return Redirect(manage);
             }
             else
             {

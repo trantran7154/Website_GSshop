@@ -54,12 +54,6 @@ namespace Website_GSshop.Controllers
         public ActionResult CategoryDetail(int? id)
         {
             Product pr = db.Product.SingleOrDefault(n => n.product_id == id);
-            if (pr == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
-            db.SaveChanges();
             return View(pr);
         }
         // Xem chi tiết sản phẩm của các cửa hàng kinh doanh
