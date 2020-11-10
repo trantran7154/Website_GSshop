@@ -123,23 +123,51 @@ namespace Website_GSshop.Areas.SellerManagement.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id,subcategory_id,banner_id,collection_id,gsmail_id,product_bin,product_related")] Product product)
+        [ValidateInput(false)]
+        public ActionResult Edit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id,subcategory_id,banner_id,collection_id,gsmail_id,product_bin,product_related")] Product product, HttpPostedFileBase image)
         {
-            if (ModelState.IsValid)
+            db.Entry(product).State = EntityState.Modified;
+            Seller sesse = (Seller)Session["seller"];
+            if (image == null)
             {
-                db.Entry(product).State = EntityState.Modified;
+                Product pro = db.Product.Find(Int32.Parse(product.product_id.ToString()));
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(seller_qlsp);
             }
-            ViewBag.banner_id = new SelectList(db.Banner, "banner_id", "banner_name", product.banner_id);
-            ViewBag.category_id = new SelectList(db.Category, "category_id", "category_name", product.category_id);
-            ViewBag.collection_id = new SelectList(db.Collection, "collection_id", "collection_name", product.collection_id);
-            ViewBag.gsmail_id = new SelectList(db.GSMall, "gsmall_id", "gsmall_name", product.gsmail_id);
-            ViewBag.seller_id = new SelectList(db.Seller, "seller_id", "seller_pass", product.seller_id);
-            ViewBag.subcategory_id = new SelectList(db.SubCategory, "subcategory_id", "subcategory_name", product.subcategory_id);
-            ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass", product.user_id);
-            return View(product);
+            else
+            {
+                // Radom ảnh
+                Random rnd = new Random();
+                int number = rnd.Next(1, 1000);
+                // Tên file ảnh sản phẩm
+                var fileimg = Path.GetFileName(number + image.FileName);
+                // Đưa tên ảnh vào đúng file
+                var pa = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg);
+                // Ảnh trống
+                if (image == null)
+                {
+                    ViewBag.ThongBao = "Ảnh trống !";
+                    return View(product);
+                }
+                //Nếu tên ảnh trùng
+                else if (System.IO.File.Exists(pa))
+                {
+                    ViewBag.ThongBao = "Ảnh đã tồn tại";
+                    return View(product);
+                }
+                //Lưu pa vào name fileUpload
+                else
+                {
+                    image.SaveAs(pa);
+                    product.product_image = number + image.FileName;
+                    product.product_datecreated = DateTime.Now;
+                    product.product_dateedit = DateTime.Now;
+                    product.seller_id = sesse.seller_id;
+                    product.product_bin = true;
+                    db.SaveChanges();
+                    return Redirect(seller_qlsp);
+                }
+            }
         }
 
         // GET: SellerManagement/Products/Delete/5
@@ -159,13 +187,14 @@ namespace Website_GSshop.Areas.SellerManagement.Controllers
 
         // POST: SellerManagement/Products/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [ValidateInput(false)]
+        public ActionResult DeleteConfirmed(Product product)
         {
-            Product product = db.Product.Find(id);
-            db.Product.Remove(product);
+            Product pr = db.Product.Find(Int32.Parse(product.product_id.ToString()));
+            pr.product_bin = false;
+            pr.product_active = false;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(seller_qlsp);
         }
 
         protected override void Dispose(bool disposing)

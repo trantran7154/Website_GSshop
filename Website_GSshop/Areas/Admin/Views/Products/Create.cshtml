@@ -1,8 +1,14 @@
-﻿@model Website_GSshop.Models.Product
+﻿@using Website_GSshop.Models
+@model Product
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Data_GSShopEntities db = new Data_GSShopEntities();
+}
+@{ 
+    List<Category> category = db.Category.ToList();
+    List<Seller> sellers = db.Seller.ToList();
 }
 @Html.Action("CSS_Sematic", "Home")
 <h3>
@@ -35,7 +41,10 @@
         <div class="field">
             <label>Tên danh mục</label>
             <select name="category_id">
-                <option>Nhẫn</option>
+                @foreach (var item in category)
+                {
+                    <option name="category_name">@item.category_name</option>
+                }
             </select>
         </div>
         <div class="field">
@@ -50,7 +59,7 @@
             <label>Mô tả</label>
             <textarea id="editor3" name="product_description"></textarea>
         </div>
-        <div class="two fields">
+        <div class="three fields">
             <div class="field">
                 <label>Hoạt động</label>
                 <select name="product_active">
@@ -63,6 +72,15 @@
                 <select name="product_ship">
                     <option>Free Ship</option>
                     <option>Trả Phí</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Tên shop</label>
+                <select name="seller_id">
+                    @foreach (var item in sellers)
+                    {
+                        <option name="seller_nameshop">@item.seller_nameshop</option>
+                    }
                 </select>
             </div>
         </div>
