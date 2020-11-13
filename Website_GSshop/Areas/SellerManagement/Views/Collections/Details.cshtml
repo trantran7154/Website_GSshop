@@ -1,0 +1,75 @@
+﻿@model Website_GSshop.Models.Collection
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/SellerManagement/Views/Shared/_LayoutSeller.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Collection</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.collection_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.collection_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.collection_image1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.collection_image1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.collection_image2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.collection_image2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.collection_image3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.collection_image3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.collection_datecreate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.collection_datecreate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.collection_active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.collection_active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.collection_bin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.collection_bin)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.collection_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

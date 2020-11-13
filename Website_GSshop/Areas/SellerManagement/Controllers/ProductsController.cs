@@ -17,7 +17,7 @@ namespace Website_GSshop.Areas.SellerManagement.Controllers
         String login = "/Account/LoginSeller";
         String seller_qlsp = "/SellerManagement/Products/Index";
         // GET: SellerManagement/Products
-        public ActionResult Index(int? id)
+        public ActionResult Index()
         {
             Seller se = (Seller)Session["seller"];
             if(se == null)

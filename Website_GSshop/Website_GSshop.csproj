@@ -154,6 +154,7 @@
     <Compile Include="Areas\Admin\Controllers\Seller_ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\SellerManagement\Controllers\CollectionsController.cs" />
     <Compile Include="Areas\SellerManagement\Controllers\ProductsController.cs" />
     <Compile Include="Areas\SellerManagement\Controllers\SellerManagementController.cs" />
     <Compile Include="Areas\SellerManagement\SellerManagementAreaRegistration.cs" />
@@ -974,6 +975,11 @@
     <Content Include="Areas\SellerManagement\Views\Products\Edit.cshtml" />
     <Content Include="Areas\SellerManagement\Views\Products\Index.cshtml" />
     <Content Include="Areas\SellerManagement\Views\SellerManagement\CSS_Sematic.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Collections\Create.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Collections\Delete.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Collections\Details.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Collections\Edit.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Collections\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

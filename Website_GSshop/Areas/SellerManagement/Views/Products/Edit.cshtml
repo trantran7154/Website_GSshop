@@ -7,7 +7,12 @@
     Data_GSShopEntities db = new Data_GSShopEntities();
 }
 @{
-    List<Category> categories = db.Category.ToList();
+    List<Product> pr = db.Product.ToList();
+    List<Category> ca = db.Category.ToList();
+    List<SubCategory> sb = db.SubCategory.ToList();
+    List<Banner> ba = db.Banner.ToList();
+    List<Collection> co = db.Collection.ToList();
+    List<GSMall> gs = db.GSMall.ToList();
 }
 @Html.Action("CSS_Sematic", "SellerManagement")
 <h3>
@@ -19,34 +24,92 @@
     <form class="mb-4 ui form">
         <input type="hidden" value="@Model.product_id" name="product_id" />
         <input type="hidden" value="@Model.product_image" name="product_image" />
-        <div class="two fields">
+        <div class="four fields">
             <div class="field">
                 <label>Tên sản phẩm</label>
                 <input value="@Model.product_name" name="product_name" type="text" />
             </div>
             <div class="field">
-                <label>Ngày sửa</label>
-                <input type="date" name="product_dateedit" value="@Model.product_dateedit.Value.Year-@(Model.product_dateedit.Value.Month < 10 ? "0" + Model.product_dateedit.Value.Month.ToString() : Model.product_dateedit.Value.Month.ToString())-@(Model.product_dateedit.Value.Day < 10 ? "0" + Model.product_dateedit.Value.Day.ToString() : Model.product_dateedit.Value.Day.ToString())" />
+                <label>Tên bộ sưu tập</label>
+                <select name="category_id">
+                    @foreach (var item in co)
+                    {
+                        <option value="@item.collection_name">@item.collection_name</option>
+                    }
+                </select>
+            </div>
+            <div class="field">
+                <label>Tên danh mục</label>
+                <select name="category_id">
+                    @foreach (var item in ca)
+                    {
+                        <option value="@item.category_name">@item.category_name</option>
+                    }
+                </select>
+            </div>
+            <div class="field">
+                <label>Tên danh mục con</label>
+                <select name="subcategory_id">
+                    @foreach (var item in sb)
+                    {
+                        <option value="@item.subcategory_name">@item.subcategory_name</option>
+                    }
+                </select>
             </div>
         </div>
-        <div class="two fields">
+        <div class="four fields">
+            <div class="field">
+                <label>Tên banner</label>
+                <select name="banner_id">
+                    @foreach (var item in ba)
+                    {
+                        <option value="@item.banner_name">@item.banner_name</option>
+                    }
+                </select>
+            </div>
+            <div class="field">
+                <label>Tên đối tác</label>
+                <select name="subcategory_id">
+                    @foreach (var item in gs)
+                    {
+                        <option value="@item.gsmall_name">@item.gsmall_name</option>
+                    }
+                </select>
+            </div>
+            <div class="field">
+                <div class="field">
+                    <label>Mã sản phẩm liên quan</label>
+                    <input name="product_related" value="@Model.product_related" type="text">
+                </div>
+            </div>
+            <div class="field">
+                <label>Hoạt động</label>
+                <select name="product_active">
+                    <option>True</option>
+                    <option>False</option>
+                </select>
+            </div>
+        </div>
+        <div class="four fields">
             <div class="field">
                 <label>Ảnh</label>
-                <input name="image" type="file" value="@Model.product_image">
+                <input name="fileUpload" value="@Model.product_image" type="file">
             </div>
             <div class="field">
                 <label>Ngày tạo</label>
-                <input type="date" name="product_datecreated" value="@Model.product_datecreated.Value.Year-@(Model.product_datecreated.Value.Month < 10 ? "0" + Model.product_datecreated.Value.Month.ToString() : Model.product_datecreated.Value.Month.ToString())-@(Model.product_datecreated.Value.Day < 10 ? "0" + Model.product_datecreated.Value.Day.ToString() : Model.product_datecreated.Value.Day.ToString())" />
+                <input type="date" name="product_datecreated" value="@Model.product_datecreated.Value.Year-@(Model.product_datecreated.Value.Month < 10 ? "0" + Model.product_datecreated.Value.Month.ToString() : Model.product_datecreated.Value.Month.ToString())-@(Model.product_datecreated.Value.Day < 10 ? "0" + Model.product_datecreated.Value.Day.ToString() : Model.product_datecreated.Value.Day.ToString())"/>
             </div>
-        </div>
-        <div class="field">
-            <label>Tên danh mục</label>
-            <select name="category_id">
-                @foreach (var item in categories)
-                {
-                    <option value="@item.category_id">@item.category_name</option>
-                }
-            </select>
+            <div class="field">
+                <label>Ngày sửa</label>
+                <input type="date" name="product_dateedit" value="@Model.product_dateedit.Value.Year-@(Model.product_dateedit.Value.Month < 10 ? "0" + Model.product_dateedit.Value.Month.ToString() : Model.product_dateedit.Value.Month.ToString())-@(Model.product_dateedit.Value.Day < 10 ? "0" + Model.product_dateedit.Value.Day.ToString() : Model.product_dateedit.Value.Day.ToString())"/>
+            </div>
+            <div class="field">
+                <label>Phương thức vận chuyển</label>
+                <select name="product_ship">
+                    <option>Free Ship</option>
+                    <option>Trả Phí</option>
+                </select>
+            </div>
         </div>
         <div class="field">
             <label>Ghi chú</label>
@@ -60,43 +123,25 @@
             <label>Mô tả</label>
             <textarea id="editor3" name="product_description">@Model.product_description</textarea>
         </div>
-        <div class="two fields">
-            <div class="field">
-                <label>Hoạt động</label>
-                <select name="product_active">
-                    <option>True</option>
-                    <option>False</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>Phương thức vận chuyển</label>
-                <select name="product_ship">
-                    <option>Free Ship</option>
-                    <option>Trả Phí</option>
-                </select>
-            </div>
-        </div>
-        <div class="two fields">
+        <div class="four fields">
             <div class="field">
                 <label>Lượt xem</label>
-                <input type="text" name="product_view" value="@Model.product_view" />
+                <input type="text" name="product_view" value="@Model.product_view"/>
             </div>
             <div class="field">
                 <label>Yêu thích</label>
-                <input type="text" name="product_love" value="@Model.product_love" />
+                <input type="text" name="product_love" value="@Model.product_love"/>
             </div>
-        </div>
-        <div class="two fields">
             <div class="field">
                 <label>Giá sản phẩm</label>
-                <input type="text" name="product_price" value="@Model.product_price" />
+                <input type="text" name="product_price" value="@Model.product_price"/>
             </div>
             <div class="field">
                 <label>Giá sale</label>
-                <input type="text" name="product_sale" value="@Model.product_sale" />
+                <input type="text" name="product_sale" value="@Model.product_sale"/>
             </div>
         </div>
-        <div class="two fields">
+        <div class="four fields">
             <div class="field">
                 <label>Tùy chọn</label>
                 <select name="product_option">
@@ -106,17 +151,15 @@
             </div>
             <div class="field">
                 <label>Số lượng</label>
-                <input type="text" name="product_amount" value="@Model.product_amount" />
+                <input type="text" name="product_amount" value="@Model.product_amount"/>
             </div>
-        </div>
-        <div class="two fields">
             <div class="field">
                 <label>Màu sắc</label>
-                <input type="text" name="product_color" value="@Model.product_color" />
+                <input type="text" name="product_color" value="@Model.product_color"/>
             </div>
             <div class="field">
                 <label>Kích cỡ</label>
-                <input type="text" name="product_size" value="@Model.product_size" />
+                <input type="text" name="product_size" value="@Model.product_size"/>
             </div>
         </div>
         <div>

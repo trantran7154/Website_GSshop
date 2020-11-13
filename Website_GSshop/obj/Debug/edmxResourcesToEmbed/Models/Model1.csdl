@@ -68,6 +68,7 @@
     <Property Name="collection_active" Type="Boolean" />
     <NavigationProperty Name="Product" Relationship="Self.FK_Product_Collection" FromRole="Collection" ToRole="Product" />
     <Property Name="collection_bin" Type="Boolean" />
+    <Property Name="seller_id" Type="Int32" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>

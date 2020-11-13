@@ -63,6 +63,7 @@
     <Property Name="collection_datecreate" Type="datetime" />
     <Property Name="collection_active" Type="bit" />
     <Property Name="collection_bin" Type="bit" />
+    <Property Name="seller_id" Type="int" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>

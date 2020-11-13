@@ -59,6 +59,7 @@
     <EntitySetMapping Name="Collection">
       <EntityTypeMapping TypeName="Data_GSShopModel.Collection">
         <MappingFragment StoreEntitySet="Collection">
+          <ScalarProperty Name="seller_id" ColumnName="seller_id" />
           <ScalarProperty Name="collection_bin" ColumnName="collection_bin" />
           <ScalarProperty Name="collection_id" ColumnName="collection_id" />
           <ScalarProperty Name="collection_name" ColumnName="collection_name" />

@@ -68,6 +68,7 @@
           <Property Name="collection_datecreate" Type="datetime" />
           <Property Name="collection_active" Type="bit" />
           <Property Name="collection_bin" Type="bit" />
+          <Property Name="seller_id" Type="int" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -559,6 +560,7 @@
           <Property Name="collection_active" Type="Boolean" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Collection" FromRole="Collection" ToRole="Product" />
           <Property Name="collection_bin" Type="Boolean" />
+          <Property Name="seller_id" Type="Int32" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -1067,6 +1069,7 @@
           <EntitySetMapping Name="Collection">
             <EntityTypeMapping TypeName="Data_GSShopModel.Collection">
               <MappingFragment StoreEntitySet="Collection">
+                <ScalarProperty Name="seller_id" ColumnName="seller_id" />
                 <ScalarProperty Name="collection_bin" ColumnName="collection_bin" />
                 <ScalarProperty Name="collection_id" ColumnName="collection_id" />
                 <ScalarProperty Name="collection_name" ColumnName="collection_name" />

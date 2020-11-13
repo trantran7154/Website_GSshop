@@ -28,6 +28,7 @@ namespace Website_GSshop.Models
         public Nullable<System.DateTime> collection_datecreate { get; set; }
         public Nullable<bool> collection_active { get; set; }
         public Nullable<bool> collection_bin { get; set; }
+        public Nullable<int> seller_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
