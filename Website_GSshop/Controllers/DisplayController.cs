@@ -50,5 +50,10 @@ namespace Website_GSshop.Controllers
         {
             return PartialView(db.Product.Where(n => n.product_active == true).OrderByDescending(n => n.product_datecreated).Take(20).ToList());
         }
+        // Sematic
+        public PartialViewResult CSS_Sematic()
+        {
+            return PartialView();
+        }
     }
 }

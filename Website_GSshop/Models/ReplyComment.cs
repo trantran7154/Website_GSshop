@@ -14,6 +14,12 @@ namespace Website_GSshop.Models
     
     public partial class ReplyComment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ReplyComment()
+        {
+            this.Like = new HashSet<Like>();
+        }
+    
         public int replycomment_id { get; set; }
         public string replycomment_content { get; set; }
         public Nullable<int> comment_id { get; set; }
@@ -28,5 +34,7 @@ namespace Website_GSshop.Models
         public virtual Product Product { get; set; }
         public virtual Seller Seller { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Like> Like { get; set; }
     }
 }

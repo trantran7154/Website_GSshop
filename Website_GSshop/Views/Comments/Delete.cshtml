@@ -1,0 +1,81 @@
+﻿@model Website_GSshop.Models.Comment
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/SellerManagement/Views/Shared/_LayoutSeller.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Comment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.comment_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comment_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.commet_datecreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.commet_datecreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.seller_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seller_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comment_spam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comment_spam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comment_bin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comment_bin)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

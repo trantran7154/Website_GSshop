@@ -5,11 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     User sesus = (User)Session["user"];
     Data_GSShopEntities db = new Data_GSShopEntities();
+    var bl = "bl";
 }
 @{ 
     List<Favourite> fa = db.Favourite.ToList();
     List<Favourite> pr = db.Favourite.Where(n => n.product_id == Model.product_id && n.fa_bin == false).ToList();
     List<Product> products = db.Product.ToList();
+    List<Comment> cmt = db.Comment.Where(n => n.product_id == Model.product_id).ToList();
+    List<ReplyComment> rep = db.ReplyComment.Where(n => n.product_id == Model.product_id).ToList();
+    List<Like> like = db.Like.ToList();
 }
 <link href="~/Content/CSS/product_detail.css" rel="stylesheet" />
 <link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
@@ -27,40 +31,141 @@
                         </ul>
                     </div>
                 </div>
+                <!--Comment-->
                 <div class="card mt-2">
                     <h6>Reviews</h6>
                     <div class="d-flex flex-row">
                         <div class="stars"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>  <i class="fa fa-star-half-o"></i> </div> <span class="ml-1 font-weight-bold">4.6</span>
                     </div>
                     <hr>
-                    <div class="badges"> <span class="badge bg-dark ">All (230)</span> <span class="badge bg-dark "> <i class="fa fa-image"></i> 23 </span> <span class="badge bg-dark "> <i class="fa fa-comments-o"></i> 23 </span> <span class="badge bg-warning">  <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <span class="ml-1">2,123</span> </span> </div>
+                    <div class="badges"> <span class="badge bg-dark ">All (230)</span> <span class="badge bg-dark "> <i class="fa fa-comments-o"></i> 23 </span> <span class="badge bg-warning">  <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <span class="ml-1">2,123</span> </span> </div>
                     <hr>
-                    <div class="comment-section">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex flex-row align-items-center">
-                                <img src="https://i.imgur.com/o5uMfKo.jpg" class="rounded-circle profile-image">
-                                <div class="d-flex flex-column ml-1 comment-profile">
-                                    <div class="comment-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div> <span class="username">Lori Benneth</span>
-                                </div>
+                    @if (sesus != null)
+                    {
+                        <form action="@Url.Action("Comment","Comment")" method="post">
+                            <textarea class="form-control" required name="comment_content"></textarea>
+                            <br />
+                            <center><input type="submit" value="Bình Luận" class="btn btn-success" /></center>
+                        </form> 
+                    }
+                    else
+                    {
+                        <center><a href="/Account/Login" class="btn btn-danger">VUI LÒNG ĐĂNG NHẬP ĐỂ BÌNH LUẬN</a></center>}
+                            <div class="comment-section">
+                                @foreach (var item in cmt)
+                                {
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        @{
+                                            var time1 = "vài giây trước";
+                                            var tmp1 = DateTime.Now.Minute - item.commet_datecreated.Value.Minute;
+                                            var tmp2 = DateTime.Now.Hour - item.commet_datecreated.Value.Hour;
+                                            var tmp3 = DateTime.Now.Date - item.commet_datecreated.Value.Date;
+                                            if (tmp1 > 0)
+                                            {
+                                                time1 = tmp1 + " phút trước";
+                                            }
+                                            else if (tmp1 > 60)
+                                            {
+                                                time1 = tmp2.ToString() + " giờ trước";
+                                            }
+                                        }
+                                        <div class="d-flex flex-row align-items-center">
+                                            <img src="https://i.imgur.com/o5uMfKo.jpg" class="rounded-circle profile-image">
+                                            <div class="d-flex flex-column ml-1 comment-profile mt-3">
+                                                <span class="username">@sesus.user_nicename</span>
+                                                <div class="comment-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
+                                                <small class="mt-1 ml-1 font-weight-bold">@item.comment_content</small>
+                                                <div class="mt-1 ml-1 row p-0">
+                                                    <div class="col-md-6 p-0">
+                                                        <form method="post" action="@Url.Action("Like","Like",new {id = Model.product_id})">
+                                                            <input type="hidden" value="@item.comment_id" name="comment_id" />
+                                                            @if (sesus != null)
+                                                            {
+                                                                if (ViewBag.CountLike == 0)
+                                                                {
+                                                                    <button style="border: none" class="bg-white"><i class="fa fa-thumbs-o-up"></i> @like.Count</button>
+                                                                }
+                                                                else
+                                                                {
+                                                                    foreach (var item2 in like.Where(n => n.product_id == Model.product_id && n.like_bin == true && n.comment_id == item.comment_id).ToList())
+                                                                    {
+                                                                        <form method="post" action="@Url.Action("LikeDelete", "Like", new { id = Model.product_id })">
+                                                                            <input type="hidden" value="@item2.like_id" name="like_id" />
+                                                                            <button type="submit" style="border: none" class="text-primary bg-white">
+                                                                                <i class="fa fa-thumbs-o-up"></i> @like.Count
+                                                                            </button>
+                                                                        </form>
+                                                                    }
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                <button style="border: none" class="bg-white"><i class="fa fa-thumbs-o-up"></i> @like.Count</button>
+                                                            }
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-md-6 p-0">
+                                                        <span data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" data-target="#@bl@item.comment_id"><i class="fa fa-comments-o"></i> 1</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="date"> <span class="text-muted">@time1</span> </div>
+                                    </div>
+                                    <!--Reply-->
+                                    <div class="collapse" id="@bl@item.comment_id">
+                                        @if (sesus != null)
+                                        {
+                                            <form action="@Url.Action("ReplyComment","ReplyComment", new {id = Model.product_id})" method="post" class="ml-4 mt-2">
+                                                <input type="hidden" value="@item.comment_id" name="comment_id" />
+                                                <textarea class="form-control" required name="replycomment_content"></textarea>
+                                                <br />
+                                                <center><input type="submit" value="TRẢ LỜI" class="btn btn-success" /></center>
+                                            </form> 
+                                        }
+                                        else
+                                        {
+                                            <center><a href="/Account/Login" class="btn btn-danger">VUI LÒNG ĐĂNG NHẬP ĐỂ TRẢ LỜI BÌNH LUẬN</a></center>
+                                        }
+                                        @foreach (var item1 in rep)
+                                        {       
+                                            <div class="d-flex justify-content-between align-items-center ml-4">
+                                                @{
+                                                    var time = "vài giây trước";
+                                                    var tmpr1 = DateTime.Now.Minute - item1.replycomment_datecreated.Value.Minute;
+                                                    var tmpr2 = DateTime.Now.Hour - item1.replycomment_datecreated.Value.Hour;
+                                                    var tmpr3 = DateTime.Now.Date - item1.replycomment_datecreated.Value.Date;
+                                                    if (tmp1 > 0)
+                                                    {
+                                                        time = tmpr1 + " phút trước";
+                                                    }
+                                                    else if (tmpr1 > 60)
+                                                    {
+                                                        time = tmpr2.ToString() + " giờ trước";
+                                                    }
+                                                } 
+                                                <div class="d-flex flex-row align-items-center">
+                                                    <img src="https://i.imgur.com/tmdHXOY.jpg" class="rounded-circle profile-image">
+                                                    <div class="d-flex flex-column ml-1 comment-profile mt-3">
+                                                        <span class="username">@sesus.user_nicename</span>
+                                                        <div class="comment-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
+                                                        <small class="mt-1 ml-1 font-weight-bold">@item1.replycomment_content</small>
+                                                        <small class="mt-1 ml-1"><span><i class="fa fa-thumbs-o-up"></i> 1</span></small>
+                                                    </div>
+                                                </div>
+                                                <div class="date"> <span class="text-muted">@time</span> </div>
+                                            </div>
+                                         }
+                                    </div>
+                                    <!--//Reply-->
+                                    <hr>
+                                }
                             </div>
-                            <div class="date"> <span class="text-muted">2 May</span> </div>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex flex-row align-items-center">
-                                <img src="https://i.imgur.com/tmdHXOY.jpg" class="rounded-circle profile-image">
-                                <div class="d-flex flex-column ml-1 comment-profile">
-                                    <div class="comment-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div> <span class="username">Timona Simaung</span>
-                                </div>
-                            </div>
-                            <div class="date"> <span class="text-muted">12 May</span> </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-7">
-                <div class="card"> 
-                    <div class="d-flex flex-row align-items-center ml-1">
+                    <div class="col-md-7">
+                        <div class="card"> 
+                            <div class="d-flex flex-row align-items-center ml-1">
                         <div class="p-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div> <small class="ml-1">(5.0)</small>
                     </div>
                     <h3 class="font-weight-bold text-primary">@Model.product_name </h3>
@@ -116,6 +221,7 @@
                         </div>
                     </div>
                 </div>
+                <!--//Comment-->
                 <div class="card mt-2">
                     <span>Sản phẩm liên quan:</span>
                     <div class="similar-products mt-2 d-flex flex-row">

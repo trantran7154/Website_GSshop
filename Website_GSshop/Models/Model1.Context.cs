@@ -39,5 +39,6 @@ namespace Website_GSshop.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Favourite> Favourite { get; set; }
+        public virtual DbSet<Like> Like { get; set; }
     }
 }

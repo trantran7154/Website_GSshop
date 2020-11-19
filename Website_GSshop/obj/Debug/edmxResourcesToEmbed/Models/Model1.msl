@@ -242,5 +242,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Like">
+      <EntityTypeMapping TypeName="Data_GSShopModel.Like">
+        <MappingFragment StoreEntitySet="Like">
+          <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+          <ScalarProperty Name="replycomment_id" ColumnName="replycomment_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="like_bin" ColumnName="like_bin" />
+          <ScalarProperty Name="like_datecreated" ColumnName="like_datecreated" />
+          <ScalarProperty Name="like_id" ColumnName="like_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

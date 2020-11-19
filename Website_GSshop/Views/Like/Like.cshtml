@@ -1,0 +1,10 @@
+﻿@using Website_GSshop.Models
+@model Product
+@{ 
+    User sesus = (User)Session["user"];
+    Data_GSShopEntities db = new Data_GSShopEntities();
+}
+@{ 
+    List<Like> like = db.Like.Where(n => n.product_id == Model.product_id && n.like_bin == true).ToList();
+}
+

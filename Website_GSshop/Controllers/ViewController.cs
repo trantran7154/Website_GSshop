@@ -10,6 +10,7 @@ namespace Website_GSshop.Controllers
     public class ViewController : Controller
     {
         Data_GSShopEntities db = new Data_GSShopEntities();
+        String login = "/Account/Login/";
         // GET: View
         // Xem chi tiết các sản phẩm tìm kiếm phổ biến
         public ActionResult MostPopularDetail()
@@ -43,8 +44,13 @@ namespace Website_GSshop.Controllers
             {
                 List<Favourite> fa = db.Favourite.Where(n => n.user_id == user.user_id && n.product_id == id && n.fa_bin == false).ToList();
                 ViewBag.CountProduct = fa.Count;
+                List<Like> like = db.Like.Where(n => n.user_id == user.user_id && n.product_id == id && n.like_bin == true).ToList();
+                ViewBag.CountLike = like.Count;
             }
-
+            else
+            {
+                return Redirect(login);
+            }
             Session["product"] = id;
             db.Product.Find(id).product_view++;
             db.SaveChanges();

@@ -16,6 +16,7 @@ namespace Website_GSshop.Controllers
         String update = "/Account/UpdateInfo";
         String updateseller = "/Account/UpdateInfoSeller";
         String manage = "/SellerManagement/SellerManagement/Index";
+        String infouser = "/Account/Info";
         Data_GSShopEntities db = new Data_GSShopEntities();
         // GET: Login
         public ActionResult Login()
@@ -117,7 +118,37 @@ namespace Website_GSshop.Controllers
             {
                 Response.Redirect(login);
             }
-            return View();
+            return View(user);
+        }
+        // Sửa thông tin cá nhân user phần info
+        [HttpPost]
+        public ActionResult UpdateInfoUser(FormCollection f)
+        {
+            User user = (User)Session["user"];
+            User usernew = db.User.SingleOrDefault(n => n.user_id == user.user_id);
+            String sNicname = f["user_nicename"].ToString();
+            String sEmail = f["user_email"].ToString();
+            db.User.Find(user.user_id).user_nicename = sNicname;
+            db.User.Find(user.user_id).user_email = sEmail;
+            Session["user"] = usernew;
+            db.SaveChanges();
+            return Redirect(infouser);
+        }
+        // Thêm thông tin cá nhân user phần info
+        [HttpPost]
+        public ActionResult CreateInfoUser(FormCollection f)
+        {
+            User user = (User)Session["user"];
+            User usernew = db.User.SingleOrDefault(n => n.user_id == user.user_id);
+            String sAddress = f["user_address"].ToString();
+            String sDis = f["user_district"].ToString();
+            String sPro = f["user_provincecity"].ToString();
+            db.User.Find(user.user_id).user_address = sAddress;
+            db.User.Find(user.user_id).user_district = sDis;
+            db.User.Find(user.user_id).user_provincecity = sPro;
+            Session["user"] = usernew;
+            db.SaveChanges();
+            return Redirect(infouser);
         }
         // Quên mật khẩu người dùng   
 

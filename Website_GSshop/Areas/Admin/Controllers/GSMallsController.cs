@@ -48,7 +48,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "gsmall_id,gsmall_name,gsmall_slogan,gsmall_active,gsmall_datecreate,gsmall_bg,gsmall_image,gsmall_bin")] GSMall gSMall, HttpPostedFileBase fileUpload1, HttpPostedFileBase fileUpload2)
+        public ActionResult Create([Bind(Include = "gsmall_id,gsmall_name,gsmall_slogan,gsmall_active,gsmall_datecreate,gsmall_bg,gsmall_image,gsmall_bin,gsmall_img1,gsmall_img2,gsmall_img3,gsmall_img4,gsmall_img5,gsmall_img6,gsmall_img7")] GSMall gSMall, HttpPostedFileBase fileUpload1, HttpPostedFileBase fileUpload2)
         {
             // Tên file ảnh sản phẩm
             var fileimg_edit1 = Path.GetFileName(fileUpload1.FileName);
@@ -113,7 +113,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "gsmall_id,gsmall_name,gsmall_slogan,gsmall_active,gsmall_datecreate,gsmall_bg,gsmall_image,gsmall_bin")] GSMall gSMall, HttpPostedFileBase gsmall_bg1, HttpPostedFileBase gsmall_image1)
+        public ActionResult Edit([Bind(Include = "gsmall_id,gsmall_name,gsmall_slogan,gsmall_active,gsmall_datecreate,gsmall_bg,gsmall_image,gsmall_bin,gsmall_img1,gsmall_img2,gsmall_img3,gsmall_img4,gsmall_img5,gsmall_img6,gsmall_img7")] GSMall gSMall, HttpPostedFileBase gsmall_bg1, HttpPostedFileBase gsmall_image1)
         {
             db.Entry(gSMall).State = EntityState.Modified;
             if (gsmall_bg1 == null || gsmall_image1 == null)

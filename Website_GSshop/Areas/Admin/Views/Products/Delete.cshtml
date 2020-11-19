@@ -6,58 +6,85 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
     Data_GSShopEntities db = new Data_GSShopEntities();
 }
+@{
+    Category ca = db.Category.SingleOrDefault(n => n.category_id == Model.category_id);
+    SubCategory sb = db.SubCategory.SingleOrDefault(n => n.subcategory_id == Model.subcategory_id);
+    Banner ba = db.Banner.SingleOrDefault(n => n.banner_id == Model.banner_id);
+    Collection co = db.Collection.SingleOrDefault(n => n.collection_id == Model.collection_id);
+    GSMall gs = db.GSMall.SingleOrDefault(n => n.gsmall_id == Model.gsmail_id);
+}
 @Html.Action("CSS_Sematic", "Home")
-<h3>
-    <a href="/Admin/Products/Index"><svg id="Capa_1" enable-background="new 0 0 512 512" height="40" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg"><g><g><g><path d="m91.373 62.847-7.362 94.653h343.979l-7.362-94.653c-2.43-31.238-28.487-55.347-59.82-55.347h-209.616c-31.333 0-57.39 24.109-59.819 55.347z" fill="#92dd7a" /></g></g><g><g><path d="m256 127.5c-11.046 0-20-8.954-20-20s8.954-20 20-20v-80h-104.808c-31.333 0-57.39 24.109-59.819 55.347l-7.362 94.653h171.989z" fill="#7ec66a" /></g></g><g><g><path d="m407.259 424.025 20.73-266.525h-343.978l20.73 266.525 151.259 40.238z" fill="#92dd7a" /></g></g><g><g><path d="m422.545 227.5 5.444-70h-343.978l20.73 266.525 56.234 14.96-16.449-211.485z" fill="#7ec66a" /></g></g><g><g><path d="m426 187.5h-340c-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30h340c16.569 0 30 13.431 30 30 0 16.569-13.431 30-30 30z" fill="#b1ef97" /></g></g><g><g><path d="m191.128 157.5c0-16.569 13.431-30 30-30h-135.128c-16.569 0-30 13.431-30 30s13.431 30 30 30h135.128c-16.569 0-30-13.431-30-30z" fill="#92dd7a" /></g></g><g><g><path d="m353.919 59.826 4.07-52.326h-203.978l4.07 52.326c1.215 15.619 14.243 27.674 29.91 27.674h136.02c15.665 0 28.694-12.055 29.908-27.674z" fill="#67b758" /></g></g><g><g><path d="m104.741 424.025 1.954 25.127c2.43 31.238 28.487 55.347 59.819 55.347h178.971c31.333 0 57.39-24.109 59.819-55.347l1.954-25.127z" fill="#7ec66a" /></g></g><g><g><path d="m106.695 449.153c2.43 31.238 28.487 55.347 59.819 55.347h55.071c-31.333 0-57.39-24.109-59.819-55.347l-1.954-25.127h-55.071z" fill="#67b758" /></g></g><g><g><g><path d="m193.551 57.428c-4.142 0-7.5-3.358-7.5-7.5v-12c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5v12c0 4.142-3.358 7.5-7.5 7.5z" /></g></g><g><g><path d="m318.449 57.428c-4.142 0-7.5-3.358-7.5-7.5v-12c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5v12c0 4.142-3.358 7.5-7.5 7.5z" /></g></g><g><g><path d="m256 64.572c-8.477 0-16.539-3.671-22.118-10.073-2.722-3.123-2.396-7.86.726-10.582s7.859-2.397 10.582.726c2.73 3.132 6.67 4.928 10.811 4.928s8.081-1.796 10.811-4.928c2.721-3.124 7.459-3.448 10.582-.726s3.448 7.459.726 10.582c-5.581 6.401-13.643 10.073-22.12 10.073z" /></g></g></g><g><g><path d="m463.5 157.5c0-18.41-13.339-33.753-30.858-36.899l-4.537-58.335c-1.322-16.997-8.942-32.733-21.455-44.312-12.514-11.578-28.794-17.954-45.842-17.954h-209.616c-17.048 0-33.328 6.376-45.842 17.954s-20.133 27.315-21.455 44.312l-4.537 58.335c-17.519 3.146-30.858 18.489-30.858 36.899s13.339 33.753 30.858 36.899l11.902 153.03c.306 3.932 3.591 6.919 7.469 6.919.195 0 .392-.008.59-.023 4.13-.321 7.217-3.93 6.896-8.059l-11.765-151.266h323.1l-17.23 221.525h-288.64l-3.133-40.287c-.322-4.13-3.937-7.214-8.059-6.896-4.13.321-7.217 3.93-6.896 8.059l5.626 72.333c1.322 16.997 8.942 32.733 21.455 44.312 12.514 11.578 28.794 17.954 45.842 17.954h178.971c17.048 0 33.328-6.376 45.842-17.954 12.513-11.578 20.133-27.315 21.455-44.312l19.86-255.335c17.518-3.146 30.857-18.489 30.857-36.899zm-316.415-142.324 3.518 45.231c1.509 19.398 17.931 34.593 37.387 34.593h87.884c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-87.884c-11.674 0-21.527-9.117-22.432-20.755l-3.441-44.245h187.766l-3.441 44.245c-.905 11.638-10.758 20.755-22.432 20.755h-18.136c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h18.136c19.456 0 35.878-15.195 37.387-34.592l3.518-45.231c25.407 2.011 46.23 22.474 48.235 48.252l4.4 56.571h-323.1l4.4-56.571c2.005-25.779 22.828-46.241 48.235-48.253zm198.4 481.824h-178.97c-27.238 0-50.229-21.272-52.342-48.429l-1.326-17.046h286.306l-1.326 17.046c-2.112 27.157-25.103 48.429-52.342 48.429zm80.515-317h-340c-12.407 0-22.5-10.093-22.5-22.5s10.093-22.5 22.5-22.5h340c12.407 0 22.5 10.093 22.5 22.5s-10.093 22.5-22.5 22.5z" /></g><g><path d="m300.931 247.234c-4.116-.463-7.83 2.493-8.296 6.609l-.717 6.334-11.654-20.186c-4.971-8.61-13.874-13.75-23.815-13.75-9.942 0-18.845 5.14-23.816 13.75l-12.972 22.468c-2.071 3.587-.842 8.174 2.745 10.245 3.586 2.072 8.173.841 10.245-2.745l12.972-22.468c2.26-3.914 6.307-6.25 10.826-6.25s8.565 2.336 10.825 6.25l11.654 20.186-5.845-2.547c-3.797-1.656-8.217.083-9.871 3.88-1.655 3.797.083 8.217 3.88 9.871l26.722 11.643c.958.417 1.978.625 2.995.625 1.299 0 2.595-.337 3.75-1.005 2.061-1.19 3.435-3.287 3.703-5.652l3.278-28.963c.466-4.114-2.493-7.829-6.609-8.295z" fill="#fff" /></g><g><path d="m330.333 354.212c4.971-8.61 4.971-18.89 0-27.5l-12.972-22.469c-2.071-3.588-6.657-4.817-10.245-2.745-3.587 2.071-4.816 6.658-2.745 10.245l12.972 22.469c2.259 3.914 2.26 8.586 0 12.5-2.259 3.914-6.306 6.25-10.825 6.25h-23.309l5.128-3.789c3.332-2.461 4.037-7.157 1.576-10.489-2.461-3.333-7.159-4.038-10.489-1.576l-23.444 17.321c-1.914 1.414-3.043 3.652-3.043 6.032s1.129 4.618 3.043 6.032l23.444 17.32c1.341.991 2.902 1.468 4.451 1.468 2.298 0 4.567-1.053 6.038-3.044 2.461-3.332 1.756-8.027-1.576-10.489l-5.127-3.788h23.309c9.939.003 18.842-5.137 23.814-13.748z" fill="#fff" /></g><g><path d="m215.926 284.059c-2.06-1.189-4.564-1.331-6.746-.38l-26.722 11.643c-3.797 1.654-5.535 6.074-3.88 9.871 1.655 3.798 6.076 5.537 9.871 3.88l5.845-2.547-11.655 20.187c-4.971 8.609-4.971 18.89 0 27.5s13.874 13.75 23.816 13.75h25.944c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-25.944c-4.519 0-8.566-2.336-10.825-6.25-2.26-3.914-2.26-8.586 0-12.5l11.654-20.186.717 6.334c.434 3.83 3.679 6.658 7.443 6.657.282 0 .566-.016.853-.048 4.116-.466 7.075-4.18 6.609-8.296l-3.278-28.964c-.267-2.364-1.641-4.461-3.702-5.651z" fill="#fff" /></g></g></g></svg></a> XÓA SẢN PHẨM
-</h3>
+<a href="/Admin/Products/Index">
+    <h3>
+        <svg id="Capa_1" enable-background="new 0 0 512 512" height="40" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg"><g><g><g><path d="m91.373 62.847-7.362 94.653h343.979l-7.362-94.653c-2.43-31.238-28.487-55.347-59.82-55.347h-209.616c-31.333 0-57.39 24.109-59.819 55.347z" fill="#92dd7a" /></g></g><g><g><path d="m256 127.5c-11.046 0-20-8.954-20-20s8.954-20 20-20v-80h-104.808c-31.333 0-57.39 24.109-59.819 55.347l-7.362 94.653h171.989z" fill="#7ec66a" /></g></g><g><g><path d="m407.259 424.025 20.73-266.525h-343.978l20.73 266.525 151.259 40.238z" fill="#92dd7a" /></g></g><g><g><path d="m422.545 227.5 5.444-70h-343.978l20.73 266.525 56.234 14.96-16.449-211.485z" fill="#7ec66a" /></g></g><g><g><path d="m426 187.5h-340c-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30h340c16.569 0 30 13.431 30 30 0 16.569-13.431 30-30 30z" fill="#b1ef97" /></g></g><g><g><path d="m191.128 157.5c0-16.569 13.431-30 30-30h-135.128c-16.569 0-30 13.431-30 30s13.431 30 30 30h135.128c-16.569 0-30-13.431-30-30z" fill="#92dd7a" /></g></g><g><g><path d="m353.919 59.826 4.07-52.326h-203.978l4.07 52.326c1.215 15.619 14.243 27.674 29.91 27.674h136.02c15.665 0 28.694-12.055 29.908-27.674z" fill="#67b758" /></g></g><g><g><path d="m104.741 424.025 1.954 25.127c2.43 31.238 28.487 55.347 59.819 55.347h178.971c31.333 0 57.39-24.109 59.819-55.347l1.954-25.127z" fill="#7ec66a" /></g></g><g><g><path d="m106.695 449.153c2.43 31.238 28.487 55.347 59.819 55.347h55.071c-31.333 0-57.39-24.109-59.819-55.347l-1.954-25.127h-55.071z" fill="#67b758" /></g></g><g><g><g><path d="m193.551 57.428c-4.142 0-7.5-3.358-7.5-7.5v-12c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5v12c0 4.142-3.358 7.5-7.5 7.5z" /></g></g><g><g><path d="m318.449 57.428c-4.142 0-7.5-3.358-7.5-7.5v-12c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5v12c0 4.142-3.358 7.5-7.5 7.5z" /></g></g><g><g><path d="m256 64.572c-8.477 0-16.539-3.671-22.118-10.073-2.722-3.123-2.396-7.86.726-10.582s7.859-2.397 10.582.726c2.73 3.132 6.67 4.928 10.811 4.928s8.081-1.796 10.811-4.928c2.721-3.124 7.459-3.448 10.582-.726s3.448 7.459.726 10.582c-5.581 6.401-13.643 10.073-22.12 10.073z" /></g></g></g><g><g><path d="m463.5 157.5c0-18.41-13.339-33.753-30.858-36.899l-4.537-58.335c-1.322-16.997-8.942-32.733-21.455-44.312-12.514-11.578-28.794-17.954-45.842-17.954h-209.616c-17.048 0-33.328 6.376-45.842 17.954s-20.133 27.315-21.455 44.312l-4.537 58.335c-17.519 3.146-30.858 18.489-30.858 36.899s13.339 33.753 30.858 36.899l11.902 153.03c.306 3.932 3.591 6.919 7.469 6.919.195 0 .392-.008.59-.023 4.13-.321 7.217-3.93 6.896-8.059l-11.765-151.266h323.1l-17.23 221.525h-288.64l-3.133-40.287c-.322-4.13-3.937-7.214-8.059-6.896-4.13.321-7.217 3.93-6.896 8.059l5.626 72.333c1.322 16.997 8.942 32.733 21.455 44.312 12.514 11.578 28.794 17.954 45.842 17.954h178.971c17.048 0 33.328-6.376 45.842-17.954 12.513-11.578 20.133-27.315 21.455-44.312l19.86-255.335c17.518-3.146 30.857-18.489 30.857-36.899zm-316.415-142.324 3.518 45.231c1.509 19.398 17.931 34.593 37.387 34.593h87.884c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-87.884c-11.674 0-21.527-9.117-22.432-20.755l-3.441-44.245h187.766l-3.441 44.245c-.905 11.638-10.758 20.755-22.432 20.755h-18.136c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h18.136c19.456 0 35.878-15.195 37.387-34.592l3.518-45.231c25.407 2.011 46.23 22.474 48.235 48.252l4.4 56.571h-323.1l4.4-56.571c2.005-25.779 22.828-46.241 48.235-48.253zm198.4 481.824h-178.97c-27.238 0-50.229-21.272-52.342-48.429l-1.326-17.046h286.306l-1.326 17.046c-2.112 27.157-25.103 48.429-52.342 48.429zm80.515-317h-340c-12.407 0-22.5-10.093-22.5-22.5s10.093-22.5 22.5-22.5h340c12.407 0 22.5 10.093 22.5 22.5s-10.093 22.5-22.5 22.5z" /></g><g><path d="m300.931 247.234c-4.116-.463-7.83 2.493-8.296 6.609l-.717 6.334-11.654-20.186c-4.971-8.61-13.874-13.75-23.815-13.75-9.942 0-18.845 5.14-23.816 13.75l-12.972 22.468c-2.071 3.587-.842 8.174 2.745 10.245 3.586 2.072 8.173.841 10.245-2.745l12.972-22.468c2.26-3.914 6.307-6.25 10.826-6.25s8.565 2.336 10.825 6.25l11.654 20.186-5.845-2.547c-3.797-1.656-8.217.083-9.871 3.88-1.655 3.797.083 8.217 3.88 9.871l26.722 11.643c.958.417 1.978.625 2.995.625 1.299 0 2.595-.337 3.75-1.005 2.061-1.19 3.435-3.287 3.703-5.652l3.278-28.963c.466-4.114-2.493-7.829-6.609-8.295z" fill="#fff" /></g><g><path d="m330.333 354.212c4.971-8.61 4.971-18.89 0-27.5l-12.972-22.469c-2.071-3.588-6.657-4.817-10.245-2.745-3.587 2.071-4.816 6.658-2.745 10.245l12.972 22.469c2.259 3.914 2.26 8.586 0 12.5-2.259 3.914-6.306 6.25-10.825 6.25h-23.309l5.128-3.789c3.332-2.461 4.037-7.157 1.576-10.489-2.461-3.333-7.159-4.038-10.489-1.576l-23.444 17.321c-1.914 1.414-3.043 3.652-3.043 6.032s1.129 4.618 3.043 6.032l23.444 17.32c1.341.991 2.902 1.468 4.451 1.468 2.298 0 4.567-1.053 6.038-3.044 2.461-3.332 1.756-8.027-1.576-10.489l-5.127-3.788h23.309c9.939.003 18.842-5.137 23.814-13.748z" fill="#fff" /></g><g><path d="m215.926 284.059c-2.06-1.189-4.564-1.331-6.746-.38l-26.722 11.643c-3.797 1.654-5.535 6.074-3.88 9.871 1.655 3.798 6.076 5.537 9.871 3.88l5.845-2.547-11.655 20.187c-4.971 8.609-4.971 18.89 0 27.5s13.874 13.75 23.816 13.75h25.944c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-25.944c-4.519 0-8.566-2.336-10.825-6.25-2.26-3.914-2.26-8.586 0-12.5l11.654-20.186.717 6.334c.434 3.83 3.679 6.658 7.443 6.657.282 0 .566-.016.853-.048 4.116-.466 7.075-4.18 6.609-8.296l-3.278-28.964c-.267-2.364-1.641-4.461-3.702-5.651z" fill="#fff" /></g></g></g></svg> XÓA SẢN PHẨM
+    </h3>
+</a>
 @using (Html.BeginForm("Delete", "Products", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
 {
     <form method="post" class="mb-4 ui form">
-        <input type="hidden" value="@Model.product_id" name="product_id"/>
-        <div class="two fields">
+        <input type="hidden" value="@Model.product_id" name="product_id" />
+        <div class="four fields">
             <div class="field">
                 <label>Tên sản phẩm</label>
-                <input value="@Model.product_name" name="product_name" type="text" disabled>
+                <input value="@Model.product_name" name="product_name" type="text" disabled />
             </div>
             <div class="field">
-                <label>Ngày sửa</label>
-                <input type="text" name="product_dateedit" value="@Model.product_dateedit" disabled/>
-            </div>
-        </div>
-        <div class="two fields">
-            <div class="field">
-                <label>Ảnh</label>
-                <img src="~/Content/Layout/images/@Model.product_image" width="100" height="100"/>
+                <label>Tên bộ sưu tập</label>
+                <select name="category_id" disabled>
+                    <option>@co.collection_name</option>
+                </select>
             </div>
             <div class="field">
-                <label>Ngày tạo</label>
-                <input type="text" name="product_datecreated" value="@Model.product_datecreated" disabled/>
+                <label>Tên danh mục</label>
+                <select name="category_id" disabled>
+                    <option>@ca.category_name</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Tên danh mục con</label>
+                <select name="subcategory_id" disabled>
+                    <option>NULL</option>
+                </select>
             </div>
         </div>
-        <div class="field">
-            <label>Mã danh mục</label>
-            <select name="category_id" disabled>
-                <option value="@Model.category_id">@Model.Category.category_name</option>
-            </select>
-        </div>
-        <div class="field">
-            <label>Ghi chú</label>
-            <input type="text" value="@Model.product_note" name="product_note" disabled/>
-        </div>
-        <div class="field">
-            <label>Chi tiết</label>
-            <input type="text" value="@Model.product_detail" name="product_detail" disabled />
-        </div>
-        <div class="field">
-            <label>Mô tả</label>
-            <input type="text" value="@Model.product_description" name="product_description" disabled />
-        </div>
-        <div class="two fields">
+        <div class="four fields">
+            <div class="field">
+                <label>Tên banner</label>
+                <select name="banner_id" disabled>
+                    <option>@ba.banner_name</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Tên đối tác</label>
+                <select name="subcategory_id" disabled>
+                    <option>@gs.gsmall_name</option>
+                </select>
+            </div>
+            <div class="field">
+                <div class="field">
+                    <label>Mã sản phẩm liên quan</label>
+                    <input name="product_related" value="@Model.product_related" type="text" disabled>
+                </div>
+            </div>
             <div class="field">
                 <label>Hoạt động</label>
                 <select name="product_active" disabled>
                     <option>@Model.product_active</option>
                 </select>
+            </div>
+        </div>
+        <div class="four fields">
+            <div class="field">
+                <label>Ảnh</label>
+                <img src="~/Content/Layout/images/@Model.product_image" width="100" height="100" />
+            </div>
+            <div class="field">
+                <label>Ngày tạo</label>
+                <input type="date" name="product_datecreated" value="@Model.product_datecreated.Value.Year-@(Model.product_datecreated.Value.Month < 10 ? "0" + Model.product_datecreated.Value.Month.ToString() : Model.product_datecreated.Value.Month.ToString())-@(Model.product_datecreated.Value.Day < 10 ? "0" + Model.product_datecreated.Value.Day.ToString() : Model.product_datecreated.Value.Day.ToString())" />
+            </div>
+            <div class="field">
+                <label>Ngày sửa</label>
+                <input type="date" name="product_dateedit" value="@Model.product_dateedit.Value.Year-@(Model.product_dateedit.Value.Month < 10 ? "0" + Model.product_dateedit.Value.Month.ToString() : Model.product_dateedit.Value.Month.ToString())-@(Model.product_dateedit.Value.Day < 10 ? "0" + Model.product_dateedit.Value.Day.ToString() : Model.product_dateedit.Value.Day.ToString())" />
             </div>
             <div class="field">
                 <label>Phương thức vận chuyển</label>
@@ -66,46 +93,54 @@
                 </select>
             </div>
         </div>
-        <div class="two fields">
+        <div class="field">
+            <label>Ghi chú</label>
+            <input name="product_description" value="@Model.product_note" disabled />
+        </div>
+        <div class="field">
+            <label>Chi tiết</label>
+            <input name="product_description" value="@Model.product_detail" disabled />
+        </div>
+        <div class="field">
+            <label>Mô tả</label>
+            <input name="product_description" value="@Model.product_description" disabled />
+        </div>
+        <div class="four fields">
             <div class="field">
                 <label>Lượt xem</label>
-                <input type="text" name="product_view" value="@Model.product_view" disabled/>
+                <input type="text" name="product_view" value="@Model.product_view" disabled />
             </div>
             <div class="field">
                 <label>Yêu thích</label>
-                <input type="text" name="product_love" value="@Model.product_love" disabled/>
+                <input type="text" name="product_love" value="@Model.product_love" disabled />
             </div>
-        </div>
-        <div class="two fields">
             <div class="field">
                 <label>Giá sản phẩm</label>
-                <input type="text" name="product_price" value="@Model.product_price" disabled/>
+                <input type="text" name="product_price" value="@Model.product_price" disabled />
             </div>
             <div class="field">
                 <label>Giá sale</label>
-                <input type="text" name="product_sale" value="@Model.product_sale" disabled/>
+                <input type="text" name="product_sale" value="@Model.product_sale" disabled />
             </div>
         </div>
-        <div class="two fields">
+        <div class="four fields">
             <div class="field">
                 <label>Tùy chọn</label>
                 <select name="product_option" disabled>
-                    <option >@Model.product_option</option>
+                    <option>@Model.product_option</option>
                 </select>
             </div>
             <div class="field">
                 <label>Số lượng</label>
-                <input type="text" name="product_amount" value="@Model.product_amount" disabled/>
+                <input type="text" name="product_amount" value="@Model.product_amount" disabled />
             </div>
-        </div>
-        <div class="two fields">
             <div class="field">
                 <label>Màu sắc</label>
-                <input type="text" name="product_color" value="@Model.product_color" disabled/>
+                <input type="text" name="product_color" value="@Model.product_color" disabled />
             </div>
             <div class="field">
                 <label>Kích cỡ</label>
-                <input type="text" name="product_size" value="@Model.product_size" disabled/>
+                <input type="text" name="product_size" value="@Model.product_size" disabled />
             </div>
         </div>
         <div>

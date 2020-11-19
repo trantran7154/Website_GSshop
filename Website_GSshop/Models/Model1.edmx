@@ -113,6 +113,18 @@
           <Property Name="gsmall_img6" Type="nvarchar" MaxLength="200" />
           <Property Name="gsmall_img7" Type="nvarchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="Like">
+          <Key>
+            <PropertyRef Name="like_id" />
+          </Key>
+          <Property Name="like_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="like_datecreated" Type="datetime" />
+          <Property Name="like_bin" Type="bit" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="replycomment_id" Type="int" />
+          <Property Name="comment_id" Type="int" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="product_id" />
@@ -264,6 +276,54 @@
               <PropertyRef Name="user_id" />
             </Principal>
             <Dependent Role="Favourite">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_Comment">
+          <End Role="Comment" Type="Self.Comment" Multiplicity="0..1" />
+          <End Role="Like" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="comment_id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="comment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Like" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_ReplyComment">
+          <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="0..1" />
+          <End Role="Like" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReplyComment">
+              <PropertyRef Name="replycomment_id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="replycomment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Like" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Like">
               <PropertyRef Name="user_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -421,6 +481,7 @@
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Favourite" EntityType="Self.Favourite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GSMall" EntityType="Self.GSMall" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Like" EntityType="Self.Like" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReplyComment" EntityType="Self.ReplyComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
@@ -438,6 +499,22 @@
           <AssociationSet Name="FK_Favourite_User" Association="Self.FK_Favourite_User">
             <End Role="User" EntitySet="User" />
             <End Role="Favourite" EntitySet="Favourite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_Comment" Association="Self.FK_Like_Comment">
+            <End Role="Comment" EntitySet="Comment" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_Product" Association="Self.FK_Like_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_ReplyComment" Association="Self.FK_Like_ReplyComment">
+            <End Role="ReplyComment" EntitySet="ReplyComment" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_User" Association="Self.FK_Like_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Like" EntitySet="Like" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Banner" Association="Self.FK_Product_Banner">
             <End Role="Banner" EntitySet="Banner" />
@@ -575,6 +652,7 @@
           <Property Name="comment_spam" Type="Boolean" />
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Comment" FromRole="Comment" ToRole="ReplyComment" />
           <Property Name="comment_bin" Type="Boolean" />
+          <NavigationProperty Name="Like" Relationship="Data_GSShopModel.FK_Like_Comment" FromRole="Comment" ToRole="Like" />
         </EntityType>
         <EntityType Name="GSMall">
           <Key>
@@ -637,6 +715,7 @@
           <Property Name="product_bin" Type="Boolean" />
           <NavigationProperty Name="Favourite" Relationship="Data_GSShopModel.FK_Favourite_Product" FromRole="Product" ToRole="Favourite" />
           <Property Name="product_related" Type="Int32" />
+          <NavigationProperty Name="Like" Relationship="Data_GSShopModel.FK_Like_Product" FromRole="Product" ToRole="Like" />
         </EntityType>
         <EntityType Name="ReplyComment">
           <Key>
@@ -655,6 +734,7 @@
           <NavigationProperty Name="Seller" Relationship="Self.FK_ReplyComment_Seller" FromRole="ReplyComment" ToRole="Seller" />
           <NavigationProperty Name="User" Relationship="Self.FK_ReplyComment_User" FromRole="ReplyComment" ToRole="User" />
           <Property Name="replycomment_bin" Type="Boolean" />
+          <NavigationProperty Name="Like" Relationship="Data_GSShopModel.FK_Like_ReplyComment" FromRole="ReplyComment" ToRole="Like" />
         </EntityType>
         <EntityType Name="Seller">
           <Key>
@@ -736,6 +816,7 @@
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_User" FromRole="User" ToRole="ReplyComment" />
           <Property Name="user_bin" Type="Boolean" />
           <NavigationProperty Name="Favourite" Relationship="Data_GSShopModel.FK_Favourite_User" FromRole="User" ToRole="Favourite" />
+          <NavigationProperty Name="Like" Relationship="Data_GSShopModel.FK_Like_User" FromRole="User" ToRole="Like" />
         </EntityType>
         <Association Name="FK_Product_Banner">
           <End Role="Banner" Type="Self.Banner" Multiplicity="0..1" />
@@ -968,6 +1049,23 @@
             <End Role="User" EntitySet="User" />
             <End Role="Favourite" EntitySet="Favourite" />
           </AssociationSet>
+          <EntitySet Name="Like" EntityType="Data_GSShopModel.Like" />
+          <AssociationSet Name="FK_Like_Product" Association="Data_GSShopModel.FK_Like_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_ReplyComment" Association="Data_GSShopModel.FK_Like_ReplyComment">
+            <End Role="ReplyComment" EntitySet="ReplyComment" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_User" Association="Data_GSShopModel.FK_Like_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_Comment" Association="Data_GSShopModel.FK_Like_Comment">
+            <End Role="Comment" EntitySet="Comment" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Favourite">
           <Key>
@@ -1002,6 +1100,70 @@
             </Principal>
             <Dependent Role="Favourite">
               <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Like">
+          <Key>
+            <PropertyRef Name="like_id" />
+          </Key>
+          <Property Name="like_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="like_datecreated" Type="DateTime" Precision="3" />
+          <Property Name="like_bin" Type="Boolean" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="replycomment_id" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Like_Product" FromRole="Like" ToRole="Product" />
+          <NavigationProperty Name="ReplyComment" Relationship="Data_GSShopModel.FK_Like_ReplyComment" FromRole="Like" ToRole="ReplyComment" />
+          <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_Like_User" FromRole="Like" ToRole="User" />
+          <Property Name="comment_id" Type="Int32" />
+          <NavigationProperty Name="Comment" Relationship="Data_GSShopModel.FK_Like_Comment" FromRole="Like" ToRole="Comment" />
+        </EntityType>
+        <Association Name="FK_Like_Product">
+          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.Like" Role="Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_ReplyComment">
+          <End Type="Data_GSShopModel.ReplyComment" Role="ReplyComment" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.Like" Role="Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReplyComment">
+              <PropertyRef Name="replycomment_id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="replycomment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_User">
+          <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.Like" Role="Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_Comment">
+          <End Type="Data_GSShopModel.Comment" Role="Comment" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.Like" Role="Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="comment_id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="comment_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1249,6 +1411,19 @@
                 <ScalarProperty Name="fa_bin" ColumnName="fa_bin" />
                 <ScalarProperty Name="fa_datereated" ColumnName="fa_datereated" />
                 <ScalarProperty Name="fa_id" ColumnName="fa_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Like">
+            <EntityTypeMapping TypeName="Data_GSShopModel.Like">
+              <MappingFragment StoreEntitySet="Like">
+                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+                <ScalarProperty Name="replycomment_id" ColumnName="replycomment_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="like_bin" ColumnName="like_bin" />
+                <ScalarProperty Name="like_datecreated" ColumnName="like_datecreated" />
+                <ScalarProperty Name="like_id" ColumnName="like_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

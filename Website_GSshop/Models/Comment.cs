@@ -18,6 +18,7 @@ namespace Website_GSshop.Models
         public Comment()
         {
             this.ReplyComment = new HashSet<ReplyComment>();
+            this.Like = new HashSet<Like>();
         }
     
         public int comment_id { get; set; }
@@ -31,5 +32,7 @@ namespace Website_GSshop.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReplyComment> ReplyComment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Like> Like { get; set; }
     }
 }
