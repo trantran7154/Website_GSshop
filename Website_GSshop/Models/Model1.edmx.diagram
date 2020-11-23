@@ -39,6 +39,11 @@
         <AssociationConnector Association="Data_GSShopModel.FK_Like_ReplyComment" />
         <AssociationConnector Association="Data_GSShopModel.FK_Like_User" />
         <AssociationConnector Association="Data_GSShopModel.FK_Like_Comment" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Collection_Seller1" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Comment_Product" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Comment_User" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Like_Product1" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Product_ClassificationSubCategory" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

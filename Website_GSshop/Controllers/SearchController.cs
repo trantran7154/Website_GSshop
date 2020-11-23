@@ -40,5 +40,9 @@ namespace Website_GSshop.Controllers
             ViewBag.Notification = "Đã tìm thấy " + TK.Count + " kết quả!";
             return View(TK.OrderBy(n => n.product_name).ToList());
         }
+        public PartialViewResult Data()
+        {
+            return PartialView();
+        }
     }
 }

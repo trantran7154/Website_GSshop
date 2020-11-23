@@ -1,0 +1,20 @@
+﻿@using Website_GSshop.Models;
+@model List<Category>
+@{
+    Data_GSShopEntities db = new Data_GSShopEntities();
+    var a = "";
+    var b = "";
+    var c = "";
+    ViewBag.T = "";
+
+}
+@{
+    List<Product> products = db.Product.ToList();
+}
+@foreach (var item in products)
+{
+    { 
+
+    }
+    @Html.Raw("{ title: '" + @item.product_name + "' },");
+}    

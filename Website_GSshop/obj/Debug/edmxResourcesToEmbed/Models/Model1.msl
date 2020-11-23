@@ -80,7 +80,6 @@
           <ScalarProperty Name="commet_datecreated" ColumnName="commet_datecreated" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="product_id" ColumnName="product_id" />
-          <ScalarProperty Name="seller_id" ColumnName="seller_id" />
           <ScalarProperty Name="comment_spam" ColumnName="comment_spam" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -109,6 +108,7 @@
     <EntitySetMapping Name="Product">
       <EntityTypeMapping TypeName="Data_GSShopModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="csc_id" ColumnName="csc_id" />
           <ScalarProperty Name="product_related" ColumnName="product_related" />
           <ScalarProperty Name="product_bin" ColumnName="product_bin" />
           <ScalarProperty Name="product_id" ColumnName="product_id" />
@@ -225,7 +225,6 @@
           <ScalarProperty Name="user_address" ColumnName="user_address" />
           <ScalarProperty Name="user_telephone" ColumnName="user_telephone" />
           <ScalarProperty Name="user_image" ColumnName="user_image" />
-          <ScalarProperty Name="user_sex" ColumnName="user_sex" />
           <ScalarProperty Name="user_provincecity" ColumnName="user_provincecity" />
           <ScalarProperty Name="user_district" ColumnName="user_district" />
         </MappingFragment>

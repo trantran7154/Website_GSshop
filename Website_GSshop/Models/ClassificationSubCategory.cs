@@ -14,6 +14,12 @@ namespace Website_GSshop.Models
     
     public partial class ClassificationSubCategory
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ClassificationSubCategory()
+        {
+            this.Product = new HashSet<Product>();
+        }
+    
         public int csc_id { get; set; }
         public string csc_name { get; set; }
         public string csc_image { get; set; }
@@ -23,5 +29,7 @@ namespace Website_GSshop.Models
         public Nullable<bool> csc_bin { get; set; }
     
         public virtual SubCategory SubCategory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Product { get; set; }
     }
 }

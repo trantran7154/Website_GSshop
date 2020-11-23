@@ -168,6 +168,7 @@
     <Compile Include="Controllers\HeaderController.cs" />
     <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\ReplyCommentController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ViewController.cs" />
@@ -284,10 +285,13 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CSS\banner.css" />
+    <Content Include="Content\CSS\categorydetail.css" />
     <Content Include="Content\CSS\CSSLayout.css" />
     <Content Include="Content\CSS\Favourite.css" />
     <Content Include="Content\CSS\login.css" />
     <Content Include="Content\CSS\product_detail.css" />
+    <Content Include="Content\CSS\shoppingcart.css" />
+    <Content Include="Content\CSS\sortlist.css" />
     <Content Include="Content\Favicon\android-icon-144x144.png" />
     <Content Include="Content\Favicon\android-icon-192x192.png" />
     <Content Include="Content\Favicon\android-icon-36x36.png" />
@@ -1061,6 +1065,11 @@
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Like\Like.cshtml" />
+    <Content Include="Views\Search\Data.cshtml" />
+    <Content Include="Views\View\Category_Detail.cshtml" />
+    <Content Include="Views\View\Category_DetailTwo.cshtml" />
+    <Content Include="Views\View\Category_DetailThree.cshtml" />
+    <Content Include="Views\Pay\ShoppingCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

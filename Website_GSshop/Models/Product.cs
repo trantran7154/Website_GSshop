@@ -20,6 +20,8 @@ namespace Website_GSshop.Models
             this.ReplyComment = new HashSet<ReplyComment>();
             this.Favourite = new HashSet<Favourite>();
             this.Like = new HashSet<Like>();
+            this.Comment = new HashSet<Comment>();
+            this.Like1 = new HashSet<Like>();
         }
     
         public int product_id { get; set; }
@@ -49,6 +51,7 @@ namespace Website_GSshop.Models
         public Nullable<int> gsmail_id { get; set; }
         public Nullable<bool> product_bin { get; set; }
         public Nullable<int> product_related { get; set; }
+        public Nullable<int> csc_id { get; set; }
     
         public virtual Banner Banner { get; set; }
         public virtual Category Category { get; set; }
@@ -63,5 +66,10 @@ namespace Website_GSshop.Models
         public virtual ICollection<Favourite> Favourite { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Like> Like { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Like> Like1 { get; set; }
+        public virtual ClassificationSubCategory ClassificationSubCategory { get; set; }
     }
 }
