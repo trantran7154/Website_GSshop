@@ -8,6 +8,15 @@
 @{ 
     List<Product> pro = db.Product.ToList();
 }
+<style>
+    .ui.search > .results {
+        width: 415px;
+    }
+    .ui.search > .results .result {
+        padding: 0px;
+        border-radius: 5px;
+    }
+</style>
 <div style="position: sticky; position: -webkit-sticky; top: 16px; z-index: 100; background-color: #fff">
     <!-- header-bot-->
     <div class="header-bot">
@@ -94,10 +103,7 @@
                     </form>
                     <div class="results"></div>
                     <script>
-                    var content = [
                         @Html.Action("Data", "Search")
-                        // etc
-                    ];
                     </script>
                     <script>
                         $('.ui.search')
@@ -111,7 +117,7 @@
                 <!-- cart details -->
                 <div class="top_nav_right">
                     <div class="wthreecartaits wthreecartaits2 cart cart box_1">
-                        <form action="" method="post" class="last">
+                        <form action="@Url.Action("ShoppingCart","Pay")" method="post" class="last">
                             <input type="hidden" name="cmd" value="_cart">
                             <input type="hidden" name="display" value="1">  
                             <button class="w3view-cart" type="submit" value="">

@@ -22,6 +22,7 @@ namespace Website_GSshop.Models
             this.Like = new HashSet<Like>();
             this.Comment = new HashSet<Comment>();
             this.Like1 = new HashSet<Like>();
+            this.PayDetail = new HashSet<PayDetail>();
         }
     
         public int product_id { get; set; }
@@ -71,5 +72,7 @@ namespace Website_GSshop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Like> Like1 { get; set; }
         public virtual ClassificationSubCategory ClassificationSubCategory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PayDetail> PayDetail { get; set; }
     }
 }

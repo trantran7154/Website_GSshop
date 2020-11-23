@@ -1,20 +1,13 @@
 ﻿@using Website_GSshop.Models;
-@model List<Category>
 @{
     Data_GSShopEntities db = new Data_GSShopEntities();
-    var a = "";
-    var b = "";
-    var c = "";
-    ViewBag.T = "";
-
 }
 @{
     List<Product> products = db.Product.ToList();
 }
-@foreach (var item in products)
-{
-    { 
-
+var content = [
+    @foreach (var item in products)
+    {
+        @:{ title: '<div class="row" style="height: 2%"><a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})" class="text-dark"><div class="col-md-3 mt-2 mb-2"><img src="/Content/Layout/images/@item.product_image" class="ml-2"/></div><div class="col-md-9" style="margin-top: 7.5%">@item.product_name</div></a></div>' },
     }
-    @Html.Raw("{ title: '" + @item.product_name + "' },");
-}    
+];   

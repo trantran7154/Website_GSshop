@@ -160,6 +160,7 @@
     <Compile Include="Areas\SellerManagement\SellerManagementAreaRegistration.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BannerController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\DisplayController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\ReplyCommentController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\Test\PayDetailsController.cs" />
     <Compile Include="Controllers\ViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -217,6 +219,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PayDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -226,6 +231,7 @@
     <Compile Include="Models\Seller.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShoppingCarts.cs" />
     <Compile Include="Models\SubCategory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1070,12 +1076,17 @@
     <Content Include="Views\View\Category_DetailTwo.cshtml" />
     <Content Include="Views\View\Category_DetailThree.cshtml" />
     <Content Include="Views\Pay\ShoppingCart.cshtml" />
+    <Content Include="Views\PayDetails\Create.cshtml" />
+    <Content Include="Views\PayDetails\Delete.cshtml" />
+    <Content Include="Views\PayDetails\Details.cshtml" />
+    <Content Include="Views\PayDetails\Edit.cshtml" />
+    <Content Include="Views\PayDetails\Index.cshtml" />
+    <Content Include="Views\Cart\IndexCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\SellerManagement\Data\" />
-    <Folder Include="Controllers\Test\" />
     <Folder Include="Views\Ajax\" />
   </ItemGroup>
   <ItemGroup>

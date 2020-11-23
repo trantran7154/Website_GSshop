@@ -65,29 +65,33 @@
                     </div>
                     <h3 class="font-weight-bold text-primary">@Model.product_name </h3>
                     <h4 class="font-weight-bold ml-1 text-left">@{float sale = (float)Model.product_sale;}@sale.ToString("#,##0") ₫&nbsp;&nbsp;&nbsp;&nbsp;<s>@{float price = (float)Model.product_price;}@price.ToString("#,##0") ₫</s></h4>
-                    <div class="buttons">
-                        <form method="post" action="@Url.Action("Favourite","Favourite",new {id = Model.product_id})">
-                            <button class="btn btn-outline-warning btn-long cart">THÊM VÀO GIỎ</button>
-                            <button class="btn btn-warning btn-long buy">MUA NGAY</button>
-                            @if (sesus != null)
-                            {
-                                if (ViewBag.ProductCount == 0)
-                                {   
-                                    <button class="btn btn-light wishlist" type="submit"><i class="fa fa-heart font-weight-500"> @pr.Count</i></button>
+                    <div class="buttons row">   
+                        <div class="col-md-3">
+                            <button class="btn btn-outline-warning btn-long cart" onclick="window.location.href='@Url.Action("CreateCart","Cart", new { id = Model.product_id })'">THÊM VÀO GIỎ</button>
+                        </div>
+                        <div class="col-md-9">
+                            <form method="post" action="@Url.Action("Favourite","Favourite",new {id = Model.product_id})">
+                                <button class="btn btn-warning btn-long buy">MUA NGAY</button>
+                                @if (sesus != null)
+                                {
+                                    if (ViewBag.ProductCount == 0)
+                                    {
+                                        <button class="btn btn-light wishlist ml-3" type="submit"><i class="fa fa-heart font-weight-500"> @pr.Count</i></button>
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in fa.Where(n => n.user_id == sesus.user_id && n.product_id == Model.product_id && n.fa_bin == false))
+                                        {
+                                            <a href="@Url.Action("FavouriteDelete","Favourite",new {id = item.fa_id})" class="btn btn-light wishlist1 ml-3"> <i class="fa fa-heart mt-2"></i> @pr.Count</a>
+                                        }
+                                    }
                                 }
                                 else
                                 {
-                                    foreach (var item in fa.Where(n => n.user_id == sesus.user_id && n.product_id == Model.product_id && n.fa_bin == false))
-                                    {
-                                        <a href="@Url.Action("FavouriteDelete","Favourite",new {id = item.fa_id})" class="btn btn-light wishlist1"> <i class="fa fa-heart mt-2"></i> @pr.Count</a>
-                                    }
+                                    <button class="btn btn-light wishlist ml-3"> <i class="fa fa-heart"> @pr.Count</i> </button>
                                 }
-                            }
-                            else
-                            {
-                                <button class="btn btn-light wishlist"> <i class="fa fa-heart"> @pr.Count</i> </button>
-                            }
-                        </form>
+                            </form>
+                        </div>
                     </div>
                     <hr>
                     <div class="product-description">

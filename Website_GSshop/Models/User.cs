@@ -22,6 +22,7 @@ namespace Website_GSshop.Models
             this.Favourite = new HashSet<Favourite>();
             this.Like = new HashSet<Like>();
             this.Comment = new HashSet<Comment>();
+            this.PayDetail = new HashSet<PayDetail>();
         }
     
         public int user_id { get; set; }
@@ -50,5 +51,7 @@ namespace Website_GSshop.Models
         public virtual ICollection<Like> Like { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PayDetail> PayDetail { get; set; }
     }
 }

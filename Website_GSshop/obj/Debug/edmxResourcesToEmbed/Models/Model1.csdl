@@ -154,6 +154,7 @@
     <NavigationProperty Name="Like1" Relationship="Data_GSShopModel.FK_Like_Product1" FromRole="Product" ToRole="Like" />
     <Property Name="csc_id" Type="Int32" />
     <NavigationProperty Name="ClassificationSubCategory" Relationship="Data_GSShopModel.FK_Product_ClassificationSubCategory" FromRole="Product" ToRole="ClassificationSubCategory" />
+    <NavigationProperty Name="PayDetail" Relationship="Data_GSShopModel.FK_PayDetail_Product" FromRole="Product" ToRole="PayDetail" />
   </EntityType>
   <EntityType Name="ReplyComment">
     <Key>
@@ -256,6 +257,7 @@
     <NavigationProperty Name="Favourite" Relationship="Data_GSShopModel.FK_Favourite_User" FromRole="User" ToRole="Favourite" />
     <NavigationProperty Name="Like" Relationship="Data_GSShopModel.FK_Like_User" FromRole="User" ToRole="Like" />
     <NavigationProperty Name="Comment" Relationship="Data_GSShopModel.FK_Comment_User" FromRole="User" ToRole="Comment" />
+    <NavigationProperty Name="PayDetail" Relationship="Data_GSShopModel.FK_PayDetail_User" FromRole="User" ToRole="PayDetail" />
   </EntityType>
   <Association Name="FK_Product_Banner">
     <End Role="Banner" Type="Self.Banner" Multiplicity="0..1" />
@@ -525,6 +527,15 @@
       <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>
+    <EntitySet Name="PayDetail" EntityType="Data_GSShopModel.PayDetail" />
+    <AssociationSet Name="FK_PayDetail_Product" Association="Data_GSShopModel.FK_PayDetail_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="PayDetail" EntitySet="PayDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PayDetail_User" Association="Data_GSShopModel.FK_PayDetail_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="PayDetail" EntitySet="PayDetail" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Favourite">
     <Key>
@@ -684,6 +695,43 @@
       </Principal>
       <Dependent Role="Product">
         <PropertyRef Name="csc_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PayDetail">
+    <Key>
+      <PropertyRef Name="pay_id" />
+    </Key>
+    <Property Name="pay_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="pay_money" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="pay_amount" Type="Int32" />
+    <Property Name="pay_datecreated" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_PayDetail_Product" FromRole="PayDetail" ToRole="Product" />
+    <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_PayDetail_User" FromRole="PayDetail" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_PayDetail_Product">
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.PayDetail" Role="PayDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="PayDetail">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PayDetail_User">
+    <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.PayDetail" Role="PayDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="PayDetail">
+        <PropertyRef Name="user_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

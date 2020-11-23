@@ -1,6 +1,9 @@
-﻿@{
+﻿@using Website_GSshop.Models
+@model List<ShoppingCarts>
+@{
     ViewBag.Title = "ShoppingCart";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    User sesus = (User)Session["user"];
 }
 <link href="~/Content/CSS/shoppingcart.css" rel="stylesheet" />
 <div class="container-fluid">
@@ -146,7 +149,7 @@
                                 <td>Quantity</td>
                                 <td>:</td>
                                 <td>
-                                    <div class="d-flex align-items-center"> <span class="fa fa-minus btn text-muted"></span> <span>2</span> <span class="fa fa-plus btn text-muted"></span> </div>
+                                    <div class="d-flex align-items-center"> <span class="fa fa-minus btn text-muted qtyminus"></span> <span class="qty"></span> <span class="fa fa-plus btn text-muted qtyplus"></span> </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -174,5 +177,19 @@
         <div class="text-muted"> <span class="fa fa-lock"></span> Your information is save </div>
     </div>
 </div>
-
+<script>
+    $(".qtyminus").on("click", function () {
+        var now = $(".qty").val();
+        if ($.isNumeric(now)) {
+            if (parseInt(now) - 1 > 0) { now--; }
+            $(".qty").val(now);
+        }
+    })
+    $(".qtyplus").on("click", function () {
+        var now = $(".qty").val();
+        if ($.isNumeric(now)) {
+            $(".qty").val(parseInt(now) + 1);
+        }
+    });
+</script>
 

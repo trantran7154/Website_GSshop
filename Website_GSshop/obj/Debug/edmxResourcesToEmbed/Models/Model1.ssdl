@@ -119,6 +119,17 @@
     <Property Name="user_id" Type="int" />
     <Property Name="comment_id" Type="int" />
   </EntityType>
+  <EntityType Name="PayDetail">
+    <Key>
+      <PropertyRef Name="pay_id" />
+    </Key>
+    <Property Name="pay_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="pay_money" Type="money" />
+    <Property Name="pay_amount" Type="int" />
+    <Property Name="pay_datecreated" Type="datetime" />
+  </EntityType>
   <EntityType Name="Product">
     <Key>
       <PropertyRef Name="product_id" />
@@ -346,7 +357,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Like_User">
+  <Association Name="FK_Like_User1">
     <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="Like" Type="Self.Like" Multiplicity="*" />
     <ReferentialConstraint>
@@ -358,14 +369,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Like_User1">
+  <Association Name="FK_PayDetail_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="PayDetail" Type="Self.PayDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="PayDetail">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PayDetail_User1">
     <End Role="User" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Like" Type="Self.Like" Multiplicity="*" />
+    <End Role="PayDetail" Type="Self.PayDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="user_id" />
       </Principal>
-      <Dependent Role="Like">
+      <Dependent Role="PayDetail">
         <PropertyRef Name="user_id" />
       </Dependent>
     </ReferentialConstraint>
@@ -560,6 +583,7 @@
     <EntitySet Name="Favourite" EntityType="Self.Favourite" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GSMall" EntityType="Self.GSMall" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Like" EntityType="Self.Like" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayDetail" EntityType="Self.PayDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReplyComment" EntityType="Self.ReplyComment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
@@ -602,13 +626,17 @@
       <End Role="ReplyComment" EntitySet="ReplyComment" />
       <End Role="Like" EntitySet="Like" />
     </AssociationSet>
-    <AssociationSet Name="FK_Like_User" Association="Self.FK_Like_User">
-      <End Role="User" EntitySet="User" />
-      <End Role="Like" EntitySet="Like" />
-    </AssociationSet>
     <AssociationSet Name="FK_Like_User1" Association="Self.FK_Like_User1">
       <End Role="User" EntitySet="User" />
       <End Role="Like" EntitySet="Like" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PayDetail_Product" Association="Self.FK_PayDetail_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="PayDetail" EntitySet="PayDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PayDetail_User1" Association="Self.FK_PayDetail_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="PayDetail" EntitySet="PayDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_Product_Banner" Association="Self.FK_Product_Banner">
       <End Role="Banner" EntitySet="Banner" />

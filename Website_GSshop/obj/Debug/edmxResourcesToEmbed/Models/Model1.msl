@@ -254,5 +254,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PayDetail">
+      <EntityTypeMapping TypeName="Data_GSShopModel.PayDetail">
+        <MappingFragment StoreEntitySet="PayDetail">
+          <ScalarProperty Name="pay_datecreated" ColumnName="pay_datecreated" />
+          <ScalarProperty Name="pay_amount" ColumnName="pay_amount" />
+          <ScalarProperty Name="pay_money" ColumnName="pay_money" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="pay_id" ColumnName="pay_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
