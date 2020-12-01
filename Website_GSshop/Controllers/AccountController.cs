@@ -56,7 +56,7 @@ namespace Website_GSshop.Controllers
         }
         // Đăng ký người dùng
         [HttpPost]
-        public ActionResult SignUp([Bind(Include = "user_id,user_login,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_fristname,user_lastname,user_image,user_sex,user_birthday")] User user, FormCollection f)
+        public ActionResult SignUp([Bind(Include = "user_id,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_image,user_provincecity,user_district,user_bin,user_role")] User user, FormCollection f)
         {
             User user_email = db.User.SingleOrDefault(n => n.user_email == user.user_email);
             if (user_email != null)
@@ -72,11 +72,11 @@ namespace Website_GSshop.Controllers
                 user.user_role = 1;
                 user.user_datelogin = DateTime.Now;
                 user.user_active = true;
+                user.user_bin = true;
                 db.User.Add(user);
                 db.SaveChanges();
                 return Redirect(update);
             }
-            return View(user);
         }
         // Cập nhật thông tin cá nhân
         public PartialViewResult UpdateInfo()
@@ -209,7 +209,6 @@ namespace Website_GSshop.Controllers
                 db.SaveChanges();
                 return Redirect(updateseller);
             }
-            return View(seller);
         }
         // Cập nhật thông tin Seller
         public PartialViewResult UpdateInfoSeller()

@@ -47,6 +47,12 @@
         <EntityTypeShape EntityType="Data_GSShopModel.PayDetail" Width="1.5" PointX="7.5" PointY="23.625" />
         <AssociationConnector Association="Data_GSShopModel.FK_PayDetail_Product" />
         <AssociationConnector Association="Data_GSShopModel.FK_PayDetail_User" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Bill" Width="1.5" PointX="5.25" PointY="30.125" />
+        <EntityTypeShape EntityType="Data_GSShopModel.BillStatus" Width="1.5" PointX="7.5" PointY="31" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Bill_Seller" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Bill_User" />
+        <AssociationConnector Association="Data_GSShopModel.FK_BillStatus_Bill" />
+        <AssociationConnector Association="Data_GSShopModel.FK_PayDetail_Bill" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

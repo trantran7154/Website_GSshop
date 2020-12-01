@@ -47,10 +47,6 @@ namespace Website_GSshop.Controllers
                 List<Like> like = db.Like.Where(n => n.user_id == user.user_id && n.product_id == id && n.like_bin == true).ToList();
                 ViewBag.CountLike = like.Count;
             }
-            else
-            {
-                return Redirect(login);
-            }
             Session["product"] = id;
             db.Product.Find(id).product_view++;
             db.SaveChanges();

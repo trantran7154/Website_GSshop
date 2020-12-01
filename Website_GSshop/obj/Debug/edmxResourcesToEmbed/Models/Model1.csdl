@@ -206,6 +206,7 @@
     <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Seller" FromRole="Seller" ToRole="ReplyComment" />
     <Property Name="seller_bin" Type="Boolean" />
     <NavigationProperty Name="Collection" Relationship="Data_GSShopModel.FK_Collection_Seller1" FromRole="Seller" ToRole="Collection" />
+    <NavigationProperty Name="Bill" Relationship="Data_GSShopModel.FK_Bill_Seller" FromRole="Seller" ToRole="Bill" />
   </EntityType>
   <EntityType Name="SubCategory">
     <Key>
@@ -258,6 +259,7 @@
     <NavigationProperty Name="Like" Relationship="Data_GSShopModel.FK_Like_User" FromRole="User" ToRole="Like" />
     <NavigationProperty Name="Comment" Relationship="Data_GSShopModel.FK_Comment_User" FromRole="User" ToRole="Comment" />
     <NavigationProperty Name="PayDetail" Relationship="Data_GSShopModel.FK_PayDetail_User" FromRole="User" ToRole="PayDetail" />
+    <NavigationProperty Name="Bill" Relationship="Data_GSShopModel.FK_Bill_User" FromRole="User" ToRole="Bill" />
   </EntityType>
   <Association Name="FK_Product_Banner">
     <End Role="Banner" Type="Self.Banner" Multiplicity="0..1" />
@@ -536,6 +538,24 @@
       <End Role="User" EntitySet="User" />
       <End Role="PayDetail" EntitySet="PayDetail" />
     </AssociationSet>
+    <EntitySet Name="Bill" EntityType="Data_GSShopModel.Bill" />
+    <EntitySet Name="BillStatus" EntityType="Data_GSShopModel.BillStatus" />
+    <AssociationSet Name="FK_Bill_Seller" Association="Data_GSShopModel.FK_Bill_Seller">
+      <End Role="Seller" EntitySet="Seller" />
+      <End Role="Bill" EntitySet="Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bill_User" Association="Data_GSShopModel.FK_Bill_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Bill" EntitySet="Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BillStatus_Bill" Association="Data_GSShopModel.FK_BillStatus_Bill">
+      <End Role="Bill" EntitySet="Bill" />
+      <End Role="BillStatus" EntitySet="BillStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PayDetail_Bill" Association="Data_GSShopModel.FK_PayDetail_Bill">
+      <End Role="Bill" EntitySet="Bill" />
+      <End Role="PayDetail" EntitySet="PayDetail" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Favourite">
     <Key>
@@ -710,6 +730,8 @@
     <Property Name="pay_datecreated" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_PayDetail_Product" FromRole="PayDetail" ToRole="Product" />
     <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_PayDetail_User" FromRole="PayDetail" ToRole="User" />
+    <Property Name="bill_id" Type="Int32" />
+    <NavigationProperty Name="Bill" Relationship="Data_GSShopModel.FK_PayDetail_Bill" FromRole="PayDetail" ToRole="Bill" />
   </EntityType>
   <Association Name="FK_PayDetail_Product">
     <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
@@ -732,6 +754,82 @@
       </Principal>
       <Dependent Role="PayDetail">
         <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Bill">
+    <Key>
+      <PropertyRef Name="bill_id" />
+    </Key>
+    <Property Name="bill_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bill_datecreated" Type="DateTime" Precision="3" />
+    <Property Name="seller_id" Type="Int32" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="bill_address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="bill_telephone" Type="Int32" />
+    <Property Name="bill_sum" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="bill_dateset" Type="DateTime" Precision="3" />
+    <Property Name="bill_status" Type="Boolean" />
+    <Property Name="bill_note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Seller" Relationship="Data_GSShopModel.FK_Bill_Seller" FromRole="Bill" ToRole="Seller" />
+    <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_Bill_User" FromRole="Bill" ToRole="User" />
+    <NavigationProperty Name="BillStatus" Relationship="Data_GSShopModel.FK_BillStatus_Bill" FromRole="Bill" ToRole="BillStatus" />
+    <NavigationProperty Name="PayDetail" Relationship="Data_GSShopModel.FK_PayDetail_Bill" FromRole="Bill" ToRole="PayDetail" />
+  </EntityType>
+  <EntityType Name="BillStatus">
+    <Key>
+      <PropertyRef Name="status_id" />
+    </Key>
+    <Property Name="status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="status_name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="bill_id" Type="Int32" />
+    <NavigationProperty Name="Bill" Relationship="Data_GSShopModel.FK_BillStatus_Bill" FromRole="BillStatus" ToRole="Bill" />
+  </EntityType>
+  <Association Name="FK_Bill_Seller">
+    <End Type="Data_GSShopModel.Seller" Role="Seller" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Bill" Role="Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seller">
+        <PropertyRef Name="seller_id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="seller_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bill_User">
+    <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Bill" Role="Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BillStatus_Bill">
+    <End Type="Data_GSShopModel.Bill" Role="Bill" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.BillStatus" Role="BillStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bill">
+        <PropertyRef Name="bill_id" />
+      </Principal>
+      <Dependent Role="BillStatus">
+        <PropertyRef Name="bill_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PayDetail_Bill">
+    <End Type="Data_GSShopModel.Bill" Role="Bill" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.PayDetail" Role="PayDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bill">
+        <PropertyRef Name="bill_id" />
+      </Principal>
+      <Dependent Role="PayDetail">
+        <PropertyRef Name="bill_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

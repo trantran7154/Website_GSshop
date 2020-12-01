@@ -28,6 +28,29 @@
     <Property Name="banner_datecreated" Type="datetime" />
     <Property Name="banner_bin" Type="bit" />
   </EntityType>
+  <EntityType Name="Bill">
+    <Key>
+      <PropertyRef Name="bill_id" />
+    </Key>
+    <Property Name="bill_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bill_datecreated" Type="datetime" />
+    <Property Name="seller_id" Type="int" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="bill_address" Type="nvarchar" MaxLength="1000" />
+    <Property Name="bill_telephone" Type="int" />
+    <Property Name="bill_sum" Type="money" />
+    <Property Name="bill_dateset" Type="datetime" />
+    <Property Name="bill_status" Type="bit" />
+    <Property Name="bill_note" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="BillStatus">
+    <Key>
+      <PropertyRef Name="status_id" />
+    </Key>
+    <Property Name="status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="status_name" Type="nvarchar" MaxLength="1000" />
+    <Property Name="bill_id" Type="int" />
+  </EntityType>
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="category_id" />
@@ -129,6 +152,7 @@
     <Property Name="pay_money" Type="money" />
     <Property Name="pay_amount" Type="int" />
     <Property Name="pay_datecreated" Type="datetime" />
+    <Property Name="bill_id" Type="int" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -249,6 +273,42 @@
     <Property Name="user_bin" Type="bit" />
     <Property Name="user_role" Type="int" />
   </EntityType>
+  <Association Name="FK_Bill_Seller">
+    <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
+    <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seller">
+        <PropertyRef Name="seller_id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="seller_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bill_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BillStatus_Bill">
+    <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
+    <End Role="BillStatus" Type="Self.BillStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bill">
+        <PropertyRef Name="bill_id" />
+      </Principal>
+      <Dependent Role="BillStatus">
+        <PropertyRef Name="bill_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ClassificationSubCategory_SubCategory">
     <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
     <End Role="ClassificationSubCategory" Type="Self.ClassificationSubCategory" Multiplicity="*" />
@@ -366,6 +426,18 @@
       </Principal>
       <Dependent Role="Like">
         <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PayDetail_Bill">
+    <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
+    <End Role="PayDetail" Type="Self.PayDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bill">
+        <PropertyRef Name="bill_id" />
+      </Principal>
+      <Dependent Role="PayDetail">
+        <PropertyRef Name="bill_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -576,6 +648,8 @@
   <EntityContainer Name="Data_GSShopModelStoreContainer">
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BillStatus" EntityType="Self.BillStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ClassificationSubCategory" EntityType="Self.ClassificationSubCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
@@ -590,6 +664,18 @@
     <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Bill_Seller" Association="Self.FK_Bill_Seller">
+      <End Role="Seller" EntitySet="Seller" />
+      <End Role="Bill" EntitySet="Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bill_User" Association="Self.FK_Bill_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Bill" EntitySet="Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BillStatus_Bill" Association="Self.FK_BillStatus_Bill">
+      <End Role="Bill" EntitySet="Bill" />
+      <End Role="BillStatus" EntitySet="BillStatus" />
+    </AssociationSet>
     <AssociationSet Name="FK_ClassificationSubCategory_SubCategory" Association="Self.FK_ClassificationSubCategory_SubCategory">
       <End Role="SubCategory" EntitySet="SubCategory" />
       <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
@@ -629,6 +715,10 @@
     <AssociationSet Name="FK_Like_User1" Association="Self.FK_Like_User1">
       <End Role="User" EntitySet="User" />
       <End Role="Like" EntitySet="Like" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PayDetail_Bill" Association="Self.FK_PayDetail_Bill">
+      <End Role="Bill" EntitySet="Bill" />
+      <End Role="PayDetail" EntitySet="PayDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_PayDetail_Product" Association="Self.FK_PayDetail_Product">
       <End Role="Product" EntitySet="Product" />

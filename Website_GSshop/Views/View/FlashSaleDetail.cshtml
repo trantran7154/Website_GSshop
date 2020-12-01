@@ -72,7 +72,14 @@
                                         <div class="d-flex flex-row align-items-center">
                                             <img src="https://i.imgur.com/o5uMfKo.jpg" class="rounded-circle profile-image">
                                             <div class="d-flex flex-column ml-1 comment-profile mt-3">
-                                                <span class="username">@sesus.user_nicename</span>
+                                                @if (sesus == null)
+                                                {
+                                                    <span class="username">123</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="username">@sesus.user_nicename</span>
+                                                }
                                                 <div class="comment-ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
                                                 <small class="mt-1 ml-1 font-weight-bold">@item.comment_content</small>
                                                 <div class="mt-1 ml-1 row p-0">
@@ -104,9 +111,7 @@
                                                             }
                                                         </form>
                                                     </div>
-                                                    <div class="col-md-6 p-0">
-                                                        <span data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" data-target="#@bl@item.comment_id"><i class="fa fa-comments-o"></i> 1</span>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -170,10 +175,10 @@
                     </div>
                     <h3 class="font-weight-bold text-primary">@Model.product_name </h3>
                     <h4 class="font-weight-bold ml-1 text-left">@{float sale = (float)Model.product_sale;}@sale.ToString("#,##0") ₫&nbsp;&nbsp;&nbsp;&nbsp;<s>@{float price = (float)Model.product_price;}@price.ToString("#,##0") ₫</s></h4>
-                    <div class="buttons">
+                    <div class="buttons row">
+                        <button class="btn btn-warning btn-long buy">MUA NGAY</button>
+                        <button class="btn btn-outline-warning btn-long cart" onclick="window.location.href='@Url.Action("CreateCart","Cart", new { id = Model.product_id })'">THÊM VÀO GIỎ</button>
                         <form method="post" action="@Url.Action("Favourite","Favourite",new {id = Model.product_id})">
-                            <button class="btn btn-outline-warning btn-long cart" onclick="window.location.href='@Url.Action("CrateCart","Cart", new { id = Model.product_id })'">THÊM VÀO GIỎ</button>
-                            <button class="btn btn-warning btn-long buy">MUA NGAY</button>
                             @if (sesus != null)
                             {
                                 if (ViewBag.CountProduct == 0)

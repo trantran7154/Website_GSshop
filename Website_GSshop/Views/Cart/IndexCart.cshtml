@@ -73,7 +73,7 @@
     else
     {
         <div class="wrapper1" style="background-color: #f9f9f9">
-            <div class="h5 large">Billing Address</div>
+            <div class="h4 large font-weight-600 text-danger mb-3">GIỎ HÀNG CỦA BẠN</div>
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1">
                     <div class="mobile h5">Billing Address</div>
@@ -128,7 +128,7 @@
                                 <span class="text-uppercase text-muted">NY</span>
                             </div>
                             <div class="rounded py-2 px-3" id="register">
-                                <a href="#"> <b>Đăng nhập để thanh toán</b> </a>
+                                <a href="#" class="text-center"><b>Đăng nhập để thanh toán</b></a>
                                 <p class="text-muted">Create account to have multiple address saved</p>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                     <div class="number">@item.pay_amount</div>
                                 </div>
                                 <div class="d-flex flex-column px-3"> <b class="h5">@item.product_name</b> <a href="#" class="h5 text-primary">C-770</a> </div>
-                                <div class="ml-auto"> <b class="h5">@item.product_price</b> </div>
+                                <div class="ml-auto"> <b class="h5">@{float price1 = (float)item.product_price;} @price1.ToString("#,##0") ₫</b> </div>
                             </div>
                         }
                         <div class="my-3"> <input type="text" class="w-100 form-control text-center" placeholder="Gift Card or Promo Card"> </div>
@@ -157,7 +157,7 @@
                                 <div class="display-5">Tổng cộng</div>
                             </div>
                             <div class="col-md-6 text-right">
-                                <div class="ml-auto font-weight-bold">@{float gia = (float)Model.Sum(n => n.pay_money);} @gia.ToString(("#,##0"))</div>
+                                <div class="ml-auto font-weight-bold">@{float price2 = (float)Model.Sum(n => n.pay_money);} @price2.ToString(("#,##0")) ₫</div>
                             </div>
                         </div>
                         <div class="d-flex align-items-center py-2 border-bottom row">
@@ -165,7 +165,7 @@
                                 <div class="display-5">Phí ship</div>
                             </div>
                             <div class="col-md-6 text-right">
-                                <div class="ml-auto font-weight-bold">$80.9</div>
+                                <div class="ml-auto font-weight-bold">Free Ship</div>
                             </div>
                         </div>
                         <div class="d-flex align-items-center py-2 row">
@@ -173,7 +173,7 @@
                                 <div class="display-5">Tổng cộng</div>
                             </div>
                             <div class="col-md-6 text-right">
-                                <div class="ml-auto font-weight-bold">@{float gia1 = (float)Model.Sum(n => n.pay_money);} @gia1.ToString(("#,##0"))₫</div>
+                                <div class="ml-auto font-weight-bold">@{float price3 = (float)Model.Sum(n => n.pay_money);} @price3.ToString(("#,##0")) ₫</div>
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
                                     <tr class="text-muted">
                                         <td>@item.product_name</td>
                                         <td>:</td>
-                                        <td>@item.product_price</td>
+                                        <td>@{float price4 = (float)item.product_price;} @price4.ToString("#,##0") ₫</td>
                                     </tr>
                                     <tr class="text-muted">
                                         <td>Mã giảm giá</td>
@@ -216,12 +216,9 @@
                             <div class="col-md-6">
                                 <div>Thành tiền</div>
                             </div>
-                            @foreach (var item in Model)
-                            {
-                                <div class="col-md-6 text-right">
-                                    <div class="px-2">@item.pay_money</div>
-                                </div>
-                            }
+                            <div class="col-md-6 text-right">
+                                <div class="px-2">@{float price5 = (float)Model.Sum(n => n.pay_money);} @price5.ToString(("#,##0")) ₫</div>
+                            </div>
                         </div>
                     </div>
                     <div class="row pt-lg-3 pt-2 buttons mb-sm-0 mb-2">

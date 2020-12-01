@@ -136,6 +136,8 @@ namespace Website_GSshop.Areas.Admin.Controllers
                     user.user_token = Guid.NewGuid().ToString();
                     user.user_role = 1;
                     user.user_datelogin = DateTime.Now;
+                    user.user_active = true;
+                    user.user_bin = true;
                     db.SaveChanges();
                     return Redirect(admin_qlu);
                 }

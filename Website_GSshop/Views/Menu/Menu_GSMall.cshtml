@@ -1,6 +1,12 @@
-﻿@{
+﻿@using Website_GSshop.Models
+@model List<Product>
+@{
     ViewBag.Title = "Menu_GSMall";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Data_GSShopEntities db = new Data_GSShopEntities();
+}
+@{ 
+    List<GSMall> gs = db.GSMall.ToList();
 }
 <div class="page-module-bx container-fluid mt-2" data-mod-id="bannerSlider">
     <div class="lzdmall-card-banner-slider card-banner-slider J_NavScroll" data-mod-id="bannerSlider" data-spm="oslpbanner">
@@ -30,33 +36,33 @@
     <div class="mt-3">
         <div class="logo-slider">
             <div class="logo-slide-track">
-                @for (var i = 0; i < 10; i++)
+                @foreach(var item in Model)
                 {
                     <div class="slide text-center" style="border: 1px solid black; height: 230px">
-                        <img src="~/Content/Layout/images/aokhoacnam.jpg" alt="" />
-                        <p>Áo khoác</p>
+                        <img src="~/Content/Layout/images/@item.product_image" alt="" />
+                        <p>@item.product_name</p>
                     </div>
                 }
             </div>
         </div>
     </div>
-    @for (var i = 0; i < 3; i++)
+    @foreach(var item in gs.Take(3))
     {
         <div class="row mt-3 container-fluid">
             <div class="col-md-6" style="background-color: #f9f9f9">
                 <div class="col-md-2">
-                    <img src="~/Content/Layout/images/aolen.jpg" style="height: 80px" class="mt-4" />
+                    <img src="~/Content/Layout/images/@item.gsmall_image" style="height: 80px" class="mt-4" />
                 </div>
                 <div class="col-md-10 mt-3" style="padding: 0px">
-                    <h3>Linkee</h3>
+                    <h3>@item.gsmall_name</h3>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row mt-2 ml-2">
-                                <div class="col-md-4" style="border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; border-top-left-radius: 8px; border-bottom-left-radius: 8px; background-color: #1ACCFD; color: white">
+                                <div class="col-md-3" style="border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; border-top-left-radius: 8px; border-bottom-left-radius: 8px; background-color: #1ACCFD; color: white">
                                     GSMall
                                 </div>
-                                <div class="col-md-8" style="padding: 0px; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; border-top-right-radius: 8px; border-bottom-right-radius: 8px; background-color: #c1f5f4">
-                                    &nbsp; Hàng Chính Hãng
+                                <div class="col-md-9" style="padding: 0px; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; border-top-right-radius: 8px; border-bottom-right-radius: 8px; background-color: #c1f5f4">
+                                    &nbsp; @item.gsmall_slogan
                                 </div>
                             </div>
                         </div>
@@ -70,14 +76,14 @@
                 <br />
                 <div class="container-fluid">
                     <div class="row">
-                        @for (var j = 0; j < 3; j++)
+                        @foreach(var item1 in Model.Take(3))
                         {
                             <div class="col-md-4">
                                 <div class="p-box text-center">
-                                    <img src="~/Content/Layout/images/aolen.jpg" alt="" class="img1" />
+                                    <img src="~/Content/Layout/images/@item1.product_image" alt="" class="img1" />
                                     <div class="p-desc text-center">
-                                        <h3 class="p-product">Áo khoác nam</h3>
-                                        <span class="p-price">₫ 75.000</span>
+                                        <h3 class="p-product">@item1.product_name</h3>
+                                        <span class="p-price">₫ @item1.product_price</span>
                                     </div>
                                 </div>
                             </div>
@@ -85,20 +91,20 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6" style="background-color: #f9f9f9; border-left: 1px solid black">
+            <div class="col-md-6" style="background-color: #f9f9f9">
                 <div class="col-md-2">
-                    <img src="~/Content/Layout/images/aolen.jpg" style="height: 80px" class="mt-4" />
+                    <img src="~/Content/Layout/images/@item.gsmall_image" style="height: 80px" class="mt-4" />
                 </div>
                 <div class="col-md-10 mt-3" style="padding: 0px">
-                    <h3>Linkee</h3>
+                    <h3>@item.gsmall_name</h3>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row mt-2 ml-2">
-                                <div class="col-md-4" style="border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; border-top-left-radius: 8px; border-bottom-left-radius: 8px; background-color: #1ACCFD; color: white">
+                                <div class="col-md-3" style="border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; border-top-left-radius: 8px; border-bottom-left-radius: 8px; background-color: #1ACCFD; color: white">
                                     GSMall
                                 </div>
-                                <div class="col-md-8" style="padding: 0px; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; border-top-right-radius: 8px; border-bottom-right-radius: 8px; background-color: #c1f5f4">
-                                    &nbsp; Hàng Chính Hãng
+                                <div class="col-md-9" style="padding: 0px; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; border-top-right-radius: 8px; border-bottom-right-radius: 8px; background-color: #c1f5f4">
+                                    &nbsp; @item.gsmall_slogan
                                 </div>
                             </div>
                         </div>
@@ -112,14 +118,14 @@
                 <br />
                 <div class="container-fluid">
                     <div class="row">
-                        @for (var k = 0; k < 3; k++)
+                        @foreach (var item1 in Model.Take(3).OrderByDescending(n => n.product_datecreated))
                         {
                             <div class="col-md-4">
                                 <div class="p-box text-center">
-                                    <img src="~/Content/Layout/images/aolen.jpg" alt="" class="img1" />
+                                    <img src="~/Content/Layout/images/@item1.product_image" alt="" class="img1" />
                                     <div class="p-desc text-center">
-                                        <h3 class="p-product">Áo khoác nam</h3>
-                                        <span class="p-price">₫ 75.000</span>
+                                        <h3 class="p-product">@item1.product_name</h3>
+                                        <span class="p-price">₫ @item1.product_price</span>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +141,7 @@
     <div class="layout mt-3">
         <center>
             <div class="row" id="change">
-                @for (var i = 0; i < 18; i++)
+                @foreach(var item in Model.Take(18))
                 {
                     <div class="col-md-2">
                         <div class="p-box">
@@ -144,12 +150,12 @@
                                 <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 p-heart mt-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 25.7143px; height: 16px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
                             </div>
                             <div class="text-center p-4">
-                                <img id="main-image" src="https://i.imgur.com/oLXMXVW.jpg" width="300" />
+                                <img id="main-image" src="~/Content/Layout/images/@item.product_image" width="300" />
                             </div>
                             <div class="p-desc">
-                                <a href="#"><h3 class="p-category">Áo len</h3></a>
-                                <h5 class="text-danger">200.000 ₫</h5>
-                                <h5><s> 190.000 ₫</s> -10%</h5>
+                                <a href="#"><h3 class="p-category">@item.product_name</h3></a>
+                                <h5 class="text-danger">@{float sale = (float)item.product_sale;}@sale.ToString("#,##0") ₫</h5>
+                                <h5><s> @{float price = (float)item.product_price;}@price.ToString("#,##0") ₫</s> -10%</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">

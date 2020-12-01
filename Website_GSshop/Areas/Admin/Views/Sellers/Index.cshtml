@@ -7,6 +7,13 @@
     var sel_detail = "seldetail";
     var sel_delete = "seldelete";
 }
+<style>
+    .error {
+        display: grid;
+        align-items: center;
+        min-height: 10vh;
+    }
+</style>
 @Html.Action("CSS_Sematic", "Home")
 <a href="/Admin/Home/Index">
     <svg id="user" enable-background="new 0 0 300 300" height="45" viewBox="0 0 300 300" width="45" xmlns="http://www.w3.org/2000/svg"><path d="m38 38h224v224h-224z" fill="#fff" /><path d="m262 270h-224c-4.422 0-8-3.578-8-8v-224c0-4.422 3.578-8 8-8h224c4.422 0 8 3.578 8 8v224c0 4.422-3.578 8-8 8zm-216-16h208v-208h-208z" fill="#5c128d" /><path d="m54 54h16v16h-16z" fill="#e86436" /><path d="m78 54h16v16h-16z" fill="#f6d831" /><path d="m102 54h16v16h-16z" fill="#2ee52b" /><path d="m38 78h224v16h-224z" fill="#5c128d" /><path d="m126 230h48v16h-48z" fill="#d6d6d6" /><circle cx="150" cy="146" fill="#ffdea2" r="32" /><path d="m150 186c-22.055 0-40-17.945-40-40s17.945-40 40-40 40 17.945 40 40-17.945 40-40 40zm0-64c-13.234 0-24 10.766-24 24s10.766 24 24 24 24-10.766 24-24-10.766-24-24-24z" fill="#5c128d" /><path d="m166 174h-33c-17.673 0-32 14.327-32 32v8h97v-8c0-17.673-14.327-32-32-32z" fill="#816982" /><path d="m198 222h-97c-4.422 0-8-3.578-8-8v-8c0-22.055 17.945-40 40-40h33c22.055 0 40 17.945 40 40v8c0 4.422-3.578 8-8 8zm-89-16h81c0-13.234-10.766-24-24-24h-33c-13.234 0-24 10.766-24 24z" fill="#5c128d" /></svg>
@@ -163,124 +170,118 @@
                             <div class="modal-body">
                                 @using (Html.BeginForm("Create", "Sellers", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
-                                    <form method="post" class="mb-4 ui form">
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Email</label>
-                                                <input type="email" name="seller_email">
-                                            </div>
-                                            <div class="field">
-                                                <label>Mật khẩu</label>
-                                                <input type="password" name="seller_pass" />
-                                            </div>
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Email</label>
+                                            <input type="email" name="seller_email">
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Tên shop</label>
-                                                <input type="text" name="seller_nameshop" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Token</label>
-                                                <input type="text" name="seller_token" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Logo</label>
-                                                <input name="fileUpload1" type="file">
-                                            </div>
+                                        <div class="field">
+                                            <label>Mật khẩu</label>
+                                            <input type="password" name="seller_pass" />
                                         </div>
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Chi tiết</label>
-                                                <textarea id="editor1" name="seller_detail"></textarea>
-                                            </div>
-                                            <div class="field">
-                                                <label>Mô tả</label>
-                                                <textarea id="editor2" name="seller_description"></textarea>
-                                            </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Tên shop</label>
+                                            <input type="text" name="seller_nameshop" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="date" name="seller_datecreated"/>
-                                            </div>
-                                            <div class="field">
-                                                <label>Ngày đăng nhập</label>
-                                                <input type="date" name="seller_datelogin" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Vai trò</label>
-                                                <input type="number" name="seller_role" />
-                                            </div>
+                                        <div class="field">
+                                            <label>Token</label>
+                                            <input type="text" name="seller_token" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Nice name</label>
-                                                <input type="text" name="seller_nicename" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Số điện thoại</label>
-                                                <input type="text" name="seller_telephone" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="seller_active">
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
+                                        <div class="field">
+                                            <label>Logo</label>
+                                            <input name="fileUpload1" type="file">
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Địa chỉ</label>
-                                                <input type="text" name="seller_address" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Quận/Huyện</label>
-                                                <select name="seller_district">
-                                                    <option>Chọn Quận/Huyện</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Tỉnh/TP</label>
-                                                <select name="seller_provincecity">
-                                                    <option>Chọn Tỉnh/Thành Phố</option>
-                                                </select>
-                                            </div>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Chi tiết</label>
+                                            <textarea id="editor1" name="seller_detail"></textarea>
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Link 1</label>
-                                                <input type="text" name="seller_link1">
-                                            </div>
-                                            <div class="field">
-                                                <label>Link 2</label>
-                                                <input type="text" name="seller_link2">
-                                            </div>
-                                            <div class="field">
-                                                <label>Link 3</label>
-                                                <input type="text" name="seller_link3">
-                                            </div>
+                                        <div class="field">
+                                            <label>Mô tả</label>
+                                            <textarea id="editor2" name="seller_description"></textarea>
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Slider 1</label>
-                                                <input name="fileUpload2" type="file">
-                                            </div>
-                                            <div class="field">
-                                                <label>Slider 2</label>
-                                                <input name="fileUpload3" type="file">
-                                            </div>
-                                            <div class="field">
-                                                <label>Slider 3</label>
-                                                <input name="fileUpload4" type="file">
-                                            </div>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Ngày tạo</label>
+                                            <input type="date" name="seller_datecreated" />
                                         </div>
-                                        <div class="ui error message"></div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
+                                        <div class="field">
+                                            <label>Ngày đăng nhập</label>
+                                            <input type="date" name="seller_datelogin" />
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Nice name</label>
+                                            <input type="text" name="seller_nicename" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Số điện thoại</label>
+                                            <input type="text" name="seller_telephone" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Hoạt động</label>
+                                            <select name="seller_active">
+                                                <option>True</option>
+                                                <option>False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Địa chỉ</label>
+                                            <input type="text" name="seller_address" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Quận/Huyện</label>
+                                            <select name="seller_district">
+                                                <option>Chọn Quận/Huyện</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tỉnh/TP</label>
+                                            <select name="seller_provincecity">
+                                                <option>Chọn Tỉnh/Thành Phố</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Link 1</label>
+                                            <input type="text" name="seller_link1">
+                                        </div>
+                                        <div class="field">
+                                            <label>Link 2</label>
+                                            <input type="text" name="seller_link2">
+                                        </div>
+                                        <div class="field">
+                                            <label>Link 3</label>
+                                            <input type="text" name="seller_link3">
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Slider 1</label>
+                                            <input name="fileUpload2" type="file">
+                                        </div>
+                                        <div class="field">
+                                            <label>Slider 2</label>
+                                            <input name="fileUpload3" type="file">
+                                        </div>
+                                        <div class="field">
+                                            <label>Slider 3</label>
+                                            <input name="fileUpload4" type="file">
+                                        </div>
+                                    </div>
+                                    <div class="ui error message"></div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -310,129 +311,123 @@
                             <div class="modal-body">
                                 @using (Html.BeginForm("Edit", "Sellers", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
-                                    <form method="post" class="mb-4 ui form">
-                                        <input type="hidden" value="@item.seller_id" name="seller_id"/>
-                                        <input type="hidden" value="@item.seller_logo" name="seller_logo"/>
-                                        <input type="hidden" value="@item.seller_slider1" name="seller_slider1"/>
-                                        <input type="hidden" value="@item.seller_slider2" name="seller_slider2"/>
-                                        <input type="hidden" value="@item.seller_slider3" name="seller_slider3"/>
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Email</label>
-                                                <input type="email" name="seller_email" value="@item.seller_email">
-                                            </div>
-                                            <div class="field">
-                                                <label>Mật khẩu</label>
-                                                <input type="text" name="seller_pass" value="@item.seller_pass" />
-                                            </div>
+                                    <input type="hidden" value="@item.seller_id" name="seller_id" />
+                                    <input type="hidden" value="@item.seller_logo" name="seller_logo" />
+                                    <input type="hidden" value="@item.seller_slider1" name="seller_slider1" />
+                                    <input type="hidden" value="@item.seller_slider2" name="seller_slider2" />
+                                    <input type="hidden" value="@item.seller_slider3" name="seller_slider3" />
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Email</label>
+                                            <input type="email" name="seller_email" value="@item.seller_email">
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Tên shop</label>
-                                                <input type="text" name="seller_nameshop" value="@item.seller_nameshop" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Token</label>
-                                                <input type="text" name="seller_token" value="@item.seller_token" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Logo</label>
-                                                <input name="fileUpload1" type="file" value="@item.seller_logo" />
-                                            </div>
+                                        <div class="field">
+                                            <label>Mật khẩu</label>
+                                            <input type="text" name="seller_pass" value="@item.seller_pass" />
                                         </div>
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Chi tiết</label>
-                                                <textarea id="editor3" name="seller_detail">@item.seller_detail</textarea>
-                                            </div>
-                                            <div class="field">
-                                                <label>Mô tả</label>
-                                                <textarea id="editor4" name="seller_description">@item.seller_description</textarea>
-                                            </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Tên shop</label>
+                                            <input type="text" name="seller_nameshop" value="@item.seller_nameshop" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="date" name="seller_datecreated" value="@item.seller_datecreated.Value.Year-@(item.seller_datecreated.Value.Month < 10 ? "0" + item.seller_datecreated.Value.Month.ToString() : item.seller_datecreated.Value.Month.ToString())-@(item.seller_datecreated.Value.Day < 10 ? "0" + item.seller_datecreated.Value.Day.ToString() : item.seller_datecreated.Value.Day.ToString())"/>
-                                            </div>
-                                            <div class="field">
-                                                <label>Ngày đăng nhập</label>
-                                                <input type="date" name="seller_datelogin" value="@item.seller_datelogin.Value.Year-@(item.seller_datelogin.Value.Month < 10 ? "0" + item.seller_datelogin.Value.Month.ToString() : item.seller_datelogin.Value.Month.ToString())-@(item.seller_datelogin.Value.Day < 10 ? "0" + item.seller_datelogin.Value.Day.ToString() : item.seller_datelogin.Value.Day.ToString())"/>
-                                            </div>
-                                            <div class="field">
-                                                <label>Vai trò</label>
-                                                <input type="number" name="seller_role" value="@item.seller_role" />
-                                            </div>
+                                        <div class="field">
+                                            <label>Token</label>
+                                            <input type="text" name="seller_token" value="@item.seller_token" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Nice name</label>
-                                                <input type="text" name="seller_nicename" value="@item.seller_nicename" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Số điện thoại</label>
-                                                <input type="text" name="seller_telephone" value="@item.seller_telephone" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="seller_active">
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
+                                        <div class="field">
+                                            <label>Logo</label>
+                                            <input name="fileUpload1" type="file" value="@item.seller_logo" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Địa chỉ</label>
-                                                <input type="text" name="seller_address" value="@item.seller_address" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Quận/Huyện</label>
-                                                <select name="seller_district">
-                                                    <option>Chọn Quận/Huyện</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Tỉnh/TP</label>
-                                                <select name="seller_provincecity">
-                                                    <option>Chọn Tỉnh/Thành Phố</option>
-                                                </select>
-                                            </div>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Chi tiết</label>
+                                            <textarea id="editor3" name="seller_detail">@Html.Raw(item.seller_detail)</textarea>
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Link 1</label>
-                                                <input type="text" name="seller_link1" value="@item.seller_link1">
-                                            </div>
-                                            <div class="field">
-                                                <label>Link 2</label>
-                                                <input type="text" name="seller_link2" value="@item.seller_link2">
-                                            </div>
-                                            <div class="field">
-                                                <label>Link 3</label>
-                                                <input type="text" name="seller_link3" value="@item.seller_link3">
-                                            </div>
+                                        <div class="field">
+                                            <label>Mô tả</label>
+                                            <textarea id="editor4" name="seller_description">@Html.Raw(item.seller_description)</textarea>
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Slider 1</label>
-                                                <input name="fileUpload2" type="file" value="@item.seller_slider1">
-                                            </div>
-                                            <div class="field">
-                                                <label>Slider 2</label>
-                                                <input name="fileUpload3" type="file" value="@item.seller_slider2">
-                                            </div>
-                                            <div class="field">
-                                                <label>Slider 3</label>
-                                                <input name="fileUpload4" type="file" value="@item.seller_slider3">
-                                            </div>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Ngày tạo</label>
+                                            <input type="date" name="seller_datecreated" value="@item.seller_datecreated.Value.Year-@(item.seller_datecreated.Value.Month < 10 ? "0" + item.seller_datecreated.Value.Month.ToString() : item.seller_datecreated.Value.Month.ToString())-@(item.seller_datecreated.Value.Day < 10 ? "0" + item.seller_datecreated.Value.Day.ToString() : item.seller_datecreated.Value.Day.ToString())" />
                                         </div>
-                                        <div class="ui error message"></div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> SỬA</button>
+                                        <div class="field">
+                                            <label>Ngày đăng nhập</label>
+                                            <input type="date" name="seller_datelogin" value="@item.seller_datelogin.Value.Year-@(item.seller_datelogin.Value.Month < 10 ? "0" + item.seller_datelogin.Value.Month.ToString() : item.seller_datelogin.Value.Month.ToString())-@(item.seller_datelogin.Value.Day < 10 ? "0" + item.seller_datelogin.Value.Day.ToString() : item.seller_datelogin.Value.Day.ToString())" />
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Nice name</label>
+                                            <input type="text" name="seller_nicename" value="@item.seller_nicename" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Số điện thoại</label>
+                                            <input type="text" name="seller_telephone" value="@item.seller_telephone" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Hoạt động</label>
+                                            <select name="seller_active">
+                                                <option>True</option>
+                                                <option>False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Địa chỉ</label>
+                                            <input type="text" name="seller_address" value="@item.seller_address" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Quận/Huyện</label>
+                                            <select name="seller_district">
+                                                <option>Chọn Quận/Huyện</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tỉnh/TP</label>
+                                            <select name="seller_provincecity">
+                                                <option>Chọn Tỉnh/Thành Phố</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Link 1</label>
+                                            <input type="text" name="seller_link1" value="@item.seller_link1">
+                                        </div>
+                                        <div class="field">
+                                            <label>Link 2</label>
+                                            <input type="text" name="seller_link2" value="@item.seller_link2">
+                                        </div>
+                                        <div class="field">
+                                            <label>Link 3</label>
+                                            <input type="text" name="seller_link3" value="@item.seller_link3">
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Slider 1</label>
+                                            <input name="fileUpload2" type="file" value="@item.seller_slider1">
+                                        </div>
+                                        <div class="field">
+                                            <label>Slider 2</label>
+                                            <input name="fileUpload3" type="file" value="@item.seller_slider2">
+                                        </div>
+                                        <div class="field">
+                                            <label>Slider 3</label>
+                                            <input name="fileUpload4" type="file" value="@item.seller_slider3">
+                                        </div>
+                                    </div>
+                                    <div class="ui error message"></div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> SỬA</button>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -473,123 +468,117 @@
                             <div class="modal-body">
                                 @using (Html.BeginForm("Details", "Sellers", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
-                                    <form method="post" class="mb-4 ui form">
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Email</label>
-                                                <input type="email" name="seller_email" value="@item.seller_email" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Mật khẩu</label>
-                                                <input type="text" name="seller_pass" value="@item.seller_pass" disabled />
-                                            </div>
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Email</label>
+                                            <input type="email" name="seller_email" value="@item.seller_email" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Tên shop</label>
-                                                <input type="text" name="seller_nameshop" value="@item.seller_nameshop" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Token</label>
-                                                <input type="text" name="seller_token" value="@item.seller_token" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Logo</label>
-                                                <img src="~/Content/Layout/images/@item.seller_logo" height="100" width="100" />
-                                            </div>
+                                        <div class="field">
+                                            <label>Mật khẩu</label>
+                                            <input type="text" name="seller_pass" value="@item.seller_pass" disabled />
                                         </div>
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Chi tiết</label>
-                                                <input type="text" name="seller_detail" value="@item.seller_detail" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Mô tả</label>
-                                                <input type="text" name="seller_description" value="@item.seller_description" disabled />
-                                            </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Tên shop</label>
+                                            <input type="text" name="seller_nameshop" value="@item.seller_nameshop" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="text" name="seller_datecreated" value="@item.seller_datecreated" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ngày đăng nhập</label>
-                                                <input type="text" name="seller_datelogin" value="@item.seller_datelogin" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Vai trò</label>
-                                                <input type="number" name="seller_role" value="@item.seller_role" disabled />
-                                            </div>
+                                        <div class="field">
+                                            <label>Token</label>
+                                            <input type="text" name="seller_token" value="@item.seller_token" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Nice name</label>
-                                                <input type="text" name="seller_nicename" value="@item.seller_nicename" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Số điện thoại</label>
-                                                <input type="text" name="seller_telephone" value="@item.seller_telephone" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="seller_active" disabled>
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
+                                        <div class="field">
+                                            <label>Logo</label>
+                                            <img src="~/Content/Layout/images/@item.seller_logo" height="100" width="100" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Địa chỉ</label>
-                                                <input type="text" name="seller_address" value="@item.seller_address" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Quận/Huyện</label>
-                                                <select name="seller_district" disabled>
-                                                    <option>@item.seller_district</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Tỉnh/TP</label>
-                                                <select name="seller_provincecity" disabled>
-                                                    <option>@item.seller_provincecity</option>
-                                                </select>
-                                            </div>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Chi tiết</label>
+                                            <input type="text" name="seller_detail" value="@Html.Raw(item.seller_detail)" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Link 1</label>
-                                                <input type="text" name="seller_link1" value="@item.seller_link1" disabled>
-                                            </div>
-                                            <div class="field">
-                                                <label>Link 2</label>
-                                                <input type="text" name="seller_link2" value="@item.seller_link2" disabled>
-                                            </div>
-                                            <div class="field">
-                                                <label>Link 3</label>
-                                                <input type="text" name="seller_link3" value="@item.seller_link3" disabled>
-                                            </div>
+                                        <div class="field">
+                                            <label>Mô tả</label>
+                                            <input type="text" name="seller_description" value="@Html.Raw(item.seller_description)" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Slider 1</label>
-                                                <img src="~/Content/Layout/images/@item.seller_slider1" height="100" width="100" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Slider 2</label>
-                                                <img src="~/Content/Layout/images/@item.seller_slider2" height="100" width="100" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Slider 3</label>
-                                                <img src="~/Content/Layout/images/@item.seller_slider3" height="100" width="100" />
-                                            </div>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Ngày tạo</label>
+                                            <input type="text" name="seller_datecreated" value="@item.seller_datecreated" disabled />
                                         </div>
-                                        <div class="ui error message"></div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                        <div class="field">
+                                            <label>Ngày đăng nhập</label>
+                                            <input type="text" name="seller_datelogin" value="@item.seller_datelogin" disabled />
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Nice name</label>
+                                            <input type="text" name="seller_nicename" value="@item.seller_nicename" disabled />
+                                        </div>
+                                        <div class="field">
+                                            <label>Số điện thoại</label>
+                                            <input type="text" name="seller_telephone" value="@item.seller_telephone" disabled />
+                                        </div>
+                                        <div class="field">
+                                            <label>Hoạt động</label>
+                                            <select name="seller_active" disabled>
+                                                <option>True</option>
+                                                <option>False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Địa chỉ</label>
+                                            <input type="text" name="seller_address" value="@item.seller_address" disabled />
+                                        </div>
+                                        <div class="field">
+                                            <label>Quận/Huyện</label>
+                                            <select name="seller_district" disabled>
+                                                <option>@item.seller_district</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tỉnh/TP</label>
+                                            <select name="seller_provincecity" disabled>
+                                                <option>@item.seller_provincecity</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Link 1</label>
+                                            <input type="text" name="seller_link1" value="@item.seller_link1" disabled>
+                                        </div>
+                                        <div class="field">
+                                            <label>Link 2</label>
+                                            <input type="text" name="seller_link2" value="@item.seller_link2" disabled>
+                                        </div>
+                                        <div class="field">
+                                            <label>Link 3</label>
+                                            <input type="text" name="seller_link3" value="@item.seller_link3" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Slider 1</label>
+                                            <img src="~/Content/Layout/images/@item.seller_slider1" height="100" width="100" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Slider 2</label>
+                                            <img src="~/Content/Layout/images/@item.seller_slider2" height="100" width="100" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Slider 3</label>
+                                            <img src="~/Content/Layout/images/@item.seller_slider3" height="100" width="100" />
+                                        </div>
+                                    </div>
+                                    <div class="ui error message"></div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -638,125 +627,119 @@
                             <div class="modal-body">
                                 @using (Html.BeginForm("Delete", "Sellers", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
-                                    <form method="post" class="mb-4 ui form">
-                                        <input type="hidden" value="@item.seller_id" name="seller_id"/>
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Email</label>
-                                                <input type="email" name="seller_email" value="@item.seller_email" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Mật khẩu</label>
-                                                <input type="text" name="seller_pass" value="@item.seller_pass" disabled />
-                                            </div>
+                                    <input type="hidden" value="@item.seller_id" name="seller_id" />
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Email</label>
+                                            <input type="email" name="seller_email" value="@item.seller_email" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Tên shop</label>
-                                                <input type="text" name="seller_nameshop" value="@item.seller_nameshop" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Token</label>
-                                                <input type="text" name="seller_token" value="@item.seller_token" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Logo</label>
-                                                <img src="~/Content/Layout/images/@item.seller_logo" height="90" width="100" />
-                                            </div>
+                                        <div class="field">
+                                            <label>Mật khẩu</label>
+                                            <input type="text" name="seller_pass" value="@item.seller_pass" disabled />
                                         </div>
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Chi tiết</label>
-                                                <input type="text" name="seller_detail" value="@item.seller_detail" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Mô tả</label>
-                                                <input type="text" name="seller_description" value="@item.seller_description" disabled />
-                                            </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Tên shop</label>
+                                            <input type="text" name="seller_nameshop" value="@item.seller_nameshop" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="text" name="seller_datecreated" value="@item.seller_datecreated" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ngày đăng nhập</label>
-                                                <input type="text" name="seller_datelogin" value="@item.seller_datelogin" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Vai trò</label>
-                                                <input type="number" name="seller_role" value="@item.seller_role" disabled />
-                                            </div>
+                                        <div class="field">
+                                            <label>Token</label>
+                                            <input type="text" name="seller_token" value="@item.seller_token" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Nice name</label>
-                                                <input type="text" name="seller_nicename" value="@item.seller_nicename" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Số điện thoại</label>
-                                                <input type="text" name="seller_telephone" value="@item.seller_telephone" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="seller_active" disabled>
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
+                                        <div class="field">
+                                            <label>Logo</label>
+                                            <img src="~/Content/Layout/images/@item.seller_logo" height="90" width="100" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Địa chỉ</label>
-                                                <input type="text" name="seller_address" value="@item.seller_address" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Quận/Huyện</label>
-                                                <select name="seller_district" disabled>
-                                                    <option>@item.seller_district</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Tỉnh/TP</label>
-                                                <select name="seller_provincecity" disabled>
-                                                    <option>@item.seller_provincecity</option>
-                                                </select>
-                                            </div>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Chi tiết</label>
+                                            <input type="text" name="seller_detail" value="@Html.Raw(item.seller_detail)" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Link 1</label>
-                                                <input type="text" name="seller_link1" value="@item.seller_link1" disabled>
-                                            </div>
-                                            <div class="field">
-                                                <label>Link 2</label>
-                                                <input type="text" name="seller_link2" value="@item.seller_link2" disabled>
-                                            </div>
-                                            <div class="field">
-                                                <label>Link 3</label>
-                                                <input type="text" name="seller_link3" value="@item.seller_link3" disabled>
-                                            </div>
+                                        <div class="field">
+                                            <label>Mô tả</label>
+                                            <input type="text" name="seller_description" value="@Html.Raw(item.seller_description)" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Slider 1</label>
-                                                <img src="~/Content/Layout/images/@item.seller_slider1" height="90" width="100" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Slider 2</label>
-                                                <img src="~/Content/Layout/images/@item.seller_slider2" height="90" width="100" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Slider 3</label>
-                                                <img src="~/Content/Layout/images/@item.seller_slider3" height="90" width="100" />
-                                            </div>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Ngày tạo</label>
+                                            <input type="text" name="seller_datecreated" value="@item.seller_datecreated" disabled />
                                         </div>
-                                        <div class="ui error message"></div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> XÓA</button>
+                                        <div class="field">
+                                            <label>Ngày đăng nhập</label>
+                                            <input type="text" name="seller_datelogin" value="@item.seller_datelogin" disabled />
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Nice name</label>
+                                            <input type="text" name="seller_nicename" value="@item.seller_nicename" disabled />
+                                        </div>
+                                        <div class="field">
+                                            <label>Số điện thoại</label>
+                                            <input type="text" name="seller_telephone" value="@item.seller_telephone" disabled />
+                                        </div>
+                                        <div class="field">
+                                            <label>Hoạt động</label>
+                                            <select name="seller_active" disabled>
+                                                <option>True</option>
+                                                <option>False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Địa chỉ</label>
+                                            <input type="text" name="seller_address" value="@item.seller_address" disabled />
+                                        </div>
+                                        <div class="field">
+                                            <label>Quận/Huyện</label>
+                                            <select name="seller_district" disabled>
+                                                <option>@item.seller_district</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tỉnh/TP</label>
+                                            <select name="seller_provincecity" disabled>
+                                                <option>@item.seller_provincecity</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Link 1</label>
+                                            <input type="text" name="seller_link1" value="@item.seller_link1" disabled>
+                                        </div>
+                                        <div class="field">
+                                            <label>Link 2</label>
+                                            <input type="text" name="seller_link2" value="@item.seller_link2" disabled>
+                                        </div>
+                                        <div class="field">
+                                            <label>Link 3</label>
+                                            <input type="text" name="seller_link3" value="@item.seller_link3" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Slider 1</label>
+                                            <img src="~/Content/Layout/images/@item.seller_slider1" height="90" width="100" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Slider 2</label>
+                                            <img src="~/Content/Layout/images/@item.seller_slider2" height="90" width="100" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Slider 3</label>
+                                            <img src="~/Content/Layout/images/@item.seller_slider3" height="90" width="100" />
+                                        </div>
+                                    </div>
+                                    <div class="ui error message"></div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> XÓA</button>
+                                    </div>
                                 }
                             </div>
                         </div>

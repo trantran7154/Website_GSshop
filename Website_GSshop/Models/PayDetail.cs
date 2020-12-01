@@ -20,8 +20,10 @@ namespace Website_GSshop.Models
         public Nullable<decimal> pay_money { get; set; }
         public Nullable<int> pay_amount { get; set; }
         public Nullable<System.DateTime> pay_datecreated { get; set; }
+        public Nullable<int> bill_id { get; set; }
     
         public virtual Product Product { get; set; }
         public virtual User User { get; set; }
+        public virtual Bill Bill { get; set; }
     }
 }

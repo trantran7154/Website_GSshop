@@ -38,9 +38,11 @@ namespace Website_GSshop.Controllers
         public ActionResult FavouriteDelete(int? id)
         {
             Favourite fa = db.Favourite.Find(id);
+            ViewBag.Note = fa.product_id;
+            List<Product> pr = db.Product.ToList();
             db.Favourite.Remove(fa);
             db.SaveChanges();
-            return Redirect(detail + fa.product_id);
+            return Redirect(detail + ViewBag.Note);
         }
         // Xóa yêu thích trang chủ
         public ActionResult FavouriteIndexDelete(int? id)

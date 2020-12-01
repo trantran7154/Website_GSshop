@@ -2,7 +2,15 @@
 @model Product
 @{
     ViewBag.Title = "ProductDelete";
-Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Data_GSShopEntities db = new Data_GSShopEntities();
+}
+@{
+    Category ca = db.Category.SingleOrDefault(n => n.category_id == Model.category_id);
+    SubCategory sb = db.SubCategory.SingleOrDefault(n => n.subcategory_id == Model.subcategory_id);
+    Banner ba = db.Banner.SingleOrDefault(n => n.banner_id == Model.banner_id);
+    Collection co = db.Collection.SingleOrDefault(n => n.collection_id == Model.collection_id);
+    GSMall gs = db.GSMall.SingleOrDefault(n => n.gsmall_id == Model.gsmail_id);
 }
 @Html.Action("CSS_Sematic", "Home")
 <h3>
@@ -10,113 +18,130 @@ Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 </h3>
 @using (Html.BeginForm("ProductDelete", "Seller_Product", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
 {
-    <form method="post" class="mb-4 ui form">
-        <input type="hidden" value="@Model.product_id" name="product_id"/>
-        <div class="two fields">
-            <div class="field">
-                <label>Tên sản phẩm</label>
-                <input value="@Model.product_name" name="product_name" type="text" disabled>
-            </div>
-            <div class="field">
-                <label>Ngày sửa</label>
-                <input type="text" name="product_dateedit" value="@Model.product_dateedit" disabled />
-            </div>
+    <input type="hidden" value="@Model.product_id" name="product_id" />
+    <div class="four fields">
+        <div class="field">
+            <label>Tên sản phẩm</label>
+            <input value="@Model.product_name" name="product_name" type="text" disabled />
         </div>
-        <div class="two fields">
-            <div class="field">
-                <label>Ảnh</label>
-                <img src="~/Content/Layout/images/@Model.product_image" width="100" height="100" />
-            </div>
-            <div class="field">
-                <label>Ngày tạo</label>
-                <input type="text" name="product_datecreated" value="@Model.product_datecreated" disabled />
-            </div>
+        <div class="field">
+            <label>Tên bộ sưu tập</label>
+            <select name="category_id" disabled>
+                <option>@co.collection_name</option>
+            </select>
         </div>
-        <div class="two fields">
+        <div class="field">
+            <label>Tên danh mục</label>
+            <select name="category_id" disabled>
+                <option>@ca.category_name</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Tên danh mục con</label>
+            <select name="subcategory_id" disabled>
+                <option>NULL</option>
+            </select>
+        </div>
+    </div>
+    <div class="four fields">
+        <div class="field">
+            <label>Tên banner</label>
+            <select name="banner_id" disabled>
+                <option>@ba.banner_name</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Tên đối tác</label>
+            <select name="subcategory_id" disabled>
+                <option>@gs.gsmall_name</option>
+            </select>
+        </div>
+        <div class="field">
             <div class="field">
-                <label>Tên danh mục</label>
-                <select name="category_id" disabled>
-                    <option value="@Model.category_id">@Model.Category.category_name</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>Tên Seller</label>
-                <select name="seller_id" disabled>
-                    <option value="@Model.seller_id">@Model.Seller.seller_nameshop</option>
-                </select>
+                <label>Mã sản phẩm liên quan</label>
+                <input name="product_related" value="@Model.product_related" type="text" disabled>
             </div>
         </div>
         <div class="field">
-            <label>Ghi chú</label>
-            <input type="text" value="@Model.product_note" name="product_note" disabled />
+            <label>Hoạt động</label>
+            <select name="product_active" disabled>
+                <option>@Model.product_active</option>
+            </select>
+        </div>
+    </div>
+    <div class="four fields">
+        <div class="field">
+            <label>Ảnh</label>
+            <img src="~/Content/Layout/images/@Model.product_image" width="100" height="100" />
         </div>
         <div class="field">
-            <label>Chi tiết</label>
-            <input type="text" value="@Model.product_detail" name="product_detail" disabled />
+            <label>Ngày tạo</label>
+            <input type="date" name="product_datecreated" value="@Model.product_datecreated.Value.Year-@(Model.product_datecreated.Value.Month < 10 ? "0" + Model.product_datecreated.Value.Month.ToString() : Model.product_datecreated.Value.Month.ToString())-@(Model.product_datecreated.Value.Day < 10 ? "0" + Model.product_datecreated.Value.Day.ToString() : Model.product_datecreated.Value.Day.ToString())" />
         </div>
         <div class="field">
-            <label>Mô tả</label>
-            <input type="text" value="@Model.product_description" name="product_description" disabled />
+            <label>Ngày sửa</label>
+            <input type="date" name="product_dateedit" value="@Model.product_dateedit.Value.Year-@(Model.product_dateedit.Value.Month < 10 ? "0" + Model.product_dateedit.Value.Month.ToString() : Model.product_dateedit.Value.Month.ToString())-@(Model.product_dateedit.Value.Day < 10 ? "0" + Model.product_dateedit.Value.Day.ToString() : Model.product_dateedit.Value.Day.ToString())" />
         </div>
-        <div class="two fields">
-            <div class="field">
-                <label>Hoạt động</label>
-                <select name="product_active" disabled>
-                    <option>@Model.product_active</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>Phương thức vận chuyển</label>
-                <select name="product_ship" disabled>
-                    <option>@Model.product_ship</option>
-                </select>
-            </div>
+        <div class="field">
+            <label>Phương thức vận chuyển</label>
+            <select name="product_ship" disabled>
+                <option>@Model.product_ship</option>
+            </select>
         </div>
-        <div class="two fields">
-            <div class="field">
-                <label>Lượt xem</label>
-                <input type="text" name="product_view" value="@Model.product_view" disabled />
-            </div>
-            <div class="field">
-                <label>Yêu thích</label>
-                <input type="text" name="product_love" value="@Model.product_love" disabled />
-            </div>
+    </div>
+    <div class="field">
+        <label>Ghi chú</label>
+        <input name="product_description" value="@Model.product_note" disabled />
+    </div>
+    <div class="field">
+        <label>Chi tiết</label>
+        <input name="product_description" value="@Model.product_detail" disabled />
+    </div>
+    <div class="field">
+        <label>Mô tả</label>
+        <input name="product_description" value="@Model.product_description" disabled />
+    </div>
+    <div class="four fields">
+        <div class="field">
+            <label>Lượt xem</label>
+            <input type="text" name="product_view" value="@Model.product_view" disabled />
         </div>
-        <div class="two fields">
-            <div class="field">
-                <label>Giá sản phẩm</label>
-                <input type="text" name="product_price" value="@Model.product_price" disabled />
-            </div>
-            <div class="field">
-                <label>Giá sale</label>
-                <input type="text" name="product_sale" value="@Model.product_sale" disabled />
-            </div>
+        <div class="field">
+            <label>Yêu thích</label>
+            <input type="text" name="product_love" value="@Model.product_love" disabled />
         </div>
-        <div class="two fields">
-            <div class="field">
-                <label>Tùy chọn</label>
-                <select name="product_option" disabled>
-                    <option>@Model.product_option</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>Số lượng</label>
-                <input type="text" name="product_amount" value="@Model.product_amount" disabled />
-            </div>
+        <div class="field">
+            <label>Giá sản phẩm</label>
+            <input type="text" name="product_price" value="@Model.product_price" disabled />
         </div>
-        <div class="two fields">
-            <div class="field">
-                <label>Màu sắc</label>
-                <input type="text" name="product_color" value="@Model.product_color" disabled />
-            </div>
-            <div class="field">
-                <label>Kích cỡ</label>
-                <input type="text" name="product_size" value="@Model.product_size" disabled />
-            </div>
+        <div class="field">
+            <label>Giá sale</label>
+            <input type="text" name="product_sale" value="@Model.product_sale" disabled />
         </div>
-        <div>
-            <button class="ui primary button mt-3" type="submit">XÓA</button>
+    </div>
+    <div class="four fields">
+        <div class="field">
+            <label>Tùy chọn</label>
+            <select name="product_option" disabled>
+                <option>@Model.product_option</option>
+            </select>
         </div>
-    </form>
+        <div class="field">
+            <label>Số lượng</label>
+            <input type="text" name="product_amount" value="@Model.product_amount" disabled />
+        </div>
+        <div class="field">
+            <label>Màu sắc</label>
+            <input type="text" name="product_color" value="@Model.product_color" disabled />
+        </div>
+        <div class="field">
+            <label>Kích cỡ</label>
+            <input type="text" name="product_size" value="@Model.product_size" disabled />
+        </div>
+    </div>
+    <div>
+        <button class="ui primary submit button mt-3" type="submit">XÓA</button>
+    </div>
+    <div class="ui error message"></div>
 }
 

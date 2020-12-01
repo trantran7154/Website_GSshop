@@ -1,0 +1,491 @@
+﻿<script>
+    $('.ui.form')
+        .form({
+            fields: {
+                // Kiểm tên sản phẩm
+                product_name: {
+                    identifier: 'product_name',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Tên sản phẩm không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm ngày tạo sản phẩm
+                product_datecreated: {
+                    identifier: 'product_datecreated',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày tạo sản phẩm không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm ngày sửa sản phẩm
+                product_dateedit: {
+                    identifier: 'product_dateedit',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày sửa sản phẩm không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm mã liên quan
+                product_related: {
+                    identifier: 'product_related',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Mã sản phẩm liên quan không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra số lượng
+                product_amount: {
+                    identifier: 'product_amount',
+                    rules: [
+                        {
+                            type: 'integer[1..10000]',
+                            prompt: 'Giá không hợp lệ.'
+                        },
+                        {
+                            type: 'empty',
+                            prompt: 'Giá không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ảnh
+                fileUpload: {
+                    identifier: 'fileUpload',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ảnh không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra lượt xem
+                product_view: {
+                    identifier: 'product_view',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Lượt xem không được để trống.'
+                        },
+                        {
+                            type: 'integer[1..100]',
+                            prompt: 'Lượt xem không hợp lệ.'
+                        }
+                    ]
+                },
+                // Kiểm tra lượt yêu thích
+                product_love: {
+                    identifier: 'product_love',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Lượt yêu thích không được để trống.'
+                        },
+                        {
+                            type: 'integer[1..100]',
+                            prompt: 'Lượt yêu thích không hợp lệ.'
+                        }
+                    ]
+                },
+                //Kiểm tra giá sản phẩm
+                product_price: {
+                    identifier: 'product_price',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Giá sản phẩm không được để trống.'
+                        },
+                        {
+                            type: 'integer[1..1000000000]',
+                            prompt: 'Giá sản phẩm không hợp lệ.'
+                        }
+                    ]
+                },
+                // Kiểm tra giá sale
+                product_sale: {
+                    identifier: 'product_sale',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Giá sale không được để trống.'
+                        },
+                        {
+                            type: 'integer[1..1000000000]',
+                            prompt: 'Giá sale không hợp lệ.'
+                        }
+                    ]
+                },
+                // Kiểm tra màu sắc
+                product_color: {
+                    identifier: 'product_color',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Màu sắc không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra kích cỡ
+                product_size: {
+                    identifier: 'product_size',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Kích cỡ không được để trống.'
+                        },
+                        {
+                            type: 'integer[1..100]',
+                            prompt: 'Kích cỡ không hợp lệ.'
+                        }
+                    ]
+                },
+                // Kiểm tra tên bộ sưu tập
+                collection_name: {
+                    identifier: 'collection_name',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Tên bộ sưu tập không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ngày đăng
+                collection_datecreated: {
+                    identifier: 'collection_datecreated',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày tạo không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra tên người bán
+                seller_id: {
+                    identifier: 'seller_id',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Tên người bán không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ảnh 1 bộ sưu tập
+                fileUpload1: {
+                    identifier: 'fileUpload1',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ảnh 1 không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ảnh 2 bộ sưu tập
+                fileUpload2: {
+                    identifier: 'fileUpload2',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ảnh 2 không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ảnh 3 bộ sưu tập
+                fileUpload3: {
+                    identifier: 'fileUpload3',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ảnh 3 không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ảnh 1 sửa bộ sưu tập
+                collection_image1a: {
+                    identifier: 'collection_image1a',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ảnh 1 không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ảnh 2 sửa bộ sưu tập
+                collection_image2a: {
+                    identifier: 'collection_image2a',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ảnh 2 không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ảnh 3 sửa bộ sưu tập
+                collection_image3a: {
+                    identifier: 'collection_image3a',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ảnh 3 không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra tên danh mục chính
+                category_name: {
+                    identifier: 'category_name',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Tên danh mục chính không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ngày tạo danh mục chính
+                category_datecreated: {
+                    identifier: 'category_datecreated',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày tạo danh mục chính không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra tên danh mục phụ
+                subcategory_name: {
+                    identifier: 'subcategory_name',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Tên danh mục phụ không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ngày tạo danh mục phụ
+                subcategory_datecreated: {
+                    identifier: 'subcategory_datecreated',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày tạo danh mục phụ không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra tên danh mục con
+                csc_name: {
+                    identifier: 'csc_name',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Tên danh mục con không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra tên đối tác
+                gsmall_name: {
+                    identifier: 'gsmall_name',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Tên đối tác không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra slogan
+                gsmall_slogan: {
+                    identifier: 'gsmall_slogan',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Slogan không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ngày tạo đối tác
+                gsmall_datecreated: {
+                    identifier: 'gsmall_datecreated',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày tạo đối tác không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra email người dùng
+                user_email: {
+                    identifier: 'user_email',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Email không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra mật khẩu người dùng
+                user_pass: {
+                    identifier: 'user_pass',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Mật khẩu không được để trống.'
+                        },
+                        {
+                            type: 'minLength[5]',
+                            prompt: 'Mật khẩu phải trên 5 ký tự.'
+                        }
+                    ]
+                },
+                // Kiểm tra số người dùng
+                user_telephone: {
+                    identifier: 'user_telephone',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Số điện thoại không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra tên người dùng
+                user_nicename: {
+                    identifier: 'user_nicename',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Tên người dùng không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ngày tạo người dùng
+                user_datecreated: {
+                    identifier: 'user_datecreated',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày tạo không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ngày đăng nhập người dùng
+                user_datelogin: {
+                    identifier: 'user_datelogin',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày đăng nhập không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra địa chỉ người dùng
+                user_address: {
+                    identifier: 'user_address',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Địa chỉ không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra email seller
+                seller_email: {
+                    identifier: 'seller_email',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Email seller không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra mật khẩu seller
+                seller_pass: {
+                    identifier: 'seller_pass',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Mật khẩu không được để trống.'
+                        },
+                        {
+                            type: 'minLength[5]',
+                            prompt: 'Mật khẩu phải trên 5 ký tự.'
+                        }
+                    ]
+                },
+                // Kiểm tra số tên shop của seller
+                seller_nameshop: {
+                    identifier: 'seller_nameshop',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Tên shop không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ngày tạo seller
+                seller_datecreated: {
+                    identifier: 'seller_datecreated',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày tạo không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ngày đăng nhập seller
+                seller_datelogin: {
+                    identifier: 'seller_datelogin',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày đăng nhập không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra tên seller
+                seller_nicename: {
+                    identifier: 'seller_nicename',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Tên seller không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra số điện thoại seller
+                seller_telephone: {
+                    identifier: 'seller_telephone',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Số điện thoại không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra địa chỉ seller
+                seller_address: {
+                    identifier: 'seller_address',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Địa chỉ không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra ảnh slider seller
+                fileUpload4: {
+                    identifier: 'fileUpload4',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ảnh 4 không được để trống.'
+                        }
+                    ]
+                }
+            }
+        })
+        ;
+</script>
+

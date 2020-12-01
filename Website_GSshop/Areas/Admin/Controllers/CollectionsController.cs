@@ -48,7 +48,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "collection_id,collection_name,collection_image1,collection_image2,collection_image3,collection_datecreate,collection_active,collection_bin")] Collection collection, HttpPostedFileBase fileUpload1, HttpPostedFileBase fileUpload2, HttpPostedFileBase fileUpload3)
+        public ActionResult Create([Bind(Include = "collection_id,collection_name,collection_image1,collection_image2,collection_image3,seller_id,collection_datecreate,collection_active,collection_bin")] Collection collection, HttpPostedFileBase fileUpload1, HttpPostedFileBase fileUpload2, HttpPostedFileBase fileUpload3)
         {
             // Tên file ảnh sản phẩm
             var fileimg_edit1 = Path.GetFileName(fileUpload1.FileName);
@@ -127,7 +127,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "collection_id,collection_name,collection_image1,collection_image2,collection_image3,collection_datecreate,collection_active,collection_bin")] Collection collection, HttpPostedFileBase collection_image1a, HttpPostedFileBase collection_image2a, HttpPostedFileBase collection_image3a)
+        public ActionResult Edit([Bind(Include = "collection_id,collection_name,collection_image1,collection_image2,collection_image3,seller_id,collection_datecreate,collection_active,collection_bin")] Collection collection, HttpPostedFileBase collection_image1a, HttpPostedFileBase collection_image2a, HttpPostedFileBase collection_image3a)
         {
             db.Entry(collection).State = EntityState.Modified;
             //Kiểm tra 1 một trong 3 ảnh bị trống

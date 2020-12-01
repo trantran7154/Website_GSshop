@@ -7,6 +7,13 @@
     var user_detail = "userdetail";
     var user_delete = "userdelete";
 }
+<style>
+    .error {
+        display: grid;
+        align-items: center;
+        min-height: 10vh;
+    }
+</style>
 @Html.Action("CSS_Sematic", "Home")
 <a href="/Admin/Home/Index">
     <svg id="user" enable-background="new 0 0 300 300" height="45" viewBox="0 0 300 300" width="45" xmlns="http://www.w3.org/2000/svg"><path d="m38 38h224v224h-224z" fill="#fff" /><path d="m262 270h-224c-4.422 0-8-3.578-8-8v-224c0-4.422 3.578-8 8-8h224c4.422 0 8 3.578 8 8v224c0 4.422-3.578 8-8 8zm-216-16h208v-208h-208z" fill="#5c128d" /><path d="m54 54h16v16h-16z" fill="#e86436" /><path d="m78 54h16v16h-16z" fill="#f6d831" /><path d="m102 54h16v16h-16z" fill="#2ee52b" /><path d="m38 78h224v16h-224z" fill="#5c128d" /><path d="m126 230h48v16h-48z" fill="#d6d6d6" /><circle cx="150" cy="146" fill="#ffdea2" r="32" /><path d="m150 186c-22.055 0-40-17.945-40-40s17.945-40 40-40 40 17.945 40 40-17.945 40-40 40zm0-64c-13.234 0-24 10.766-24 24s10.766 24 24 24 24-10.766 24-24-10.766-24-24-24z" fill="#5c128d" /><path d="m166 174h-33c-17.673 0-32 14.327-32 32v8h97v-8c0-17.673-14.327-32-32-32z" fill="#816982" /><path d="m198 222h-97c-4.422 0-8-3.578-8-8v-8c0-22.055 17.945-40 40-40h33c22.055 0 40 17.945 40 40v8c0 4.422-3.578 8-8 8zm-89-16h81c0-13.234-10.766-24-24-24h-33c-13.234 0-24 10.766-24 24z" fill="#5c128d" /></svg>
@@ -163,89 +170,74 @@
                             <div class="modal-body">
                                 @using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
-                                    <form method="post" class="mb-4 ui form">
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Email</label>
-                                                <input type="email" name="user_email">
-                                            </div>
-                                            <div class="field">
-                                                <label>Mật khẩu</label>
-                                                <input type="password" name="user_pass" />
-                                            </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Email</label>
+                                            <input type="email" name="user_email">
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Nice name</label>
-                                                <input type="text" name="user_nicename" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Token</label>
-                                                <input type="text" name="user_token" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đại diện</label>
-                                                <input name="fileUpload" type="file">
-                                            </div>
+                                        <div class="field">
+                                            <label>Mật khẩu</label>
+                                            <input type="password" name="user_pass" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="date" name="user_datecreated" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ngày đăng nhập</label>
-                                                <input type="date" name="user_datelogin" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Vai trò</label>
-                                                <input type="number" name="user_role" />
-                                            </div>
+                                        <div class="field">
+                                            <label>Số điện thoại</label>
+                                            <input type="text" name="user_telephone" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="user_active">
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Giới tính</label>
-                                                <select name="user_sex">
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Số điện thoại</label>
-                                                <input type="text" name="user_telephone" />
-                                            </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Nice name</label>
+                                            <input type="text" name="user_nicename" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Địa chỉ</label>
-                                                <input type="text" name="user_address" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Quận/Huyện</label>
-                                                <select name="user_district">
-                                                    <option>Chọn Quận/Huyện</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Tỉnh/TP</label>
-                                                <select name="user_provincecity">
-                                                    <option>Chọn Tỉnh/Thành Phố</option>
-                                                </select>
-                                            </div>
+                                        <div class="field">
+                                            <label>Token</label>
+                                            <input type="text" name="user_token" />
                                         </div>
-                                        <div class="ui error message"></div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
+                                        <div class="field">
+                                            <label>Ảnh đại diện</label>
+                                            <input name="fileUpload" type="file">
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Ngày tạo</label>
+                                            <input type="date" name="user_datecreated" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Ngày đăng nhập</label>
+                                            <input type="date" name="user_datelogin" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Hoạt động</label>
+                                            <select name="user_active">
+                                                <option>True</option>
+                                                <option>False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Địa chỉ</label>
+                                            <input type="text" name="user_address" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Quận/Huyện</label>
+                                            <select name="user_district">
+                                                <option>Chọn Quận/Huyện</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tỉnh/TP</label>
+                                            <select name="user_provincecity">
+                                                <option>Chọn Tỉnh/Thành Phố</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="ui error message"></div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -275,91 +267,76 @@
                             <div class="modal-body">
                                 @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
-                                    <form method="post" class="mb-4 ui form">
-                                        <input type="hidden" value="@item.user_id" name="user_id"/>
-                                        <input type="hidden" value="@item.user_image" name="user_image"/>
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Email</label>
-                                                <input type="email" name="user_email" value="@item.user_email">
-                                            </div>
-                                            <div class="field">
-                                                <label>Mật khẩu</label>
-                                                <input type="text" name="user_pass" value="@item.user_pass" />
-                                            </div>
+                                    <input type="hidden" value="@item.user_id" name="user_id" />
+                                    <input type="hidden" value="@item.user_image" name="user_image" />
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Email</label>
+                                            <input type="email" name="user_email" value="@item.user_email">
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Nice name</label>
-                                                <input type="text" name="user_nicename" value="@item.user_nicename" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Token</label>
-                                                <input type="text" name="user_token" value="@item.user_token" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đại diện</label>
-                                                <input name="fileUpload" type="file">
-                                            </div>
+                                        <div class="field">
+                                            <label>Mật khẩu</label>
+                                            <input type="text" name="user_pass" value="@item.user_pass" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="date" name="user_datecreated" value="@item.user_datecreated.Value.Year-@(item.user_datecreated.Value.Month < 10 ? "0" + item.user_datecreated.Value.Month.ToString() : item.user_datecreated.Value.Month.ToString())-@(item.user_datecreated.Value.Day < 10 ? "0" + item.user_datecreated.Value.Day.ToString() : item.user_datecreated.Value.Day.ToString())"/>
-                                            </div>
-                                            <div class="field">
-                                                <label>Ngày đăng nhập</label>
-                                                <input type="date" name="user_datelogin" value="@item.user_datecreated.Value.Year-@(item.user_datelogin.Value.Month < 10 ? "0" + item.user_datelogin.Value.Month.ToString() : item.user_datelogin.Value.Month.ToString())-@(item.user_datelogin.Value.Day < 10 ? "0" + item.user_datelogin.Value.Day.ToString() : item.user_datelogin.Value.Day.ToString())"/>
-                                            </div>
-                                            <div class="field">
-                                                <label>Vai trò</label>
-                                                <input type="number" name="user_role" value="@item.user_role" />
-                                            </div>
+                                        <div class="field">
+                                            <label>Số điện thoại</label>
+                                            <input type="text" name="user_telephone" value="@item.user_telephone" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="user_active">
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Giới tính</label>
-                                                <select name="user_sex">
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Số điện thoại</label>
-                                                <input type="text" name="user_telephone" value="@item.user_telephone" />
-                                            </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Nice name</label>
+                                            <input type="text" name="user_nicename" value="@item.user_nicename" />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Địa chỉ</label>
-                                                <input type="text" name="user_address" value="@item.user_address" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Quận/Huyện</label>
-                                                <select name="user_district">
-                                                    <option>Chọn Quận/Huyện</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Tỉnh/TP</label>
-                                                <select name="user_provincecity">
-                                                    <option>Chọn Tỉnh/Thành Phố</option>
-                                                </select>
-                                            </div>
+                                        <div class="field">
+                                            <label>Token</label>
+                                            <input type="text" name="user_token" value="@item.user_token" />
                                         </div>
-                                        <div class="ui error message"></div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> SỬA</button>
+                                        <div class="field">
+                                            <label>Ảnh đại diện</label>
+                                            <input name="fileUpload" type="file">
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Ngày tạo</label>
+                                            <input type="date" name="user_datecreated" value="@item.user_datecreated.Value.Year-@(item.user_datecreated.Value.Month < 10 ? "0" + item.user_datecreated.Value.Month.ToString() : item.user_datecreated.Value.Month.ToString())-@(item.user_datecreated.Value.Day < 10 ? "0" + item.user_datecreated.Value.Day.ToString() : item.user_datecreated.Value.Day.ToString())" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Ngày đăng nhập</label>
+                                            <input type="date" name="user_datelogin" value="@item.user_datecreated.Value.Year-@(item.user_datelogin.Value.Month < 10 ? "0" + item.user_datelogin.Value.Month.ToString() : item.user_datelogin.Value.Month.ToString())-@(item.user_datelogin.Value.Day < 10 ? "0" + item.user_datelogin.Value.Day.ToString() : item.user_datelogin.Value.Day.ToString())" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Hoạt động</label>
+                                            <select name="user_active">
+                                                <option>True</option>
+                                                <option>False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Địa chỉ</label>
+                                            <input type="text" name="user_address" value="@item.user_address" />
+                                        </div>
+                                        <div class="field">
+                                            <label>Quận/Huyện</label>
+                                            <select name="user_district">
+                                                <option>Chọn Quận/Huyện</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tỉnh/TP</label>
+                                            <select name="user_provincecity">
+                                                <option>Chọn Tỉnh/Thành Phố</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="ui error message"></div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> SỬA</button>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -400,88 +377,73 @@
                             <div class="modal-body">
                                 @using (Html.BeginForm("Details", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
-                                    <form method="post" class="mb-4 ui form">
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Email</label>
-                                                <input type="email" name="user_email" value="@item.user_email" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Mật khẩu</label>
-                                                <input type="text" name="user_pass" value="@item.user_pass" disabled />
-                                            </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Email</label>
+                                            <input type="email" name="user_email" value="@item.user_email" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Nice name</label>
-                                                <input type="text" name="user_nicename" value="@item.user_nicename" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Token</label>
-                                                <input type="text" name="user_token" value="@item.user_token" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đại diện</label>
-                                                <img src="~/Content/Layout/images/@item.user_image" height="100" width="100" />
-                                            </div>
+                                        <div class="field">
+                                            <label>Mật khẩu</label>
+                                            <input type="text" name="user_pass" value="@item.user_pass" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="text" name="user_datecreated" value="@item.user_datecreated" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ngày đăng nhập</label>
-                                                <input type="text" name="user_datelogin" value="@item.user_datelogin" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Vai trò</label>
-                                                <input type="number" name="user_role" value="@item.user_role" disabled />
-                                            </div>
+                                        <div class="field">
+                                            <label>Số điện thoại</label>
+                                            <input type="text" name="user_telephone" value="@item.user_telephone" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="user_active" disabled>
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Giới tính</label>
-                                                <select name="user_sex" disabled>
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Số điện thoại</label>
-                                                <input type="text" name="user_telephone" value="@item.user_telephone" disabled />
-                                            </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Nice name</label>
+                                            <input type="text" name="user_nicename" value="@item.user_nicename" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Địa chỉ</label>
-                                                <input type="text" name="user_address" value="@item.user_address" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Quận/Huyện</label>
-                                                <select name="user_district" disabled>
-                                                    <option>@item.user_district</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Tỉnh/TP</label>
-                                                <select name="user_provincecity" disabled>
-                                                    <option>@item.user_provincecity</option>
-                                                </select>
-                                            </div>
+                                        <div class="field">
+                                            <label>Token</label>
+                                            <input type="text" name="user_token" value="@item.user_token" disabled />
                                         </div>
-                                        <div class="ui error message"></div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                        <div class="field">
+                                            <label>Ảnh đại diện</label>
+                                            <img src="~/Content/Layout/images/@item.user_image" height="100" width="100" />
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Ngày tạo</label>
+                                            <input type="text" name="user_datecreated" value="@item.user_datecreated" disabled />
+                                        </div>
+                                        <div class="field">
+                                            <label>Ngày đăng nhập</label>
+                                            <input type="text" name="user_datelogin" value="@item.user_datelogin" disabled />
+                                        </div>
+                                        <div class="field">
+                                            <label>Hoạt động</label>
+                                            <select name="user_active" disabled>
+                                                <option>True</option>
+                                                <option>False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Địa chỉ</label>
+                                            <input type="text" name="user_address" value="@item.user_address" disabled />
+                                        </div>
+                                        <div class="field">
+                                            <label>Quận/Huyện</label>
+                                            <select name="user_district" disabled>
+                                                <option>@item.user_district</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tỉnh/TP</label>
+                                            <select name="user_provincecity" disabled>
+                                                <option>@item.user_provincecity</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="ui error message"></div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -530,90 +492,75 @@
                             <div class="modal-body">
                                 @using (Html.BeginForm("Delete", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                 {
-                                    <form method="post" class="mb-4 ui form">
-                                        <input type="hidden" value="@item.user_id" name="user_id"/>
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Email</label>
-                                                <input type="email" name="user_email" value="@item.user_email" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Mật khẩu</label>
-                                                <input type="text" name="user_pass" value="@item.user_pass" disabled />
-                                            </div>
+                                    <input type="hidden" value="@item.user_id" name="user_id" />
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Email</label>
+                                            <input type="email" name="user_email" value="@item.user_email" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Nice name</label>
-                                                <input type="text" name="user_nicename" value="@item.user_nicename" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Token</label>
-                                                <input type="text" name="user_token" value="@item.user_token" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đại diện</label>
-                                                <img src="~/Content/Layout/images/@item.user_image" height="90" width="100" />
-                                            </div>
+                                        <div class="field">
+                                            <label>Mật khẩu</label>
+                                            <input type="text" name="user_pass" value="@item.user_pass" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="text" name="user_datecreated" value="@item.user_datecreated" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ngày đăng nhập</label>
-                                                <input type="text" name="user_datelogin" value="@item.user_datelogin" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Vai trò</label>
-                                                <input type="number" name="user_role" value="@item.user_role" disabled />
-                                            </div>
+                                        <div class="field">
+                                            <label>Số điện thoại</label>
+                                            <input type="text" name="user_telephone" value="@item.user_telephone" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="user_active" disabled>
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Giới tính</label>
-                                                <select name="user_sex" disabled>
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Số điện thoại</label>
-                                                <input type="text" name="user_telephone" value="@item.user_telephone" disabled />
-                                            </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Nice name</label>
+                                            <input type="text" name="user_nicename" value="@item.user_nicename" disabled />
                                         </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Địa chỉ</label>
-                                                <input type="text" name="user_address" value="@item.user_address" disabled />
-                                            </div>
-                                            <div class="field">
-                                                <label>Quận/Huyện</label>
-                                                <select name="user_district" disabled>
-                                                    <option>@item.user_district</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Tỉnh/TP</label>
-                                                <select name="user_provincecity" disabled>
-                                                    <option>@item.user_provincecity</option>
-                                                </select>
-                                            </div>
+                                        <div class="field">
+                                            <label>Token</label>
+                                            <input type="text" name="user_token" value="@item.user_token" disabled />
                                         </div>
-                                        <div class="ui error message"></div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> XÓA</button>
+                                        <div class="field">
+                                            <label>Ảnh đại diện</label>
+                                            <img src="~/Content/Layout/images/@item.user_image" height="90" width="100" />
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Ngày tạo</label>
+                                            <input type="text" name="user_datecreated" value="@item.user_datecreated" disabled />
+                                        </div>
+                                        <div class="field">
+                                            <label>Ngày đăng nhập</label>
+                                            <input type="text" name="user_datelogin" value="@item.user_datelogin" disabled />
+                                        </div>
+                                        <div class="field">
+                                            <label>Hoạt động</label>
+                                            <select name="user_active" disabled>
+                                                <option>True</option>
+                                                <option>False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="three fields">
+                                        <div class="field">
+                                            <label>Địa chỉ</label>
+                                            <input type="text" name="user_address" value="@item.user_address" disabled />
+                                        </div>
+                                        <div class="field">
+                                            <label>Quận/Huyện</label>
+                                            <select name="user_district" disabled>
+                                                <option>@item.user_district</option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label>Tỉnh/TP</label>
+                                            <select name="user_provincecity" disabled>
+                                                <option>@item.user_provincecity</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="ui error message"></div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> XÓA</button>
+                                    </div>
                                 }
                             </div>
                         </div>

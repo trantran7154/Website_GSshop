@@ -8,6 +8,13 @@
     var cate_delete = "catedelete";
 }
 @Html.Action("CSS_Sematic", "Home")
+<style>
+    .error {
+        display: grid;
+        align-items: center;
+        min-height: 10vh;
+    }
+</style>
 <a href="/Admin/Home/Index">
     <svg xmlns="http://www.w3.org/2000/svg" height="40" version="1.1" viewBox="0 -52 512.00003 512" width="40">
         <g id="surface1">
@@ -156,36 +163,34 @@
                     <div class="modal-body">
                         @using (Html.BeginForm("Create", "Categories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                         {
-                            <form method="post" class="mb-4 ui form">
-                                <div class="two fields">
-                                    <div class="field">
-                                        <label>Tên danh mục</label>
-                                        <input type="text" name="category_name" />
-                                    </div>
-                                    <div class="field">
-                                        <label>Ảnh</label>
-                                        <input name="fileUpload" type="file">
-                                    </div>
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>Tên danh mục</label>
+                                    <input type="text" name="category_name" />
                                 </div>
-                                <div class="two fields">
-                                    <div class="field">
-                                        <label>Ngày tạo</label>
-                                        <input type="date" name="category_datecreated" />
-                                    </div>
-                                    <div class="field">
-                                        <label>Hoạt động</label>
-                                        <select name="category_active">
-                                            <option>True</option>
-                                            <option>False</option>
-                                        </select>
-                                    </div>
+                                <div class="field">
+                                    <label>Ảnh</label>
+                                    <input name="fileUpload" type="file">
                                 </div>
-                                <div class="ui error message"></div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                    <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
+                            </div>
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>Ngày tạo</label>
+                                    <input type="date" name="category_datecreated" />
                                 </div>
-                            </form>
+                                <div class="field">
+                                    <label>Hoạt động</label>
+                                    <select name="category_active">
+                                        <option>True</option>
+                                        <option>False</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ui error message"></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
+                            </div>
                         }
                     </div>
                 </div>

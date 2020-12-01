@@ -41,5 +41,7 @@ namespace Website_GSshop.Models
         public virtual DbSet<Favourite> Favourite { get; set; }
         public virtual DbSet<Like> Like { get; set; }
         public virtual DbSet<PayDetail> PayDetail { get; set; }
+        public virtual DbSet<Bill> Bill { get; set; }
+        public virtual DbSet<BillStatus> BillStatus { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Website_GSshop.Models.Collection>
+﻿@using Website_GSshop.Models
+@model List<Collection> 
 
 @{
     ViewBag.Title = "Index";
@@ -6,7 +7,18 @@
     var col_edit = "coledit";
     var col_detail = "coldetail";
     var col_delete = "coldelete";
+    Data_GSShopEntities db = new Data_GSShopEntities();
 }
+@{ 
+    List<Seller> seller = db.Seller.ToList();
+}
+<style>
+    .error {
+        display: grid;
+        align-items: center;
+        min-height: 10vh;
+    }
+</style>
 @Html.Action("CSS_Sematic", "Home")
 <a href="/Admin/Home/Index">
     <?xml version="1.0" ?>
@@ -26,6 +38,9 @@
         </th>
         <th>
             <span><i class="fa fa-image"></i> Ảnh 3</span>
+        </th>
+        <th>
+            <span><i class="fa fa-user"></i> Tên người bán</span>
         </th>
         <th>
             <span><i class="fa fa-calendar"></i> Ngày tạo</span>
@@ -56,6 +71,9 @@
             <td class="text-center">
                 <img src="~/Content/Layout/images/@item.collection_image3" height="100" width="100" />
             </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Seller.seller_nameshop)
+            </td>   
             <td class="text-center">
                 <p>@item.collection_datecreate.Value.Day/@item.collection_datecreate.Value.Month/@item.collection_datecreate.Value.Year</p>
             </td>
@@ -158,11 +176,11 @@
                                                 <input type="date" name="collection_datecreated" />
                                             </div>
                                             <div class="field">
-                                                <label>Mã sản phẩm</label>
-                                                <select name="product_id">
-                                                    @foreach(var item1 in Model.ToList())
+                                                <label>Tên người bán</label>
+                                                <select name="seller_id">
+                                                    @foreach(var item1 in seller)
                                                     {
-                                                        <option>@item1.</option>
+                                                        <option>@item1.seller_nameshop</option>
                                                     }
                                                 </select>
                                             </div>
@@ -239,11 +257,11 @@
                                             <input type="date" name="collection_datecreate" value="@item.collection_datecreate.Value.Year-@(item.collection_datecreate.Value.Month < 10 ? "0" + item.collection_datecreate.Value.Month.ToString() : item.collection_datecreate.Value.Month.ToString())-@(item.collection_datecreate.Value.Day < 10 ? "0" + item.collection_datecreate.Value.Day.ToString() : item.collection_datecreate.Value.Day.ToString())"/>
                                         </div>
                                         <div class="field">
-                                            <label>Mã sản phẩm</label>
-                                            <select name="product_id">
-                                                @foreach (var item1 in Model.ToList())
+                                            <label>Tên người bán</label>  
+                                            <select name="seller_id">
+                                                @foreach (var item1 in seller)
                                                 {
-                                                    <option>1</option>
+                                                    <option>@item1.seller_nameshop</option>
                                                 }
                                             </select>
                                         </div>
@@ -326,10 +344,10 @@
                                                 <input type="text" name="collection_datecreated" value="@item.collection_datecreate" disabled />
                                             </div>
                                             <div class="field">
-                                                <label>Mã sản phẩm</label>
+                                                <label>Tên người bán</label>
                                                 <div class="field">
-                                                    <select name="product_id" disabled>
-                                                        <option>1</option>
+                                                    <select name="seller_id" disabled>
+                                                        <option>@item.Seller.seller_nameshop</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -420,10 +438,10 @@
                                                 <input type="text" name="collection_datecreated" value="@item.collection_datecreate" disabled />
                                             </div>
                                             <div class="field">
-                                                <label>Mã sản phẩm</label>
+                                                <label>Tên người bán</label>
                                                 <div class="field">
-                                                    <select name="product_id" disabled>
-                                                        <option>1</option>
+                                                    <select name="seller_id" disabled>
+                                                        <option>@item.Seller.seller_nameshop</option>
                                                     </select>
                                                 </div>
                                             </div>
