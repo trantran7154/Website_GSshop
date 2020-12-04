@@ -41,10 +41,10 @@ namespace Website_GSshop.Controllers
                 db.User.Find(user.user_id).user_datelogin = DateTime.Now;
                 db.User.Find(user.user_id).user_token = Guid.NewGuid().ToString();
                 return Redirect(home);
-            }               
+            }    
             else
             {
-                Session["testlogin"] = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn sai tài khoản và mật khẩu.</b></div>";
+                Session["testlogin"] = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Nhập sai tài khoản hoặc mật khẩu.</b></div>";
                 return Redirect(Request.UrlReferrer.ToString());
             }
         }
@@ -183,7 +183,7 @@ namespace Website_GSshop.Controllers
             }
             else
             {
-                Session["testsellerlogin"] = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn sai tài khoản và mật khẩu.</b></div>";
+                Session["testsellerlogin"] = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Nhập sai tài khoản hoặc mật khẩu.</b></div>";
                 return Redirect(Request.UrlReferrer.ToString());
             }
         }

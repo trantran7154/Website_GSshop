@@ -29,27 +29,6 @@
                             <div class="card2 card border-0 px-4 py-5">
                                 <h3 class="mb-1 text-dark">Chào mừng đến với idlecat Shop.<br /> Đăng nhập ngay!</h3>
                                 <p class="mb-4 text-sm">Thành viên mới?  <a class="text-primary login">Đăng ký</a> tại đây.</p>
-                                <script>
-                                    function validateForm() {
-                                        // Bước 1: Lấy giá trị của username và password
-                                        var seller_email = document.getElementById('seller_email').value;
-                                        var seller_pass = document.getElementById('seller_pass').value;
-                                        // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
-                                        if (seller_email == '' && seller_pass == '') {
-                                            document.getElementById("testsellerlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email và mật khẩu.</b></div>"
-                                        }
-                                        else if (seller_pass == '') {
-                                            document.getElementById("testsellerlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i > Bạn chưa nhập mật khẩu.</b></div>"
-                                        }
-                                        else if (seller_email == '') {
-                                            document.getElementById("testsellerlogin").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email.</b></div>"
-                                        }
-                                        else {
-                                            return true;
-                                        }
-                                        return false;
-                                    }
-                                </script>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="google"><span class="fa fa-google"></span><small class="pl-3 pr-1">Sign up with google</small></div>
@@ -62,23 +41,22 @@
                                     <div class="line"></div> <small class="text-muted or text-center">OR</small>
                                     <div class="line"></div>
                                 </div>
-                                <form role="form" method="post" action="@Url.Action("LoginSeller","Account")" onsubmit="return validateForm()">
-                                    <div class="row px-3">
-                                        <label class="mb-0">
-                                            <span class="mb-0 text-sm text-dark">Email</span>
-                                        </label> <input class="input1" type="text" name="seller_email" id="seller_email">
+                                <form class="ui form segment" role="form" method="post" action="@Url.Action("LoginSeller","Account")" style="border: none; box-shadow: none">
+                                    <div class="field">
+                                        <label>Email</label>
+                                        <input class="input1" type="text" name="seller_email">
                                     </div>
-                                    <div class="row px-3">
-                                        <label class="mb-0">
-                                            <span class="mb-0 text-sm text-dark">Mật khẩu</span>
-                                        </label> <input class="input1" type="password" name="seller_pass" id="seller_pass">
+                                    <div class="field">
+                                        <label>Mật khẩu</label>
+                                        <input class="input1" type="password" name="seller_pass">
                                     </div>
-                                    @Html.Raw(Session["testsellerlogin"])
                                     <div id="testlogin"></div>
                                     <div class="row mb-4">
-                                        <div class="col-md-5"> <button class="btn btn-blue button3 text-center mb-1">ĐĂNG NHẬP</button> </div>
+                                        <div class="col-md-5"> <button class="ui btn btn-blue button3 text-center mb-1">ĐĂNG NHẬP</button> </div>
                                         <div class="col-md-7 text-right"><a href="#"><u>Quên mật khẩu?</u></a></div>
+                                        <div class="ui error message" style="width: 100%; min-height: 10vh;"></div>
                                     </div>
+                                    @Html.Raw(Session["testsellerlogin"])
                                 </form>
                             </div>
                         </div>
@@ -102,31 +80,6 @@
                         <div class="col-md-7">
                             <div class="card2 card border-0 px-4 py-5">
                                 <h3 class="mb-1 text-dark">Chào mừng đến với idlecat Shop.<br /> Đăng ký ngay!</h3>
-                                <script>
-                                    function valiSignUpSeller() {
-                                        // Bước 1: Lấy giá trị của username và password
-                                        var seller_email = document.getElementById('seller_emailres').value;
-                                        var seller_pass = document.getElementById('seller_passres').value;
-                                        var seller_repeat = document.getElementById('seller_repeat').value;
-                                        // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
-                                        if (seller_email == '' && seller_pass == '') {
-                                            document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email và mật khẩu.</b></div>"
-                                        }
-                                        else if (seller_pass == '') {
-                                            document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i > Bạn chưa nhập mật khẩu.</b></div>"
-                                        }
-                                        else if (seller_email == '') {
-                                            document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Bạn chưa nhập email.</b></div>"
-                                        }
-                                        else if (seller_pass != seller_repeat) {
-                                            document.getElementById("testsignup").innerHTML = "<div class='alert alert-danger'><b class='text-danger'><i class='fa fa-times-circle' style='color: red'>&nbsp;</i> Mật khẩu nhập lại chưa đúng.</b></div>"
-                                        }
-                                        else {
-                                            return true;
-                                        }
-                                        return false;
-                                    }
-                                </script>
                                 <div class="row mt-4">
                                     <div class="col-sm-6">
                                         <div class="google"><span class="fa fa-google"></span><small class="pl-3 pr-1">Sign up with google</small></div>
@@ -139,36 +92,32 @@
                                     <div class="line"></div> <small class="text-muted or text-center">OR</small>
                                     <div class="line"></div>
                                 </div>
-                                <form role="form" method="post" action="@Url.Action("SignUpSeller","Account")" onsubmit="return valiSignUp()">
-                                    <div class="row mt-2">
-                                        <div class="col-md-6">
-                                            <label class="mb-0">
-                                                <span class="mb-0 text-sm text-dark">Tên shop</span>
-                                            </label> <input class="input1" type="text" name="seller_nameshop">
+                                <form class="ui form segment" role="form" method="post" action="@Url.Action("SignUpSeller","Account")" style="border: none; box-shadow: none">
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label>Tên shop</label>
+                                            <input class="input1" type="text" name="seller_nameshop">
                                         </div>
-                                        <div class="col-md-6">
-                                            <label class="mb-0">
-                                                <span class="mb-0 text-sm text-dark">Số điện thoại</span>
-                                            </label> <input class="input1" type="text" name="seller_telephone">
+                                        <div class="field">
+                                            <label>Số điện thoại</label>
+                                            <input class="input1" type="text" name="seller_telephone">
                                         </div>
                                     </div>
-                                    <div class="row px-3">
-                                        <label class="mb-0">
-                                            <span class="mb-0 text-sm text-dark">Email</span>
-                                        </label> <input class="input1" type="text" name="seller_email" id="seller_emailres">
+                                    <div class="field">
+                                        <label>Email</label>
+                                        <input class="input1" type="text" name="user_email">
                                     </div>
-                                    <div class="row px-3">
-                                        <label class="mb-0">
-                                            <span class="mb-0 text-sm text-dark">Mật khẩu</span>
-                                        </label> <input class="input1" type="password" id="seller_passres" name="seller_pass">
+                                    <div class="field">
+                                        <label>Mật khẩu</label>
+                                        <input class="input1" type="password" name="seller_pass">
                                     </div>
-                                    <div class="row px-3">
-                                        <label class="mb-0">
-                                            <span class="mb-0 text-sm text-dark">Nhập lại mật khẩu</span>
-                                        </label> <input class="input1" type="password" name="seller_repeat" id="seller_repeat">
+                                    <div class="field">
+                                        <label>Nhập lại mật khẩu</label>
+                                        <input class="input1" type="password" name="seller_repeat">
                                     </div>
                                     <div class="row mb-4">
                                         <div class="col-md-5"> <button class="btn btn-blue button3 text-center mb-1">ĐĂNG KÝ</button> </div>
+                                        <div class="ui error message" style="width: 100%; min-height: 10vh;"></div>
                                     </div>
                                 </form>
                             </div>

@@ -25,23 +25,23 @@ namespace Website_GSshop.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<AdminData> AdminData { get; set; }
         public virtual DbSet<Banner> Banner { get; set; }
+        public virtual DbSet<Bill> Bill { get; set; }
+        public virtual DbSet<BillStatus> BillStatus { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<ClassificationSubCategory> ClassificationSubCategory { get; set; }
         public virtual DbSet<Collection> Collection { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
+        public virtual DbSet<Favourite> Favourite { get; set; }
         public virtual DbSet<GSMall> GSMall { get; set; }
+        public virtual DbSet<Like> Like { get; set; }
+        public virtual DbSet<PayDetail> PayDetail { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ReplyComment> ReplyComment { get; set; }
         public virtual DbSet<Seller> Seller { get; set; }
         public virtual DbSet<SubCategory> SubCategory { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<Favourite> Favourite { get; set; }
-        public virtual DbSet<Like> Like { get; set; }
-        public virtual DbSet<PayDetail> PayDetail { get; set; }
-        public virtual DbSet<Bill> Bill { get; set; }
-        public virtual DbSet<BillStatus> BillStatus { get; set; }
     }
 }

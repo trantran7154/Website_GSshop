@@ -18,14 +18,13 @@ namespace Website_GSshop.Models
         public Nullable<System.DateTime> like_datecreated { get; set; }
         public Nullable<bool> like_bin { get; set; }
         public Nullable<int> product_id { get; set; }
-        public Nullable<int> user_id { get; set; }
         public Nullable<int> replycomment_id { get; set; }
+        public Nullable<int> user_id { get; set; }
         public Nullable<int> comment_id { get; set; }
     
+        public virtual Comment Comment { get; set; }
         public virtual Product Product { get; set; }
         public virtual ReplyComment ReplyComment { get; set; }
         public virtual User User { get; set; }
-        public virtual Comment Comment { get; set; }
-        public virtual Product Product1 { get; set; }
     }
 }

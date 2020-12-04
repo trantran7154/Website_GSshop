@@ -10,7 +10,6 @@ namespace Website_GSshop.Controllers
     public class ViewController : Controller
     {
         Data_GSShopEntities db = new Data_GSShopEntities();
-        String login = "/Account/Login/";
         // GET: View
         // Xem chi tiết các sản phẩm tìm kiếm phổ biến
         public ActionResult MostPopularDetail()
@@ -115,6 +114,10 @@ namespace Website_GSshop.Controllers
         {
             List<Product> products = db.Product.Where(n => n.csc_id == id).ToList();
             return View(products);
+        }
+        public ActionResult Check()
+        {
+            return View();
         }
     }
 }

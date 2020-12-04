@@ -17,13 +17,14 @@ namespace Website_GSshop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Product = new HashSet<Product>();
-            this.ReplyComment = new HashSet<ReplyComment>();
+            this.Bill = new HashSet<Bill>();
+            this.Comment = new HashSet<Comment>();
             this.Favourite = new HashSet<Favourite>();
             this.Like = new HashSet<Like>();
-            this.Comment = new HashSet<Comment>();
             this.PayDetail = new HashSet<PayDetail>();
-            this.Bill = new HashSet<Bill>();
+            this.Product = new HashSet<Product>();
+            this.Product1 = new HashSet<Product>();
+            this.ReplyComment = new HashSet<ReplyComment>();
         }
     
         public int user_id { get; set; }
@@ -32,7 +33,6 @@ namespace Website_GSshop.Models
         public string user_email { get; set; }
         public Nullable<System.DateTime> user_datecreated { get; set; }
         public string user_token { get; set; }
-        public Nullable<int> user_role { get; set; }
         public Nullable<System.DateTime> user_datelogin { get; set; }
         public Nullable<bool> user_active { get; set; }
         public string user_address { get; set; }
@@ -41,20 +41,23 @@ namespace Website_GSshop.Models
         public string user_provincecity { get; set; }
         public string user_district { get; set; }
         public Nullable<bool> user_bin { get; set; }
+        public Nullable<int> user_role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Product { get; set; }
+        public virtual ICollection<Bill> Bill { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReplyComment> ReplyComment { get; set; }
+        public virtual ICollection<Comment> Comment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Favourite> Favourite { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Like> Like { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comment { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PayDetail> PayDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bill> Bill { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Product1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReplyComment> ReplyComment { get; set; }
     }
 }

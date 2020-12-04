@@ -17,10 +17,10 @@ namespace Website_GSshop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Seller()
         {
+            this.Bill = new HashSet<Bill>();
+            this.Collection = new HashSet<Collection>();
             this.Product = new HashSet<Product>();
             this.ReplyComment = new HashSet<ReplyComment>();
-            this.Collection = new HashSet<Collection>();
-            this.Bill = new HashSet<Bill>();
         }
     
         public int seller_id { get; set; }
@@ -49,12 +49,12 @@ namespace Website_GSshop.Models
         public Nullable<bool> seller_bin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Product { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReplyComment> ReplyComment { get; set; }
+        public virtual ICollection<Bill> Bill { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Collection> Collection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bill> Bill { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReplyComment> ReplyComment { get; set; }
     }
 }

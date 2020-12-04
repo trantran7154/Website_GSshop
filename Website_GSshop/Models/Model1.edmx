@@ -4,23 +4,22 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Data_GSShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Admin">
+      <Schema Namespace="Data_GSShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminData">
           <Key>
             <PropertyRef Name="admin_id" />
           </Key>
           <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="admin_login" Type="varchar" MaxLength="50" />
-          <Property Name="admin_pass1" Type="varchar" MaxLength="50" />
+          <Property Name="admin_pass" Type="varchar" MaxLength="50" />
           <Property Name="admin_active" Type="bit" />
           <Property Name="admin_token" Type="varchar" MaxLength="200" />
           <Property Name="admin_role" Type="int" />
           <Property Name="admin_datecreated" Type="datetime" />
           <Property Name="admin_name" Type="nvarchar" MaxLength="50" />
           <Property Name="admin_email" Type="varchar" MaxLength="50" />
-          <Property Name="admin_pass2" Type="varchar" MaxLength="50" />
           <Property Name="admin_datelogin" Type="datetime" />
           <Property Name="admin_bin" Type="bit" />
+          <Property Name="admin_svg" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Banner">
           <Key>
@@ -651,7 +650,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Data_GSShopModelStoreContainer">
-          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminData" EntityType="Self.AdminData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BillStatus" EntityType="Self.BillStatus" Schema="dbo" store:Type="Tables" />
@@ -794,26 +793,26 @@
             <End Role="SubCategory" EntitySet="SubCategory" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Data_GSShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Admin">
+        <EntityType Name="AdminData">
           <Key>
             <PropertyRef Name="admin_id" />
           </Key>
           <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="admin_login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="admin_pass1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="admin_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="admin_active" Type="Boolean" />
           <Property Name="admin_token" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="admin_role" Type="Int32" />
           <Property Name="admin_datecreated" Type="DateTime" Precision="3" />
           <Property Name="admin_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="admin_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="admin_pass2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="admin_datelogin" Type="DateTime" Precision="3" />
           <Property Name="admin_bin" Type="Boolean" />
+          <Property Name="admin_svg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Banner">
           <Key>
@@ -824,8 +823,36 @@
           <Property Name="banner_svg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="banner_active" Type="Boolean" />
           <Property Name="banner_datecreated" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Banner" FromRole="Banner" ToRole="Product" />
           <Property Name="banner_bin" Type="Boolean" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Banner" FromRole="Banner" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="bill_id" />
+          </Key>
+          <Property Name="bill_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bill_datecreated" Type="DateTime" Precision="3" />
+          <Property Name="seller_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="bill_address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="bill_telephone" Type="Int32" />
+          <Property Name="bill_sum" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="bill_dateset" Type="DateTime" Precision="3" />
+          <Property Name="bill_status" Type="Boolean" />
+          <Property Name="bill_note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Seller" Relationship="Self.FK_Bill_Seller" FromRole="Bill" ToRole="Seller" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Bill_User" FromRole="Bill" ToRole="User" />
+          <NavigationProperty Name="BillStatus" Relationship="Self.FK_BillStatus_Bill" FromRole="Bill" ToRole="BillStatus" />
+          <NavigationProperty Name="PayDetail" Relationship="Self.FK_PayDetail_Bill" FromRole="Bill" ToRole="PayDetail" />
+        </EntityType>
+        <EntityType Name="BillStatus">
+          <Key>
+            <PropertyRef Name="status_id" />
+          </Key>
+          <Property Name="status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status_name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="bill_id" Type="Int32" />
+          <NavigationProperty Name="Bill" Relationship="Self.FK_BillStatus_Bill" FromRole="BillStatus" ToRole="Bill" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -836,9 +863,9 @@
           <Property Name="category_image" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="category_datecreated" Type="DateTime" Precision="3" />
           <Property Name="category_active" Type="Boolean" />
+          <Property Name="category_bin" Type="Boolean" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
           <NavigationProperty Name="SubCategory" Relationship="Self.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
-          <Property Name="category_bin" Type="Boolean" />
         </EntityType>
         <EntityType Name="ClassificationSubCategory">
           <Key>
@@ -850,9 +877,9 @@
           <Property Name="csc_datecreate" Type="DateTime" Precision="3" />
           <Property Name="csc_active" Type="Boolean" />
           <Property Name="subcategory_id" Type="Int32" />
-          <NavigationProperty Name="SubCategory" Relationship="Self.FK_ClassificationSubCategory_SubCategory" FromRole="ClassificationSubCategory" ToRole="SubCategory" />
           <Property Name="csc_bin" Type="Boolean" />
-          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_ClassificationSubCategory" FromRole="ClassificationSubCategory" ToRole="Product" />
+          <NavigationProperty Name="SubCategory" Relationship="Self.FK_ClassificationSubCategory_SubCategory" FromRole="ClassificationSubCategory" ToRole="SubCategory" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_ClassificationSubCategory" FromRole="ClassificationSubCategory" ToRole="Product" />
         </EntityType>
         <EntityType Name="Collection">
           <Key>
@@ -865,10 +892,10 @@
           <Property Name="collection_image3" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="collection_datecreate" Type="DateTime" Precision="3" />
           <Property Name="collection_active" Type="Boolean" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Collection" FromRole="Collection" ToRole="Product" />
           <Property Name="collection_bin" Type="Boolean" />
           <Property Name="seller_id" Type="Int32" />
-          <NavigationProperty Name="Seller" Relationship="Data_GSShopModel.FK_Collection_Seller1" FromRole="Collection" ToRole="Seller" />
+          <NavigationProperty Name="Seller" Relationship="Self.FK_Collection_Seller1" FromRole="Collection" ToRole="Seller" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Collection" FromRole="Collection" ToRole="Product" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -877,14 +904,26 @@
           <Property Name="comment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="comment_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="commet_datecreated" Type="DateTime" Precision="3" />
-          <Property Name="user_id" Type="Int32" />
           <Property Name="product_id" Type="Int32" />
           <Property Name="comment_spam" Type="Boolean" />
-          <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Comment" FromRole="Comment" ToRole="ReplyComment" />
           <Property Name="comment_bin" Type="Boolean" />
-          <NavigationProperty Name="Like" Relationship="Data_GSShopModel.FK_Like_Comment" FromRole="Comment" ToRole="Like" />
-          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Comment_Product" FromRole="Comment" ToRole="Product" />
-          <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_Comment_User" FromRole="Comment" ToRole="User" />
+          <Property Name="user_id" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Comment_Product" FromRole="Comment" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Comment_User" FromRole="Comment" ToRole="User" />
+          <NavigationProperty Name="Like" Relationship="Self.FK_Like_Comment" FromRole="Comment" ToRole="Like" />
+          <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Comment" FromRole="Comment" ToRole="ReplyComment" />
+        </EntityType>
+        <EntityType Name="Favourite">
+          <Key>
+            <PropertyRef Name="fa_id" />
+          </Key>
+          <Property Name="fa_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fa_datereated" Type="DateTime" Precision="3" />
+          <Property Name="fa_bin" Type="Boolean" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Favourite_Product" FromRole="Favourite" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Favourite_User" FromRole="Favourite" ToRole="User" />
         </EntityType>
         <EntityType Name="GSMall">
           <Key>
@@ -897,7 +936,6 @@
           <Property Name="gsmall_datecreate" Type="DateTime" Precision="3" />
           <Property Name="gsmall_bg" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="gsmall_image" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_GSMall" FromRole="GSMall" ToRole="Product" />
           <Property Name="gsmall_bin" Type="Boolean" />
           <Property Name="gsmall_img1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="gsmall_img2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -906,6 +944,38 @@
           <Property Name="gsmall_img5" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="gsmall_img6" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="gsmall_img7" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_GSMall1" FromRole="GSMall" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Like">
+          <Key>
+            <PropertyRef Name="like_id" />
+          </Key>
+          <Property Name="like_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="like_datecreated" Type="DateTime" Precision="3" />
+          <Property Name="like_bin" Type="Boolean" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="replycomment_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="comment_id" Type="Int32" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK_Like_Comment" FromRole="Like" ToRole="Comment" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Like_Product" FromRole="Like" ToRole="Product" />
+          <NavigationProperty Name="ReplyComment" Relationship="Self.FK_Like_ReplyComment" FromRole="Like" ToRole="ReplyComment" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Like_User1" FromRole="Like" ToRole="User" />
+        </EntityType>
+        <EntityType Name="PayDetail">
+          <Key>
+            <PropertyRef Name="pay_id" />
+          </Key>
+          <Property Name="pay_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="pay_money" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="pay_amount" Type="Int32" />
+          <Property Name="pay_datecreated" Type="DateTime" Precision="3" />
+          <Property Name="bill_id" Type="Int32" />
+          <NavigationProperty Name="Bill" Relationship="Self.FK_PayDetail_Bill" FromRole="PayDetail" ToRole="Bill" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_PayDetail_Product" FromRole="PayDetail" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Self.FK_PayDetail_User1" FromRole="PayDetail" ToRole="User" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -930,29 +1000,30 @@
           <Property Name="product_amount" Type="Int32" />
           <Property Name="product_dateedit" Type="DateTime" Precision="3" />
           <Property Name="seller_id" Type="Int32" />
-          <Property Name="user_id" Type="Int32" />
           <Property Name="category_id" Type="Int32" />
           <Property Name="subcategory_id" Type="Int32" />
           <Property Name="banner_id" Type="Int32" />
           <Property Name="collection_id" Type="Int32" />
           <Property Name="gsmail_id" Type="Int32" />
+          <Property Name="product_bin" Type="Boolean" />
+          <Property Name="product_related" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="csc_id" Type="Int32" />
           <NavigationProperty Name="Banner" Relationship="Self.FK_Product_Banner" FromRole="Product" ToRole="Banner" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="ClassificationSubCategory" Relationship="Self.FK_Product_ClassificationSubCategory" FromRole="Product" ToRole="ClassificationSubCategory" />
           <NavigationProperty Name="Collection" Relationship="Self.FK_Product_Collection" FromRole="Product" ToRole="Collection" />
-          <NavigationProperty Name="GSMall" Relationship="Self.FK_Product_GSMall" FromRole="Product" ToRole="GSMall" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Product" FromRole="Product" ToRole="Comment" />
+          <NavigationProperty Name="Favourite" Relationship="Self.FK_Favourite_Product" FromRole="Product" ToRole="Favourite" />
+          <NavigationProperty Name="GSMall" Relationship="Self.FK_Product_GSMall1" FromRole="Product" ToRole="GSMall" />
+          <NavigationProperty Name="Like" Relationship="Self.FK_Like_Product" FromRole="Product" ToRole="Like" />
+          <NavigationProperty Name="PayDetail" Relationship="Self.FK_PayDetail_Product" FromRole="Product" ToRole="PayDetail" />
           <NavigationProperty Name="Seller" Relationship="Self.FK_Product_Seller" FromRole="Product" ToRole="Seller" />
           <NavigationProperty Name="SubCategory" Relationship="Self.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
           <NavigationProperty Name="User" Relationship="Self.FK_Product_User" FromRole="Product" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Product_User1" FromRole="Product" ToRole="User" />
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Product" FromRole="Product" ToRole="ReplyComment" />
-          <Property Name="product_bin" Type="Boolean" />
-          <NavigationProperty Name="Favourite" Relationship="Data_GSShopModel.FK_Favourite_Product" FromRole="Product" ToRole="Favourite" />
-          <Property Name="product_related" Type="Int32" />
-          <NavigationProperty Name="Like" Relationship="Data_GSShopModel.FK_Like_Product" FromRole="Product" ToRole="Like" />
-          <NavigationProperty Name="Comment" Relationship="Data_GSShopModel.FK_Comment_Product" FromRole="Product" ToRole="Comment" />
-          <NavigationProperty Name="Like1" Relationship="Data_GSShopModel.FK_Like_Product1" FromRole="Product" ToRole="Like" />
-          <Property Name="csc_id" Type="Int32" />
-          <NavigationProperty Name="ClassificationSubCategory" Relationship="Data_GSShopModel.FK_Product_ClassificationSubCategory" FromRole="Product" ToRole="ClassificationSubCategory" />
-          <NavigationProperty Name="PayDetail" Relationship="Data_GSShopModel.FK_PayDetail_Product" FromRole="Product" ToRole="PayDetail" />
+          <NavigationProperty Name="ReplyComment1" Relationship="Self.FK_ReplyComment_Product1" FromRole="Product" ToRole="ReplyComment" />
         </EntityType>
         <EntityType Name="ReplyComment">
           <Key>
@@ -960,18 +1031,19 @@
           </Key>
           <Property Name="replycomment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="replycomment_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="comment_id" Type="Int32" />
-          <Property Name="user_id" Type="Int32" />
           <Property Name="product_id" Type="Int32" />
           <Property Name="seller_id" Type="Int32" />
           <Property Name="replycomment_spam" Type="Boolean" />
           <Property Name="replycomment_datecreated" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Comment" Relationship="Self.FK_ReplyComment_Comment" FromRole="ReplyComment" ToRole="Comment" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ReplyComment_Product" FromRole="ReplyComment" ToRole="Product" />
-          <NavigationProperty Name="Seller" Relationship="Self.FK_ReplyComment_Seller" FromRole="ReplyComment" ToRole="Seller" />
-          <NavigationProperty Name="User" Relationship="Self.FK_ReplyComment_User" FromRole="ReplyComment" ToRole="User" />
           <Property Name="replycomment_bin" Type="Boolean" />
-          <NavigationProperty Name="Like" Relationship="Data_GSShopModel.FK_Like_ReplyComment" FromRole="ReplyComment" ToRole="Like" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="comment_id" Type="Int32" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK_ReplyComment_Comment" FromRole="ReplyComment" ToRole="Comment" />
+          <NavigationProperty Name="Like" Relationship="Self.FK_Like_ReplyComment" FromRole="ReplyComment" ToRole="Like" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ReplyComment_Product" FromRole="ReplyComment" ToRole="Product" />
+          <NavigationProperty Name="Product1" Relationship="Self.FK_ReplyComment_Product1" FromRole="ReplyComment" ToRole="Product" />
+          <NavigationProperty Name="Seller" Relationship="Self.FK_ReplyComment_Seller" FromRole="ReplyComment" ToRole="Seller" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ReplyComment_User1" FromRole="ReplyComment" ToRole="User" />
         </EntityType>
         <EntityType Name="Seller">
           <Key>
@@ -1000,11 +1072,11 @@
           <Property Name="seller_nicename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="seller_provincecity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="seller_district" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="seller_bin" Type="Boolean" />
+          <NavigationProperty Name="Bill" Relationship="Self.FK_Bill_Seller" FromRole="Seller" ToRole="Bill" />
+          <NavigationProperty Name="Collection" Relationship="Self.FK_Collection_Seller1" FromRole="Seller" ToRole="Collection" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Seller" FromRole="Seller" ToRole="Product" />
           <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Seller" FromRole="Seller" ToRole="ReplyComment" />
-          <Property Name="seller_bin" Type="Boolean" />
-          <NavigationProperty Name="Collection" Relationship="Data_GSShopModel.FK_Collection_Seller1" FromRole="Seller" ToRole="Collection" />
-          <NavigationProperty Name="Bill" Relationship="Data_GSShopModel.FK_Bill_Seller" FromRole="Seller" ToRole="Bill" />
         </EntityType>
         <EntityType Name="SubCategory">
           <Key>
@@ -1017,10 +1089,10 @@
           <Property Name="subcategory_active" Type="Boolean" />
           <Property Name="category_id" Type="Int32" />
           <Property Name="subcategory_level" Type="Boolean" />
+          <Property Name="subcategory_bin" Type="Boolean" />
           <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
           <NavigationProperty Name="ClassificationSubCategory" Relationship="Self.FK_ClassificationSubCategory_SubCategory" FromRole="SubCategory" ToRole="ClassificationSubCategory" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
-          <Property Name="subcategory_bin" Type="Boolean" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1042,7 +1114,6 @@
           <Property Name="user_email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="user_datecreated" Type="DateTime" Precision="3" />
           <Property Name="user_token" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="user_role" Type="Int32" />
           <Property Name="user_datelogin" Type="DateTime" Precision="3" />
           <Property Name="user_active" Type="Boolean" />
           <Property Name="user_address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
@@ -1050,14 +1121,16 @@
           <Property Name="user_image" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="user_provincecity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="user_district" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_User" FromRole="User" ToRole="Product" />
-          <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_User" FromRole="User" ToRole="ReplyComment" />
           <Property Name="user_bin" Type="Boolean" />
-          <NavigationProperty Name="Favourite" Relationship="Data_GSShopModel.FK_Favourite_User" FromRole="User" ToRole="Favourite" />
-          <NavigationProperty Name="Like" Relationship="Data_GSShopModel.FK_Like_User" FromRole="User" ToRole="Like" />
-          <NavigationProperty Name="Comment" Relationship="Data_GSShopModel.FK_Comment_User" FromRole="User" ToRole="Comment" />
-          <NavigationProperty Name="PayDetail" Relationship="Data_GSShopModel.FK_PayDetail_User" FromRole="User" ToRole="PayDetail" />
-          <NavigationProperty Name="Bill" Relationship="Data_GSShopModel.FK_Bill_User" FromRole="User" ToRole="Bill" />
+          <Property Name="user_role" Type="Int32" />
+          <NavigationProperty Name="Bill" Relationship="Self.FK_Bill_User" FromRole="User" ToRole="Bill" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_User" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="Favourite" Relationship="Self.FK_Favourite_User" FromRole="User" ToRole="Favourite" />
+          <NavigationProperty Name="Like" Relationship="Self.FK_Like_User1" FromRole="User" ToRole="Like" />
+          <NavigationProperty Name="PayDetail" Relationship="Self.FK_PayDetail_User1" FromRole="User" ToRole="PayDetail" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_User" FromRole="User" ToRole="Product" />
+          <NavigationProperty Name="Product1" Relationship="Self.FK_Product_User1" FromRole="User" ToRole="Product" />
+          <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_User1" FromRole="User" ToRole="ReplyComment" />
         </EntityType>
         <Association Name="FK_Product_Banner">
           <End Role="Banner" Type="Self.Banner" Multiplicity="0..1" />
@@ -1068,6 +1141,54 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="banner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bill_Seller">
+          <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seller">
+              <PropertyRef Name="seller_id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="seller_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bill_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillStatus_Bill">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
+          <End Role="BillStatus" Type="Self.BillStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="bill_id" />
+            </Principal>
+            <Dependent Role="BillStatus">
+              <PropertyRef Name="bill_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayDetail_Bill">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
+          <End Role="PayDetail" Type="Self.PayDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="bill_id" />
+            </Principal>
+            <Dependent Role="PayDetail">
+              <PropertyRef Name="bill_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1107,6 +1228,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_ClassificationSubCategory">
+          <End Role="ClassificationSubCategory" Type="Self.ClassificationSubCategory" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassificationSubCategory">
+              <PropertyRef Name="csc_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="csc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_Seller1">
+          <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
+          <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seller">
+              <PropertyRef Name="seller_id" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="seller_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Collection">
           <End Role="Collection" Type="Self.Collection" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -1116,6 +1261,42 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="collection_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_Comment">
+          <End Role="Comment" Type="Self.Comment" Multiplicity="0..1" />
+          <End Role="Like" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="comment_id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="comment_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1131,7 +1312,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_GSMall">
+        <Association Name="FK_Favourite_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Favourite" Type="Self.Favourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Favourite">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourite_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Favourite" Type="Self.Favourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Favourite">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_GSMall1">
           <End Role="GSMall" Type="Self.GSMall" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1140,6 +1345,66 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="gsmail_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Like" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_ReplyComment">
+          <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="0..1" />
+          <End Role="Like" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReplyComment">
+              <PropertyRef Name="replycomment_id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="replycomment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Like" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Like">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayDetail_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="PayDetail" Type="Self.PayDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="PayDetail">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayDetail_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="PayDetail" Type="Self.PayDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="PayDetail">
+              <PropertyRef Name="user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1179,7 +1444,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ReplyComment_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="ReplyComment">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReplyComment_Product1">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1203,7 +1492,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ReplyComment_User">
+        <Association Name="FK_ReplyComment_User1">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1216,13 +1505,18 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Data_GSShopEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="AdminData" EntityType="Self.AdminData" />
           <EntitySet Name="Banner" EntityType="Self.Banner" />
+          <EntitySet Name="Bill" EntityType="Self.Bill" />
+          <EntitySet Name="BillStatus" EntityType="Self.BillStatus" />
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="ClassificationSubCategory" EntityType="Self.ClassificationSubCategory" />
           <EntitySet Name="Collection" EntityType="Self.Collection" />
           <EntitySet Name="Comment" EntityType="Self.Comment" />
+          <EntitySet Name="Favourite" EntityType="Self.Favourite" />
           <EntitySet Name="GSMall" EntityType="Self.GSMall" />
+          <EntitySet Name="Like" EntityType="Self.Like" />
+          <EntitySet Name="PayDetail" EntityType="Self.PayDetail" />
           <EntitySet Name="Product" EntityType="Self.Product" />
           <EntitySet Name="ReplyComment" EntityType="Self.ReplyComment" />
           <EntitySet Name="Seller" EntityType="Self.Seller" />
@@ -1232,6 +1526,22 @@
           <AssociationSet Name="FK_Product_Banner" Association="Self.FK_Product_Banner">
             <End Role="Banner" EntitySet="Banner" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bill_Seller" Association="Self.FK_Bill_Seller">
+            <End Role="Seller" EntitySet="Seller" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bill_User" Association="Self.FK_Bill_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillStatus_Bill" Association="Self.FK_BillStatus_Bill">
+            <End Role="Bill" EntitySet="Bill" />
+            <End Role="BillStatus" EntitySet="BillStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayDetail_Bill" Association="Self.FK_PayDetail_Bill">
+            <End Role="Bill" EntitySet="Bill" />
+            <End Role="PayDetail" EntitySet="PayDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Category" />
@@ -1245,17 +1555,65 @@
             <End Role="SubCategory" EntitySet="SubCategory" />
             <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
           </AssociationSet>
+          <AssociationSet Name="FK_Product_ClassificationSubCategory" Association="Self.FK_Product_ClassificationSubCategory">
+            <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_Seller1" Association="Self.FK_Collection_Seller1">
+            <End Role="Seller" EntitySet="Seller" />
+            <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_Collection" Association="Self.FK_Product_Collection">
             <End Role="Collection" EntitySet="Collection" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Product" Association="Self.FK_Comment_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_Comment" Association="Self.FK_Like_Comment">
+            <End Role="Comment" EntitySet="Comment" />
+            <End Role="Like" EntitySet="Like" />
           </AssociationSet>
           <AssociationSet Name="FK_ReplyComment_Comment" Association="Self.FK_ReplyComment_Comment">
             <End Role="Comment" EntitySet="Comment" />
             <End Role="ReplyComment" EntitySet="ReplyComment" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_GSMall" Association="Self.FK_Product_GSMall">
+          <AssociationSet Name="FK_Favourite_Product" Association="Self.FK_Favourite_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Favourite" EntitySet="Favourite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourite_User" Association="Self.FK_Favourite_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Favourite" EntitySet="Favourite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_GSMall1" Association="Self.FK_Product_GSMall1">
             <End Role="GSMall" EntitySet="GSMall" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_Product" Association="Self.FK_Like_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_ReplyComment" Association="Self.FK_Like_ReplyComment">
+            <End Role="ReplyComment" EntitySet="ReplyComment" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_User1" Association="Self.FK_Like_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Like" EntitySet="Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayDetail_Product" Association="Self.FK_PayDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PayDetail" EntitySet="PayDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayDetail_User1" Association="Self.FK_PayDetail_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="PayDetail" EntitySet="PayDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Seller" Association="Self.FK_Product_Seller">
             <End Role="Seller" EntitySet="Seller" />
@@ -1269,7 +1627,15 @@
             <End Role="User" EntitySet="User" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
+          <AssociationSet Name="FK_Product_User1" Association="Self.FK_Product_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_ReplyComment_Product" Association="Self.FK_ReplyComment_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ReplyComment" EntitySet="ReplyComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReplyComment_Product1" Association="Self.FK_ReplyComment_Product1">
             <End Role="Product" EntitySet="Product" />
             <End Role="ReplyComment" EntitySet="ReplyComment" />
           </AssociationSet>
@@ -1277,426 +1643,99 @@
             <End Role="Seller" EntitySet="Seller" />
             <End Role="ReplyComment" EntitySet="ReplyComment" />
           </AssociationSet>
-          <AssociationSet Name="FK_ReplyComment_User" Association="Self.FK_ReplyComment_User">
+          <AssociationSet Name="FK_ReplyComment_User1" Association="Self.FK_ReplyComment_User1">
             <End Role="User" EntitySet="User" />
             <End Role="ReplyComment" EntitySet="ReplyComment" />
-          </AssociationSet>
-          <EntitySet Name="Favourite" EntityType="Data_GSShopModel.Favourite" />
-          <AssociationSet Name="FK_Favourite_Product" Association="Data_GSShopModel.FK_Favourite_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Favourite" EntitySet="Favourite" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Favourite_User" Association="Data_GSShopModel.FK_Favourite_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Favourite" EntitySet="Favourite" />
-          </AssociationSet>
-          <EntitySet Name="Like" EntityType="Data_GSShopModel.Like" />
-          <AssociationSet Name="FK_Like_Product" Association="Data_GSShopModel.FK_Like_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Like" EntitySet="Like" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Like_ReplyComment" Association="Data_GSShopModel.FK_Like_ReplyComment">
-            <End Role="ReplyComment" EntitySet="ReplyComment" />
-            <End Role="Like" EntitySet="Like" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Like_User" Association="Data_GSShopModel.FK_Like_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Like" EntitySet="Like" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Like_Comment" Association="Data_GSShopModel.FK_Like_Comment">
-            <End Role="Comment" EntitySet="Comment" />
-            <End Role="Like" EntitySet="Like" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Collection_Seller1" Association="Data_GSShopModel.FK_Collection_Seller1">
-            <End Role="Seller" EntitySet="Seller" />
-            <End Role="Collection" EntitySet="Collection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comment_Product" Association="Data_GSShopModel.FK_Comment_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Comment" EntitySet="Comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comment_User" Association="Data_GSShopModel.FK_Comment_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Comment" EntitySet="Comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Like_Product1" Association="Data_GSShopModel.FK_Like_Product1">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Like" EntitySet="Like" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_ClassificationSubCategory" Association="Data_GSShopModel.FK_Product_ClassificationSubCategory">
-            <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <EntitySet Name="PayDetail" EntityType="Data_GSShopModel.PayDetail" />
-          <AssociationSet Name="FK_PayDetail_Product" Association="Data_GSShopModel.FK_PayDetail_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="PayDetail" EntitySet="PayDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PayDetail_User" Association="Data_GSShopModel.FK_PayDetail_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="PayDetail" EntitySet="PayDetail" />
-          </AssociationSet>
-          <EntitySet Name="Bill" EntityType="Data_GSShopModel.Bill" />
-          <EntitySet Name="BillStatus" EntityType="Data_GSShopModel.BillStatus" />
-          <AssociationSet Name="FK_Bill_Seller" Association="Data_GSShopModel.FK_Bill_Seller">
-            <End Role="Seller" EntitySet="Seller" />
-            <End Role="Bill" EntitySet="Bill" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Bill_User" Association="Data_GSShopModel.FK_Bill_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Bill" EntitySet="Bill" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BillStatus_Bill" Association="Data_GSShopModel.FK_BillStatus_Bill">
-            <End Role="Bill" EntitySet="Bill" />
-            <End Role="BillStatus" EntitySet="BillStatus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PayDetail_Bill" Association="Data_GSShopModel.FK_PayDetail_Bill">
-            <End Role="Bill" EntitySet="Bill" />
-            <End Role="PayDetail" EntitySet="PayDetail" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Favourite">
-          <Key>
-            <PropertyRef Name="fa_id" />
-          </Key>
-          <Property Name="fa_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fa_datereated" Type="DateTime" Precision="3" />
-          <Property Name="fa_bin" Type="Boolean" />
-          <Property Name="product_id" Type="Int32" />
-          <Property Name="user_id" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Favourite_Product" FromRole="Favourite" ToRole="Product" />
-          <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_Favourite_User" FromRole="Favourite" ToRole="User" />
-        </EntityType>
-        <Association Name="FK_Favourite_Product">
-          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Favourite" Role="Favourite" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="Favourite">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Favourite_User">
-          <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Favourite" Role="Favourite" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="Favourite">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Like">
-          <Key>
-            <PropertyRef Name="like_id" />
-          </Key>
-          <Property Name="like_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="like_datecreated" Type="DateTime" Precision="3" />
-          <Property Name="like_bin" Type="Boolean" />
-          <Property Name="product_id" Type="Int32" />
-          <Property Name="user_id" Type="Int32" />
-          <Property Name="replycomment_id" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Like_Product" FromRole="Like" ToRole="Product" />
-          <NavigationProperty Name="ReplyComment" Relationship="Data_GSShopModel.FK_Like_ReplyComment" FromRole="Like" ToRole="ReplyComment" />
-          <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_Like_User" FromRole="Like" ToRole="User" />
-          <Property Name="comment_id" Type="Int32" />
-          <NavigationProperty Name="Comment" Relationship="Data_GSShopModel.FK_Like_Comment" FromRole="Like" ToRole="Comment" />
-          <NavigationProperty Name="Product1" Relationship="Data_GSShopModel.FK_Like_Product1" FromRole="Like" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK_Like_Product">
-          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Like" Role="Like" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="Like">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Like_ReplyComment">
-          <End Type="Data_GSShopModel.ReplyComment" Role="ReplyComment" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Like" Role="Like" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ReplyComment">
-              <PropertyRef Name="replycomment_id" />
-            </Principal>
-            <Dependent Role="Like">
-              <PropertyRef Name="replycomment_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Like_User">
-          <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Like" Role="Like" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="Like">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Like_Comment">
-          <End Type="Data_GSShopModel.Comment" Role="Comment" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Like" Role="Like" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Comment">
-              <PropertyRef Name="comment_id" />
-            </Principal>
-            <Dependent Role="Like">
-              <PropertyRef Name="comment_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Collection_Seller1">
-          <End Type="Data_GSShopModel.Seller" Role="Seller" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Collection" Role="Collection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Seller">
-              <PropertyRef Name="seller_id" />
-            </Principal>
-            <Dependent Role="Collection">
-              <PropertyRef Name="seller_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comment_Product">
-          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Comment" Role="Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="Comment">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comment_User">
-          <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Comment" Role="Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="Comment">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Like_Product1">
-          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Like" Role="Like" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="Like">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_ClassificationSubCategory">
-          <End Type="Data_GSShopModel.ClassificationSubCategory" Role="ClassificationSubCategory" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassificationSubCategory">
-              <PropertyRef Name="csc_id" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="csc_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="PayDetail">
-          <Key>
-            <PropertyRef Name="pay_id" />
-          </Key>
-          <Property Name="pay_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user_id" Type="Int32" />
-          <Property Name="product_id" Type="Int32" />
-          <Property Name="pay_money" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="pay_amount" Type="Int32" />
-          <Property Name="pay_datecreated" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_PayDetail_Product" FromRole="PayDetail" ToRole="Product" />
-          <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_PayDetail_User" FromRole="PayDetail" ToRole="User" />
-          <Property Name="bill_id" Type="Int32" />
-          <NavigationProperty Name="Bill" Relationship="Data_GSShopModel.FK_PayDetail_Bill" FromRole="PayDetail" ToRole="Bill" />
-        </EntityType>
-        <Association Name="FK_PayDetail_Product">
-          <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.PayDetail" Role="PayDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="PayDetail">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PayDetail_User">
-          <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.PayDetail" Role="PayDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="PayDetail">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Bill">
-          <Key>
-            <PropertyRef Name="bill_id" />
-          </Key>
-          <Property Name="bill_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="bill_datecreated" Type="DateTime" Precision="3" />
-          <Property Name="seller_id" Type="Int32" />
-          <Property Name="user_id" Type="Int32" />
-          <Property Name="bill_address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="bill_telephone" Type="Int32" />
-          <Property Name="bill_sum" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="bill_dateset" Type="DateTime" Precision="3" />
-          <Property Name="bill_status" Type="Boolean" />
-          <Property Name="bill_note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Seller" Relationship="Data_GSShopModel.FK_Bill_Seller" FromRole="Bill" ToRole="Seller" />
-          <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_Bill_User" FromRole="Bill" ToRole="User" />
-          <NavigationProperty Name="BillStatus" Relationship="Data_GSShopModel.FK_BillStatus_Bill" FromRole="Bill" ToRole="BillStatus" />
-          <NavigationProperty Name="PayDetail" Relationship="Data_GSShopModel.FK_PayDetail_Bill" FromRole="Bill" ToRole="PayDetail" />
-        </EntityType>
-        <EntityType Name="BillStatus">
-          <Key>
-            <PropertyRef Name="status_id" />
-          </Key>
-          <Property Name="status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="status_name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="bill_id" Type="Int32" />
-          <NavigationProperty Name="Bill" Relationship="Data_GSShopModel.FK_BillStatus_Bill" FromRole="BillStatus" ToRole="Bill" />
-        </EntityType>
-        <Association Name="FK_Bill_Seller">
-          <End Type="Data_GSShopModel.Seller" Role="Seller" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Bill" Role="Bill" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Seller">
-              <PropertyRef Name="seller_id" />
-            </Principal>
-            <Dependent Role="Bill">
-              <PropertyRef Name="seller_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Bill_User">
-          <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.Bill" Role="Bill" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="Bill">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BillStatus_Bill">
-          <End Type="Data_GSShopModel.Bill" Role="Bill" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.BillStatus" Role="BillStatus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bill">
-              <PropertyRef Name="bill_id" />
-            </Principal>
-            <Dependent Role="BillStatus">
-              <PropertyRef Name="bill_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PayDetail_Bill">
-          <End Type="Data_GSShopModel.Bill" Role="Bill" Multiplicity="0..1" />
-          <End Type="Data_GSShopModel.PayDetail" Role="PayDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bill">
-              <PropertyRef Name="bill_id" />
-            </Principal>
-            <Dependent Role="PayDetail">
-              <PropertyRef Name="bill_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Data_GSShopModelStoreContainer" CdmEntityContainer="Data_GSShopEntities">
-          <EntitySetMapping Name="Admin">
-            <EntityTypeMapping TypeName="Data_GSShopModel.Admin">
-              <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="admin_bin" ColumnName="admin_bin" />
+          <EntitySetMapping Name="AdminData">
+            <EntityTypeMapping TypeName="Data_GSShopModel.AdminData">
+              <MappingFragment StoreEntitySet="AdminData">
                 <ScalarProperty Name="admin_id" ColumnName="admin_id" />
-                <ScalarProperty Name="admin_login" ColumnName="admin_login" />
-                <ScalarProperty Name="admin_pass1" ColumnName="admin_pass1" />
+                <ScalarProperty Name="admin_pass" ColumnName="admin_pass" />
                 <ScalarProperty Name="admin_active" ColumnName="admin_active" />
                 <ScalarProperty Name="admin_token" ColumnName="admin_token" />
                 <ScalarProperty Name="admin_role" ColumnName="admin_role" />
                 <ScalarProperty Name="admin_datecreated" ColumnName="admin_datecreated" />
                 <ScalarProperty Name="admin_name" ColumnName="admin_name" />
                 <ScalarProperty Name="admin_email" ColumnName="admin_email" />
-                <ScalarProperty Name="admin_pass2" ColumnName="admin_pass2" />
                 <ScalarProperty Name="admin_datelogin" ColumnName="admin_datelogin" />
+                <ScalarProperty Name="admin_bin" ColumnName="admin_bin" />
+                <ScalarProperty Name="admin_svg" ColumnName="admin_svg" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Banner">
             <EntityTypeMapping TypeName="Data_GSShopModel.Banner">
               <MappingFragment StoreEntitySet="Banner">
-                <ScalarProperty Name="banner_bin" ColumnName="banner_bin" />
                 <ScalarProperty Name="banner_id" ColumnName="banner_id" />
                 <ScalarProperty Name="banner_name" ColumnName="banner_name" />
                 <ScalarProperty Name="banner_svg" ColumnName="banner_svg" />
                 <ScalarProperty Name="banner_active" ColumnName="banner_active" />
                 <ScalarProperty Name="banner_datecreated" ColumnName="banner_datecreated" />
+                <ScalarProperty Name="banner_bin" ColumnName="banner_bin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bill">
+            <EntityTypeMapping TypeName="Data_GSShopModel.Bill">
+              <MappingFragment StoreEntitySet="Bill">
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+                <ScalarProperty Name="bill_datecreated" ColumnName="bill_datecreated" />
+                <ScalarProperty Name="seller_id" ColumnName="seller_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="bill_address" ColumnName="bill_address" />
+                <ScalarProperty Name="bill_telephone" ColumnName="bill_telephone" />
+                <ScalarProperty Name="bill_sum" ColumnName="bill_sum" />
+                <ScalarProperty Name="bill_dateset" ColumnName="bill_dateset" />
+                <ScalarProperty Name="bill_status" ColumnName="bill_status" />
+                <ScalarProperty Name="bill_note" ColumnName="bill_note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillStatus">
+            <EntityTypeMapping TypeName="Data_GSShopModel.BillStatus">
+              <MappingFragment StoreEntitySet="BillStatus">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="status_name" ColumnName="status_name" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="Data_GSShopModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="category_bin" ColumnName="category_bin" />
                 <ScalarProperty Name="category_id" ColumnName="category_id" />
                 <ScalarProperty Name="category_name" ColumnName="category_name" />
                 <ScalarProperty Name="category_image" ColumnName="category_image" />
                 <ScalarProperty Name="category_datecreated" ColumnName="category_datecreated" />
                 <ScalarProperty Name="category_active" ColumnName="category_active" />
+                <ScalarProperty Name="category_bin" ColumnName="category_bin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ClassificationSubCategory">
             <EntityTypeMapping TypeName="Data_GSShopModel.ClassificationSubCategory">
               <MappingFragment StoreEntitySet="ClassificationSubCategory">
-                <ScalarProperty Name="csc_bin" ColumnName="csc_bin" />
                 <ScalarProperty Name="csc_id" ColumnName="csc_id" />
                 <ScalarProperty Name="csc_name" ColumnName="csc_name" />
                 <ScalarProperty Name="csc_image" ColumnName="csc_image" />
                 <ScalarProperty Name="csc_datecreate" ColumnName="csc_datecreate" />
                 <ScalarProperty Name="csc_active" ColumnName="csc_active" />
                 <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
+                <ScalarProperty Name="csc_bin" ColumnName="csc_bin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Collection">
             <EntityTypeMapping TypeName="Data_GSShopModel.Collection">
               <MappingFragment StoreEntitySet="Collection">
-                <ScalarProperty Name="seller_id" ColumnName="seller_id" />
-                <ScalarProperty Name="collection_bin" ColumnName="collection_bin" />
                 <ScalarProperty Name="collection_id" ColumnName="collection_id" />
                 <ScalarProperty Name="collection_name" ColumnName="collection_name" />
                 <ScalarProperty Name="collection_image1" ColumnName="collection_image1" />
@@ -1704,33 +1743,38 @@
                 <ScalarProperty Name="collection_image3" ColumnName="collection_image3" />
                 <ScalarProperty Name="collection_datecreate" ColumnName="collection_datecreate" />
                 <ScalarProperty Name="collection_active" ColumnName="collection_active" />
+                <ScalarProperty Name="collection_bin" ColumnName="collection_bin" />
+                <ScalarProperty Name="seller_id" ColumnName="seller_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Comment">
             <EntityTypeMapping TypeName="Data_GSShopModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
-                <ScalarProperty Name="comment_bin" ColumnName="comment_bin" />
                 <ScalarProperty Name="comment_id" ColumnName="comment_id" />
                 <ScalarProperty Name="comment_content" ColumnName="comment_content" />
                 <ScalarProperty Name="commet_datecreated" ColumnName="commet_datecreated" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="comment_spam" ColumnName="comment_spam" />
+                <ScalarProperty Name="comment_bin" ColumnName="comment_bin" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favourite">
+            <EntityTypeMapping TypeName="Data_GSShopModel.Favourite">
+              <MappingFragment StoreEntitySet="Favourite">
+                <ScalarProperty Name="fa_id" ColumnName="fa_id" />
+                <ScalarProperty Name="fa_datereated" ColumnName="fa_datereated" />
+                <ScalarProperty Name="fa_bin" ColumnName="fa_bin" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GSMall">
             <EntityTypeMapping TypeName="Data_GSShopModel.GSMall">
               <MappingFragment StoreEntitySet="GSMall">
-                <ScalarProperty Name="gsmall_img7" ColumnName="gsmall_img7" />
-                <ScalarProperty Name="gsmall_img6" ColumnName="gsmall_img6" />
-                <ScalarProperty Name="gsmall_img5" ColumnName="gsmall_img5" />
-                <ScalarProperty Name="gsmall_img4" ColumnName="gsmall_img4" />
-                <ScalarProperty Name="gsmall_img3" ColumnName="gsmall_img3" />
-                <ScalarProperty Name="gsmall_img2" ColumnName="gsmall_img2" />
-                <ScalarProperty Name="gsmall_img1" ColumnName="gsmall_img1" />
-                <ScalarProperty Name="gsmall_bin" ColumnName="gsmall_bin" />
                 <ScalarProperty Name="gsmall_id" ColumnName="gsmall_id" />
                 <ScalarProperty Name="gsmall_name" ColumnName="gsmall_name" />
                 <ScalarProperty Name="gsmall_slogan" ColumnName="gsmall_slogan" />
@@ -1738,15 +1782,46 @@
                 <ScalarProperty Name="gsmall_datecreate" ColumnName="gsmall_datecreate" />
                 <ScalarProperty Name="gsmall_bg" ColumnName="gsmall_bg" />
                 <ScalarProperty Name="gsmall_image" ColumnName="gsmall_image" />
+                <ScalarProperty Name="gsmall_bin" ColumnName="gsmall_bin" />
+                <ScalarProperty Name="gsmall_img1" ColumnName="gsmall_img1" />
+                <ScalarProperty Name="gsmall_img2" ColumnName="gsmall_img2" />
+                <ScalarProperty Name="gsmall_img3" ColumnName="gsmall_img3" />
+                <ScalarProperty Name="gsmall_img4" ColumnName="gsmall_img4" />
+                <ScalarProperty Name="gsmall_img5" ColumnName="gsmall_img5" />
+                <ScalarProperty Name="gsmall_img6" ColumnName="gsmall_img6" />
+                <ScalarProperty Name="gsmall_img7" ColumnName="gsmall_img7" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Like">
+            <EntityTypeMapping TypeName="Data_GSShopModel.Like">
+              <MappingFragment StoreEntitySet="Like">
+                <ScalarProperty Name="like_id" ColumnName="like_id" />
+                <ScalarProperty Name="like_datecreated" ColumnName="like_datecreated" />
+                <ScalarProperty Name="like_bin" ColumnName="like_bin" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="replycomment_id" ColumnName="replycomment_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayDetail">
+            <EntityTypeMapping TypeName="Data_GSShopModel.PayDetail">
+              <MappingFragment StoreEntitySet="PayDetail">
+                <ScalarProperty Name="pay_id" ColumnName="pay_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="pay_money" ColumnName="pay_money" />
+                <ScalarProperty Name="pay_amount" ColumnName="pay_amount" />
+                <ScalarProperty Name="pay_datecreated" ColumnName="pay_datecreated" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="Data_GSShopModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="csc_id" ColumnName="csc_id" />
-                <ScalarProperty Name="product_related" ColumnName="product_related" />
-                <ScalarProperty Name="product_bin" ColumnName="product_bin" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="product_name" ColumnName="product_name" />
                 <ScalarProperty Name="product_image" ColumnName="product_image" />
@@ -1766,34 +1841,36 @@
                 <ScalarProperty Name="product_amount" ColumnName="product_amount" />
                 <ScalarProperty Name="product_dateedit" ColumnName="product_dateedit" />
                 <ScalarProperty Name="seller_id" ColumnName="seller_id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="category_id" ColumnName="category_id" />
                 <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
                 <ScalarProperty Name="banner_id" ColumnName="banner_id" />
                 <ScalarProperty Name="collection_id" ColumnName="collection_id" />
                 <ScalarProperty Name="gsmail_id" ColumnName="gsmail_id" />
+                <ScalarProperty Name="product_bin" ColumnName="product_bin" />
+                <ScalarProperty Name="product_related" ColumnName="product_related" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="csc_id" ColumnName="csc_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReplyComment">
             <EntityTypeMapping TypeName="Data_GSShopModel.ReplyComment">
               <MappingFragment StoreEntitySet="ReplyComment">
-                <ScalarProperty Name="replycomment_bin" ColumnName="replycomment_bin" />
                 <ScalarProperty Name="replycomment_id" ColumnName="replycomment_id" />
                 <ScalarProperty Name="replycomment_content" ColumnName="replycomment_content" />
-                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="seller_id" ColumnName="seller_id" />
                 <ScalarProperty Name="replycomment_spam" ColumnName="replycomment_spam" />
                 <ScalarProperty Name="replycomment_datecreated" ColumnName="replycomment_datecreated" />
+                <ScalarProperty Name="replycomment_bin" ColumnName="replycomment_bin" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Seller">
             <EntityTypeMapping TypeName="Data_GSShopModel.Seller">
               <MappingFragment StoreEntitySet="Seller">
-                <ScalarProperty Name="seller_bin" ColumnName="seller_bin" />
                 <ScalarProperty Name="seller_id" ColumnName="seller_id" />
                 <ScalarProperty Name="seller_pass" ColumnName="seller_pass" />
                 <ScalarProperty Name="seller_email" ColumnName="seller_email" />
@@ -1817,13 +1894,13 @@
                 <ScalarProperty Name="seller_nicename" ColumnName="seller_nicename" />
                 <ScalarProperty Name="seller_provincecity" ColumnName="seller_provincecity" />
                 <ScalarProperty Name="seller_district" ColumnName="seller_district" />
+                <ScalarProperty Name="seller_bin" ColumnName="seller_bin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubCategory">
             <EntityTypeMapping TypeName="Data_GSShopModel.SubCategory">
               <MappingFragment StoreEntitySet="SubCategory">
-                <ScalarProperty Name="subcategory_bin" ColumnName="subcategory_bin" />
                 <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
                 <ScalarProperty Name="subcategory_name" ColumnName="subcategory_name" />
                 <ScalarProperty Name="subcategory_image" ColumnName="subcategory_image" />
@@ -1831,6 +1908,7 @@
                 <ScalarProperty Name="subcategory_active" ColumnName="subcategory_active" />
                 <ScalarProperty Name="category_id" ColumnName="category_id" />
                 <ScalarProperty Name="subcategory_level" ColumnName="subcategory_level" />
+                <ScalarProperty Name="subcategory_bin" ColumnName="subcategory_bin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1848,14 +1926,12 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="Data_GSShopModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="user_bin" ColumnName="user_bin" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="user_pass" ColumnName="user_pass" />
                 <ScalarProperty Name="user_nicename" ColumnName="user_nicename" />
                 <ScalarProperty Name="user_email" ColumnName="user_email" />
                 <ScalarProperty Name="user_datecreated" ColumnName="user_datecreated" />
                 <ScalarProperty Name="user_token" ColumnName="user_token" />
-                <ScalarProperty Name="user_role" ColumnName="user_role" />
                 <ScalarProperty Name="user_datelogin" ColumnName="user_datelogin" />
                 <ScalarProperty Name="user_active" ColumnName="user_active" />
                 <ScalarProperty Name="user_address" ColumnName="user_address" />
@@ -1863,68 +1939,8 @@
                 <ScalarProperty Name="user_image" ColumnName="user_image" />
                 <ScalarProperty Name="user_provincecity" ColumnName="user_provincecity" />
                 <ScalarProperty Name="user_district" ColumnName="user_district" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Favourite">
-            <EntityTypeMapping TypeName="Data_GSShopModel.Favourite">
-              <MappingFragment StoreEntitySet="Favourite">
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="fa_bin" ColumnName="fa_bin" />
-                <ScalarProperty Name="fa_datereated" ColumnName="fa_datereated" />
-                <ScalarProperty Name="fa_id" ColumnName="fa_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Like">
-            <EntityTypeMapping TypeName="Data_GSShopModel.Like">
-              <MappingFragment StoreEntitySet="Like">
-                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
-                <ScalarProperty Name="replycomment_id" ColumnName="replycomment_id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="like_bin" ColumnName="like_bin" />
-                <ScalarProperty Name="like_datecreated" ColumnName="like_datecreated" />
-                <ScalarProperty Name="like_id" ColumnName="like_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PayDetail">
-            <EntityTypeMapping TypeName="Data_GSShopModel.PayDetail">
-              <MappingFragment StoreEntitySet="PayDetail">
-                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
-                <ScalarProperty Name="pay_datecreated" ColumnName="pay_datecreated" />
-                <ScalarProperty Name="pay_amount" ColumnName="pay_amount" />
-                <ScalarProperty Name="pay_money" ColumnName="pay_money" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="pay_id" ColumnName="pay_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Bill">
-            <EntityTypeMapping TypeName="Data_GSShopModel.Bill">
-              <MappingFragment StoreEntitySet="Bill">
-                <ScalarProperty Name="bill_note" ColumnName="bill_note" />
-                <ScalarProperty Name="bill_status" ColumnName="bill_status" />
-                <ScalarProperty Name="bill_dateset" ColumnName="bill_dateset" />
-                <ScalarProperty Name="bill_sum" ColumnName="bill_sum" />
-                <ScalarProperty Name="bill_telephone" ColumnName="bill_telephone" />
-                <ScalarProperty Name="bill_address" ColumnName="bill_address" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="seller_id" ColumnName="seller_id" />
-                <ScalarProperty Name="bill_datecreated" ColumnName="bill_datecreated" />
-                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BillStatus">
-            <EntityTypeMapping TypeName="Data_GSShopModel.BillStatus">
-              <MappingFragment StoreEntitySet="BillStatus">
-                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
-                <ScalarProperty Name="status_name" ColumnName="status_name" />
-                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="user_bin" ColumnName="user_bin" />
+                <ScalarProperty Name="user_role" ColumnName="user_role" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

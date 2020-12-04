@@ -1,21 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Data_GSShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Admin">
+  <EntityType Name="AdminData">
     <Key>
       <PropertyRef Name="admin_id" />
     </Key>
     <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="admin_login" Type="varchar" MaxLength="50" />
-    <Property Name="admin_pass1" Type="varchar" MaxLength="50" />
+    <Property Name="admin_pass" Type="varchar" MaxLength="50" />
     <Property Name="admin_active" Type="bit" />
     <Property Name="admin_token" Type="varchar" MaxLength="200" />
     <Property Name="admin_role" Type="int" />
     <Property Name="admin_datecreated" Type="datetime" />
     <Property Name="admin_name" Type="nvarchar" MaxLength="50" />
     <Property Name="admin_email" Type="varchar" MaxLength="50" />
-    <Property Name="admin_pass2" Type="varchar" MaxLength="50" />
     <Property Name="admin_datelogin" Type="datetime" />
     <Property Name="admin_bin" Type="bit" />
+    <Property Name="admin_svg" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Banner">
     <Key>
@@ -646,7 +645,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="Data_GSShopModelStoreContainer">
-    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AdminData" EntityType="Self.AdminData" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BillStatus" EntityType="Self.BillStatus" Schema="dbo" store:Type="Tables" />

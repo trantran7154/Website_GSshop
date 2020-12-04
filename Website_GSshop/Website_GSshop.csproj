@@ -142,6 +142,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CheckController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClassificationSubCategoriesController.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CheckAccountController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\DisplayController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -178,7 +180,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Admin.cs">
+    <Compile Include="Models\AdminData.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Banner.cs">
@@ -302,6 +304,7 @@
     <Content Include="Content\CSS\CSSLayout.css" />
     <Content Include="Content\CSS\Favourite.css" />
     <Content Include="Content\CSS\login.css" />
+    <Content Include="Content\CSS\loginadmin.css" />
     <Content Include="Content\CSS\product_detail.css" />
     <Content Include="Content\CSS\shoppingcart.css" />
     <Content Include="Content\CSS\sortlist.css" />
@@ -978,13 +981,6 @@
     <Content Include="Areas\Admin\Views\ReplyComments\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Seller_Product\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Seller_Product\SellerProductDetail.cshtml" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\Seller_Product\ProductCreate.cshtml" />
     <Content Include="Areas\Admin\Views\Seller_Product\ProductDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Seller_Product\ProductEdit.cshtml" />
@@ -1004,6 +1000,14 @@
     <Content Include="Areas\SellerManagement\Views\Collections\Edit.cshtml" />
     <Content Include="Areas\SellerManagement\Views\Collections\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Check\FormValidation.cshtml" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1091,6 +1095,8 @@
     <Content Include="Views\PayDetails\Edit.cshtml" />
     <Content Include="Views\PayDetails\Index.cshtml" />
     <Content Include="Views\Cart\IndexCart.cshtml" />
+    <Content Include="Views\CheckAccount\Check.cshtml" />
+    <Content Include="Views\View\Check.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

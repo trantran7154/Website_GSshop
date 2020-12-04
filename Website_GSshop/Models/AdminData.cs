@@ -12,19 +12,18 @@ namespace Website_GSshop.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Admin
+    public partial class AdminData
     {
         public int admin_id { get; set; }
-        public string admin_login { get; set; }
-        public string admin_pass1 { get; set; }
+        public string admin_pass { get; set; }
         public Nullable<bool> admin_active { get; set; }
         public string admin_token { get; set; }
         public Nullable<int> admin_role { get; set; }
         public Nullable<System.DateTime> admin_datecreated { get; set; }
         public string admin_name { get; set; }
         public string admin_email { get; set; }
-        public string admin_pass2 { get; set; }
         public Nullable<System.DateTime> admin_datelogin { get; set; }
         public Nullable<bool> admin_bin { get; set; }
+        public string admin_svg { get; set; }
     }
 }

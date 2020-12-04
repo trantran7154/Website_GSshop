@@ -1,66 +1,88 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Data_GSShopModelStoreContainer" CdmEntityContainer="Data_GSShopEntities">
-    <EntitySetMapping Name="Admin">
-      <EntityTypeMapping TypeName="Data_GSShopModel.Admin">
-        <MappingFragment StoreEntitySet="Admin">
-          <ScalarProperty Name="admin_bin" ColumnName="admin_bin" />
+    <EntitySetMapping Name="AdminData">
+      <EntityTypeMapping TypeName="Data_GSShopModel.AdminData">
+        <MappingFragment StoreEntitySet="AdminData">
           <ScalarProperty Name="admin_id" ColumnName="admin_id" />
-          <ScalarProperty Name="admin_login" ColumnName="admin_login" />
-          <ScalarProperty Name="admin_pass1" ColumnName="admin_pass1" />
+          <ScalarProperty Name="admin_pass" ColumnName="admin_pass" />
           <ScalarProperty Name="admin_active" ColumnName="admin_active" />
           <ScalarProperty Name="admin_token" ColumnName="admin_token" />
           <ScalarProperty Name="admin_role" ColumnName="admin_role" />
           <ScalarProperty Name="admin_datecreated" ColumnName="admin_datecreated" />
           <ScalarProperty Name="admin_name" ColumnName="admin_name" />
           <ScalarProperty Name="admin_email" ColumnName="admin_email" />
-          <ScalarProperty Name="admin_pass2" ColumnName="admin_pass2" />
           <ScalarProperty Name="admin_datelogin" ColumnName="admin_datelogin" />
+          <ScalarProperty Name="admin_bin" ColumnName="admin_bin" />
+          <ScalarProperty Name="admin_svg" ColumnName="admin_svg" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Banner">
       <EntityTypeMapping TypeName="Data_GSShopModel.Banner">
         <MappingFragment StoreEntitySet="Banner">
-          <ScalarProperty Name="banner_bin" ColumnName="banner_bin" />
           <ScalarProperty Name="banner_id" ColumnName="banner_id" />
           <ScalarProperty Name="banner_name" ColumnName="banner_name" />
           <ScalarProperty Name="banner_svg" ColumnName="banner_svg" />
           <ScalarProperty Name="banner_active" ColumnName="banner_active" />
           <ScalarProperty Name="banner_datecreated" ColumnName="banner_datecreated" />
+          <ScalarProperty Name="banner_bin" ColumnName="banner_bin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bill">
+      <EntityTypeMapping TypeName="Data_GSShopModel.Bill">
+        <MappingFragment StoreEntitySet="Bill">
+          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+          <ScalarProperty Name="bill_datecreated" ColumnName="bill_datecreated" />
+          <ScalarProperty Name="seller_id" ColumnName="seller_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="bill_address" ColumnName="bill_address" />
+          <ScalarProperty Name="bill_telephone" ColumnName="bill_telephone" />
+          <ScalarProperty Name="bill_sum" ColumnName="bill_sum" />
+          <ScalarProperty Name="bill_dateset" ColumnName="bill_dateset" />
+          <ScalarProperty Name="bill_status" ColumnName="bill_status" />
+          <ScalarProperty Name="bill_note" ColumnName="bill_note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BillStatus">
+      <EntityTypeMapping TypeName="Data_GSShopModel.BillStatus">
+        <MappingFragment StoreEntitySet="BillStatus">
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+          <ScalarProperty Name="status_name" ColumnName="status_name" />
+          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Category">
       <EntityTypeMapping TypeName="Data_GSShopModel.Category">
         <MappingFragment StoreEntitySet="Category">
-          <ScalarProperty Name="category_bin" ColumnName="category_bin" />
           <ScalarProperty Name="category_id" ColumnName="category_id" />
           <ScalarProperty Name="category_name" ColumnName="category_name" />
           <ScalarProperty Name="category_image" ColumnName="category_image" />
           <ScalarProperty Name="category_datecreated" ColumnName="category_datecreated" />
           <ScalarProperty Name="category_active" ColumnName="category_active" />
+          <ScalarProperty Name="category_bin" ColumnName="category_bin" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ClassificationSubCategory">
       <EntityTypeMapping TypeName="Data_GSShopModel.ClassificationSubCategory">
         <MappingFragment StoreEntitySet="ClassificationSubCategory">
-          <ScalarProperty Name="csc_bin" ColumnName="csc_bin" />
           <ScalarProperty Name="csc_id" ColumnName="csc_id" />
           <ScalarProperty Name="csc_name" ColumnName="csc_name" />
           <ScalarProperty Name="csc_image" ColumnName="csc_image" />
           <ScalarProperty Name="csc_datecreate" ColumnName="csc_datecreate" />
           <ScalarProperty Name="csc_active" ColumnName="csc_active" />
           <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
+          <ScalarProperty Name="csc_bin" ColumnName="csc_bin" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Collection">
       <EntityTypeMapping TypeName="Data_GSShopModel.Collection">
         <MappingFragment StoreEntitySet="Collection">
-          <ScalarProperty Name="seller_id" ColumnName="seller_id" />
-          <ScalarProperty Name="collection_bin" ColumnName="collection_bin" />
           <ScalarProperty Name="collection_id" ColumnName="collection_id" />
           <ScalarProperty Name="collection_name" ColumnName="collection_name" />
           <ScalarProperty Name="collection_image1" ColumnName="collection_image1" />
@@ -68,33 +90,38 @@
           <ScalarProperty Name="collection_image3" ColumnName="collection_image3" />
           <ScalarProperty Name="collection_datecreate" ColumnName="collection_datecreate" />
           <ScalarProperty Name="collection_active" ColumnName="collection_active" />
+          <ScalarProperty Name="collection_bin" ColumnName="collection_bin" />
+          <ScalarProperty Name="seller_id" ColumnName="seller_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Comment">
       <EntityTypeMapping TypeName="Data_GSShopModel.Comment">
         <MappingFragment StoreEntitySet="Comment">
-          <ScalarProperty Name="comment_bin" ColumnName="comment_bin" />
           <ScalarProperty Name="comment_id" ColumnName="comment_id" />
           <ScalarProperty Name="comment_content" ColumnName="comment_content" />
           <ScalarProperty Name="commet_datecreated" ColumnName="commet_datecreated" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="product_id" ColumnName="product_id" />
           <ScalarProperty Name="comment_spam" ColumnName="comment_spam" />
+          <ScalarProperty Name="comment_bin" ColumnName="comment_bin" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Favourite">
+      <EntityTypeMapping TypeName="Data_GSShopModel.Favourite">
+        <MappingFragment StoreEntitySet="Favourite">
+          <ScalarProperty Name="fa_id" ColumnName="fa_id" />
+          <ScalarProperty Name="fa_datereated" ColumnName="fa_datereated" />
+          <ScalarProperty Name="fa_bin" ColumnName="fa_bin" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="GSMall">
       <EntityTypeMapping TypeName="Data_GSShopModel.GSMall">
         <MappingFragment StoreEntitySet="GSMall">
-          <ScalarProperty Name="gsmall_img7" ColumnName="gsmall_img7" />
-          <ScalarProperty Name="gsmall_img6" ColumnName="gsmall_img6" />
-          <ScalarProperty Name="gsmall_img5" ColumnName="gsmall_img5" />
-          <ScalarProperty Name="gsmall_img4" ColumnName="gsmall_img4" />
-          <ScalarProperty Name="gsmall_img3" ColumnName="gsmall_img3" />
-          <ScalarProperty Name="gsmall_img2" ColumnName="gsmall_img2" />
-          <ScalarProperty Name="gsmall_img1" ColumnName="gsmall_img1" />
-          <ScalarProperty Name="gsmall_bin" ColumnName="gsmall_bin" />
           <ScalarProperty Name="gsmall_id" ColumnName="gsmall_id" />
           <ScalarProperty Name="gsmall_name" ColumnName="gsmall_name" />
           <ScalarProperty Name="gsmall_slogan" ColumnName="gsmall_slogan" />
@@ -102,15 +129,46 @@
           <ScalarProperty Name="gsmall_datecreate" ColumnName="gsmall_datecreate" />
           <ScalarProperty Name="gsmall_bg" ColumnName="gsmall_bg" />
           <ScalarProperty Name="gsmall_image" ColumnName="gsmall_image" />
+          <ScalarProperty Name="gsmall_bin" ColumnName="gsmall_bin" />
+          <ScalarProperty Name="gsmall_img1" ColumnName="gsmall_img1" />
+          <ScalarProperty Name="gsmall_img2" ColumnName="gsmall_img2" />
+          <ScalarProperty Name="gsmall_img3" ColumnName="gsmall_img3" />
+          <ScalarProperty Name="gsmall_img4" ColumnName="gsmall_img4" />
+          <ScalarProperty Name="gsmall_img5" ColumnName="gsmall_img5" />
+          <ScalarProperty Name="gsmall_img6" ColumnName="gsmall_img6" />
+          <ScalarProperty Name="gsmall_img7" ColumnName="gsmall_img7" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Like">
+      <EntityTypeMapping TypeName="Data_GSShopModel.Like">
+        <MappingFragment StoreEntitySet="Like">
+          <ScalarProperty Name="like_id" ColumnName="like_id" />
+          <ScalarProperty Name="like_datecreated" ColumnName="like_datecreated" />
+          <ScalarProperty Name="like_bin" ColumnName="like_bin" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="replycomment_id" ColumnName="replycomment_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayDetail">
+      <EntityTypeMapping TypeName="Data_GSShopModel.PayDetail">
+        <MappingFragment StoreEntitySet="PayDetail">
+          <ScalarProperty Name="pay_id" ColumnName="pay_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="pay_money" ColumnName="pay_money" />
+          <ScalarProperty Name="pay_amount" ColumnName="pay_amount" />
+          <ScalarProperty Name="pay_datecreated" ColumnName="pay_datecreated" />
+          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Product">
       <EntityTypeMapping TypeName="Data_GSShopModel.Product">
         <MappingFragment StoreEntitySet="Product">
-          <ScalarProperty Name="csc_id" ColumnName="csc_id" />
-          <ScalarProperty Name="product_related" ColumnName="product_related" />
-          <ScalarProperty Name="product_bin" ColumnName="product_bin" />
           <ScalarProperty Name="product_id" ColumnName="product_id" />
           <ScalarProperty Name="product_name" ColumnName="product_name" />
           <ScalarProperty Name="product_image" ColumnName="product_image" />
@@ -130,34 +188,36 @@
           <ScalarProperty Name="product_amount" ColumnName="product_amount" />
           <ScalarProperty Name="product_dateedit" ColumnName="product_dateedit" />
           <ScalarProperty Name="seller_id" ColumnName="seller_id" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="category_id" ColumnName="category_id" />
           <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
           <ScalarProperty Name="banner_id" ColumnName="banner_id" />
           <ScalarProperty Name="collection_id" ColumnName="collection_id" />
           <ScalarProperty Name="gsmail_id" ColumnName="gsmail_id" />
+          <ScalarProperty Name="product_bin" ColumnName="product_bin" />
+          <ScalarProperty Name="product_related" ColumnName="product_related" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="csc_id" ColumnName="csc_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ReplyComment">
       <EntityTypeMapping TypeName="Data_GSShopModel.ReplyComment">
         <MappingFragment StoreEntitySet="ReplyComment">
-          <ScalarProperty Name="replycomment_bin" ColumnName="replycomment_bin" />
           <ScalarProperty Name="replycomment_id" ColumnName="replycomment_id" />
           <ScalarProperty Name="replycomment_content" ColumnName="replycomment_content" />
-          <ScalarProperty Name="comment_id" ColumnName="comment_id" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="product_id" ColumnName="product_id" />
           <ScalarProperty Name="seller_id" ColumnName="seller_id" />
           <ScalarProperty Name="replycomment_spam" ColumnName="replycomment_spam" />
           <ScalarProperty Name="replycomment_datecreated" ColumnName="replycomment_datecreated" />
+          <ScalarProperty Name="replycomment_bin" ColumnName="replycomment_bin" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="comment_id" ColumnName="comment_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Seller">
       <EntityTypeMapping TypeName="Data_GSShopModel.Seller">
         <MappingFragment StoreEntitySet="Seller">
-          <ScalarProperty Name="seller_bin" ColumnName="seller_bin" />
           <ScalarProperty Name="seller_id" ColumnName="seller_id" />
           <ScalarProperty Name="seller_pass" ColumnName="seller_pass" />
           <ScalarProperty Name="seller_email" ColumnName="seller_email" />
@@ -181,13 +241,13 @@
           <ScalarProperty Name="seller_nicename" ColumnName="seller_nicename" />
           <ScalarProperty Name="seller_provincecity" ColumnName="seller_provincecity" />
           <ScalarProperty Name="seller_district" ColumnName="seller_district" />
+          <ScalarProperty Name="seller_bin" ColumnName="seller_bin" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SubCategory">
       <EntityTypeMapping TypeName="Data_GSShopModel.SubCategory">
         <MappingFragment StoreEntitySet="SubCategory">
-          <ScalarProperty Name="subcategory_bin" ColumnName="subcategory_bin" />
           <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
           <ScalarProperty Name="subcategory_name" ColumnName="subcategory_name" />
           <ScalarProperty Name="subcategory_image" ColumnName="subcategory_image" />
@@ -195,6 +255,7 @@
           <ScalarProperty Name="subcategory_active" ColumnName="subcategory_active" />
           <ScalarProperty Name="category_id" ColumnName="category_id" />
           <ScalarProperty Name="subcategory_level" ColumnName="subcategory_level" />
+          <ScalarProperty Name="subcategory_bin" ColumnName="subcategory_bin" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -212,14 +273,12 @@
     <EntitySetMapping Name="User">
       <EntityTypeMapping TypeName="Data_GSShopModel.User">
         <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="user_bin" ColumnName="user_bin" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="user_pass" ColumnName="user_pass" />
           <ScalarProperty Name="user_nicename" ColumnName="user_nicename" />
           <ScalarProperty Name="user_email" ColumnName="user_email" />
           <ScalarProperty Name="user_datecreated" ColumnName="user_datecreated" />
           <ScalarProperty Name="user_token" ColumnName="user_token" />
-          <ScalarProperty Name="user_role" ColumnName="user_role" />
           <ScalarProperty Name="user_datelogin" ColumnName="user_datelogin" />
           <ScalarProperty Name="user_active" ColumnName="user_active" />
           <ScalarProperty Name="user_address" ColumnName="user_address" />
@@ -227,68 +286,8 @@
           <ScalarProperty Name="user_image" ColumnName="user_image" />
           <ScalarProperty Name="user_provincecity" ColumnName="user_provincecity" />
           <ScalarProperty Name="user_district" ColumnName="user_district" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Favourite">
-      <EntityTypeMapping TypeName="Data_GSShopModel.Favourite">
-        <MappingFragment StoreEntitySet="Favourite">
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="product_id" ColumnName="product_id" />
-          <ScalarProperty Name="fa_bin" ColumnName="fa_bin" />
-          <ScalarProperty Name="fa_datereated" ColumnName="fa_datereated" />
-          <ScalarProperty Name="fa_id" ColumnName="fa_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Like">
-      <EntityTypeMapping TypeName="Data_GSShopModel.Like">
-        <MappingFragment StoreEntitySet="Like">
-          <ScalarProperty Name="comment_id" ColumnName="comment_id" />
-          <ScalarProperty Name="replycomment_id" ColumnName="replycomment_id" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="product_id" ColumnName="product_id" />
-          <ScalarProperty Name="like_bin" ColumnName="like_bin" />
-          <ScalarProperty Name="like_datecreated" ColumnName="like_datecreated" />
-          <ScalarProperty Name="like_id" ColumnName="like_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PayDetail">
-      <EntityTypeMapping TypeName="Data_GSShopModel.PayDetail">
-        <MappingFragment StoreEntitySet="PayDetail">
-          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
-          <ScalarProperty Name="pay_datecreated" ColumnName="pay_datecreated" />
-          <ScalarProperty Name="pay_amount" ColumnName="pay_amount" />
-          <ScalarProperty Name="pay_money" ColumnName="pay_money" />
-          <ScalarProperty Name="product_id" ColumnName="product_id" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="pay_id" ColumnName="pay_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Bill">
-      <EntityTypeMapping TypeName="Data_GSShopModel.Bill">
-        <MappingFragment StoreEntitySet="Bill">
-          <ScalarProperty Name="bill_note" ColumnName="bill_note" />
-          <ScalarProperty Name="bill_status" ColumnName="bill_status" />
-          <ScalarProperty Name="bill_dateset" ColumnName="bill_dateset" />
-          <ScalarProperty Name="bill_sum" ColumnName="bill_sum" />
-          <ScalarProperty Name="bill_telephone" ColumnName="bill_telephone" />
-          <ScalarProperty Name="bill_address" ColumnName="bill_address" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="seller_id" ColumnName="seller_id" />
-          <ScalarProperty Name="bill_datecreated" ColumnName="bill_datecreated" />
-          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BillStatus">
-      <EntityTypeMapping TypeName="Data_GSShopModel.BillStatus">
-        <MappingFragment StoreEntitySet="BillStatus">
-          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
-          <ScalarProperty Name="status_name" ColumnName="status_name" />
-          <ScalarProperty Name="status_id" ColumnName="status_id" />
+          <ScalarProperty Name="user_bin" ColumnName="user_bin" />
+          <ScalarProperty Name="user_role" ColumnName="user_role" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

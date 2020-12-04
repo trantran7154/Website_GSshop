@@ -1,0 +1,148 @@
+﻿<script>
+    $('.ui.form')
+        .form({
+            fields: {
+                // Kiểm email user
+                user_email: {
+                    identifier: 'user_email',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập vào email.'
+                        },
+                        {
+                            type: 'email',
+                            prompt: 'Email không đúng định dạng.'
+                        }
+                    ]
+                },
+                // Kiểm tra pass user
+                user_pass: {
+                    identifier: 'user_pass',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập mật khẩu.'
+                        },
+                        {
+                            type: 'minLength[5]',
+                            prompt: 'Mật khẩu phải trên 5 ký tự.'
+                        },
+                    ]
+                },
+                // Kiểm tra pass nhập lại
+                user_repeat: {
+                    identifier: 'user_repeat',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập lại mật khẩu.'
+                        },
+                        {
+                            type: 'match[user_pass]',
+                            prompt: 'Xác nhận mật khẩu không đúng.'
+                        }
+                    ]
+                },
+                // Kiểm tra tên đăng ký
+                user_nicename: {
+                    identifier: 'user_nicename',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng họ và tên.'
+                        },
+                        {
+                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            prompt: 'Vui lòng nhập tên người dùng 4-16 chữ cái.'
+                        }
+                    ]
+                },
+                // Kiểm tra số điện thoại
+                user_telephone: {
+                    identifier: 'user_telephone',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập số điện thoại.'
+                        },
+                        {
+                            type: 'number',
+                            prompt: 'Vui lòng nhập một số hợp lệ.'
+                        }
+                    ]
+                },
+                // Kiểm email seller
+                seller_email: {
+                    identifier: 'seller_email',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập vào email.'
+                        },
+                        {
+                            type: 'email',
+                            prompt: 'Email không đúng định dạng.'
+                        }
+                    ]
+                },
+                // Kiểm tra pass seller
+                seller_pass: {
+                    identifier: 'seller_pass',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập mật khẩu.'
+                        },
+                        {
+                            type: 'minLength[5]',
+                            prompt: 'Mật khẩu phải trên 5 ký tự.'
+                        },
+                    ]
+                },
+                // Kiểm tra pass nhập lại
+                seller_repeat: {
+                    identifier: 'seller_repeat',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập lại mật khẩu.'
+                        },
+                        {
+                            type: 'match[seller_pass]',
+                            prompt: 'Xác nhận mật khẩu không đúng.'
+                        }
+                    ]
+                },
+                // Kiểm tra tên shop đăng ký
+                seller_nameshop: {
+                    identifier: 'seller_nameshop',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập tên shop.'
+                        },
+                        {
+                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            prompt: 'Vui lòng nhập tên shop 4-16 chữ cái.'
+                        }
+                    ]
+                },
+                // Kiểm tra số điện thoại
+                seller_telephone: {
+                    identifier: 'seller_telephone',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập số điện thoại.'
+                        },
+                        {
+                            type: 'number',
+                            prompt: 'Vui lòng nhập một số hợp lệ.'
+                        }
+                    ]
+                }
+            }
+        })
+        ;
+</script>

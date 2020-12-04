@@ -9,6 +9,10 @@
                         {
                             type: 'empty',
                             prompt: 'Tên sản phẩm không được để trống.'
+                        },
+                        {
+                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            prompt: 'Vui lòng nhập tên sản phẩm 4-16 chữ cái.'
                         }
                     ]
                 },
@@ -153,6 +157,10 @@
                         {
                             type: 'empty',
                             prompt: 'Tên bộ sưu tập không được để trống.'
+                        },
+                        {
+                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            prompt: 'Vui lòng nhập tên bộ sưu tập 4-16 chữ cái.'
                         }
                     ]
                 },
@@ -243,6 +251,10 @@
                         {
                             type: 'empty',
                             prompt: 'Tên danh mục chính không được để trống.'
+                        },
+                        {
+                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            prompt: 'Vui lòng nhập tên danh mục chính 4-16 chữ cái.'
                         }
                     ]
                 },
@@ -263,6 +275,10 @@
                         {
                             type: 'empty',
                             prompt: 'Tên danh mục phụ không được để trống.'
+                        },
+                        {
+                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            prompt: 'Vui lòng nhập tên danh mục phụ 4-16 chữ cái.'
                         }
                     ]
                 },
@@ -283,6 +299,10 @@
                         {
                             type: 'empty',
                             prompt: 'Tên danh mục con không được để trống.'
+                        },
+                        {
+                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            prompt: 'Vui lòng nhập tên danh mục con 4-16 chữ cái.'
                         }
                     ]
                 },
@@ -293,6 +313,10 @@
                         {
                             type: 'empty',
                             prompt: 'Tên đối tác không được để trống.'
+                        },
+                        {
+                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            prompt: 'Vui lòng nhập tên đối tác 4-16 chữ cái.'
                         }
                     ]
                 },
@@ -322,7 +346,11 @@
                     rules: [
                         {
                             type: 'empty',
-                            prompt: 'Email không được để trống.'
+                            prompt: 'Vui lòng nhập vào email.'
+                        },
+                        {
+                            type: 'email',
+                            prompt: 'Email không đúng định dạng.'
                         }
                     ]
                 },
@@ -347,6 +375,10 @@
                         {
                             type: 'empty',
                             prompt: 'Số điện thoại không được để trống.'
+                        },
+                        {
+                            type: 'number',
+                            prompt: 'Vui lòng nhập một số hợp lệ.'
                         }
                     ]
                 },
@@ -357,6 +389,10 @@
                         {
                             type: 'empty',
                             prompt: 'Tên người dùng không được để trống.'
+                        },
+                        {
+                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            prompt: 'Vui lòng nhập họ và tên 4-16 chữ cái.'
                         }
                     ]
                 },
@@ -396,7 +432,11 @@
                     rules: [
                         {
                             type: 'empty',
-                            prompt: 'Email seller không được để trống.'
+                            prompt: 'Vui lòng nhập vào email.'
+                        },
+                        {
+                            type: 'email',
+                            prompt: 'Email không đúng định dạng.'
                         }
                     ]
                 },
@@ -421,6 +461,10 @@
                         {
                             type: 'empty',
                             prompt: 'Tên shop không được để trống.'
+                        },
+                        {
+                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            prompt: 'Vui lòng nhập tên shop 4-16 chữ cái.'
                         }
                     ]
                 },
@@ -451,6 +495,10 @@
                         {
                             type: 'empty',
                             prompt: 'Tên seller không được để trống.'
+                        },
+                        {
+                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            prompt: 'Vui lòng nhập tên shop 4-16 chữ cái.'
                         }
                     ]
                 },
@@ -461,6 +509,10 @@
                         {
                             type: 'empty',
                             prompt: 'Số điện thoại không được để trống.'
+                        },
+                        {
+                            type: 'number',
+                            prompt: 'Vui lòng nhập một số hợp lệ.'
                         }
                     ]
                 },
@@ -481,6 +533,34 @@
                         {
                             type: 'empty',
                             prompt: 'Ảnh 4 không được để trống.'
+                        }
+                    ]
+                },
+                // Kiểm tra email admin
+                admin_email: {
+                    identifier: 'admin_email',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập vào email.'
+                        },
+                        {
+                            type: 'email',
+                            prompt: 'Email không đúng định dạng.'
+                        }
+                    ]
+                },
+                // Kiểm tra mật khẩu admin
+                admin_pass: {
+                    identifier: 'admin_pass',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Mật khẩu không được để trống.'
+                        },
+                        {
+                            type: 'minLength[5]',
+                            prompt: 'Mật khẩu phải trên 5 ký tự.'
                         }
                     ]
                 }

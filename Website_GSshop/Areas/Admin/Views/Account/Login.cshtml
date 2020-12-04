@@ -1,0 +1,56 @@
+﻿@using Website_GSshop.Models
+@model AdminData
+@{
+    Data_GSShopEntities db = new Data_GSShopEntities();
+}
+@{
+    List<AdminData> ad = db.AdminData.ToList();
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/Semantic-UI-CSS-master/semantic.css" rel="stylesheet" />
+@Html.Action("CSS_Sematic", "Home")
+<link href="~/Content/CSS/loginadmin.css" rel="stylesheet" />
+@foreach (var item in ad)
+{
+    @Html.Raw(item.admin_svg)
+}
+<div class="container">
+    <div class="login-contianer">
+        <div class="bg_top">
+            <h1 class="welcome" style="font-family: 'Segoe UI'; padding-top: 105px">Welcome to Admin Page</h1>
+        </div>
+        <div class="col-sm-12 col-md-12">
+            <div class="col-md-6 m-auto">
+                <div class="userloginheading" style="font-family: 'Segoe UI'; padding: 0px">ĐĂNG NHẬP ADMIN</div>
+            </div>
+            <form class="ui form segment" role="form" method="post" action="@Url.Action("Login","Account")" style="border: none; box-shadow: none; margin-left: 5%; margin-right: 5%">
+                <div class="field">
+                    <label class="float-left">Email</label>
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email" name="admin_email">
+                </div>
+                <div class="field">
+                    <label>Mật khẩu</label>
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name="admin_pass">
+                </div>
+                <div class="form-group row" style="text-align: center">
+                    <div class="col-sm-12 width100 mt40 text-center">
+                        <button type="submit" class="submitbtn btn btn-primary"> ĐĂNG NHẬP</button>
+                        <!--<a id="show" class="col-md-12 pull-left anchr">Dark Night</a>-->
+                    </div>
+                </div>
+                <div class="ui error message" style="width: 100%; min-height: 10vh;"></div>
+                <center>@Html.Raw(Session["testloginadmin"])</center>
+            </form>
+        </div>
+    </div>
+</div>
+@Html.Action("FormValidation", "Check")
+<script>
+    (document).ready(function () {
+        $(".anchr").click(function () {
+            $(".st0,.st3").css("fill", "white !important");
+        });
+    });
+</script>
+
+
