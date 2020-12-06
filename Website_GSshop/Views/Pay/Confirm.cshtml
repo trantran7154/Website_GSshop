@@ -1,0 +1,258 @@
+﻿@using Website_GSshop.Models;
+@model List<ShoppingCarts>
+@{
+    ViewBag.Title = "Confirm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Data_GSShopEntities db = new Data_GSShopEntities();
+    User sesus = (User)Session["user"];
+}
+<style>
+    .buttons_added {
+        opacity: 1;
+        display: inline-block;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        white-space: nowrap;
+        vertical-align: top;
+        margin-top: -3%;
+    }
+
+    .is-form {
+        overflow: hidden;
+        position: relative;
+        background-color: #f9f9f9;
+        height: 2.2rem;
+        width: 1.9rem;
+        padding: 0;
+        text-shadow: 1px 1px 1px #fff;
+        border: 1px solid #ddd;
+    }
+
+    .is-form:focus, .input-text:focus {
+        outline: none;
+    }
+
+    .is-form.minus {
+        border-radius: 4px 0 0 4px;
+    }
+
+    .is-form.plus {
+        border-radius: 0 4px 4px 0;
+    }
+
+    .input-qty {
+        background-color: #fff;
+        height: 2.2rem;
+        text-align: center;
+        font-size: 1rem;
+        display: inline-block;
+        vertical-align: top;
+        margin: 0;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        border-left: 0;
+        border-right: 0;
+        padding: 0;
+    }
+
+    .input-qty::-webkit-outer-spin-button, .input-qty::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+<link href="~/Content/CSS/shoppingcart.css" rel="stylesheet" />
+<div class="container-fluid">
+    <header class="header1">
+        <div class="d-flex justify-content-center align-items-center pb-3">
+            <div class="px-sm-5 px-2 active">SHOPPING CART <span class="fa fa-check"></span> </div>
+            <div class="px-sm-5 px-2 active">CHECKOUT <span class="fa fa-check"></span> </div>
+            <div class="px-sm-5 px-2">FINISH</div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 54%;"></div>
+        </div>
+    </header>
+    <form method="post" action="@Url.Action("CreateBill","Pay")">
+        <div class="wrapper1" style="background-color: #f9f9f9">
+            <div class="h4 large font-weight-600 text-danger mb-3">GIỎ HÀNG CỦA BẠN</div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1">
+                        <div class="mobile h5">Billing Address</div>
+                        <div id="details" class="bg-white rounded pb-5">
+                            <input type="hidden" value="@sesus.user_id" name="user_id"/>
+                            <div class="form-group"> <label class="text-muted">Họ tên</label> <input type="text" value="@sesus.user_nicename" class="form-control"> </div>
+                            <div class="form-group">
+                                <label class="text-muted">Email</label>
+                                <div class="d-flex jusify-content-start align-items-center rounded p-2"> <input type="text" value="@sesus.user_email"> <span class="fa fa-check text-success pr-sm-2 pr-0"></span> </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-muted">Số điện thoại</label>
+                                <div class="d-flex jusify-content-start align-items-center rounded p-2"> <input type="text" value="@sesus.user_telephone" name="bill_telephone"> <span class="fa fa-check text-success pr-sm-2 pr-0"></span> </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Tên đường</label>
+                                        <div class="d-flex jusify-content-start align-items-center rounded p-2"> <input type="text" value="@sesus.user_address" name="bill_address"> <span class="fa fa-check text-success pr-2"></span> </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Zip code</label>
+                                        <div class="d-flex jusify-content-start align-items-center rounded p-2"> <input type="text" value="77001"> <span class="fa fa-check text-success pr-2"></span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Quận/Huyện</label>
+                                        <div class="d-flex jusify-content-start align-items-center rounded p-2"> <input type="text" value="@sesus.user_district"> <span class="fa fa-check text-success pr-2"></span> </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Tỉnh/TP</label> <select name="country" id="country">
+                                            <option value="usa">@sesus.user_provincecity</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input class="mt-3" type="checkbox" checked> <label>Shipping address is same as billing</label>
+                        <div id="address" class="bg-light rounded mt-3">
+                            <div class="font-weight-bold text-blue"> Địa chỉ giao hàng </div>
+                            <div class="d-md-flex justify-content-md-start align-items-md-center pt-3">
+                                <div style="width: 100%">
+                                    <b>Địa chỉ</b>
+                                    <br />
+                                    <span class="text-justify text-muted">542 W.14th Street</span>
+                                    <br />
+                                    <span class="text-uppercase text-muted">NY</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1 pt-lg-0 pt-3">
+                        <div id="cart" class="bg-white rounded">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="h6">ĐƠN HÀNG</div>
+                                <div class="h6"> <a href="#">Sửa</a> </div>
+                            </div>
+                            @foreach (var item in Model)
+                            {
+                                <div class="d-flex jusitfy-content-between align-items-center pt-3 pb-2 border-bottom">
+                                    <div class="item2 pr-2">
+                                        <img src="~/Content/Layout/images/@item.product_image" alt="" width="80" height="80">
+                                        <div class="number">@item.pay_amount</div>
+                                    </div>
+                                    <div class="d-flex flex-column px-3"> <b class="h5">@item.product_name</b> <a href="#" class="h5 text-primary">C-770</a> </div>
+                                    <div class="ml-auto"> <b class="h5">@{float price1 = (float)item.product_price;} @price1.ToString("#,##0") ₫</b> </div>
+                                </div>
+                            }
+                            <div class="my-3"> <input type="text" class="w-100 form-control text-center" placeholder="Gift Card or Promo Card"> </div>
+                            <div class="d-flex align-items-center row">
+                                <div class="col-md-6">
+                                    <div class="display-5">Tổng cộng</div>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <input class="ml-auto font-weight-bold text-right" value="@Model.Sum(n => n.pay_money).ToString(("#,##0")) đ" style="border: none" />
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center py-2 border-bottom row">
+                                <div class="col-md-6">
+                                    <div class="display-5">Phí ship</div>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <div class="ml-auto font-weight-bold">Free Ship</div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center py-2 row">
+                                <div class="col-md-6">
+                                    <div class="display-5">Tổng cộng</div>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <input class="ml-auto font-weight-bold text-right" value="@Model.Sum(n => n.pay_money).ToString(("#,##0")) đ" style="border: none" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <span class="text-muted">Mọi thông tin thắc mắc về cách thức giao hàng liên hệ qua?</span>
+                            <br />
+                            <span class="text-muted"><a href="#" class="text-danger">Hotline:</a> 0869139879</span>
+                        </div>
+                        <div class="h4"> <span class="fa fa-shield text-info pr-2" style="font-size: 30px"></span> Bảo mật mua sắm của bạn</div>
+                        <div id="summary" class="bg-white rounded py-2 my-4">
+                            <table class="table table-borderless" style="box-shadow: none">
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="text-muted">
+                                            <td>@item.product_name</td>
+                                            <td>:</td>
+                                            <td>@{float price4 = (float)item.product_price;} @price4.ToString("#,##0") ₫</td>
+                                        </tr>
+                                        <tr class="text-muted">
+                                            <td>Mã giảm giá</td>
+                                            <td>:</td>
+                                            <td>770</td>
+                                        </tr>
+                                        <tr class="text-muted">
+                                            <td>Số lượng</td>
+                                            <td>:</td>
+                                            <td>
+                                                <div class="buttons_added">
+                                                    <input class="minus is-form" type="button" value="-">
+                                                    <input aria-label="quantity" class="input-qty" max="10" min="1" name="" type="number" value="1">
+                                                    <input class="plus is-form" type="button" value="+">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="border-top py-2 d-flex align-items-center ml-2 font-weight-bold row">
+                                <div class="col-md-6">
+                                    <div>Thành tiền</div>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <input class="px-2 text-right" name="bill_sum" value="@Model.Sum(n => n.pay_money).ToString(("#,##0")) đ" style="border: none" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-lg-3 pt-2 buttons mb-sm-0 mb-2">
+                            <div class="col-md-6">
+                                <a href="/Display/Index"><div class="btn text-uppercase">TIẾP TỤC MUA SẮM</div></a>
+                            </div>
+                            <div class="col-md-6 pt-md-0 pt-3 text-right">
+                                <button class="btn text-white ml-auto" type="submit"><span class="fa fa-lock"></span> THANH TOÁN</button>
+                            </div>
+                        <div class="text-muted pt-3" id="mobile"> <span class="fa fa-lock"></span> Your information is save </div>
+                    </div>
+                </div>
+                <div class="text-muted"> <span class="fa fa-lock"></span> Your information is save </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $('input.input-qty').each(function () {
+        var $this = $(this),
+            qty = $this.parent().find('.is-form'),
+            min = Number($this.attr('min')),
+            max = Number($this.attr('max'))
+        if (min == 0) {
+            var d = 0
+        } else d = min
+        $(qty).on('click', function () {
+            if ($(this).hasClass('minus')) {
+                if (d > min) d += -1
+            } else if ($(this).hasClass('plus')) {
+                var x = Number($this.val()) + 1
+                if (x <= max) d += 1
+            }
+            $this.attr('value', d).val(d)
+        })
+    })
+</script>
+

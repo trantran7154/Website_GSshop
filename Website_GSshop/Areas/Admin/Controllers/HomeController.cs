@@ -9,7 +9,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
 {
     public class HomeController : Controller
     {
-        String loginadmin = "/Admin/Account/Login";
+        String loginadmin = "/Admin/AccountAdmin/Login";
         // GET: Admin/Home
         Data_GSShopEntities db = new Data_GSShopEntities();
         public ActionResult Index()

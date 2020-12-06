@@ -7,7 +7,7 @@ using Website_GSshop.Models;
 
 namespace Website_GSshop.Areas.Admin.Controllers
 {
-    public class AccountController : Controller
+    public class AccountAdminController : Controller
     {
         // GET: Admin/Account
         String adminhome = "/Admin/Home/Index";
