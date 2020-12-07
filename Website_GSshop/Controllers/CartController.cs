@@ -51,18 +51,5 @@ namespace Website_GSshop.Controllers
             }
             return Redirect(Request.UrlReferrer.ToString());
         }
-        //Xu ly xóa
-        //Xu ly cap nhat
-        //in ra danh sách và tính tiền
-        [HttpGet]
-        public ActionResult Pay()
-        {
-            List<ShoppingCarts> ghtt = Session["sptt"] as List<ShoppingCarts>;
-            User kh = db.User.Find(Int32.Parse(Session["user"].ToString()));
-            return View();
-        }
-        //in ra phuong thuc thanh toán
-        //xu ly luu thanh taon vao data
-
     }
 }

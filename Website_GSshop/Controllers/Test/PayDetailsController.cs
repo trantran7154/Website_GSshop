@@ -17,7 +17,7 @@ namespace Website_GSshop.Controllers.Test
         // GET: PayDetails
         public ActionResult Index()
         {
-            var payDetail = db.PayDetail.Include(p => p.Product).Include(p => p.User);
+            var payDetail = db.PayDetail.Include(p => p.Product).Include(p => p.User).Include(p => p.Bill);
             return View(payDetail.ToList());
         }
 
@@ -41,6 +41,7 @@ namespace Website_GSshop.Controllers.Test
         {
             ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name");
             ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass");
+            ViewBag.bill_id = new SelectList(db.Bill, "bill_id", "bill_address");
             return View();
         }
 
@@ -49,7 +50,7 @@ namespace Website_GSshop.Controllers.Test
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "pay_id,user_id,product_id,pay_money,pay_amount,pay_datecreated")] PayDetail payDetail)
+        public ActionResult Create([Bind(Include = "pay_id,user_id,product_id,pay_money,pay_amount,pay_datecreated,bill_id")] PayDetail payDetail)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +61,7 @@ namespace Website_GSshop.Controllers.Test
 
             ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", payDetail.product_id);
             ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass", payDetail.user_id);
+            ViewBag.bill_id = new SelectList(db.Bill, "bill_id", "bill_address", payDetail.bill_id);
             return View(payDetail);
         }
 
@@ -77,6 +79,7 @@ namespace Website_GSshop.Controllers.Test
             }
             ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", payDetail.product_id);
             ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass", payDetail.user_id);
+            ViewBag.bill_id = new SelectList(db.Bill, "bill_id", "bill_address", payDetail.bill_id);
             return View(payDetail);
         }
 
@@ -85,7 +88,7 @@ namespace Website_GSshop.Controllers.Test
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "pay_id,user_id,product_id,pay_money,pay_amount,pay_datecreated")] PayDetail payDetail)
+        public ActionResult Edit([Bind(Include = "pay_id,user_id,product_id,pay_money,pay_amount,pay_datecreated,bill_id")] PayDetail payDetail)
         {
             if (ModelState.IsValid)
             {
@@ -95,6 +98,7 @@ namespace Website_GSshop.Controllers.Test
             }
             ViewBag.product_id = new SelectList(db.Product, "product_id", "product_name", payDetail.product_id);
             ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass", payDetail.user_id);
+            ViewBag.bill_id = new SelectList(db.Bill, "bill_id", "bill_address", payDetail.bill_id);
             return View(payDetail);
         }
 
