@@ -17,7 +17,6 @@ namespace Website_GSshop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Seller()
         {
-            this.Bill = new HashSet<Bill>();
             this.Collection = new HashSet<Collection>();
             this.Product = new HashSet<Product>();
             this.ReplyComment = new HashSet<ReplyComment>();
@@ -48,8 +47,6 @@ namespace Website_GSshop.Models
         public string seller_district { get; set; }
         public Nullable<bool> seller_bin { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bill> Bill { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Collection> Collection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

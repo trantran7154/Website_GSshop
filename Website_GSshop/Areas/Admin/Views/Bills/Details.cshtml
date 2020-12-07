@@ -1,0 +1,123 @@
+﻿@model Website_GSshop.Models.Bill
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Bill</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.bill_datecreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bill_datecreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bill_address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bill_address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bill_telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bill_telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bill_sum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bill_sum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bill_dateset)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bill_dateset)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bill_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bill_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bill_note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bill_note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bill_district)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bill_district)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bill_provincecity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bill_provincecity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bill_sale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bill_sale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bill_bin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bill_bin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Seller.seller_pass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Seller.seller_pass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.user_pass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.user_pass)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.bill_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

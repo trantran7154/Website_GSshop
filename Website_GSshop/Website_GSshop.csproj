@@ -143,6 +143,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BillsController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CheckController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClassificationSubCategoriesController.cs" />
@@ -162,7 +163,6 @@
     <Compile Include="Areas\SellerManagement\SellerManagementAreaRegistration.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BannerController.cs" />
-    <Compile Include="Controllers\BillsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckAccountController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
@@ -307,7 +307,7 @@
     <Content Include="Content\CSS\login.css" />
     <Content Include="Content\CSS\loginadmin.css" />
     <Content Include="Content\CSS\product_detail.css" />
-    <Content Include="Content\CSS\shoppingcart.css" />
+    <Content Include="Content\CSS\ShoppingCart.css" />
     <Content Include="Content\CSS\sortlist.css" />
     <Content Include="Content\Favicon\android-icon-144x144.png" />
     <Content Include="Content\Favicon\android-icon-192x192.png" />
@@ -1009,6 +1009,11 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\AccountAdmin\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Bills\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Bills\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Bills\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Bills\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Bills\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

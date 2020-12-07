@@ -17,7 +17,6 @@ namespace Website_GSshop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Bill = new HashSet<Bill>();
             this.Comment = new HashSet<Comment>();
             this.Favourite = new HashSet<Favourite>();
             this.Like = new HashSet<Like>();
@@ -25,6 +24,7 @@ namespace Website_GSshop.Models
             this.Product = new HashSet<Product>();
             this.Product1 = new HashSet<Product>();
             this.ReplyComment = new HashSet<ReplyComment>();
+            this.Bill = new HashSet<Bill>();
         }
     
         public int user_id { get; set; }
@@ -44,8 +44,6 @@ namespace Website_GSshop.Models
         public Nullable<int> user_role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bill> Bill { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Favourite> Favourite { get; set; }
@@ -59,5 +57,7 @@ namespace Website_GSshop.Models
         public virtual ICollection<Product> Product1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReplyComment> ReplyComment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bill> Bill { get; set; }
     }
 }

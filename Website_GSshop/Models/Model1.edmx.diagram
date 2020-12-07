@@ -7,7 +7,6 @@
       <Diagram DiagramId="cc2ac52d78c4460b91f5a6c26bd5e9b5" Name="Diagram1">
         <EntityTypeShape EntityType="Data_GSShopModel.AdminData" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.Banner" Width="1.5" PointX="6.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.Bill" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.BillStatus" Width="1.5" PointX="5.25" PointY="18.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.Category" Width="1.5" PointX="6.75" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.ClassificationSubCategory" Width="1.5" PointX="6.75" PointY="21.625" IsExpanded="true" />
@@ -24,10 +23,6 @@
         <EntityTypeShape EntityType="Data_GSShopModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.User" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_Banner" ManuallyRouted="false" />
-        <AssociationConnector Association="Data_GSShopModel.FK_Bill_Seller" ManuallyRouted="false" />
-        <AssociationConnector Association="Data_GSShopModel.FK_Bill_User" ManuallyRouted="false" />
-        <AssociationConnector Association="Data_GSShopModel.FK_BillStatus_Bill" ManuallyRouted="false" />
-        <AssociationConnector Association="Data_GSShopModel.FK_PayDetail_Bill" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_SubCategory_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ClassificationSubCategory_SubCategory" ManuallyRouted="false" />
@@ -54,6 +49,10 @@
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Product1" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Seller" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_User1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Bill" Width="1.5" PointX="3" PointY="14.625" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Bill_User" />
+        <AssociationConnector Association="Data_GSShopModel.FK_BillStatus_Bill" />
+        <AssociationConnector Association="Data_GSShopModel.FK_PayDetail_Bill" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

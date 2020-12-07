@@ -6,61 +6,7 @@
     Data_GSShopEntities db = new Data_GSShopEntities();
     User sesus = (User)Session["user"];
 }
-<style>
-    .buttons_added {
-        opacity: 1;
-        display: inline-block;
-        display: -ms-inline-flexbox;
-        display: inline-flex;
-        white-space: nowrap;
-        vertical-align: top;
-        margin-top: -3%;
-    }
-
-    .is-form {
-        overflow: hidden;
-        position: relative;
-        background-color: #f9f9f9;
-        height: 2.2rem;
-        width: 1.9rem;
-        padding: 0;
-        text-shadow: 1px 1px 1px #fff;
-        border: 1px solid #ddd;
-    }
-
-    .is-form:focus, .input-text:focus {
-        outline: none;
-    }
-
-    .is-form.minus {
-        border-radius: 4px 0 0 4px;
-    }
-
-    .is-form.plus {
-        border-radius: 0 4px 4px 0;
-    }
-
-    .input-qty {
-        background-color: #fff;
-        height: 2.2rem;
-        text-align: center;
-        font-size: 1rem;
-        display: inline-block;
-        vertical-align: top;
-        margin: 0;
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
-        border-left: 0;
-        border-right: 0;
-        padding: 0;
-    }
-
-    .input-qty::-webkit-outer-spin-button, .input-qty::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-</style>
-<link href="~/Content/CSS/shoppingcart.css" rel="stylesheet" />
+<link href="~/Content/CSS/ShoppingCart.css" rel="stylesheet" />
 <div class="container-fluid">
     <header class="header1">
         <div class="d-flex justify-content-center align-items-center pb-3">
@@ -98,7 +44,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Zip code</label>
+                                        <label>Mã giảm giá</label>
                                         <div class="d-flex jusify-content-start align-items-center rounded p-2"> <input type="text" value="77001"> <span class="fa fa-check text-success pr-2"></span> </div>
                                     </div>
                                 </div>
@@ -107,12 +53,12 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Quận/Huyện</label>
-                                        <div class="d-flex jusify-content-start align-items-center rounded p-2"> <input type="text" value="@sesus.user_district"> <span class="fa fa-check text-success pr-2"></span> </div>
+                                        <div class="d-flex jusify-content-start align-items-center rounded p-2"> <input type="text" value="@sesus.user_district" name="bill_district"> <span class="fa fa-check text-success pr-2"></span> </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Tỉnh/TP</label> <select name="country" id="country">
+                                        <label>Tỉnh/TP</label> <select name="bill_provincecity" id="country">
                                             <option value="usa">@sesus.user_provincecity</option>
                                         </select>
                                     </div>
@@ -216,13 +162,16 @@
                                     <div>Thành tiền</div>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <input class="px-2 text-right" name="bill_sum" value="@Model.Sum(n => n.pay_money).ToString(("#,##0")) đ" style="border: none" />
+                                    <span class="px-2 text-right">
+                                        @Model.Sum(n => n.pay_money).ToString("#,##0") đ
+                                    </span>
+                                    <input  type="hidden" name="bill_sum" value="@Model.Sum(n => n.pay_money)" style="border: none" />
                                 </div>
                             </div>
                         </div>
                         <div class="row pt-lg-3 pt-2 buttons mb-sm-0 mb-2">
                             <div class="col-md-6">
-                                <a href="/Display/Index"><div class="btn text-uppercase">TIẾP TỤC MUA SẮM</div></a>
+                                <a href="/Cart/IndexCart"><div class="btn text-uppercase">QUAY LẠI</div></a>
                             </div>
                             <div class="col-md-6 pt-md-0 pt-3 text-right">
                                 <button class="btn text-white ml-auto" type="submit"><span class="fa fa-lock"></span> THANH TOÁN</button>

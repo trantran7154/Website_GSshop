@@ -23,7 +23,6 @@ namespace Website_GSshop.Models
     
         public int bill_id { get; set; }
         public Nullable<System.DateTime> bill_datecreated { get; set; }
-        public Nullable<int> seller_id { get; set; }
         public Nullable<int> user_id { get; set; }
         public string bill_address { get; set; }
         public Nullable<int> bill_telephone { get; set; }
@@ -31,8 +30,11 @@ namespace Website_GSshop.Models
         public Nullable<System.DateTime> bill_dateset { get; set; }
         public Nullable<bool> bill_status { get; set; }
         public string bill_note { get; set; }
+        public string bill_district { get; set; }
+        public string bill_provincecity { get; set; }
+        public string bill_sale { get; set; }
+        public Nullable<bool> bill_bin { get; set; }
     
-        public virtual Seller Seller { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillStatus> BillStatus { get; set; }

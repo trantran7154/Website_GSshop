@@ -33,7 +33,6 @@
     </Key>
     <Property Name="bill_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="bill_datecreated" Type="datetime" />
-    <Property Name="seller_id" Type="int" />
     <Property Name="user_id" Type="int" />
     <Property Name="bill_address" Type="nvarchar" MaxLength="1000" />
     <Property Name="bill_telephone" Type="int" />
@@ -41,6 +40,10 @@
     <Property Name="bill_dateset" Type="datetime" />
     <Property Name="bill_status" Type="bit" />
     <Property Name="bill_note" Type="nvarchar" MaxLength="1000" />
+    <Property Name="bill_district" Type="nvarchar" MaxLength="300" />
+    <Property Name="bill_provincecity" Type="nvarchar" MaxLength="300" />
+    <Property Name="bill_sale" Type="nvarchar" MaxLength="100" />
+    <Property Name="bill_bin" Type="bit" />
   </EntityType>
   <EntityType Name="BillStatus">
     <Key>
@@ -272,18 +275,6 @@
     <Property Name="user_bin" Type="bit" />
     <Property Name="user_role" Type="int" />
   </EntityType>
-  <Association Name="FK_Bill_Seller">
-    <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
-    <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Seller">
-        <PropertyRef Name="seller_id" />
-      </Principal>
-      <Dependent Role="Bill">
-        <PropertyRef Name="seller_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Bill_User">
     <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
@@ -663,10 +654,6 @@
     <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Bill_Seller" Association="Self.FK_Bill_Seller">
-      <End Role="Seller" EntitySet="Seller" />
-      <End Role="Bill" EntitySet="Bill" />
-    </AssociationSet>
     <AssociationSet Name="FK_Bill_User" Association="Self.FK_Bill_User">
       <End Role="User" EntitySet="User" />
       <End Role="Bill" EntitySet="Bill" />

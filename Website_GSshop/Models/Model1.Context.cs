@@ -27,7 +27,6 @@ namespace Website_GSshop.Models
     
         public virtual DbSet<AdminData> AdminData { get; set; }
         public virtual DbSet<Banner> Banner { get; set; }
-        public virtual DbSet<Bill> Bill { get; set; }
         public virtual DbSet<BillStatus> BillStatus { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<ClassificationSubCategory> ClassificationSubCategory { get; set; }
@@ -43,5 +42,6 @@ namespace Website_GSshop.Models
         public virtual DbSet<SubCategory> SubCategory { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Bill> Bill { get; set; }
     }
 }
