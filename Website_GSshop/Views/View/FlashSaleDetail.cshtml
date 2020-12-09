@@ -3,8 +3,11 @@
 @{
     ViewBag.Title = "FlashSaleDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
     User sesus = (User)Session["user"];
+
     Data_GSShopEntities db = new Data_GSShopEntities();
+
     var bl = "bl";
 }
 @{ 
@@ -15,8 +18,10 @@
     List<ReplyComment> rep = db.ReplyComment.Where(n => n.product_id == Model.product_id).ToList();
     List<Like> like = db.Like.ToList();
 }
+
 <link href="~/Content/CSS/product_detail.css" rel="stylesheet" />
 <link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
+
 <div class="container-fluid" style="background-color: #f9f9f9">
     <div class="container-fluid mt-2 mb-3" style="background-color: #f9f9f9">
         <div class="row no-gutters">

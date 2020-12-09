@@ -304,9 +304,9 @@
     <Content Include="Content\CSS\banner.css" />
     <Content Include="Content\CSS\categorydetail.css" />
     <Content Include="Content\CSS\CSSLayout.css" />
-    <Content Include="Content\CSS\Favourite.css" />
     <Content Include="Content\CSS\login.css" />
     <Content Include="Content\CSS\loginadmin.css" />
+    <Content Include="Content\CSS\manage.css" />
     <Content Include="Content\CSS\product_detail.css" />
     <Content Include="Content\CSS\ShoppingCart.css" />
     <Content Include="Content\CSS\sortlist.css" />
@@ -1082,7 +1082,6 @@
     <Content Include="Views\View\ProductCategoriesList.cshtml" />
     <Content Include="Views\Banner\Banner.cshtml" />
     <Content Include="Views\View\CategoryDetail.cshtml" />
-    <Content Include="Views\Favourite\FavouriteList.cshtml" />
     <Content Include="Views\Display\CSS_Sematic.cshtml" />
     <Content Include="Views\Comment\Comment.cshtml" />
     <Content Include="Views\Comments\Create.cshtml" />
@@ -1110,7 +1109,10 @@
     <Content Include="Views\Bills\Details.cshtml" />
     <Content Include="Views\Bills\Edit.cshtml" />
     <Content Include="Views\Bills\Index.cshtml" />
+    <Content Include="Views\Manage\ProductManagement.cshtml" />
     <Content Include="Views\Manage\OrderManagement.cshtml" />
+    <Content Include="Views\Manage\FavouriteManagement.cshtml" />
+    <Content Include="Views\Manage\CommentManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

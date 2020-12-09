@@ -52,17 +52,5 @@ namespace Website_GSshop.Controllers
             db.SaveChanges();
             return Redirect(home);
         }
-        // Danh sách yêu thích của user
-        public ActionResult FavouriteList(int? id)
-        {
-            User us = (User)Session["user"];
-            if (us == null)
-            {
-                return Redirect(login);
-            }
-            List<Favourite> fa = db.Favourite.Where(n => n.user_id == id && n.fa_bin == false).ToList();
-            ViewBag.CountProduct = fa.Count;
-            return View(fa);
-        }
     }
 }
