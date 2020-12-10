@@ -140,7 +140,7 @@
                         <div class="col-md-7">
                             <div class="card2 card border-0 px-4 py-5">
                                 <h3 class="mb-1 text-dark">Nhập email/gmail để thay đổi <br /> mật khẩu mới.</h3>
-                                <form class="ui form segment" role="form" method="post" style="border: none; box-shadow: none">
+                                <form class="ui form segment" action="@Url.Action("SendEmail","Account")" method="post" style="border: none; box-shadow: none">
                                     <div class="field">
                                         <label>Email</label>
                                         <input class="input1" type="email" name="user_email">
@@ -148,6 +148,8 @@
                                     <div class="col-md-5 float-right">
                                         <button class="btn btn-blue button3 text-center mb-1">LẤY LẠI MẬT KHẨU</button>
                                         <div class="ui error message" style="width: 100%; min-height: 10vh;"></div>
+                                        <h4 style="color:green; font-family: 'Segoe UI'">@ViewBag.Sucess</h4>
+                                        <h4 style="color:red; font-family: 'Segoe UI'">@ViewBag.Fail</h4>
                                     </div>
                                 </form>
                             </div>

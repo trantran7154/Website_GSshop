@@ -12,7 +12,7 @@ namespace Website_GSshop.Controllers
         // GET: Manage
         Data_GSShopEntities db = new Data_GSShopEntities();
         String login = "/Account/Login";
-        // Quản lý đơn hàng của user
+        // Quản lý sản phẩm của user
         public ActionResult ProductManagement()
         {
             User user = (User)Session["user"];
@@ -23,6 +23,7 @@ namespace Website_GSshop.Controllers
             }
             return View(db.PayDetail.Where(n => n.user_id == user.user_id).ToList());
         }
+        // Quản lý đơn đặt hàng của user
         public ActionResult OrderManagement()
         {
             User user = (User)Session["user"];

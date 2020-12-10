@@ -6,11 +6,10 @@ Author URL: http://w3layouts.com
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Seller</title>
     <!-- Template CSS -->
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <link href="~/Content/Semantic-UI-CSS-master/semantic.css" rel="stylesheet" />
+    <script src="~/Content/Semantic-UI-CSS-master/semantic.min.js"></script>
     <link href="~/Areas/Admin/Content/Layout_Admin/assets/css/style-starter.css" rel="stylesheet" />
     <link href="~/Areas/Admin/Content/Layout_Admin/CSS/search.css" rel="stylesheet" />
     <!-- google fonts -->
@@ -34,6 +33,8 @@ Author URL: http://w3layouts.com
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="msapplication-TileImage" content="~/Content/Favicon/ms-icon-144x144.png" />
     <meta name="theme-color" content="#ffffff" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
     <!--//favicon-->
 </head>
 <body class="sidebar-menu-collapsed">
@@ -629,21 +630,21 @@ Author URL: http://w3layouts.com
     <script>
         // When the user scrolls down 20px from the top of the document, show the button
         window.onscroll = function () {
-        scrollFunction()
+            scrollFunction()
         };
 
         function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        document.getElementById("movetop").style.display = "block";
-        } else {
-        document.getElementById("movetop").style.display = "none";
-        }
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("movetop").style.display = "block";
+            } else {
+                document.getElementById("movetop").style.display = "none";
+            }
         }
 
         // When the user clicks on the button, scroll to the top of the document
         function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
         }
     </script>
     <!-- /move top -->
@@ -678,18 +679,18 @@ Author URL: http://w3layouts.com
         var i;
 
         for (i = 0; i < closebtns.length; i++) {
-        closebtns[i].addEventListener("click", function () {
-        this.parentElement.style.display = 'none';
-        });
+            closebtns[i].addEventListener("click", function () {
+                this.parentElement.style.display = 'none';
+            });
         }
     </script>
     <!-- //close script -->
     <!-- disable body scroll when navbar is in active -->
     <script>
         $(function () {
-        $('.sidebar-menu-collapsed').click(function () {
-        $('body').toggleClass('noscroll');
-        })
+            $('.sidebar-menu-collapsed').click(function () {
+                $('body').toggleClass('noscroll');
+            })
         });
     </script>
     <!-- disable body scroll when navbar is in active -->
@@ -698,8 +699,8 @@ Author URL: http://w3layouts.com
     </script>
     <script>
         $(window).load(function () {
-        // Animate loader off screen
-        $(".se-pre-con").fadeOut("slow");;
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("slow");;
         });
     </script>
     <!--// loading-gif Js -->

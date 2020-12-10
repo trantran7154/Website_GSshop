@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Website_GSshop.Models;
 
@@ -243,6 +245,76 @@ namespace Website_GSshop.Controllers
             Session["seller"] = sellernew;
             db.SaveChanges();
             return Redirect(home);
+        }
+        // Thay đổi mật khẩu User
+        [HttpPost]
+        public ActionResult ChangePassWordUser(FormCollection f)
+        {
+            User user = (User)Session["user"];
+            var id = user.user_id;
+            String pass_old = f["passold"].ToString();
+            String user_pass = f["userpass"].ToString();
+            String pass_repeat = f["passrepeat"].ToString();
+            db.User.Find(id).user_pass = user_pass;
+            db.SaveChanges();
+            Session["user"] = db.User.Find(id);
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+        // Quên mật khẩu User
+        public ActionResult SendEmail()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SendEmail(ForgotPassword fp)
+        {
+            try
+            {
+                // Máy chủ gmail
+                WebMail.SmtpServer = "smtp.gmail.com";
+                // Cổng
+                WebMail.SmtpPort = 587;
+                WebMail.SmtpUseDefaultCredentials = true;
+                //Gửi gmail với giao thức bảo mật
+                WebMail.EnableSsl = true;
+                //Tài khoản dùng để đăng nhập vào gmail để gửi
+                WebMail.UserName = "vuongbaot1905@gmail.com";
+                WebMail.Password = "tran1905";
+                // Nội dung gửi
+                WebMail.From = "vuongbaot1905@gmail.com";
+                User user = db.User.SingleOrDefault(n => n.user_email == fp.ConfirmationEmail);
+                fp.Theme = "Xác nhận mật khẩu Web";
+                fp.Content = "Xác Nhận: https://localhost:44311/Account/ChangePassword/" + user.user_id + "&Token=" + user.user_token;
+                //Gửi gmail
+                WebMail.Send(to: fp.ConfirmationEmail, subject: fp.Theme, body: fp.Content, cc: fp.Cc, bcc: fp.Bcc, isBodyHtml: true);
+                ViewBag.Sucess = "Gửi thành công! Vui lòng kiểm tra email/gmail.";
+            }
+            catch (Exception)
+            {
+                ViewBag.Fail = "Gửi gmail thất bại! Vui lòng thử lại.";
+            }
+            return View();
+        }
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(String pnew, String pconfirm, int? id)
+        {
+            if (pnew != pconfirm)
+            {
+                ViewBag.thong = "Sai mật khẩu nhập lại";
+                return View();
+            }
+            else
+            {
+                db.User.Find(id).user_pass = pnew;
+                db.User.Find(id).user_token = Guid.NewGuid().ToString();
+                db.SaveChanges();
+                return Redirect(login);
+            }
         }
     }
 }

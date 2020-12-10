@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "SendEmail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SendEmail</h2>
+
+<form method="post">
+    <input type="text" name="ConfirmationEmail" />
+    <input type="submit" value="OK" />
+    @ViewBag.Sucess
+    @ViewBag.Fail
+</form>

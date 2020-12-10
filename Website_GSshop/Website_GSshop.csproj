@@ -160,6 +160,7 @@
     <Compile Include="Areas\SellerManagement\Controllers\CollectionsController.cs" />
     <Compile Include="Areas\SellerManagement\Controllers\ProductsController.cs" />
     <Compile Include="Areas\SellerManagement\Controllers\SellerManagementController.cs" />
+    <Compile Include="Areas\SellerManagement\Controllers\SellerPayDetailsController.cs" />
     <Compile Include="Areas\SellerManagement\SellerManagementAreaRegistration.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BannerController.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Models\Favourite.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ForgotPassword.cs" />
     <Compile Include="Models\GSMall.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1015,6 +1017,16 @@
     <Content Include="Areas\Admin\Views\Bills\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Bills\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Bills\Index.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\BillsForSeller\Create.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\BillsForSeller\Delete.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\BillsForSeller\Details.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\BillsForSeller\Edit.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\BillsForSeller\Index.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\SellerPayDetails\Create.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\SellerPayDetails\Delete.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\SellerPayDetails\Details.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\SellerPayDetails\Edit.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\SellerPayDetails\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1084,11 +1096,6 @@
     <Content Include="Views\View\CategoryDetail.cshtml" />
     <Content Include="Views\Display\CSS_Sematic.cshtml" />
     <Content Include="Views\Comment\Comment.cshtml" />
-    <Content Include="Views\Comments\Create.cshtml" />
-    <Content Include="Views\Comments\Delete.cshtml" />
-    <Content Include="Views\Comments\Details.cshtml" />
-    <Content Include="Views\Comments\Edit.cshtml" />
-    <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Like\Like.cshtml" />
     <Content Include="Views\Search\Data.cshtml" />
     <Content Include="Views\View\Category_Detail.cshtml" />
@@ -1113,6 +1120,9 @@
     <Content Include="Views\Manage\OrderManagement.cshtml" />
     <Content Include="Views\Manage\FavouriteManagement.cshtml" />
     <Content Include="Views\Manage\CommentManagement.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\SellerOrderManagement.cshtml" />
+    <Content Include="Views\Account\SendEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
