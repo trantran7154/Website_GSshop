@@ -1,0 +1,196 @@
+﻿@model IEnumerable<Website_GSshop.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/SellerManagement/Views/Shared/_LayoutSeller.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_datecreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_ship)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_view)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_love)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_detail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_option)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_sale)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_dateedit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_bin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_related)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Banner.banner_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.category_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassificationSubCategory.csc_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Collection.collection_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GSMall.gsmall_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Seller.seller_pass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubCategory.subcategory_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.user_pass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User1.user_pass)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_datecreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_ship)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_view)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_love)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_size)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_detail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_option)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_sale)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_dateedit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_bin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_related)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Banner.banner_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.category_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClassificationSubCategory.csc_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Collection.collection_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GSMall.gsmall_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Seller.seller_pass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubCategory.subcategory_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.user_pass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User1.user_pass)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.product_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.product_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.product_id })
+        </td>
+    </tr>
+}
+
+</table>

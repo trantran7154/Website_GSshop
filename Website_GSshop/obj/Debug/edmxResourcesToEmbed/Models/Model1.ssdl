@@ -515,7 +515,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Product_Seller">
+  <Association Name="FK_Product_Seller1">
     <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
@@ -734,7 +734,7 @@
       <End Role="GSMall" EntitySet="GSMall" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>
-    <AssociationSet Name="FK_Product_Seller" Association="Self.FK_Product_Seller">
+    <AssociationSet Name="FK_Product_Seller1" Association="Self.FK_Product_Seller1">
       <End Role="Seller" EntitySet="Seller" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>

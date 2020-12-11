@@ -520,7 +520,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Seller">
+        <Association Name="FK_Product_Seller1">
           <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -739,7 +739,7 @@
             <End Role="GSMall" EntitySet="GSMall" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Seller" Association="Self.FK_Product_Seller">
+          <AssociationSet Name="FK_Product_Seller1" Association="Self.FK_Product_Seller1">
             <End Role="Seller" EntitySet="Seller" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
@@ -1009,8 +1009,8 @@
           <NavigationProperty Name="Like" Relationship="Self.FK_Like_ReplyComment" FromRole="ReplyComment" ToRole="Like" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ReplyComment_Product" FromRole="ReplyComment" ToRole="Product" />
           <NavigationProperty Name="Product1" Relationship="Self.FK_ReplyComment_Product1" FromRole="ReplyComment" ToRole="Product" />
-          <NavigationProperty Name="Seller" Relationship="Self.FK_ReplyComment_Seller" FromRole="ReplyComment" ToRole="Seller" />
           <NavigationProperty Name="User" Relationship="Self.FK_ReplyComment_User1" FromRole="ReplyComment" ToRole="User" />
+          <NavigationProperty Name="Seller" Relationship="Data_GSShopModel.FK_ReplyComment_Seller" FromRole="ReplyComment" ToRole="Seller" />
         </EntityType>
         <EntityType Name="Seller">
           <Key>
@@ -1042,7 +1042,7 @@
           <Property Name="seller_bin" Type="Boolean" />
           <NavigationProperty Name="Collection" Relationship="Self.FK_Collection_Seller1" FromRole="Seller" ToRole="Collection" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Seller" FromRole="Seller" ToRole="Product" />
-          <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Seller" FromRole="Seller" ToRole="ReplyComment" />
+          <NavigationProperty Name="ReplyComment" Relationship="Data_GSShopModel.FK_ReplyComment_Seller" FromRole="Seller" ToRole="ReplyComment" />
         </EntityType>
         <EntityType Name="SubCategory">
           <Key>
@@ -1398,18 +1398,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ReplyComment_Seller">
-          <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
-          <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Seller">
-              <PropertyRef Name="seller_id" />
-            </Principal>
-            <Dependent Role="ReplyComment">
-              <PropertyRef Name="seller_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ReplyComment_User1">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
@@ -1540,10 +1528,6 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="ReplyComment" EntitySet="ReplyComment" />
           </AssociationSet>
-          <AssociationSet Name="FK_ReplyComment_Seller" Association="Self.FK_ReplyComment_Seller">
-            <End Role="Seller" EntitySet="Seller" />
-            <End Role="ReplyComment" EntitySet="ReplyComment" />
-          </AssociationSet>
           <AssociationSet Name="FK_ReplyComment_User1" Association="Self.FK_ReplyComment_User1">
             <End Role="User" EntitySet="User" />
             <End Role="ReplyComment" EntitySet="ReplyComment" />
@@ -1560,6 +1544,10 @@
           <AssociationSet Name="FK_PayDetail_Bill" Association="Data_GSShopModel.FK_PayDetail_Bill">
             <End Role="Bill" EntitySet="Bill" />
             <End Role="PayDetail" EntitySet="PayDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReplyComment_Seller" Association="Data_GSShopModel.FK_ReplyComment_Seller">
+            <End Role="Seller" EntitySet="Seller" />
+            <End Role="ReplyComment" EntitySet="ReplyComment" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Bill">
@@ -1616,6 +1604,18 @@
             </Principal>
             <Dependent Role="PayDetail">
               <PropertyRef Name="bill_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReplyComment_Seller">
+          <End Type="Data_GSShopModel.Seller" Role="Seller" Multiplicity="0..1" />
+          <End Type="Data_GSShopModel.ReplyComment" Role="ReplyComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seller">
+              <PropertyRef Name="seller_id" />
+            </Principal>
+            <Dependent Role="ReplyComment">
+              <PropertyRef Name="seller_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

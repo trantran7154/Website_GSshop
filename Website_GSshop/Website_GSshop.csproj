@@ -160,6 +160,7 @@
     <Compile Include="Areas\SellerManagement\Controllers\CheckSellerController.cs" />
     <Compile Include="Areas\SellerManagement\Controllers\CollectionsController.cs" />
     <Compile Include="Areas\SellerManagement\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\SellerManagement\Controllers\ProductsteController.cs" />
     <Compile Include="Areas\SellerManagement\Controllers\SellerManagementController.cs" />
     <Compile Include="Areas\SellerManagement\Controllers\SellerPayDetailsController.cs" />
     <Compile Include="Areas\SellerManagement\SellerManagementAreaRegistration.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\ReplyCommentController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SellersTestController.cs" />
     <Compile Include="Controllers\Test\PayDetailsController.cs" />
     <Compile Include="Controllers\ViewController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1031,6 +1033,16 @@
     <Content Include="Areas\SellerManagement\Views\SellerManagement\Form.cshtml" />
     <Content Include="Areas\SellerManagement\Views\SellerManagement\InfoSeller.cshtml" />
     <Content Include="Areas\SellerManagement\Views\CheckSeller\FormValidation.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\ProductsTest\Create.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\ProductsTest\Delete.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\ProductsTest\Details.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\ProductsTest\Edit.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\ProductsTest\Index.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Productste\Create.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Productste\Delete.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Productste\Details.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Productste\Edit.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\Productste\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1128,6 +1140,11 @@
     <Content Include="Views\Manage\SellerOrderManagement.cshtml" />
     <Content Include="Views\Account\SendEmail.cshtml" />
     <Content Include="Views\Account\InfoSeller.cshtml" />
+    <Content Include="Views\SellersTest\Create.cshtml" />
+    <Content Include="Views\SellersTest\Delete.cshtml" />
+    <Content Include="Views\SellersTest\Details.cshtml" />
+    <Content Include="Views\SellersTest\Edit.cshtml" />
+    <Content Include="Views\SellersTest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

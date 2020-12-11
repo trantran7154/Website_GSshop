@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -173,9 +174,12 @@ namespace Website_GSshop.Controllers
             Seller seller = (Seller)Session["seller"];
             if (seller != null)
             {
-                return Redirect(home);
+                return Redirect("/SellerManagement/SellerManagement/Index");
             }
-            return View();
+            else
+            {
+                return View();
+            }
         }
         // Đăng xuất người bán
         public ActionResult LogOutSeller()
@@ -188,7 +192,7 @@ namespace Website_GSshop.Controllers
         {
             String sEmail = f["seller_email"].ToString();
             String sPass = f["seller_pass"].ToString();
-            Seller seller = db.Seller.Where(n => n.seller_active == true && n.seller_role == 2).SingleOrDefault(n => n.seller_email == sEmail && n.seller_pass == sPass);
+            Seller seller = db.Seller.Where(n => n.seller_active == true).SingleOrDefault(n => n.seller_email == sEmail && n.seller_pass == sPass);
             if(seller != null)
             {
                 Session["seller"] = seller;
@@ -214,14 +218,17 @@ namespace Website_GSshop.Controllers
             }
             else
             {
-                Session["seller"] = seller;
                 seller.seller_token = Guid.NewGuid().ToString();
                 seller.seller_active = true;
                 seller.seller_datecreated = DateTime.Now;
                 seller.seller_datelogin = DateTime.Now;
                 seller.seller_role = 2;
+                seller.seller_bin = false;
                 db.Seller.Add(seller);
                 db.SaveChanges();
+
+
+                Session["seller"] = seller;
                 return Redirect(updateseller);
             }
         }
@@ -236,28 +243,40 @@ namespace Website_GSshop.Controllers
             return PartialView();
         }
         [HttpPost]
-        public ActionResult UpdateInfoSeller(FormCollection f)
+        public ActionResult UpdateInfoSeller([Bind(Include = "seller_id,seller_login,seller_pass,seller_email,seller_telephone,seller_token,seller_slider1,seller_slider2,seller_slider3,seller_link1,seller_link2,seller_link3,seller_logo,seller_active,seller_nameshop,seller_datecreated,seller_address,seller_datelogin,seller_detail,seller_description,seller_role,seller_nicename,seller_provincecity,seller_district")] Seller seller, HttpPostedFileBase seller_logo)
         {
-            Seller seller = (Seller)Session["seller"];
-            Seller sellernew = db.Seller.SingleOrDefault(n => n.seller_id == seller.seller_id);
-            String sLogo = f["seller_logo"].ToString();
-            String sNicname = f["seller_nicename"].ToString();
-            String sTelephone = f["seller_telephone"].ToString();
-            String sAddress = f["seller_address"].ToString();
-            String sProvinceCity = f["seller_provincecity"].ToString();
-            String sDistrict = f["seller_district"].ToString();
-            String sNameshop = f["seller_nameshop"].ToString();
-            db.Seller.Find(seller.seller_id).seller_logo = sLogo;
-            db.Seller.Find(seller.seller_id).seller_nicename = sNicname;
-            db.Seller.Find(seller.seller_id).seller_address = sAddress;
-            db.Seller.Find(seller.seller_id).seller_telephone = sTelephone;
-            db.Seller.Find(seller.seller_id).seller_address = sAddress;
-            db.Seller.Find(seller.seller_id).seller_provincecity = sProvinceCity;
-            db.Seller.Find(seller.seller_id).seller_district = sDistrict;
-            db.Seller.Find(seller.seller_id).seller_nameshop = sNameshop;
-            Session["seller"] = sellernew;
-            db.SaveChanges();
-            return Redirect(home);
+            Random random = new Random();
+            ViewBag.random = random.Next(0, 1000);
+
+            Seller ses = (Seller)Session["seller"];
+            var fileimg = Path.GetFileName(seller_logo.FileName);
+            var pa = Path.Combine(Server.MapPath("~/Content/Layout/images"),ViewBag.random + fileimg);
+
+            db.Entry(seller).State = EntityState.Modified;
+            if (seller_logo == null)
+            {
+                ViewBag.ThongBao = "Chọn hình ảnh";
+                return View();
+            }
+            else
+            {
+                seller_logo.SaveAs(pa);
+                seller.seller_pass = ses.seller_pass;
+                seller.seller_email = ses.seller_email;
+                seller.seller_token = ses.seller_token;
+                seller.seller_active = ses.seller_active;
+                seller.seller_datecreated = ses.seller_datecreated;
+                seller.seller_datelogin = ses.seller_datelogin;
+                seller.seller_role = ses.seller_role;
+                ses.seller_bin = ses.seller_bin;
+
+                ses.seller_logo = ViewBag.random + seller_logo;
+
+                db.SaveChanges();
+
+                Session["seller"] = seller;
+                return Redirect("/SellerManagement/SellerManagement/Index");
+            }
         }
         // Thông tin cá nhân Seller
         public ActionResult InfoSeller()

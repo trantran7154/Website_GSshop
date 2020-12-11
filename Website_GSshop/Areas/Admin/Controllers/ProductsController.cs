@@ -40,43 +40,61 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // GET: Admin/Products/Create
         public ActionResult Create()
         {
-            ViewBag.seller_id = new SelectList(db.Seller, "seller_id", "seller_login");
-            ViewBag.user_id = new SelectList(db.User, "user_id", "user_login");
+            ViewBag.banner_id = new SelectList(db.Banner, "banner_id", "banner_name");
             ViewBag.category_id = new SelectList(db.Category, "category_id", "category_name");
+            ViewBag.csc_id = new SelectList(db.ClassificationSubCategory, "csc_id", "csc_name");
+            ViewBag.collection_id = new SelectList(db.Collection, "collection_id", "collection_name");
+            ViewBag.gsmail_id = new SelectList(db.GSMall, "gsmall_id", "gsmall_name");
+            ViewBag.seller_id = new SelectList(db.Seller, "seller_id", "seller_email");
+            ViewBag.subcategory_id = new SelectList(db.SubCategory, "subcategory_id", "subcategory_name");
+            ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass");
+            ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass");
             return View();
         }
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id,subcategory_id,banner_id,collection_id,gsmall_id,product_bin")] Product product, HttpPostedFileBase fileUpload)
         {
-            // Tên file ảnh sản phẩm
-            var fileimg_edit = Path.GetFileName(fileUpload.FileName);
-            // Đưa tên ảnh vào đúng file
-            var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit);
-            // Ảnh trống
+
+            Random random = new Random();
+            ViewBag.random = random.Next(0, 1000);
+
+            var fileimg = Path.GetFileName(fileUpload.FileName);
+            var pa = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg);
+
+            db.Product.Add(product);
             if (fileUpload == null)
             {
-                ViewBag.ThongBao = "Ảnh trống !";
-                return View(product);
+                ViewBag.ThongBao = "Chọn hình ảnh";
+                return View();
             }
-            //Nếu tên ảnh trùng
-            else if (System.IO.File.Exists(pa_eidt))
-            {
-                ViewBag.ThongBao = "Ảnh đã tồn tại";
-                return View(product);
-            }
-            //Lưu pa vào name fileUpload
             else
             {
-                fileUpload.SaveAs(pa_eidt);
-                db.Product.Add(product);
-                product.product_image = fileUpload.FileName;
+
+                fileUpload.SaveAs(pa);
                 product.product_active = true;
                 product.product_option = true;
+                product.product_bin = true;
+
+
                 product.product_datecreated = DateTime.Now;
                 product.product_dateedit = DateTime.Now;
-                product.product_bin = true;
+
+
+                product.product_image = ViewBag.random + fileUpload.FileName;
+
                 db.SaveChanges();
+
+                ViewBag.banner_id = new SelectList(db.Banner, "banner_id", "banner_name", product.banner_id);
+                ViewBag.category_id = new SelectList(db.Category, "category_id", "category_name", product.category_id);
+                ViewBag.csc_id = new SelectList(db.ClassificationSubCategory, "csc_id", "csc_name", product.csc_id);
+                ViewBag.collection_id = new SelectList(db.Collection, "collection_id", "collection_name", product.collection_id);
+                ViewBag.gsmail_id = new SelectList(db.GSMall, "gsmall_id", "gsmall_name", product.gsmail_id);
+                ViewBag.seller_id = new SelectList(db.Seller, "seller_id", "seller_email", product.seller_id);
+                ViewBag.subcategory_id = new SelectList(db.SubCategory, "subcategory_id", "subcategory_name", product.subcategory_id);
+                ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass", product.user_id);
+                ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass", product.user_id);
+
                 return Redirect(admin_qlsp);
             }
         }
@@ -93,9 +111,15 @@ namespace Website_GSshop.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.seller_id = new SelectList(db.Seller, "seller_id", "seller_login", product.seller_id);
-            ViewBag.user_id = new SelectList(db.User, "user_id", "user_login", product.user_id);
-            ViewBag.category_id = new SelectList(db.Category, "category_id", "category_name", product.category_id);
+            ViewBag.banner_id = new SelectList(db.Banner, "banner_id", "banner_name");
+            ViewBag.category_id = new SelectList(db.Category, "category_id", "category_name");
+            ViewBag.csc_id = new SelectList(db.ClassificationSubCategory, "csc_id", "csc_name");
+            ViewBag.collection_id = new SelectList(db.Collection, "collection_id", "collection_name");
+            ViewBag.gsmail_id = new SelectList(db.GSMall, "gsmall_id", "gsmall_name");
+            ViewBag.seller_id = new SelectList(db.Seller, "seller_id", "seller_email");
+            ViewBag.subcategory_id = new SelectList(db.SubCategory, "subcategory_id", "subcategory_name");
+            ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass");
+            ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass");
             return View(product);
         }
 
@@ -106,11 +130,24 @@ namespace Website_GSshop.Areas.Admin.Controllers
         [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id,subcategory_id,banner_id,collection_id,gsmall_id,product_bin")] Product product, HttpPostedFileBase image)
         {
+            Product pr = db.Product.Find(product.product_id);
             db.Entry(product).State = EntityState.Modified;
             if(image == null)
             {
                 Product pro = db.Product.Find(Int32.Parse(product.product_id.ToString()));
+                product.product_bin = pr.product_bin;
+                product.product_datecreated = pr.product_datecreated;
+                product.product_dateedit = DateTime.Now;
                 db.SaveChanges();
+                ViewBag.banner_id = new SelectList(db.Banner, "banner_id", "banner_name");
+                ViewBag.category_id = new SelectList(db.Category, "category_id", "category_name");
+                ViewBag.csc_id = new SelectList(db.ClassificationSubCategory, "csc_id", "csc_name");
+                ViewBag.collection_id = new SelectList(db.Collection, "collection_id", "collection_name");
+                ViewBag.gsmail_id = new SelectList(db.GSMall, "gsmall_id", "gsmall_name");
+                ViewBag.seller_id = new SelectList(db.Seller, "seller_id", "seller_email");
+                ViewBag.subcategory_id = new SelectList(db.SubCategory, "subcategory_id", "subcategory_name");
+                ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass");
+                ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass");
                 return Redirect(admin_qlsp);
             }
             else
@@ -136,12 +173,17 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 {
                     image.SaveAs(pa);
                     product.product_image = image.FileName;
-                    product.product_active = true;
-                    product.product_option = true;
-                    product.product_datecreated = DateTime.Now;
-                    product.product_dateedit = DateTime.Now;
                     product.product_bin = true;
                     db.SaveChanges();
+                    ViewBag.banner_id = new SelectList(db.Banner, "banner_id", "banner_name");
+                    ViewBag.category_id = new SelectList(db.Category, "category_id", "category_name");
+                    ViewBag.csc_id = new SelectList(db.ClassificationSubCategory, "csc_id", "csc_name");
+                    ViewBag.collection_id = new SelectList(db.Collection, "collection_id", "collection_name");
+                    ViewBag.gsmail_id = new SelectList(db.GSMall, "gsmall_id", "gsmall_name");
+                    ViewBag.seller_id = new SelectList(db.Seller, "seller_id", "seller_email");
+                    ViewBag.subcategory_id = new SelectList(db.SubCategory, "subcategory_id", "subcategory_name");
+                    ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass");
+                    ViewBag.user_id = new SelectList(db.User, "user_id", "user_pass");
                     return Redirect(admin_qlsp);
                 }
             }

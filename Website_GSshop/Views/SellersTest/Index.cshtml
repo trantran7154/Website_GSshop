@@ -1,0 +1,166 @@
+﻿@model IEnumerable<Website_GSshop.Models.Seller>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/SellerManagement/Views/Shared/_LayoutSeller.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_pass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_token)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_slider1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_slider2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_slider3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_link1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_link2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_link3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_logo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_nameshop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_datecreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_datelogin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_detail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_nicename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_provincecity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_district)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seller_bin)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_pass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_token)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_slider1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_slider2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_slider3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_link1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_link2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_link3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_logo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_nameshop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_datecreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_datelogin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_detail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_role)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_nicename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_provincecity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_district)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seller_bin)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.seller_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.seller_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.seller_id })
+        </td>
+    </tr>
+}
+
+</table>
