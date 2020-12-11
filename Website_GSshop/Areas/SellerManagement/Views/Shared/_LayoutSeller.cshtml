@@ -1,4 +1,8 @@
-﻿<!--
+﻿@using Website_GSshop.Models;
+@{ 
+    Seller seller = (Seller)Session["seller"];
+}
+<!--
 Author: W3layouts
 Author URL: http://w3layouts.com
 -->
@@ -36,6 +40,13 @@ Author URL: http://w3layouts.com
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/angular.min.js"></script>
     <!--//favicon-->
+    <style>
+        .error {
+            display: grid;
+            align-items: center;
+            min-height: 10vh;
+        }
+    </style>
 </head>
 <body class="sidebar-menu-collapsed">
     <div class="se-pre-con"></div>
@@ -209,7 +220,14 @@ Author URL: http://w3layouts.com
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu3" aria-haspopup="true"
                                        aria-expanded="false">
                                         <div class="profile_img">
-                                            <img src="~/Content/Layout/images/gaubong.jpg" class="rounded-circle" alt="" />
+                                            @if (seller.seller_logo == null)
+                                            {
+                                                <img src="~/Content/Layout/images/gaubong.jpg" class="rounded-circle" alt="" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/Layout/images/@seller.seller_logo" class="rounded-circle" alt="" />
+                                            }
                                             <div class="user-active">
                                                 <span></span>
                                             </div>

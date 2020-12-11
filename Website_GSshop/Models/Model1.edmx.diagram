@@ -47,12 +47,12 @@
         <AssociationConnector Association="Data_GSShopModel.FK_Product_User1" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Product" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Product1" ManuallyRouted="false" />
-        <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Seller" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_User1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Data_GSShopModel.Bill" Width="1.5" PointX="3" PointY="14.625" />
         <AssociationConnector Association="Data_GSShopModel.FK_Bill_User" />
         <AssociationConnector Association="Data_GSShopModel.FK_BillStatus_Bill" />
         <AssociationConnector Association="Data_GSShopModel.FK_PayDetail_Bill" />
+        <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Seller" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

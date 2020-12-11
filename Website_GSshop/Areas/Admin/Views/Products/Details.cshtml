@@ -5,13 +5,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
     Data_GSShopEntities db = new Data_GSShopEntities();
 }
-@{
-    Category ca = db.Category.SingleOrDefault(n => n.category_id == Model.category_id);
-    SubCategory sb = db.SubCategory.SingleOrDefault(n => n.subcategory_id == Model.subcategory_id);
-    Banner ba = db.Banner.SingleOrDefault(n => n.banner_id == Model.banner_id);
-    Collection co = db.Collection.SingleOrDefault(n => n.collection_id == Model.collection_id);
-    GSMall gs = db.GSMall.SingleOrDefault(n => n.gsmall_id == Model.gsmail_id);
-}
 @Html.Action("CSS_Sematic", "Home")
 <a href="/Admin/Products/Index">
     <h3>
@@ -28,13 +21,13 @@
         <div class="field">
             <label>Tên bộ sưu tập</label>
             <select name="category_id" disabled>
-                <option>@co.collection_name</option>
+                <option>@Model.Collection.collection_name</option>
             </select>
         </div>
         <div class="field">
             <label>Tên danh mục</label>
             <select name="category_id" disabled>
-                <option>@ca.category_name</option>
+                <option>@Model.Category.category_name</option>
             </select>
         </div>
         <div class="field">
@@ -48,13 +41,13 @@
         <div class="field">
             <label>Tên banner</label>
             <select name="banner_id" disabled>
-                <option>@ba.banner_name</option>
+                <option>@Model.Banner.banner_name</option>
             </select>
         </div>
         <div class="field">
             <label>Tên đối tác</label>
             <select name="subcategory_id" disabled>
-                <option>@gs.gsmall_name</option>
+                <option>@Model.GSMall.gsmall_name</option>
             </select>
         </div>
         <div class="field">
