@@ -30,6 +30,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Bill">
+      <EntityTypeMapping TypeName="Data_GSShopModel.Bill">
+        <MappingFragment StoreEntitySet="Bill">
+          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+          <ScalarProperty Name="bill_datecreated" ColumnName="bill_datecreated" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="bill_address" ColumnName="bill_address" />
+          <ScalarProperty Name="bill_telephone" ColumnName="bill_telephone" />
+          <ScalarProperty Name="bill_sum" ColumnName="bill_sum" />
+          <ScalarProperty Name="bill_dateset" ColumnName="bill_dateset" />
+          <ScalarProperty Name="bill_status" ColumnName="bill_status" />
+          <ScalarProperty Name="bill_note" ColumnName="bill_note" />
+          <ScalarProperty Name="bill_district" ColumnName="bill_district" />
+          <ScalarProperty Name="bill_provincecity" ColumnName="bill_provincecity" />
+          <ScalarProperty Name="bill_sale" ColumnName="bill_sale" />
+          <ScalarProperty Name="bill_bin" ColumnName="bill_bin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="BillStatus">
       <EntityTypeMapping TypeName="Data_GSShopModel.BillStatus">
         <MappingFragment StoreEntitySet="BillStatus">
@@ -243,17 +262,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="Data_GSShopModel.sysdiagrams">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="User">
       <EntityTypeMapping TypeName="Data_GSShopModel.User">
         <MappingFragment StoreEntitySet="User">
@@ -272,25 +280,6 @@
           <ScalarProperty Name="user_district" ColumnName="user_district" />
           <ScalarProperty Name="user_bin" ColumnName="user_bin" />
           <ScalarProperty Name="user_role" ColumnName="user_role" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Bill">
-      <EntityTypeMapping TypeName="Data_GSShopModel.Bill">
-        <MappingFragment StoreEntitySet="Bill">
-          <ScalarProperty Name="bill_bin" ColumnName="bill_bin" />
-          <ScalarProperty Name="bill_sale" ColumnName="bill_sale" />
-          <ScalarProperty Name="bill_provincecity" ColumnName="bill_provincecity" />
-          <ScalarProperty Name="bill_district" ColumnName="bill_district" />
-          <ScalarProperty Name="bill_note" ColumnName="bill_note" />
-          <ScalarProperty Name="bill_status" ColumnName="bill_status" />
-          <ScalarProperty Name="bill_dateset" ColumnName="bill_dateset" />
-          <ScalarProperty Name="bill_sum" ColumnName="bill_sum" />
-          <ScalarProperty Name="bill_telephone" ColumnName="bill_telephone" />
-          <ScalarProperty Name="bill_address" ColumnName="bill_address" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="bill_datecreated" ColumnName="bill_datecreated" />
-          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

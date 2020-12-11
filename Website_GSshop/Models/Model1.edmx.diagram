@@ -4,25 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cc2ac52d78c4460b91f5a6c26bd5e9b5" Name="Diagram1">
+      <Diagram DiagramId="b140eb472e1a4bafaa9dd534887a2ac6" Name="Diagram1">
         <EntityTypeShape EntityType="Data_GSShopModel.AdminData" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.Banner" Width="1.5" PointX="6.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.BillStatus" Width="1.5" PointX="5.25" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.Category" Width="1.5" PointX="6.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.ClassificationSubCategory" Width="1.5" PointX="6.75" PointY="21.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.Collection" Width="1.5" PointX="6.75" PointY="26.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.Comment" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.Favourite" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.GSMall" Width="1.5" PointX="6.75" PointY="31.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.Like" Width="1.5" PointX="14.25" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.PayDetail" Width="1.5" PointX="11.25" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.Product" Width="1.5" PointX="9" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.ReplyComment" Width="1.5" PointX="11.25" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.Seller" Width="1.5" PointX="4.5" PointY="25.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.SubCategory" Width="1.5" PointX="4.5" PointY="21.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Data_GSShopModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Banner" Width="1.5" PointX="6.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Bill" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.BillStatus" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Category" Width="1.5" PointX="6.75" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.ClassificationSubCategory" Width="1.5" PointX="6.75" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Collection" Width="1.5" PointX="6.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Comment" Width="1.5" PointX="6" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Favourite" Width="1.5" PointX="6" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.GSMall" Width="1.5" PointX="6.75" PointY="34.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Like" Width="1.5" PointX="11.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.PayDetail" Width="1.5" PointX="8.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Product" Width="1.5" PointX="9" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.ReplyComment" Width="1.5" PointX="14.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.Seller" Width="1.5" PointX="4.5" PointY="28.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data_GSShopModel.SubCategory" Width="1.5" PointX="4.5" PointY="24.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Data_GSShopModel.User" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_Banner" ManuallyRouted="false" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Bill_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Data_GSShopModel.FK_BillStatus_Bill" ManuallyRouted="false" />
+        <AssociationConnector Association="Data_GSShopModel.FK_PayDetail_Bill" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_SubCategory_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ClassificationSubCategory_SubCategory" ManuallyRouted="false" />
@@ -41,18 +44,14 @@
         <AssociationConnector Association="Data_GSShopModel.FK_Like_User1" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_PayDetail_Product" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_PayDetail_User1" ManuallyRouted="false" />
-        <AssociationConnector Association="Data_GSShopModel.FK_Product_Seller" ManuallyRouted="false" />
+        <AssociationConnector Association="Data_GSShopModel.FK_Product_Seller1" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_SubCategory" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_User" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_Product_User1" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Product" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Product1" ManuallyRouted="false" />
+        <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Seller" ManuallyRouted="false" />
         <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_User1" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Data_GSShopModel.Bill" Width="1.5" PointX="3" PointY="14.625" />
-        <AssociationConnector Association="Data_GSShopModel.FK_Bill_User" />
-        <AssociationConnector Association="Data_GSShopModel.FK_BillStatus_Bill" />
-        <AssociationConnector Association="Data_GSShopModel.FK_PayDetail_Bill" />
-        <AssociationConnector Association="Data_GSShopModel.FK_ReplyComment_Seller" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
