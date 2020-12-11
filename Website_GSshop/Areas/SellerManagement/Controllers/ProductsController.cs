@@ -19,12 +19,12 @@ namespace Website_GSshop.Areas.SellerManagement.Controllers
         // GET: SellerManagement/Products
         public ActionResult Index()
         {
-            Seller se = (Seller)Session["seller"];
-            if(se == null)
+            Seller seller = (Seller)Session["seller"];
+            if (seller == null)
             {
-                return Redirect(login);
+                Response.Redirect(login);
             }
-            List<Product> pr = db.Product.Where(n => n.seller_id == se.seller_id && n.product_bin == true).ToList();
+            List<Product> pr = db.Product.Where(n => n.seller_id == seller.seller_id && n.product_bin == true).ToList();
             return View(pr);
         }
 

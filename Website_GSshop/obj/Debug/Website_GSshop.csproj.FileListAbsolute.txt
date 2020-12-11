@@ -86,4 +86,3 @@ C:\Users\lenovo\source\repos\Website_GSshop\Website_GSshop\obj\Debug\Website_GSs
 C:\Users\lenovo\source\repos\Website_GSshop\Website_GSshop\obj\Debug\Website_GSshop.csproj.CopyComplete
 C:\Users\lenovo\source\repos\Website_GSshop\Website_GSshop\obj\Debug\Website_GSshop.dll
 C:\Users\lenovo\source\repos\Website_GSshop\Website_GSshop\obj\Debug\Website_GSshop.pdb
-C:\Users\lenovo\source\repos\Website_GSshop\Website_GSshop\obj\Debug\Website_GSshop.csprojAssemblyReference.cache

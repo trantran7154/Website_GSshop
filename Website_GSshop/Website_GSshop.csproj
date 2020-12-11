@@ -157,6 +157,7 @@
     <Compile Include="Areas\Admin\Controllers\Seller_ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\SellerManagement\Controllers\CheckSellerController.cs" />
     <Compile Include="Areas\SellerManagement\Controllers\CollectionsController.cs" />
     <Compile Include="Areas\SellerManagement\Controllers\ProductsController.cs" />
     <Compile Include="Areas\SellerManagement\Controllers\SellerManagementController.cs" />
@@ -780,7 +781,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Database\script.sql" />
+    <Content Include="Models\Database\dataweb.sql" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -1027,6 +1028,9 @@
     <Content Include="Areas\SellerManagement\Views\SellerPayDetails\Details.cshtml" />
     <Content Include="Areas\SellerManagement\Views\SellerPayDetails\Edit.cshtml" />
     <Content Include="Areas\SellerManagement\Views\SellerPayDetails\Index.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\SellerManagement\Form.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\SellerManagement\InfoSeller.cshtml" />
+    <Content Include="Areas\SellerManagement\Views\CheckSeller\FormValidation.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1123,6 +1127,7 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Manage\SellerOrderManagement.cshtml" />
     <Content Include="Views\Account\SendEmail.cshtml" />
+    <Content Include="Views\Account\InfoSeller.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -136,8 +136,11 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 {
                     image.SaveAs(pa);
                     product.product_image = image.FileName;
+                    product.product_active = true;
+                    product.product_option = true;
                     product.product_datecreated = DateTime.Now;
                     product.product_dateedit = DateTime.Now;
+                    product.product_bin = true;
                     db.SaveChanges();
                     return Redirect(admin_qlsp);
                 }

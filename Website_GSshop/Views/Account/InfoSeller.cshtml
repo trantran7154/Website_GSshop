@@ -1,18 +1,18 @@
 ﻿@using Website_GSshop.Models
-@model User
+@model Seller
 @{
-    ViewBag.Title = "Info";
+    ViewBag.Title = "InfoSeller";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    User sesuser = (User)Session["user"];
+    Seller sellerer = (Seller)Session["seller"];
 
     var info_edit = "infoedit";
-    var create_user = "createuser";
+    var create_seller = "createseller";
     var change_pass = "change_pass";
 }
 
 <style>
-    body{
+    body {
         font-size: 15px;
     }
 </style>
@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-md-2">
             <div class="profile-work">
-                <p style="color: black">Xin chào, @sesuser.user_nicename</p>
+                <p style="color: black">Xin chào, @sellerer.seller_nicename</p>
                 <br />
                 <p class="text-info" style="font-size: 16px">Quản lý tài khoản</p>
             </div>
@@ -37,11 +37,11 @@
                             <div class="row">
                                 <div class="col-md-4" style="background-color: #ffffff">
                                     <br />
-                                    Thông tin cá nhân | <a href="@Url.Action("UpdateInfoUser","Account", new {id = Model.user_id})" data-toggle="modal" data-target="#@info_edit@Model.user_id"><small>Chỉnh sửa</small></a>
+                                    Thông tin cá nhân | <a href="@Url.Action("UpdateInfoSeller","Account", new {id = Model.seller_id})" data-toggle="modal" data-target="#@info_edit@Model.seller_id"><small>Chỉnh sửa</small></a>
                                     <br />
                                     <br />
-                                    <p>@sesuser.user_nicename</p>
-                                    <p>@sesuser.user_email</p>
+                                    <p>@sellerer.seller_nicename</p>
+                                    <p>@sellerer.seller_email</p>
                                     <br />
                                     <a href="#">Đăng ký nhận bản tin</a>
                                     <br />
@@ -52,16 +52,16 @@
                                         <div class="row">
                                             <div class="col-md-6" style="background-color: #ffffff">
                                                 <br />
-                                                Số địa chỉ | <a href="@Url.Action("CreateInfoUser","Account", new {id = Model.user_id})" data-toggle="modal" data-target="#@create_user@Model.user_id"><small>Thêm</small></a>
+                                                Số địa chỉ | <a href="@Url.Action("CreateInfoSeller","Account", new {id = Model.seller_id})" data-toggle="modal" data-target="#@create_seller@Model.seller_id"><small>Thêm</small></a>
                                                 <br />
                                                 <br />
-                                                @if (sesuser.user_address == null && sesuser.user_district == null && sesuser.user_provincecity == null)
+                                                @if (sellerer.seller_address == null && sellerer.seller_district == null && sellerer.seller_provincecity == null)
                                                 {
                                                     <p>Lưu thông địa chỉ thanh toán</p>
                                                 }
                                                 else
                                                 {
-                                                    <p>@Model.user_address,&nbsp;@Model.user_district,&nbsp;@Model.user_provincecity</p>
+                                                    <p>@Model.seller_address,&nbsp;@Model.seller_district,&nbsp;@Model.seller_provincecity</p>
                                                 }
                                                 <br />
                                                 <i class="fa fa-map-marker" style="font-size: 55px"></i>
@@ -72,7 +72,7 @@
                                                 <br />
                                                 <br />
                                                 <br />
-                                                <a href="@Url.Action("ChangePassWordUser","Account", new {id = Model.user_id})" data-toggle="modal" data-target="#@change_pass@Model.user_id" class="font-weight-600 text-center"><h3>Thay đổi mật khẩu</h3></a>
+                                                <a href="@Url.Action("ChangePassWordSeller","Account", new {id = Model.seller_id})" data-toggle="modal" data-target="#@change_pass@Model.seller_id" class="font-weight-600 text-center"><h3>Thay đổi mật khẩu</h3></a>
                                                 <br />
                                                 <br />
                                             </div>
@@ -86,7 +86,7 @@
             </div>
         </div>
         <!--Sửa Tên + Email-->
-        <div class="modal fade mt-8" id="@info_edit@Model.user_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade mt-8" id="@info_edit@Model.seller_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -106,17 +106,21 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @using (Html.BeginForm("UpdateInfoUser", "Account", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("UpdateInfoSeller", "Account", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                         {
                             <form method="post" class="mb-4 ui form">
                                 <div class="two fields">
                                     <div class="field">
                                         <label>Họ và tên</label>
-                                        <input type="text" name="user_nicename" value="@Model.user_nicename" />
+                                        <input type="text" name="seller_nicename" value="@Model.seller_nicename" />
                                     </div>
                                     <div class="field">
                                         <label>Email</label>
-                                        <input type="text" name="user_email" value="@Model.user_email" />
+                                        <input type="text" name="seller_email" value="@Model.seller_email" />
+                                    </div>
+                                    <div class="field">
+                                        <label>Tên shop</label>
+                                        <input type="text" name="seller_nameshop" value="@Model.seller_nicename" />
                                     </div>
                                 </div>
                                 <div class="ui error message"></div>
@@ -132,7 +136,7 @@
         </div>
         <!--//Sửa Tên + Email-->
         <!--Thêm Địa Chỉ-->
-        <div class="modal fade mt-8" id="@create_user@Model.user_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade mt-8" id="@create_seller@Model.seller_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -144,24 +148,24 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @using (Html.BeginForm("CreateInfoUser", "Account", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("CreateInfoSeller", "Account", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                         {
                             <form method="post" class="mb-4 ui form">
                                 <div class="three fields">
                                     <div class="field">
                                         <label>Địa chỉ</label>
-                                        <input type="text" name="user_address" />
+                                        <input type="text" name="seller_address" />
                                     </div>
                                     <div class="field">
                                         <label>Quận/Huyện</label>
-                                        <select name="user_district">
+                                        <select name="seller_district">
                                             <option>Chọn Quận/Huyện</option>
                                             <option>Bến Cát</option>
                                         </select>
                                     </div>
                                     <div class="field">
                                         <label>Tỉnh/TP</label>
-                                        <select name="user_provincecity">
+                                        <select name="seller_provincecity">
                                             <option>Chọn Tỉnh/Thành Phố</option>
                                             <option>Bình Dương</option>
                                         </select>
@@ -180,7 +184,7 @@
         </div>
         <!--//Thêm Địa Chỉ-->
         <!--Đổi Mật Khẩu-->
-        <div class="modal fade mt-8" id="@change_pass@Model.user_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade mt-8" id="@change_pass@Model.seller_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -192,7 +196,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @using (Html.BeginForm("ChangePassWordUser", "Account", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("ChangePassWordSeller", "Account", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                         {
                             <div class="container-fluid">
                                 <div class="field">
@@ -201,7 +205,7 @@
                                 </div>
                                 <div class="field">
                                     <label>Mật khẩu mới</label>
-                                    <input type="password" name="user_pass" />
+                                    <input type="password" name="seller_pass" />
                                 </div>
                                 <div class="field">
                                     <label>Nhập lại mật khẩu</label>
@@ -221,6 +225,4 @@
         <!--//Đổi Mật Khẩu-->
     </div>
 </div>
-
-
 

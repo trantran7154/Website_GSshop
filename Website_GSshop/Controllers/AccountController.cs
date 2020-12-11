@@ -19,6 +19,7 @@ namespace Website_GSshop.Controllers
         String updateseller = "/Account/UpdateInfoSeller";
         String manage = "/SellerManagement/SellerManagement/Index";
         String infouser = "/Account/Info";
+        String infoseller = "/Account/InfoSeller";
         Data_GSShopEntities db = new Data_GSShopEntities();
         // GET: Login
         public ActionResult Login()
@@ -112,7 +113,7 @@ namespace Website_GSshop.Controllers
             db.SaveChanges();
             return Redirect(home);
         }
-        // Thông tin cá nhân
+        // Thông tin cá nhân user
         public ActionResult Info()
         {
             User user = (User)Session["user"];
@@ -152,8 +153,20 @@ namespace Website_GSshop.Controllers
             db.SaveChanges();
             return Redirect(infouser);
         }
-        // Quên mật khẩu người dùng   
-
+        // Thay đổi mật khẩu User
+        [HttpPost]
+        public ActionResult ChangePassWordUser(FormCollection f)
+        {
+            User user = (User)Session["user"];
+            var id = user.user_id;
+            String pass_old = f["pass_old"].ToString();
+            String user_pass = f["user_pass"].ToString();
+            String pass_repeat = f["pass_repeat"].ToString();
+            db.User.Find(id).user_pass = user_pass;
+            db.SaveChanges();
+            Session["user"] = db.User.Find(id);
+            return Redirect(Request.UrlReferrer.ToString());
+        }
         // Đăng nhập người bán
         public ActionResult LoginSeller()
         {
@@ -164,7 +177,7 @@ namespace Website_GSshop.Controllers
             }
             return View();
         }
-        // Đăng xuất người dùng
+        // Đăng xuất người bán
         public ActionResult LogOutSeller()
         {
             Session["seller"] = null;
@@ -246,18 +259,44 @@ namespace Website_GSshop.Controllers
             db.SaveChanges();
             return Redirect(home);
         }
-        // Thay đổi mật khẩu User
-        [HttpPost]
-        public ActionResult ChangePassWordUser(FormCollection f)
+        // Thông tin cá nhân Seller
+        public ActionResult InfoSeller()
         {
-            User user = (User)Session["user"];
-            var id = user.user_id;
-            String pass_old = f["passold"].ToString();
-            String user_pass = f["userpass"].ToString();
-            String pass_repeat = f["passrepeat"].ToString();
-            db.User.Find(id).user_pass = user_pass;
+            Seller seller = (Seller)Session["seller"];
+            if (seller == null)
+            {
+                Response.Redirect(loginseller);
+            }
+            return View(seller);
+        }
+        // Thêm thông tin cá nhân Seller phần info
+        [HttpPost]
+        public ActionResult CreateInfoSeller(FormCollection f)
+        {
+            Seller seller = (Seller)Session["seller"];
+            Seller sellernew = db.Seller.SingleOrDefault(n => n.seller_id == seller.seller_id);
+            String sAddress = f["seller_address"].ToString();
+            String sDis = f["seller_district"].ToString();
+            String sPro = f["seller_provincecity"].ToString();
+            db.Seller.Find(seller.seller_id).seller_address = sAddress;
+            db.Seller.Find(seller.seller_id).seller_district = sDis;
+            db.Seller.Find(seller.seller_id).seller_provincecity = sPro;
+            Session["user"] = sellernew;
             db.SaveChanges();
-            Session["user"] = db.User.Find(id);
+            return Redirect(infoseller);
+        }
+        // Thay đổi mật khẩu Seller
+        [HttpPost]
+        public ActionResult ChangePassWordSeller(FormCollection f)
+        {
+            Seller seller = (Seller)Session["seller"];
+            var id = seller.seller_id;
+            String pass_old = f["pass_old"].ToString();
+            String seller_pass = f["seller_pass"].ToString();
+            String pass_repeat = f["pass_repeat"].ToString();
+            db.Seller.Find(id).seller_pass = seller_pass;
+            db.SaveChanges();
+            Session["seller"] = db.Seller.Find(id);
             return Redirect(Request.UrlReferrer.ToString());
         }
         // Quên mật khẩu User

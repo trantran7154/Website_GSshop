@@ -1,0 +1,14 @@
+﻿@using Website_GSshop.Models
+@{ 
+    Seller seller = (Seller)Session["seller"];
+}
+<ul class="dropdown-menu drp-mnu" aria-labelledby="dropdownMenu3">
+    <li class="user-info">
+        <h5 class="user-name">@seller.seller_nameshop</h5>
+    </li>
+    <li> <a href="@Url.Action("InfoSeller","SellerManagement")"><i class="lnr lnr-user"></i>Thông tin cá nhân</a> </li>
+    <li> <a href="#"><i class="lnr lnr-users"></i>1k Followers</a> </li>
+    <li> <a href="#"><i class="lnr lnr-cog"></i>Setting</a> </li>
+    <li> <a href="#"><i class="lnr lnr-heart"></i>100 Likes</a> </li>
+    <li class="logout"> <a href="@Url.Action("LogOutSeller","SellerManagement")"><i class="fa fa-power-off"></i> Logout</a> </li>
+</ul>

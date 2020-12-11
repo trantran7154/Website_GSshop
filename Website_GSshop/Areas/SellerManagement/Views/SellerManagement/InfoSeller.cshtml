@@ -1,47 +1,42 @@
 ﻿@using Website_GSshop.Models
-@model User
+@model Seller
 @{
-    ViewBag.Title = "Info";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "InfoSeller";
+    Layout = "~/Areas/SellerManagement/Views/Shared/_LayoutSeller.cshtml";
 
-    User sesuser = (User)Session["user"];
+    Seller sellerer = (Seller)Session["seller"];
 
     var info_edit = "infoedit";
-    var create_user = "createuser";
+    var create_seller = "createseller";
     var change_pass = "change_pass";
 }
 
-<style>
-    body{
-        font-size: 15px;
-    }
-</style>
-@Html.Action("CSS_Sematic", "Display")
+@Html.Action("CSS_Sematic", "SellerManagement")
 
-<div class="emp-profile" style="background-color: #f9f9f9">
+<div class="emp-profile mb-3" style="background-color: #f9f9f9">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 mt-2 ml-2">
             <div class="profile-work">
-                <p style="color: black">Xin chào, @sesuser.user_nicename</p>
+                <p style="color: black">Xin chào, @sellerer.seller_nicename</p>
                 <br />
-                <p class="text-info" style="font-size: 16px">Quản lý tài khoản</p>
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-10 ml-5">
             <div class="tab-content profile-tab" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <h2>QUẢN LÝ TÀI KHOẢN</h2>
+                    <h2 class="ml-5">QUẢN LÝ TÀI KHOẢN</h2>
                     <div class="container-fluid">
                         <br />
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-4" style="background-color: #ffffff">
                                     <br />
-                                    Thông tin cá nhân | <a href="@Url.Action("UpdateInfoUser","Account", new {id = Model.user_id})" data-toggle="modal" data-target="#@info_edit@Model.user_id"><small>Chỉnh sửa</small></a>
+                                    Thông tin cá nhân | <a href="@Url.Action("UpdateInfoSeller","SellerManagement", new {id = Model.seller_id})" data-toggle="modal" data-target="#@info_edit@Model.seller_id"><small>Chỉnh sửa</small></a>
                                     <br />
                                     <br />
-                                    <p>@sesuser.user_nicename</p>
-                                    <p>@sesuser.user_email</p>
+                                    <p>Họ và tên: @sellerer.seller_nicename.</p>
+                                    <p>Tên shop: @sellerer.seller_nameshop.</p>
+                                    <p>Email/Gmail: @sellerer.seller_email.</p>
                                     <br />
                                     <a href="#">Đăng ký nhận bản tin</a>
                                     <br />
@@ -52,16 +47,16 @@
                                         <div class="row">
                                             <div class="col-md-6" style="background-color: #ffffff">
                                                 <br />
-                                                Số địa chỉ | <a href="@Url.Action("CreateInfoUser","Account", new {id = Model.user_id})" data-toggle="modal" data-target="#@create_user@Model.user_id"><small>Thêm</small></a>
+                                                Số địa chỉ | <a href="@Url.Action("CreateInfoSelle","SellerManagement", new {id = Model.seller_id})" data-toggle="modal" data-target="#@create_seller@Model.seller_id"><small>Thêm</small></a>
                                                 <br />
                                                 <br />
-                                                @if (sesuser.user_address == null && sesuser.user_district == null && sesuser.user_provincecity == null)
+                                                @if (sellerer.seller_address == null && sellerer.seller_district == null && sellerer.seller_provincecity == null)
                                                 {
                                                     <p>Lưu thông địa chỉ thanh toán</p>
                                                 }
                                                 else
                                                 {
-                                                    <p>@Model.user_address,&nbsp;@Model.user_district,&nbsp;@Model.user_provincecity</p>
+                                                    <p>@sellerer.seller_address,&nbsp;@sellerer.seller_district,&nbsp;@sellerer.seller_provincecity.</p>
                                                 }
                                                 <br />
                                                 <i class="fa fa-map-marker" style="font-size: 55px"></i>
@@ -72,7 +67,7 @@
                                                 <br />
                                                 <br />
                                                 <br />
-                                                <a href="@Url.Action("ChangePassWordUser","Account", new {id = Model.user_id})" data-toggle="modal" data-target="#@change_pass@Model.user_id" class="font-weight-600 text-center"><h3>Thay đổi mật khẩu</h3></a>
+                                                <a href="@Url.Action("ChangePassWordSeller","SellerManagement", new {id = Model.seller_id})" data-toggle="modal" data-target="#@change_pass@Model.seller_id" class="font-weight-600 text-center"><h3>Thay đổi mật khẩu</h3></a>
                                                 <br />
                                                 <br />
                                             </div>
@@ -86,7 +81,7 @@
             </div>
         </div>
         <!--Sửa Tên + Email-->
-        <div class="modal fade mt-8" id="@info_edit@Model.user_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade mt-8" id="@info_edit@Model.seller_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -106,17 +101,21 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @using (Html.BeginForm("UpdateInfoUser", "Account", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("UpdateInfoSeller", "SellerManagement", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                         {
                             <form method="post" class="mb-4 ui form">
                                 <div class="two fields">
                                     <div class="field">
                                         <label>Họ và tên</label>
-                                        <input type="text" name="user_nicename" value="@Model.user_nicename" />
+                                        <input type="text" name="seller_nicename" value="@Model.seller_nicename" />
                                     </div>
                                     <div class="field">
                                         <label>Email</label>
-                                        <input type="text" name="user_email" value="@Model.user_email" />
+                                        <input type="text" name="seller_email" value="@Model.seller_email" />
+                                    </div>
+                                    <div class="field">
+                                        <label>Tên shop</label>
+                                        <input type="text" name="seller_nameshop" value="@Model.seller_nicename" />
                                     </div>
                                 </div>
                                 <div class="ui error message"></div>
@@ -132,7 +131,7 @@
         </div>
         <!--//Sửa Tên + Email-->
         <!--Thêm Địa Chỉ-->
-        <div class="modal fade mt-8" id="@create_user@Model.user_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade mt-8" id="@create_seller@Model.seller_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -144,24 +143,24 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @using (Html.BeginForm("CreateInfoUser", "Account", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("CreateInfoSeller", "SellerManagement", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                         {
                             <form method="post" class="mb-4 ui form">
                                 <div class="three fields">
                                     <div class="field">
                                         <label>Địa chỉ</label>
-                                        <input type="text" name="user_address" />
+                                        <input type="text" name="seller_address" />
                                     </div>
                                     <div class="field">
                                         <label>Quận/Huyện</label>
-                                        <select name="user_district">
+                                        <select name="seller_district">
                                             <option>Chọn Quận/Huyện</option>
                                             <option>Bến Cát</option>
                                         </select>
                                     </div>
                                     <div class="field">
                                         <label>Tỉnh/TP</label>
-                                        <select name="user_provincecity">
+                                        <select name="seller_provincecity">
                                             <option>Chọn Tỉnh/Thành Phố</option>
                                             <option>Bình Dương</option>
                                         </select>
@@ -180,7 +179,7 @@
         </div>
         <!--//Thêm Địa Chỉ-->
         <!--Đổi Mật Khẩu-->
-        <div class="modal fade mt-8" id="@change_pass@Model.user_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade mt-8" id="@change_pass@Model.seller_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -192,7 +191,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @using (Html.BeginForm("ChangePassWordUser", "Account", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("ChangePassWordSeller", "SellerManagement", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                         {
                             <div class="container-fluid">
                                 <div class="field">
@@ -201,7 +200,7 @@
                                 </div>
                                 <div class="field">
                                     <label>Mật khẩu mới</label>
-                                    <input type="password" name="user_pass" />
+                                    <input type="password" name="seller_pass" />
                                 </div>
                                 <div class="field">
                                     <label>Nhập lại mật khẩu</label>
@@ -221,6 +220,4 @@
         <!--//Đổi Mật Khẩu-->
     </div>
 </div>
-
-
 
