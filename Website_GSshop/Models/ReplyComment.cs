@@ -35,7 +35,7 @@ namespace Website_GSshop.Models
         public virtual ICollection<Like> Like { get; set; }
         public virtual Product Product { get; set; }
         public virtual Product Product1 { get; set; }
-        public virtual User User { get; set; }
         public virtual Seller Seller { get; set; }
+        public virtual User User { get; set; }
     }
 }
