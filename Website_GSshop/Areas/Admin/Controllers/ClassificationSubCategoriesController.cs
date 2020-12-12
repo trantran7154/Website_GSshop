@@ -19,7 +19,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var classificationSubCategory = db.ClassificationSubCategory.Include(c => c.SubCategory);
-            return View(classificationSubCategory.Where(n => n.csc_bin == true).ToList());
+            return View(classificationSubCategory.Where(n => n.csc_bin == true).OrderByDescending(n=>n.csc_datecreate).ToList());
         }
 
         // GET: Admin/ClassificationSubCategories/Details/5
@@ -50,10 +50,12 @@ namespace Website_GSshop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include = "csc_id,csc_name,csc_image,csc_datecreate,csc_active,subcategory_id,csc_bin")] ClassificationSubCategory classificationSubCategory, HttpPostedFileBase fileUpload)
         {
+            Random random = new Random();
+            ViewBag.random = random.Next(0, 1000);
             // Tên file ảnh sản phẩm
             var fileimg_edit = Path.GetFileName(fileUpload.FileName);
             // Đưa tên ảnh vào đúng file
-            var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit);
+            var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit);
             // Ảnh trống
             if (fileUpload == null)
             {
@@ -71,8 +73,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
             {
                 fileUpload.SaveAs(pa_eidt);
                 db.ClassificationSubCategory.Add(classificationSubCategory);
-                classificationSubCategory.csc_image = fileUpload.FileName;
-                classificationSubCategory.csc_active = true;
+                classificationSubCategory.csc_image = ViewBag.random + fileUpload.FileName;
                 classificationSubCategory.csc_datecreate = DateTime.Now;
                 classificationSubCategory.csc_bin = true;
                 db.SaveChanges();
@@ -100,42 +101,37 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "csc_id,csc_name,csc_image,csc_datecreate,csc_active,subcategory_id,csc_bin")] ClassificationSubCategory classificationSubCategory, HttpPostedFileBase fileUpload)
+        public ActionResult Edit([Bind(Include = "csc_id,csc_name,csc_image,csc_datecreate,csc_active,subcategory_id,csc_bin")] ClassificationSubCategory classificationSubCategory, HttpPostedFileBase img)
         {
+            Random random = new Random();
+            ViewBag.random = random.Next(0, 1000);
+
             db.Entry(classificationSubCategory).State = EntityState.Modified;
-            if (fileUpload  == null)
+            if (img == null)
             {
-                ClassificationSubCategory sub = db.ClassificationSubCategory.Find(Int32.Parse(classificationSubCategory.csc_id.ToString()));
                 db.SaveChanges();
                 return Redirect(admin_qldmc);
             }
             else
             {
                 // Tên file ảnh sản phẩm
-                var fileimg_edit = Path.GetFileName(fileUpload.FileName);
+                var fileimg_edit = Path.GetFileName(img.FileName);
                 // Đưa tên ảnh vào đúng file
-                var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit);
+                var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit);
                 // Ảnh trống
-                if (fileUpload == null)
+                if (img == null)
                 {
                     ViewBag.ThongBao = "Ảnh trống !";
-                    return View(classificationSubCategory);
-                }
-                //Nếu tên ảnh trùng
-                else if (System.IO.File.Exists(pa_eidt))
-                {
-                    ViewBag.ThongBao = "Ảnh đã tồn tại";
-                    return View(classificationSubCategory);
                 }
                 //Lưu pa vào name fileUpload
                 else
                 {
-                    fileUpload.SaveAs(pa_eidt);
-                    classificationSubCategory.csc_image = fileUpload.FileName;
-                    classificationSubCategory.csc_datecreate = DateTime.Now;
+                    img.SaveAs(pa_eidt);
+                    classificationSubCategory.csc_image = ViewBag.random + img.FileName;
                     db.SaveChanges();
                     return Redirect(admin_qldmc);
                 }
+                return Redirect(Request.UrlReferrer.ToString());
             }
         }
 
@@ -160,7 +156,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
         {
             ClassificationSubCategory csc = db.ClassificationSubCategory.Find(Int32.Parse(classificationSubCategory.csc_id.ToString()));
             csc.csc_bin = false;
-            csc.csc_active = false;
             db.SaveChanges();
             return Redirect(admin_qldmc);
         }

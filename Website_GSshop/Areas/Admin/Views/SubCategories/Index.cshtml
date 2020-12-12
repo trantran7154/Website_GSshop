@@ -26,27 +26,39 @@
     }
 </style>
 <script>
-    var app = angular
-        .module("myModule", [])
-        .controller("myController", function ($scope) {
+    var todos = angular.module('myModule', ['ui.bootstrap']);
 
-            var sub = [
+    todos.controller('myControllersub', function ($scope) {
+        $scope.filteredTodos = []
+            , $scope.currentPage = 1
+            , $scope.numPerPage = 8
+            , $scope.maxSize = 5;
+
+        $scope.makeTodos = function () {
+            $scope.todos = [
                 @foreach (var item in Model)
                 {
                     @: {id: @item.subcategory_id, name: "@Html.Raw(item.subcategory_name)", img: "@item.subcategory_image", day: "@item.subcategory_datecreated.Value.Day", month: "@item.subcategory_datecreated.Value.Month", year: "@item.subcategory_datecreated.Value.Year", ac: "@item.subcategory_active", bin: "@item.subcategory_bin", cate: "@item.Category.category_name", date: "@item.subcategory_datecreated.Value.Year-@(item.subcategory_datecreated.Value.Month < 10 ? "0" + item.subcategory_datecreated.Value.Month.ToString() : item.subcategory_datecreated.Value.Month.ToString())-@(item.subcategory_datecreated.Value.Day < 10 ? "0" + item.subcategory_datecreated.Value.Day.ToString() : item.subcategory_datecreated.Value.Day.ToString())" },
                 }
             ];
 
-            $scope.sub = sub;
-        });
-</script>
+        };
+        $scope.makeTodos();
 
+        $scope.$watch('currentPage + numPerPage', function () {
+            var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+                , end = begin + $scope.numPerPage;
+
+            $scope.filteredTodos = $scope.todos.slice(begin, end);
+        });
+    });
+</script>
 <a href="/Admin/Home/Index">
     <svg height="40" viewBox="0 0 512 512.0005" width="40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1=".001" x2="512.001" y1="256" y2="256"><stop offset="0" stop-color="#80d8ff" /><stop offset="1" stop-color="#ea80fc" /></linearGradient><path d="m220 0h-200c-11.046875 0-20 8.953125-20 20v200c0 11.046875 8.953125 20 20 20h200c11.046875 0 20-8.953125 20-20v-200c0-11.046875-8.953125-20-20-20zm-20 200h-160v-160h160zm299.65625 73.523438c-7.472656-3.097657-16.078125-1.386719-21.796875 4.332031l-200 200c-5.722656 5.722656-7.433594 14.324219-4.335937 21.796875 3.097656 7.476562 10.386718 12.347656 18.476562 12.347656h200c11.046875 0 20-8.953125 20-20v-200c0-8.089844-4.871094-15.382812-12.34375-18.476562zm-27.65625 198.476562h-131.714844l131.714844-131.714844zm-80-232c66.167969 0 120-53.832031 120-120s-53.832031-120-120-120-120 53.832031-120 120 53.832031 120 120 120zm0-200c44.113281 0 80 35.886719 80 80s-35.886719 80-80 80-80-35.886719-80-80 35.886719-80 80-80zm-157.859375 266.144531-85.855469 85.855469 85.855469 85.855469c7.8125 7.8125 7.8125 20.476562 0 28.285156-7.808594 7.808594-20.472656 7.8125-28.28125 0l-85.859375-85.855469-85.859375 85.859375c-7.808594 7.808594-20.472656 7.808594-28.28125 0-7.8125-7.8125-7.8125-20.476562 0-28.285156l85.855469-85.859375-85.855469-85.855469c-7.8125-7.8125-7.8125-20.476562 0-28.285156 7.808594-7.8125 20.472656-7.8125 28.28125 0l85.859375 85.855469 85.859375-85.859375c7.808594-7.808594 20.472656-7.808594 28.28125 0 7.8125 7.8125 7.8125 20.476562 0 28.289062zm0 0" fill="url(#a)" /></svg>
 </a>
 <p class="btn btn-warning float-right" data-toggle="modal" data-target="#sub_create"> THÊM MỚI</p>
 <div ng-app="myModule">
-    <div ng-controller="myController">
+    <div ng-controller="myControllersub">
         <div class="card mt-3" style="padding: 10px">
             <div class="row">
                 <div class="col-lg-3">
@@ -144,25 +156,25 @@
                     <span><i class="fa fa-cogs"></i> Công cụ</span>
                 </th>
             </tr>
-            <tr ng-repeat="sub in sub | filter: searchText">
+            <tr ng-repeat="todo in filteredTodos | filter: searchText">
                 <td class="text-center">
-                    {{sub.name}}
+                    {{todo.name}}
                 </td>
                 <td class="text-center">
-                    <img src="~/Content/Layout/images/{{sub.name}}" height="100" width="100" />
+                    <img src="~/Content/Layout/images/{{todo.img}}" height="100" width="100" />
                 </td>
                 <td class="text-center">
-                    {{sub.day}}/{{sub.month}}/{{sub.year}}
+                    {{todo.day}}/{{todo.month}}/{{todo.year}}
                 </td>
                 <td class="text-center">
-                    {{sub.ac}}
+                    {{todo.ac}}
                 </td>
                 <td class="text-center">
-                    {{sub.bin}}
+                    {{todo.bin}}
                 </td>
                 <td>
                     <div class="text-center">
-                        <a href="/Admin/SubCategories/Edit/{{sub.id}}" data-toggle="modal" data-target="#@sub_edit{{sub.id}}">
+                        <a href="/Admin/SubCategories/Edit/{{todo.id}}" data-toggle="modal" data-target="#@sub_edit{{todo.id}}">
                             <svg height="20" viewBox="0 -1 401.5411 401" width="20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="m381.289062 32.242188c13.671876 13.664062 13.671876 35.824218 0 49.488281l-17.679687 17.679687-61.230469-61.230468 17.679688-17.679688c13.671875-13.667969 35.832031-13.667969 49.5 0zm0 0" fill="#00acea" />
                                 <path d="m363.609375 99.410156-160.148437 160.160156h-.011719l-61.230469-61.230468 160.160156-160.160156zm0 0" fill="#00efd1" />
@@ -173,7 +185,7 @@
                                 </g>
                             </svg>
                         </a> |
-                        <a href="/Admin/SubCategories/Details/{{sub.id}}" data-toggle="modal" data-target="#@sub_detail{{sub.id}}">
+                        <a href="/Admin/SubCategories/Details/{{todo.id}}" data-toggle="modal" data-target="#@sub_detail{{todo.id}}">
                             <svg id="Layer_1" enable-background="new 0 0 512 512" height="20" viewBox="0 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg">
                                 <g>
                                     <g clip-rule="evenodd" fill-rule="evenodd">
@@ -195,7 +207,7 @@
                                 </g>
                             </svg>
                         </a> |
-                        <a href="/Admin/SubCategories/Delete/{{sub.id}}" data-toggle="modal" data-target="#@sub_delete{{sub.id}}">
+                        <a href="/Admin/SubCategories/Delete/{{todo.id}}" data-toggle="modal" data-target="#@sub_delete{{todo.id}}">
                             <svg id="Capa_1" enable-background="new 0 0 512 512" height="20" viewBox="0 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg">
                                 <g>
                                     <g>
@@ -226,138 +238,10 @@
                             </svg>
                         </a>
                     </div>
-                    <!--Thêm Danh Mục Phụ-->
-                    <div class="modal fade" id="sub_create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
-                                        <svg height="35" viewBox="0 0 512 512.0005" width="35" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1=".001" x2="512.001" y1="256" y2="256"><stop offset="0" stop-color="#80d8ff" /><stop offset="1" stop-color="#ea80fc" /></linearGradient><path d="m220 0h-200c-11.046875 0-20 8.953125-20 20v200c0 11.046875 8.953125 20 20 20h200c11.046875 0 20-8.953125 20-20v-200c0-11.046875-8.953125-20-20-20zm-20 200h-160v-160h160zm299.65625 73.523438c-7.472656-3.097657-16.078125-1.386719-21.796875 4.332031l-200 200c-5.722656 5.722656-7.433594 14.324219-4.335937 21.796875 3.097656 7.476562 10.386718 12.347656 18.476562 12.347656h200c11.046875 0 20-8.953125 20-20v-200c0-8.089844-4.871094-15.382812-12.34375-18.476562zm-27.65625 198.476562h-131.714844l131.714844-131.714844zm-80-232c66.167969 0 120-53.832031 120-120s-53.832031-120-120-120-120 53.832031-120 120 53.832031 120 120 120zm0-200c44.113281 0 80 35.886719 80 80s-35.886719 80-80 80-80-35.886719-80-80 35.886719-80 80-80zm-157.859375 266.144531-85.855469 85.855469 85.855469 85.855469c7.8125 7.8125 7.8125 20.476562 0 28.285156-7.808594 7.808594-20.472656 7.8125-28.28125 0l-85.859375-85.855469-85.859375 85.859375c-7.808594 7.808594-20.472656 7.808594-28.28125 0-7.8125-7.8125-7.8125-20.476562 0-28.285156l85.855469-85.859375-85.855469-85.855469c-7.8125-7.8125-7.8125-20.476562 0-28.285156 7.808594-7.8125 20.472656-7.8125 28.28125 0l85.859375 85.855469 85.859375-85.859375c7.808594-7.808594 20.472656-7.808594 28.28125 0 7.8125 7.8125 7.8125 20.476562 0 28.289062zm0 0" fill="url(#a)" /></svg> &nbsp;THÊM DANH MỤC PHỤ
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    @using (Html.BeginForm("Create", "SubCategories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
-                                    {
-                                        <form method="post" class="mb-4 ui form">
-                                            <div class="field">
-                                                <label>Tên danh mục phụ</label>
-                                                <input type="text" name="subcategory_name" />
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="field">
-                                                    <label>Tên danh mục chính</label>
-                                                    <select name="category_id">
-                                                        @foreach (var item1 in categories)
-                                                        {
-                                                            <option value="{{sub.id}}">@item1.category_name</option>
-                                                        }
-                                                    </select>
-                                                </div>
-                                                <div class="field">
-                                                    <label>Ảnh</label>
-                                                    <input name="fileUpload" type="file">
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="field">
-                                                    <label>Ngày tạo</label>
-                                                    <input type="date" name="subcategory_datecreated" />
-                                                </div>
-                                                <div class="field">
-                                                    <label>Hoạt động</label>
-                                                    <select name="subcategory_active">
-                                                        <option>True</option>
-                                                        <option>False</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="ui error message"></div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
-                                            </div>
-                                        </form>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--//Thêm Danh Mục Phụ-->
-                    <!--Sửa Danh Mục Phụ-->
-                    <div class="modal fade" id="@sub_edit{{sub.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
-                                        <svg height="20" viewBox="0 -1 401.5411 401" width="20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="m381.289062 32.242188c13.671876 13.664062 13.671876 35.824218 0 49.488281l-17.679687 17.679687-61.230469-61.230468 17.679688-17.679688c13.671875-13.667969 35.832031-13.667969 49.5 0zm0 0" fill="#00acea" />
-                                            <path d="m363.609375 99.410156-160.148437 160.160156h-.011719l-61.230469-61.230468 160.160156-160.160156zm0 0" fill="#00efd1" />
-                                            <path d="m142.21875 198.339844 61.230469 61.230468-.570313.570313-84.6875 23.460937 23.457032-84.691406zm0 0" fill="#fedb41" />
-                                            <g fill="#083863">
-                                                <path d="m370.589844 250.960938c-5.523438 0-10 4.476562-10 10v88.789062c-.019532 16.5625-13.4375 29.980469-30 30h-280.589844c-16.5625-.019531-29.980469-13.4375-30-30v-260.589844c.019531-16.558594 13.4375-29.980468 30-30h88.789062c5.523438 0 10-4.476562 10-10 0-5.523437-4.476562-10-10-10h-88.789062c-27.601562.03125-49.96875 22.398438-50 50v260.589844c.03125 27.601562 22.398438 49.96875 50 50h280.589844c27.601562-.03125 49.96875-22.398438 50-50v-88.789062c0-5.523438-4.476563-10-10-10zm0 0" />
-                                                <path d="m376.632812 13.429688c-17.589843-17.546876-46.058593-17.546876-63.644531 0l-178.410156 178.410156c-1.21875 1.222656-2.105469 2.738281-2.566406 4.398437l-23.457031 84.691407c-.964844 3.472656.015624 7.191406 2.5625 9.742187 2.550781 2.546875 6.269531 3.527344 9.742187 2.566406l84.691406-23.460937c1.664063-.460938 3.183594-1.347656 4.40625-2.570313l.566407-.570312 177.835937-177.835938c17.574219-17.570312 17.574219-46.058593 0-63.628906zm-229.675781 203.789062 37.613281 37.617188-52.03125 14.414062zm56.5 42.355469v-.007813l6.519531 6.519532zm0-14.140625-47.09375-47.09375 146.015625-146.015625 47.089844 47.085937zm170.761719-170.773438-10.609375 10.609375-47.085937-47.089843 10.609374-10.609376c9.765626-9.746093 25.582032-9.746093 35.351563 0l11.734375 11.746094c9.765625 9.757813 9.765625 25.585938 0 35.34375zm0 0" />
-                                            </g>
-                                        </svg> &nbsp;SỬA DANH MỤC PHỤ
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    @using (Html.BeginForm("Edit", "SubCategories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
-                                    {
-                                        <form method="post" class="mb-4 ui form">
-                                            <input type="hidden" value="{{sub.id}}" name="subcategory_id" />
-                                            <input type="hidden" value="{{sub.img}}" name="subcategory_image" />
-                                            <div class="field">
-                                                <label>Tên danh mục phụ</label>
-                                                <input type="text" name="subcategory_name" value="{{sub.name}}" />
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="field">
-                                                    <label>Ngày tạo</label>
-                                                    <input type="date" name="subcategory_datecreated" value="{{sub.date}}"/>
-                                                </div>
-                                                <div class="field">
-                                                    <label>Hoạt động</label>
-                                                    <select name="subcategory_active">
-                                                        <option>True</option>
-                                                        <option>False</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="field">
-                                                    <label>Tên danh mục chính</label>
-                                                    <select name="category_id">
-                                                        @foreach (var item1 in categories)
-                                                        {
-                                                            <option value="{{sub.id}}">@item1.category_name</option>
-                                                        }
-                                                    </select>
-                                                </div>
-                                                <div class="field">
-                                                    <label>Ảnh</label>
-                                                    <input name="fileUpload" type="file">
-                                                </div>
-                                            </div>
-                                            <div class="ui error message"></div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> SỬA</button>
-                                            </div>
-                                        </form>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--//Sửa Danh Mục Phụ-->
+
+
                     <!--Xem Danh Mục Phụ-->
-                    <div class="modal fade" id="@sub_detail{{sub.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="@sub_detail{{todo.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -393,16 +277,16 @@
                                         <form method="post" class="mb-4 ui form">
                                             <div class="field">
                                                 <label>Tên danh mục phụ</label>
-                                                <input type="text" name="subcategory_name" value="{{sub.name}}" disabled />
+                                                <input type="text" name="subcategory_name" value="{{todo.name}}" disabled />
                                             </div>
                                             <div class="two fields">
                                                 <div class="field">
                                                     <label>Ngày tạo</label>
-                                                    <input type="text" name="subcategory_datecreated" value="{{sub.day}}/{{sub.month}}/{{sub.year}}" disabled />
+                                                    <input type="text" name="subcategory_datecreated" value="{{todo.day}}/{{todo.month}}/{{todo.year}}" disabled />
                                                 </div>
                                                 <div class="field">
                                                     <label>Hoạt động</label>
-                                                    <select name="subcategory_active" value="{{sub.ac}}" disabled>
+                                                    <select name="subcategory_active" value="{{todo.ac}}" disabled>
                                                         <option>True</option>
                                                         <option>False</option>
                                                     </select>
@@ -412,12 +296,12 @@
                                                 <div class="field">
                                                     <label>Tên danh mục chính</label>
                                                     <select name="category_id" disabled>
-                                                        <option value="{{sub.id}}">{{sub.cate}}</option>
+                                                        <option value="{{todo.id}}">{{todo.cate}}</option>
                                                     </select>
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh</label>
-                                                    <img src="~/Content/Layout/images/{{sub.img}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img}}" height="90" width="100" />
                                                 </div>
                                             </div>
                                             <div class="ui error message"></div>
@@ -432,7 +316,7 @@
                     </div>
                     <!--//Xem Danh Mục Phụ-->
                     <!--Xóa Danh Mục Phụ-->
-                    <div class="modal fade" id="@sub_delete{{sub.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="@sub_delete{{todo.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -474,19 +358,19 @@
                                     @using (Html.BeginForm("Delete", "SubCategories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                     {
                                         <form method="post" class="mb-4 ui form">
-                                            <input type="hidden" value="{{sub.id}}" name="subcategory_id" />
+                                            <input type="hidden" value="{{todo.id}}" name="subcategory_id" />
                                             <div class="field">
                                                 <label>Tên danh mục phụ</label>
-                                                <input type="text" name="subcategory_name" value="{{sub.name}}" disabled />
+                                                <input type="text" name="subcategory_name" value="{{todo.name}}" disabled />
                                             </div>
                                             <div class="two fields">
                                                 <div class="field">
                                                     <label>Ngày tạo</label>
-                                                    <input type="text" name="subcategory_datecreated" value="{{sub.day}}/{{sub.month}}/{{sub.year}}" disabled />
+                                                    <input type="text" name="subcategory_datecreated" value="{{todo.day}}/{{todo.month}}/{{todo.year}}" disabled />
                                                 </div>
                                                 <div class="field">
                                                     <label>Hoạt động</label>
-                                                    <select name="subcategory_active" value="{{sub.ac}}" disabled>
+                                                    <select name="subcategory_active" value="{{todo.ac}}" disabled>
                                                         <option>True</option>
                                                         <option>False</option>
                                                     </select>
@@ -496,12 +380,12 @@
                                                 <div class="field">
                                                     <label>Tên danh mục chính</label>
                                                     <select name="category_id" disabled>
-                                                        <option value="{{sub.id}}">{{sub.cate}}</option>
+                                                        <option value="{{todo.id}}">{{todo.cate}}</option>
                                                     </select>
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh</label>
-                                                    <img src="~/Content/Layout/images/{{sub.img}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img}}" height="90" width="100" />
                                                 </div>
                                             </div>
                                             <div class="ui error message"></div>
@@ -519,5 +403,145 @@
                 </td>
             </tr>
         </table>
+        <center>
+            <pagination ng-model="currentPage"
+                        total-items="todos.length"
+                        max-size="maxSize"
+                        boundary-links="true">
+            </pagination>
+        </center>
     </div>
 </div>
+<!--Thêm Danh Mục Phụ-->
+<div class="modal fade" id="sub_create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <svg height="35" viewBox="0 0 512 512.0005" width="35" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1=".001" x2="512.001" y1="256" y2="256"><stop offset="0" stop-color="#80d8ff" /><stop offset="1" stop-color="#ea80fc" /></linearGradient><path d="m220 0h-200c-11.046875 0-20 8.953125-20 20v200c0 11.046875 8.953125 20 20 20h200c11.046875 0 20-8.953125 20-20v-200c0-11.046875-8.953125-20-20-20zm-20 200h-160v-160h160zm299.65625 73.523438c-7.472656-3.097657-16.078125-1.386719-21.796875 4.332031l-200 200c-5.722656 5.722656-7.433594 14.324219-4.335937 21.796875 3.097656 7.476562 10.386718 12.347656 18.476562 12.347656h200c11.046875 0 20-8.953125 20-20v-200c0-8.089844-4.871094-15.382812-12.34375-18.476562zm-27.65625 198.476562h-131.714844l131.714844-131.714844zm-80-232c66.167969 0 120-53.832031 120-120s-53.832031-120-120-120-120 53.832031-120 120 53.832031 120 120 120zm0-200c44.113281 0 80 35.886719 80 80s-35.886719 80-80 80-80-35.886719-80-80 35.886719-80 80-80zm-157.859375 266.144531-85.855469 85.855469 85.855469 85.855469c7.8125 7.8125 7.8125 20.476562 0 28.285156-7.808594 7.808594-20.472656 7.8125-28.28125 0l-85.859375-85.855469-85.859375 85.859375c-7.808594 7.808594-20.472656 7.808594-28.28125 0-7.8125-7.8125-7.8125-20.476562 0-28.285156l85.855469-85.859375-85.855469-85.855469c-7.8125-7.8125-7.8125-20.476562 0-28.285156 7.808594-7.8125 20.472656-7.8125 28.28125 0l85.859375 85.855469 85.859375-85.859375c7.808594-7.808594 20.472656-7.808594 28.28125 0 7.8125 7.8125 7.8125 20.476562 0 28.289062zm0 0" fill="url(#a)" /></svg> &nbsp;THÊM DANH MỤC PHỤ
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Create", "SubCategories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                {
+                    <form method="post" class="mb-4 ui form">
+                        <div class="field">
+                            <label>Tên danh mục phụ</label>
+                            <input type="text" name="subcategory_name" />
+                        </div>
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Tên danh mục chính</label>
+                                <select name="category_id">
+                                    @foreach (var item1 in categories)
+                                    {
+                                        <option value="@item1.category_id">@item1.category_name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label>Ảnh</label>
+                                <input name="fileUpload" type="file">
+                            </div>
+                        </div>
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Hoạt động</label>
+                                <select name="subcategory_active">
+                                    <option value="true">Hoạt động</option>
+                                    <option value="false">Không hoạt động</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ui error message"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!--//Thêm Danh Mục Phụ-->
+@foreach (var item in Model)
+{
+    <!--Sửa Danh Mục Phụ-->
+    <div class="modal fade" id="@sub_edit@item.subcategory_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <svg height="20" viewBox="0 -1 401.5411 401" width="20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m381.289062 32.242188c13.671876 13.664062 13.671876 35.824218 0 49.488281l-17.679687 17.679687-61.230469-61.230468 17.679688-17.679688c13.671875-13.667969 35.832031-13.667969 49.5 0zm0 0" fill="#00acea" />
+                            <path d="m363.609375 99.410156-160.148437 160.160156h-.011719l-61.230469-61.230468 160.160156-160.160156zm0 0" fill="#00efd1" />
+                            <path d="m142.21875 198.339844 61.230469 61.230468-.570313.570313-84.6875 23.460937 23.457032-84.691406zm0 0" fill="#fedb41" />
+                            <g fill="#083863">
+                                <path d="m370.589844 250.960938c-5.523438 0-10 4.476562-10 10v88.789062c-.019532 16.5625-13.4375 29.980469-30 30h-280.589844c-16.5625-.019531-29.980469-13.4375-30-30v-260.589844c.019531-16.558594 13.4375-29.980468 30-30h88.789062c5.523438 0 10-4.476562 10-10 0-5.523437-4.476562-10-10-10h-88.789062c-27.601562.03125-49.96875 22.398438-50 50v260.589844c.03125 27.601562 22.398438 49.96875 50 50h280.589844c27.601562-.03125 49.96875-22.398438 50-50v-88.789062c0-5.523438-4.476563-10-10-10zm0 0" />
+                                <path d="m376.632812 13.429688c-17.589843-17.546876-46.058593-17.546876-63.644531 0l-178.410156 178.410156c-1.21875 1.222656-2.105469 2.738281-2.566406 4.398437l-23.457031 84.691407c-.964844 3.472656.015624 7.191406 2.5625 9.742187 2.550781 2.546875 6.269531 3.527344 9.742187 2.566406l84.691406-23.460937c1.664063-.460938 3.183594-1.347656 4.40625-2.570313l.566407-.570312 177.835937-177.835938c17.574219-17.570312 17.574219-46.058593 0-63.628906zm-229.675781 203.789062 37.613281 37.617188-52.03125 14.414062zm56.5 42.355469v-.007813l6.519531 6.519532zm0-14.140625-47.09375-47.09375 146.015625-146.015625 47.089844 47.085937zm170.761719-170.773438-10.609375 10.609375-47.085937-47.089843 10.609374-10.609376c9.765626-9.746093 25.582032-9.746093 35.351563 0l11.734375 11.746094c9.765625 9.757813 9.765625 25.585938 0 35.34375zm0 0" />
+                            </g>
+                        </svg> &nbsp;SỬA DANH MỤC PHỤ
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Edit", "SubCategories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                    {
+                        <form method="post" class="mb-4 ui form">
+                            <input type="hidden" value="@item.subcategory_id" name="subcategory_id" />
+                            <input type="hidden" value="@item.subcategory_image" name="subcategory_image" />
+                            <input type="hidden" value="@item.subcategory_datecreated" name="subcategory_datecreated" />
+                            <div class="field">
+                                <label>Tên danh mục phụ</label>
+                                <input type="text" name="subcategory_name" value="@item.subcategory_name" />
+                            </div>
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>Thùng rác</label>
+                                    <select name="subcategory_bin">
+                                        <option value="@(item.subcategory_bin == true ? "selected" : "")">Không thùng rác</option>
+                                        <option value="@(item.subcategory_bin == false ? "selected" : "")">Thùng rác</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label>Hoạt động</label>
+                                    <select name="subcategory_active">
+                                        <option value="true" @(item.subcategory_active == true ? "selected" : "")>True</option>
+                                        <option value="false" @(item.subcategory_active == false ? "selected" : "")>False</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>Tên danh mục chính</label>
+                                    <select name="category_id">
+                                        @foreach (var item1 in categories)
+                                        {
+                                            <option value="@item1.category_id" @(item1.category_id == item.category_id ? "selected" : "")>@item1.category_name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label>Ảnh</label>
+                                    <input name="img" type="file">
+                                </div>
+                            </div>
+                            <div class="ui error message"></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> SỬA</button>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--//Sửa Danh Mục Phụ-->
+}
