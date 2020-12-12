@@ -405,8 +405,13 @@
                             prompt: 'Tên người dùng không được để trống.'
                         },
                         {
-                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
-                            prompt: 'Vui lòng nhập họ và tên 4-16 chữ cái.'
+                            type: 'minLength[4]',
+                            prompt: 'Vui lòng nhập nickname 4-16 chữ cái.'
+                        }
+                        ,
+                        {
+                            type: 'maxLength[50]',
+                            prompt: 'Vui lòng nhập nickname 4-50 chữ cái.'
                         }
                     ]
                 },

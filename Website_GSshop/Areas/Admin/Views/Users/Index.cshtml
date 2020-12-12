@@ -21,27 +21,39 @@
 </style>
 @Html.Action("CSS_Sematic", "Home")
 <script>
-    var app = angular
-        .module("myModule", [])
-        .controller("myController", function ($scope) {
+    var todos = angular.module('myModule', ['ui.bootstrap']);
 
-            var us = [
-                @foreach (var item in Model)
+    todos.controller('myControlleruser', function ($scope) {
+        $scope.filteredTodos = []
+            , $scope.currentPage = 1
+            , $scope.numPerPage = 8
+            , $scope.maxSize = 5;
+
+        $scope.makeTodos = function () {
+            $scope.todos = [
+               @foreach (var item in Model)
                 {
                     @: {id: @item.user_id, name: "@Html.Raw(item.user_nicename)", email: "@Html.Raw(item.user_email)", pass: "@item.user_pass", day: "@item.user_datecreated.Value.Day", month: "@item.user_datecreated.Value.Month", year: "@item.user_datecreated.Value.Year", token: "@Html.Raw(item.user_token)", role: "@item.user_role", dayl: "@item.user_datelogin.Value.Day", monthl: "@item.user_datelogin.Value.Month", yearl: "@item.user_datelogin.Value.Year", ac: "@item.user_active", img: "@item.user_image", bin: "@item.user_bin", tel: "@item.user_telephone", add: "@Html.Raw(item.user_address)", dis: "@item.user_district", pro: "@item.user_provincecity", date: "@item.user_datecreated.Value.Year-@(item.user_datecreated.Value.Month < 10 ? "0" + item.user_datecreated.Value.Month.ToString() : item.user_datecreated.Value.Month.ToString())-@(item.user_datecreated.Value.Day < 10 ? "0" + item.user_datecreated.Value.Day.ToString() : item.user_datecreated.Value.Day.ToString())", datel: "@item.user_datelogin.Value.Year-@(item.user_datelogin.Value.Month < 10 ? "0" + item.user_datelogin.Value.Month.ToString() : item.user_datelogin.Value.Month.ToString())-@(item.user_datelogin.Value.Day < 10 ? "0" + item.user_datelogin.Value.Day.ToString() : item.user_datelogin.Value.Day.ToString())" },
                 }
             ];
 
-            $scope.us = us;
-        });
-</script>
+        };
+        $scope.makeTodos();
 
+        $scope.$watch('currentPage + numPerPage', function () {
+            var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+                , end = begin + $scope.numPerPage;
+
+            $scope.filteredTodos = $scope.todos.slice(begin, end);
+        });
+    });
+</script>
 <a href="/Admin/Home/Index">
     <svg id="user" enable-background="new 0 0 300 300" height="45" viewBox="0 0 300 300" width="45" xmlns="http://www.w3.org/2000/svg"><path d="m38 38h224v224h-224z" fill="#fff" /><path d="m262 270h-224c-4.422 0-8-3.578-8-8v-224c0-4.422 3.578-8 8-8h224c4.422 0 8 3.578 8 8v224c0 4.422-3.578 8-8 8zm-216-16h208v-208h-208z" fill="#5c128d" /><path d="m54 54h16v16h-16z" fill="#e86436" /><path d="m78 54h16v16h-16z" fill="#f6d831" /><path d="m102 54h16v16h-16z" fill="#2ee52b" /><path d="m38 78h224v16h-224z" fill="#5c128d" /><path d="m126 230h48v16h-48z" fill="#d6d6d6" /><circle cx="150" cy="146" fill="#ffdea2" r="32" /><path d="m150 186c-22.055 0-40-17.945-40-40s17.945-40 40-40 40 17.945 40 40-17.945 40-40 40zm0-64c-13.234 0-24 10.766-24 24s10.766 24 24 24 24-10.766 24-24-10.766-24-24-24z" fill="#5c128d" /><path d="m166 174h-33c-17.673 0-32 14.327-32 32v8h97v-8c0-17.673-14.327-32-32-32z" fill="#816982" /><path d="m198 222h-97c-4.422 0-8-3.578-8-8v-8c0-22.055 17.945-40 40-40h33c22.055 0 40 17.945 40 40v8c0 4.422-3.578 8-8 8zm-89-16h81c0-13.234-10.766-24-24-24h-33c-13.234 0-24 10.766-24 24z" fill="#5c128d" /></svg>
 </a>
 <p class="btn btn-warning float-right" data-toggle="modal" data-target="#user_create"> THÊM MỚI</p>
 <div ng-app="myModule">
-    <div ng-controller="myController">
+    <div ng-controller="myControlleruser">
         <div class="card mt-3" style="padding: 10px">
             <div class="row">
                 <div class="col-lg-3">
@@ -161,40 +173,40 @@
                     <span><i class="fa fa-cogs"></i> Công cụ</span>
                 </th>
             </tr>
-            <tr ng-repeat="us in us | filter: searchText">
+            <tr ng-repeat="todo in filteredTodos | filter: searchText">
                 <td class="text-center">
-                    {{us.name}}
+                    {{todo.name}}
                 </td>
                 <td class="text-center">
-                    {{us.email}}
+                    {{todo.email}}
                 </td>
                 <td class="text-center">
-                    {{us.pass}}
+                    {{todo.pass}}
                 </td>
                 <td class="text-center">
-                    {{us.day}}/{{us.month}}/{{us.year}}
+                    {{todo.day}}/{{todo.month}}/{{todo.year}}
                 </td>
                 <td class="text-center">
-                    {{us.token}}
+                    {{todo.token}}
                 </td>
                 <td class="text-center">
-                    {{us.role}}
+                    {{todo.role}}
                 </td>
                 <td class="text-center">
-                    {{us.dayl}}/{{us.monthl}}/{{us.yearl}}
+                    {{todo.dayl}}/{{todo.monthl}}/{{todo.yearl}}
                 </td>
                 <td class="text-center">
-                    {{us.ac}}
+                    {{todo.ac}}
                 </td>
                 <td class="text-center">
-                    <img src="~/Content/Layout/images/{{us.img}}" height="100" width="100" />
+                    <img src="~/Content/Layout/images/{{todo.img}}" height="100" width="100" />
                 </td>
                 <td class="text-center">
-                    {{us.bin}}
+                    {{todo.bin}}
                 </td>
                 <td width="130">
                     <div class="text-center">
-                        <a href="/Admin/Users/Edit/{{us.id}}" data-toggle="modal" data-target="#@user_edit{{us.id}}">
+                        <a href="/Admin/Users/Edit/{{todo.id}}" data-toggle="modal" data-target="#@user_edit{{todo.id}}">
                             <svg height="20" viewBox="0 -1 401.5411 401" width="20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="m381.289062 32.242188c13.671876 13.664062 13.671876 35.824218 0 49.488281l-17.679687 17.679687-61.230469-61.230468 17.679688-17.679688c13.671875-13.667969 35.832031-13.667969 49.5 0zm0 0" fill="#00acea" />
                                 <path d="m363.609375 99.410156-160.148437 160.160156h-.011719l-61.230469-61.230468 160.160156-160.160156zm0 0" fill="#00efd1" />
@@ -205,7 +217,7 @@
                                 </g>
                             </svg>
                         </a> |
-                        <a href="/Admin/Users/Edit/{{us.id}}" data-toggle="modal" data-target="#@user_detail{{us.id}}">
+                        <a href="/Admin/Users/Edit/{{todo.id}}" data-toggle="modal" data-target="#@user_detail{{todo.id}}">
                             <svg id="Layer_1" enable-background="new 0 0 512 512" height="20" viewBox="0 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg">
                                 <g>
                                     <g clip-rule="evenodd" fill-rule="evenodd">
@@ -227,7 +239,7 @@
                                 </g>
                             </svg>
                         </a> |
-                        <a href="/Admin/Users/Edit/{{us.id}}" data-toggle="modal" data-target="#@user_delete{{us.id}}">
+                        <a href="/Admin/Users/Edit/{{todo.id}}" data-toggle="modal" data-target="#@user_delete{{todo.id}}">
                             <svg id="Capa_1" enable-background="new 0 0 512 512" height="20" viewBox="0 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg">
                                 <g>
                                     <g>
@@ -258,196 +270,9 @@
                             </svg>
                         </a>
                     </div>
-                    <!--Thêm User-->
-                    <div class="modal fade" id="user_create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
-                                        <svg id="user" enable-background="new 0 0 300 300" height="40" viewBox="0 0 300 300" width="40" xmlns="http://www.w3.org/2000/svg"><path d="m38 38h224v224h-224z" fill="#fff" /><path d="m262 270h-224c-4.422 0-8-3.578-8-8v-224c0-4.422 3.578-8 8-8h224c4.422 0 8 3.578 8 8v224c0 4.422-3.578 8-8 8zm-216-16h208v-208h-208z" fill="#5c128d" /><path d="m54 54h16v16h-16z" fill="#e86436" /><path d="m78 54h16v16h-16z" fill="#f6d831" /><path d="m102 54h16v16h-16z" fill="#2ee52b" /><path d="m38 78h224v16h-224z" fill="#5c128d" /><path d="m126 230h48v16h-48z" fill="#d6d6d6" /><circle cx="150" cy="146" fill="#ffdea2" r="32" /><path d="m150 186c-22.055 0-40-17.945-40-40s17.945-40 40-40 40 17.945 40 40-17.945 40-40 40zm0-64c-13.234 0-24 10.766-24 24s10.766 24 24 24 24-10.766 24-24-10.766-24-24-24z" fill="#5c128d" /><path d="m166 174h-33c-17.673 0-32 14.327-32 32v8h97v-8c0-17.673-14.327-32-32-32z" fill="#816982" /><path d="m198 222h-97c-4.422 0-8-3.578-8-8v-8c0-22.055 17.945-40 40-40h33c22.055 0 40 17.945 40 40v8c0 4.422-3.578 8-8 8zm-89-16h81c0-13.234-10.766-24-24-24h-33c-13.234 0-24 10.766-24 24z" fill="#5c128d" /></svg> &nbsp;THÊM USER
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    @using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
-                                    {
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Email</label>
-                                                <input type="email" name="user_email">
-                                            </div>
-                                            <div class="field">
-                                                <label>Mật khẩu</label>
-                                                <input type="password" name="user_pass" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Số điện thoại</label>
-                                                <input type="text" name="user_telephone" />
-                                            </div>
-                                        </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Nice name</label>
-                                                <input type="text" name="user_nicename" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Token</label>
-                                                <input type="text" name="user_token" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đại diện</label>
-                                                <input name="fileUpload" type="file">
-                                            </div>
-                                        </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="date" name="user_datecreated" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ngày đăng nhập</label>
-                                                <input type="date" name="user_datelogin" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="user_active">
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Địa chỉ</label>
-                                                <input type="text" name="user_address" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Quận/Huyện</label>
-                                                <select name="user_district">
-                                                    <option>Chọn Quận/Huyện</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Tỉnh/TP</label>
-                                                <select name="user_provincecity">
-                                                    <option>Chọn Tỉnh/Thành Phố</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="ui error message"></div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--//Thêm User-->
-                    <!--Sửa User-->
-                    <div class="modal fade" id="@user_edit{{us.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
-                                        <svg height="20" viewBox="0 -1 401.5411 401" width="20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="m381.289062 32.242188c13.671876 13.664062 13.671876 35.824218 0 49.488281l-17.679687 17.679687-61.230469-61.230468 17.679688-17.679688c13.671875-13.667969 35.832031-13.667969 49.5 0zm0 0" fill="#00acea" />
-                                            <path d="m363.609375 99.410156-160.148437 160.160156h-.011719l-61.230469-61.230468 160.160156-160.160156zm0 0" fill="#00efd1" />
-                                            <path d="m142.21875 198.339844 61.230469 61.230468-.570313.570313-84.6875 23.460937 23.457032-84.691406zm0 0" fill="#fedb41" />
-                                            <g fill="#083863">
-                                                <path d="m370.589844 250.960938c-5.523438 0-10 4.476562-10 10v88.789062c-.019532 16.5625-13.4375 29.980469-30 30h-280.589844c-16.5625-.019531-29.980469-13.4375-30-30v-260.589844c.019531-16.558594 13.4375-29.980468 30-30h88.789062c5.523438 0 10-4.476562 10-10 0-5.523437-4.476562-10-10-10h-88.789062c-27.601562.03125-49.96875 22.398438-50 50v260.589844c.03125 27.601562 22.398438 49.96875 50 50h280.589844c27.601562-.03125 49.96875-22.398438 50-50v-88.789062c0-5.523438-4.476563-10-10-10zm0 0" />
-                                                <path d="m376.632812 13.429688c-17.589843-17.546876-46.058593-17.546876-63.644531 0l-178.410156 178.410156c-1.21875 1.222656-2.105469 2.738281-2.566406 4.398437l-23.457031 84.691407c-.964844 3.472656.015624 7.191406 2.5625 9.742187 2.550781 2.546875 6.269531 3.527344 9.742187 2.566406l84.691406-23.460937c1.664063-.460938 3.183594-1.347656 4.40625-2.570313l.566407-.570312 177.835937-177.835938c17.574219-17.570312 17.574219-46.058593 0-63.628906zm-229.675781 203.789062 37.613281 37.617188-52.03125 14.414062zm56.5 42.355469v-.007813l6.519531 6.519532zm0-14.140625-47.09375-47.09375 146.015625-146.015625 47.089844 47.085937zm170.761719-170.773438-10.609375 10.609375-47.085937-47.089843 10.609374-10.609376c9.765626-9.746093 25.582032-9.746093 35.351563 0l11.734375 11.746094c9.765625 9.757813 9.765625 25.585938 0 35.34375zm0 0" />
-                                            </g>
-                                        </svg> &nbsp;SỬA USER
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
-                                    {
-                                        <input type="hidden" value="{{us.id}}" name="user_id" />
-                                        <input type="hidden" value="{{us.img}}" name="user_image" />
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Email</label>
-                                                <input type="email" name="user_email" value="{{us.email}}">
-                                            </div>
-                                            <div class="field">
-                                                <label>Mật khẩu</label>
-                                                <input type="text" name="user_pass" value="{{us.email}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Số điện thoại</label>
-                                                <input type="text" name="user_telephone" value="{{us.tel}}" />
-                                            </div>
-                                        </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Nice name</label>
-                                                <input type="text" name="user_nicename" value="{{us.name}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Token</label>
-                                                <input type="text" name="user_token" value="{{us.token}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đại diện</label>
-                                                <input name="fileUpload" type="file">
-                                            </div>
-                                        </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="date" name="user_datecreated" value="{{us.date}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ngày đăng nhập</label>
-                                                <input type="date" name="user_datelogin" value="{{us.datel}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="user_active">
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Địa chỉ</label>
-                                                <input type="text" name="user_address" value="{{us.add}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Quận/Huyện</label>
-                                                <select name="user_district">
-                                                    <option>Chọn Quận/Huyện</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Tỉnh/TP</label>
-                                                <select name="user_provincecity">
-                                                    <option>Chọn Tỉnh/Thành Phố</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="ui error message"></div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> SỬA</button>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--//Sửa User-->
+
                     <!--Chi Tiết User-->
-                    <div class="modal fade" id="@user_detail{{us.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="@user_detail{{todo.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -483,39 +308,39 @@
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Email</label>
-                                                <input type="email" name="user_email" value="{{us.email}}" disabled />
+                                                <input type="email" name="user_email" value="{{todo.email}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Mật khẩu</label>
-                                                <input type="text" name="user_pass" value="{{us.pass}}" disabled />
+                                                <input type="text" name="user_pass" value="{{todo.pass}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Số điện thoại</label>
-                                                <input type="text" name="user_telephone" value="{{us.tel}}" disabled />
+                                                <input type="text" name="user_telephone" value="{{todo.tel}}" disabled />
                                             </div>
                                         </div>
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Nice name</label>
-                                                <input type="text" name="user_nicename" value="{{us.name}}" disabled />
+                                                <input type="text" name="user_nicename" value="{{todo.name}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Token</label>
-                                                <input type="text" name="user_token" value="{{us.token}}" disabled />
+                                                <input type="text" name="user_token" value="{{todo.token}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Ảnh đại diện</label>
-                                                <img src="~/Content/Layout/images/{{us.img}}" height="100" width="100" />
+                                                <img src="~/Content/Layout/images/{{todo.img}}" height="100" width="100" />
                                             </div>
                                         </div>
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Ngày tạo</label>
-                                                <input type="text" name="user_datecreated" value="{{us.day}}/{{us.month}}/{{us.year}}" disabled />
+                                                <input type="text" name="user_datecreated" value="{{todo.day}}/{{todo.month}}/{{todo.year}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Ngày đăng nhập</label>
-                                                <input type="text" name="user_datelogin" value="{{us.dayl}}/{{us.monthl}}/{{us.yearl}}" disabled />
+                                                <input type="text" name="user_datelogin" value="{{todo.dayl}}/{{todo.monthl}}/{{todo.yearl}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Hoạt động</label>
@@ -528,18 +353,18 @@
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Địa chỉ</label>
-                                                <input type="text" name="user_address" value="{{us.add}}" disabled />
+                                                <input type="text" name="user_address" value="{{todo.add}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Quận/Huyện</label>
                                                 <select name="user_district" disabled>
-                                                    <option>{{us.dis}}</option>
+                                                    <option>{{todo.dis}}</option>
                                                 </select>
                                             </div>
                                             <div class="field">
                                                 <label>Tỉnh/TP</label>
                                                 <select name="user_provincecity" disabled>
-                                                    <option>{{us.pro}}</option>
+                                                    <option>{{todo.pro}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -554,7 +379,7 @@
                     </div>
                     <!--//Chi Tiết User-->
                     <!--Xóa User-->
-                    <div class="modal fade" id="@user_delete{{us.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="@user_delete{{todo.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -595,43 +420,43 @@
                                 <div class="modal-body">
                                     @using (Html.BeginForm("Delete", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                     {
-                                        <input type="hidden" value="{{us.id}}" name="user_id" />
+                                        <input type="hidden" value="{{todo.id}}" name="user_id" />
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Email</label>
-                                                <input type="email" name="user_email" value="{{us.email}}" disabled />
+                                                <input type="email" name="user_email" value="{{todo.email}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Mật khẩu</label>
-                                                <input type="text" name="user_pass" value="{{us.pass}}" disabled />
+                                                <input type="text" name="user_pass" value="{{todo.pass}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Số điện thoại</label>
-                                                <input type="text" name="user_telephone" value="{{us.tel}}" disabled />
+                                                <input type="text" name="user_telephone" value="{{todo.tel}}" disabled />
                                             </div>
                                         </div>
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Nice name</label>
-                                                <input type="text" name="user_nicename" value="{{us.name}}" disabled />
+                                                <input type="text" name="user_nicename" value="{{todo.name}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Token</label>
-                                                <input type="text" name="user_token" value="{{us.token}}" disabled />
+                                                <input type="text" name="user_token" value="{{todo.token}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Ảnh đại diện</label>
-                                                <img src="~/Content/Layout/images/{{us.img}}" height="90" width="100" />
+                                                <img src="~/Content/Layout/images/{{todo.img}}" height="90" width="100" />
                                             </div>
                                         </div>
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Ngày tạo</label>
-                                                <input type="text" name="user_datecreated" value="{{us.day}}/{{us.month}}/{{us.year}}" disabled />
+                                                <input type="text" name="user_datecreated" value="{{todo.day}}/{{todo.month}}/{{todo.year}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Ngày đăng nhập</label>
-                                                <input type="text" name="user_datelogin" value="{{us.dayl}}/{{us.monthl}}/{{us.yearl}}" disabled />
+                                                <input type="text" name="user_datelogin" value="{{todo.dayl}}/{{todo.monthl}}/{{todo.yearl}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Hoạt động</label>
@@ -644,18 +469,18 @@
                                         <div class="three fields">
                                             <div class="field">
                                                 <label>Địa chỉ</label>
-                                                <input type="text" name="user_address" value="{{us.add}}" disabled />
+                                                <input type="text" name="user_address" value="{{todo.add}}" disabled />
                                             </div>
                                             <div class="field">
                                                 <label>Quận/Huyện</label>
                                                 <select name="user_district" disabled>
-                                                    <option>{{us.dis}}</option>
+                                                    <option>{{todo.dis}}</option>
                                                 </select>
                                             </div>
                                             <div class="field">
                                                 <label>Tỉnh/TP</label>
                                                 <select name="user_provincecity" disabled>
-                                                    <option>{{us.pro}}</option>
+                                                    <option>{{todo.pro}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -673,5 +498,195 @@
                 </td>
             </tr>
         </table>
+        <center>
+            <pagination ng-model="currentPage"
+                        total-items="todos.length"
+                        max-size="maxSize"
+                        boundary-links="true">
+            </pagination>
+        </center>
     </div>
 </div>
+<!--Thêm User-->
+<div class="modal fade" id="user_create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <svg id="user" enable-background="new 0 0 300 300" height="40" viewBox="0 0 300 300" width="40" xmlns="http://www.w3.org/2000/svg"><path d="m38 38h224v224h-224z" fill="#fff" /><path d="m262 270h-224c-4.422 0-8-3.578-8-8v-224c0-4.422 3.578-8 8-8h224c4.422 0 8 3.578 8 8v224c0 4.422-3.578 8-8 8zm-216-16h208v-208h-208z" fill="#5c128d" /><path d="m54 54h16v16h-16z" fill="#e86436" /><path d="m78 54h16v16h-16z" fill="#f6d831" /><path d="m102 54h16v16h-16z" fill="#2ee52b" /><path d="m38 78h224v16h-224z" fill="#5c128d" /><path d="m126 230h48v16h-48z" fill="#d6d6d6" /><circle cx="150" cy="146" fill="#ffdea2" r="32" /><path d="m150 186c-22.055 0-40-17.945-40-40s17.945-40 40-40 40 17.945 40 40-17.945 40-40 40zm0-64c-13.234 0-24 10.766-24 24s10.766 24 24 24 24-10.766 24-24-10.766-24-24-24z" fill="#5c128d" /><path d="m166 174h-33c-17.673 0-32 14.327-32 32v8h97v-8c0-17.673-14.327-32-32-32z" fill="#816982" /><path d="m198 222h-97c-4.422 0-8-3.578-8-8v-8c0-22.055 17.945-40 40-40h33c22.055 0 40 17.945 40 40v8c0 4.422-3.578 8-8 8zm-89-16h81c0-13.234-10.766-24-24-24h-33c-13.234 0-24 10.766-24 24z" fill="#5c128d" /></svg> &nbsp;THÊM USER
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                {
+                    <div class="three fields">
+                        <div class="field">
+                            <label>Email</label>
+                            <input type="email" name="user_email">
+                        </div>
+                        <div class="field">
+                            <label>Mật khẩu</label>
+                            <input type="password" name="user_pass" />
+                        </div>
+                        <div class="field">
+                            <label>Số điện thoại</label>
+                            <input type="text" name="user_telephone" />
+                        </div>
+                    </div>
+                    <div class="three fields">
+                        <div class="field">
+                            <label>Nice name</label>
+                            <input type="text" name="user_nicename" />
+                        </div>
+                        <div class="field">
+                            <label>Ảnh đại diện</label>
+                            <input name="fileUpload" type="file">
+                        </div>
+                        <div class="field">
+                            <label>Hoạt động</label>
+                            <select name="user_active">
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="three fields">
+                        <div class="field">
+                            <label>Địa chỉ</label>
+                            <input type="text" name="user_address" />
+                        </div>
+                        <div class="field">
+                            <label>Quận/Huyện</label>
+                            <select name="user_district">
+                                <option>Chọn Quận/Huyện</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Tỉnh/TP</label>
+                            <select name="user_provincecity">
+                                <option>Chọn Tỉnh/Thành Phố</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ui error message"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!--//Thêm User-->
+@foreach (var item in Model)
+{
+
+    <!--Sửa User-->
+    <div class="modal fade" id="@user_edit@item.user_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <svg height="20" viewBox="0 -1 401.5411 401" width="20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m381.289062 32.242188c13.671876 13.664062 13.671876 35.824218 0 49.488281l-17.679687 17.679687-61.230469-61.230468 17.679688-17.679688c13.671875-13.667969 35.832031-13.667969 49.5 0zm0 0" fill="#00acea" />
+                            <path d="m363.609375 99.410156-160.148437 160.160156h-.011719l-61.230469-61.230468 160.160156-160.160156zm0 0" fill="#00efd1" />
+                            <path d="m142.21875 198.339844 61.230469 61.230468-.570313.570313-84.6875 23.460937 23.457032-84.691406zm0 0" fill="#fedb41" />
+                            <g fill="#083863">
+                                <path d="m370.589844 250.960938c-5.523438 0-10 4.476562-10 10v88.789062c-.019532 16.5625-13.4375 29.980469-30 30h-280.589844c-16.5625-.019531-29.980469-13.4375-30-30v-260.589844c.019531-16.558594 13.4375-29.980468 30-30h88.789062c5.523438 0 10-4.476562 10-10 0-5.523437-4.476562-10-10-10h-88.789062c-27.601562.03125-49.96875 22.398438-50 50v260.589844c.03125 27.601562 22.398438 49.96875 50 50h280.589844c27.601562-.03125 49.96875-22.398438 50-50v-88.789062c0-5.523438-4.476563-10-10-10zm0 0" />
+                                <path d="m376.632812 13.429688c-17.589843-17.546876-46.058593-17.546876-63.644531 0l-178.410156 178.410156c-1.21875 1.222656-2.105469 2.738281-2.566406 4.398437l-23.457031 84.691407c-.964844 3.472656.015624 7.191406 2.5625 9.742187 2.550781 2.546875 6.269531 3.527344 9.742187 2.566406l84.691406-23.460937c1.664063-.460938 3.183594-1.347656 4.40625-2.570313l.566407-.570312 177.835937-177.835938c17.574219-17.570312 17.574219-46.058593 0-63.628906zm-229.675781 203.789062 37.613281 37.617188-52.03125 14.414062zm56.5 42.355469v-.007813l6.519531 6.519532zm0-14.140625-47.09375-47.09375 146.015625-146.015625 47.089844 47.085937zm170.761719-170.773438-10.609375 10.609375-47.085937-47.089843 10.609374-10.609376c9.765626-9.746093 25.582032-9.746093 35.351563 0l11.734375 11.746094c9.765625 9.757813 9.765625 25.585938 0 35.34375zm0 0" />
+                            </g>
+                        </svg> &nbsp;SỬA USER
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                    {
+                        <input type="hidden" value="@item.user_id" name="user_id" />
+                        <input type="hidden" value="@item.user_image" name="user_image" />
+                        <input type="hidden" value="@item.user_datecreated" name="user_datecreated" />
+                        <input type="hidden" value="@item.user_datelogin" name="user_datelogin" />
+                        <div class="three fields">
+                            <div class="field">
+                                <label>Email</label>
+                                <input type="email" name="user_email" value="@item.user_email">
+                            </div>
+                            <div class="field">
+                                <label>Mật khẩu</label>
+                                <input type="text" name="user_pass" value="@item.user_pass" />
+                            </div>
+                            <div class="field">
+                                <label>Số điện thoại</label>
+                                <input type="text" name="user_telephone" value="@item.user_telephone" />
+                            </div>
+                        </div>
+                        <div class="three fields">
+                            <div class="field">
+                                <label>Nice name</label>
+                                <input type="text" name="user_nicename" value="@item.user_nicename" />
+                            </div>
+                            <div class="field">
+                                <label>Thùng rác</label>
+                                <select name="user_bin">
+                                    <option value="true" @(item.user_bin == true ? "selected" : "")>Không thùng rác</option>
+                                    <option value="false" @(item.user_bin == false ? "selected" : "")>Thùng rác</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label>Ảnh đại diện</label>
+                                <input name="efileUpload" type="file">
+                            </div>
+                        </div>
+                        <div class="three fields">
+                            <div class="field">
+                                <label>Ngày tạo</label>
+                                <input type="date" name="" disabled value="@item.user_datecreated" />
+                            </div>
+                            <div class="field">
+                                <label>Ngày đăng nhập</label>
+                                <input type="date" name="" disabled value="@item.user_datelogin" />
+                            </div>
+                            <div class="field">
+                                <label>Hoạt động</label>
+                                <select name="user_active">
+                                    <option value="true" @(item.user_active == true ? "selected" : "")>Hoạt động</option>
+                                    <option value="false" @(item.user_active == false ? "selected" : "")>Không hoạt đỗng</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="three fields">
+                            <div class="field">
+                                <label>Địa chỉ</label>
+                                <input type="text" name="user_address" value="@item.user_address" />
+                            </div>
+                            <div class="field">
+                                <label>Quận/Huyện</label>
+                                <select name="user_district">
+                                    <option>Chọn Quận/Huyện</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label>Tỉnh/TP</label>
+                                <select name="user_provincecity">
+                                    <option>Chọn Tỉnh/Thành Phố</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ui error message"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> SỬA</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--//Sửa User-->
+}
