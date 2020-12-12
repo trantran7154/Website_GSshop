@@ -12,15 +12,12 @@ namespace Website_GSshop.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Favourite
+    public partial class sysdiagrams
     {
-        public int fa_id { get; set; }
-        public Nullable<System.DateTime> fa_datereated { get; set; }
-        public Nullable<bool> fa_bin { get; set; }
-        public Nullable<int> product_id { get; set; }
-        public Nullable<int> user_id { get; set; }
-    
-        public virtual User User { get; set; }
-        public virtual Product Product { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

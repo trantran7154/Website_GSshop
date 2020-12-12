@@ -105,6 +105,7 @@ namespace Website_GSshop.Areas.SellerManagement.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,category_id,subcategory_id,banner_id,collection_id,gsmail_id,product_bin,product_related,user_id,csc_id")] Product product)
         {

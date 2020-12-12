@@ -151,7 +151,7 @@
     <Compile Include="Areas\Admin\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\GSMallsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReplyCommentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SellersController.cs" />
     <Compile Include="Areas\Admin\Controllers\Seller_ProductController.cs" />
@@ -249,6 +249,9 @@
     </Compile>
     <Compile Include="Models\ShoppingCarts.cs" />
     <Compile Include="Models\SubCategory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
@@ -470,6 +473,9 @@
     <Content Include="Content\Layout\js\minicart.js" />
     <Content Include="Content\Layout\js\move-top.js" />
     <Content Include="Content\Layout\js\SmoothScroll.min.js" />
+    <Content Include="Content\PageList\JavaScript.js" />
+    <Content Include="Content\PageList\ui.css" />
+    <Content Include="Content\PageList\ui.js" />
     <Content Include="Content\Semantic-UI-CSS-master\components\accordion.css" />
     <Content Include="Content\Semantic-UI-CSS-master\components\accordion.js" />
     <Content Include="Content\Semantic-UI-CSS-master\components\accordion.min.css" />
@@ -932,11 +938,11 @@
     <Content Include="Areas\Admin\Content\Layout_Admin\assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="Areas\Admin\Content\Layout_Admin\assets\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductsAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductsAdmin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductsAdmin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductsAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductsAdmin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\CSS_Sematic.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
@@ -1040,6 +1046,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1147,6 +1154,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\SellerManagement\Data\" />
+    <Folder Include="Content\NewFolder1\" />
     <Folder Include="Views\Ajax\" />
   </ItemGroup>
   <ItemGroup>

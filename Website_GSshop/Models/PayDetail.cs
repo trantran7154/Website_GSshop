@@ -23,7 +23,7 @@ namespace Website_GSshop.Models
         public Nullable<int> bill_id { get; set; }
     
         public virtual Bill Bill { get; set; }
-        public virtual Product Product { get; set; }
         public virtual User User { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

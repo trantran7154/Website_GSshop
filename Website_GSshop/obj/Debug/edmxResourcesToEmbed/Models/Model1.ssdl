@@ -245,6 +245,16 @@
     <Property Name="subcategory_level" Type="bit" />
     <Property Name="subcategory_bin" Type="bit" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="user_id" />
@@ -642,6 +652,7 @@
     <EntitySet Name="ReplyComment" EntityType="Self.ReplyComment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Bill_User" Association="Self.FK_Bill_User">
       <End Role="User" EntitySet="User" />

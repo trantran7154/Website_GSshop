@@ -23,8 +23,8 @@ namespace Website_GSshop.Models
         public Nullable<int> comment_id { get; set; }
     
         public virtual Comment Comment { get; set; }
-        public virtual Product Product { get; set; }
         public virtual ReplyComment ReplyComment { get; set; }
         public virtual User User { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

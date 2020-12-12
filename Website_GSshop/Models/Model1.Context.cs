@@ -37,10 +37,11 @@ namespace Website_GSshop.Models
         public virtual DbSet<GSMall> GSMall { get; set; }
         public virtual DbSet<Like> Like { get; set; }
         public virtual DbSet<PayDetail> PayDetail { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ReplyComment> ReplyComment { get; set; }
         public virtual DbSet<Seller> Seller { get; set; }
         public virtual DbSet<SubCategory> SubCategory { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

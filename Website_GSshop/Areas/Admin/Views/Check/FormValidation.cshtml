@@ -249,7 +249,11 @@
                             prompt: 'Tên danh mục chính không được để trống.'
                         },
                         {
-                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            type: 'minLength[4]',
+                            prompt: 'Vui lòng nhập tên danh mục chính 4-16 chữ cái.'
+                        },
+                        {
+                            type: 'maxLength[16]',
                             prompt: 'Vui lòng nhập tên danh mục chính 4-16 chữ cái.'
                         }
                     ]
