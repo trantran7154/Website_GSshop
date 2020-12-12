@@ -18,7 +18,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // GET: Admin/Users
         public ActionResult Index()
         {
-            return View(db.User.Where(n => n.user_bin == true).ToList());
+            return View(db.User.Where(n => n.user_bin == true).OrderByDescending(n=>n.user_datecreated).ToList());
         }
 
         // GET: Admin/Users/Details/5
@@ -48,10 +48,13 @@ namespace Website_GSshop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include = "user_id,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_image,user_sex,user_provincecity,user_district,user_bin")] User user, HttpPostedFileBase fileUpload)
         {
+            Random random = new Random();
+            ViewBag.random = random.Next(0, 1000);
+
             // Tên file ảnh sản phẩm
             var fileimg_edit = Path.GetFileName(fileUpload.FileName);
             // Đưa tên ảnh vào đúng file
-            var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit);
+            var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit);
             // Ảnh trống
             if (fileUpload == null)
             {
@@ -69,7 +72,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
             {
                 fileUpload.SaveAs(pa_eidt);
                 db.User.Add(user);
-                user.user_image = fileUpload.FileName;
+                user.user_image = ViewBag.random + fileUpload.FileName;
                 user.user_datecreated = DateTime.Now;
                 user.user_token = Guid.NewGuid().ToString();
                 user.user_role = 1;
@@ -100,10 +103,13 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "user_id,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_image,user_sex,user_provincecity,user_district,user_bin")] User user, HttpPostedFileBase fileUpload)
+        public ActionResult Edit([Bind(Include = "user_id,user_pass,user_nicename,user_email,user_datecreated,user_token,user_role,user_datelogin,user_active,user_address,user_telephone,user_image,user_sex,user_provincecity,user_district,user_bin")] User user, HttpPostedFileBase efileUpload)
         {
+            Random random = new Random();
+            ViewBag.random = random.Next(0, 1000);
+
             db.Entry(user).State = EntityState.Modified;
-            if (fileUpload == null)
+            if (efileUpload == null)
             {
                 User users = db.User.Find(Int32.Parse(user.user_id.ToString()));
                 db.SaveChanges();
@@ -112,11 +118,11 @@ namespace Website_GSshop.Areas.Admin.Controllers
             else
             {
                 // Tên file ảnh sản phẩm
-                var fileimg_edit = Path.GetFileName(fileUpload.FileName);
+                var fileimg_edit = Path.GetFileName(efileUpload.FileName);
                 // Đưa tên ảnh vào đúng file
                 var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit);
                 // Ảnh trống
-                if (fileUpload == null)
+                if (efileUpload == null)
                 {
                     ViewBag.ThongBao = "Ảnh trống !";
                     return View(user);
@@ -130,8 +136,8 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 //Lưu pa vào name fileUpload
                 else
                 {
-                    fileUpload.SaveAs(pa_eidt);
-                    user.user_image = fileUpload.FileName;
+                    efileUpload.SaveAs(pa_eidt);
+                    user.user_image = efileUpload.FileName;
                     user.user_datecreated = DateTime.Now;
                     user.user_token = Guid.NewGuid().ToString();
                     user.user_role = 1;
@@ -164,7 +170,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(User user)
         {
             User us = db.User.Find(Int32.Parse(user.user_id.ToString()));
-            us.user_active = false;
             us.user_bin = false;
             db.SaveChanges();
             return Redirect(admin_qlu);

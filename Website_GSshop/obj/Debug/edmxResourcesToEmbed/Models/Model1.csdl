@@ -26,7 +26,7 @@
     <Property Name="banner_active" Type="Boolean" />
     <Property Name="banner_datecreated" Type="DateTime" Precision="3" />
     <Property Name="banner_bin" Type="Boolean" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Product_Banner" FromRole="Banner" ToRole="Product" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_Banner" FromRole="Banner" ToRole="Product" />
   </EntityType>
   <EntityType Name="Bill">
     <Key>
@@ -68,8 +68,8 @@
     <Property Name="category_datecreated" Type="DateTime" Precision="3" />
     <Property Name="category_active" Type="Boolean" />
     <Property Name="category_bin" Type="Boolean" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
     <NavigationProperty Name="SubCategory" Relationship="Self.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
   </EntityType>
   <EntityType Name="ClassificationSubCategory">
     <Key>
@@ -83,7 +83,7 @@
     <Property Name="subcategory_id" Type="Int32" />
     <Property Name="csc_bin" Type="Boolean" />
     <NavigationProperty Name="SubCategory" Relationship="Self.FK_ClassificationSubCategory_SubCategory" FromRole="ClassificationSubCategory" ToRole="SubCategory" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Product_ClassificationSubCategory" FromRole="ClassificationSubCategory" ToRole="Product" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_ClassificationSubCategory" FromRole="ClassificationSubCategory" ToRole="Product" />
   </EntityType>
   <EntityType Name="Collection">
     <Key>
@@ -99,7 +99,7 @@
     <Property Name="collection_bin" Type="Boolean" />
     <Property Name="seller_id" Type="Int32" />
     <NavigationProperty Name="Seller" Relationship="Self.FK_Collection_Seller1" FromRole="Collection" ToRole="Seller" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Product_Collection" FromRole="Collection" ToRole="Product" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_Collection" FromRole="Collection" ToRole="Product" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>
@@ -112,10 +112,10 @@
     <Property Name="comment_spam" Type="Boolean" />
     <Property Name="comment_bin" Type="Boolean" />
     <Property Name="user_id" Type="Int32" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Comment_Product" FromRole="Comment" ToRole="Product" />
     <NavigationProperty Name="User" Relationship="Self.FK_Comment_User" FromRole="Comment" ToRole="User" />
     <NavigationProperty Name="Like" Relationship="Self.FK_Like_Comment" FromRole="Comment" ToRole="Like" />
     <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Comment" FromRole="Comment" ToRole="ReplyComment" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Comment_Product" FromRole="Comment" ToRole="Product" />
   </EntityType>
   <EntityType Name="Favourite">
     <Key>
@@ -126,8 +126,8 @@
     <Property Name="fa_bin" Type="Boolean" />
     <Property Name="product_id" Type="Int32" />
     <Property Name="user_id" Type="Int32" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Favourite_Product" FromRole="Favourite" ToRole="Product" />
     <NavigationProperty Name="User" Relationship="Self.FK_Favourite_User" FromRole="Favourite" ToRole="User" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Favourite_Product" FromRole="Favourite" ToRole="Product" />
   </EntityType>
   <EntityType Name="GSMall">
     <Key>
@@ -148,7 +148,7 @@
     <Property Name="gsmall_img5" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="gsmall_img6" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="gsmall_img7" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Product_GSMall1" FromRole="GSMall" ToRole="Product" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_GSMall1" FromRole="GSMall" ToRole="Product" />
   </EntityType>
   <EntityType Name="Like">
     <Key>
@@ -162,9 +162,9 @@
     <Property Name="user_id" Type="Int32" />
     <Property Name="comment_id" Type="Int32" />
     <NavigationProperty Name="Comment" Relationship="Self.FK_Like_Comment" FromRole="Like" ToRole="Comment" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Like_Product" FromRole="Like" ToRole="Product" />
     <NavigationProperty Name="ReplyComment" Relationship="Self.FK_Like_ReplyComment" FromRole="Like" ToRole="ReplyComment" />
     <NavigationProperty Name="User" Relationship="Self.FK_Like_User1" FromRole="Like" ToRole="User" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Like_Product" FromRole="Like" ToRole="Product" />
   </EntityType>
   <EntityType Name="PayDetail">
     <Key>
@@ -178,56 +178,8 @@
     <Property Name="pay_datecreated" Type="DateTime" Precision="3" />
     <Property Name="bill_id" Type="Int32" />
     <NavigationProperty Name="Bill" Relationship="Self.FK_PayDetail_Bill" FromRole="PayDetail" ToRole="Bill" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_PayDetail_Product" FromRole="PayDetail" ToRole="Product" />
     <NavigationProperty Name="User" Relationship="Self.FK_PayDetail_User1" FromRole="PayDetail" ToRole="User" />
-  </EntityType>
-  <EntityType Name="Product">
-    <Key>
-      <PropertyRef Name="product_id" />
-    </Key>
-    <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="product_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="product_image" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-    <Property Name="product_datecreated" Type="DateTime" Precision="3" />
-    <Property Name="product_active" Type="Boolean" />
-    <Property Name="product_note" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-    <Property Name="product_price" Type="Decimal" Precision="19" Scale="4" />
-    <Property Name="product_ship" Type="Boolean" />
-    <Property Name="product_view" Type="Int32" />
-    <Property Name="product_love" Type="Int32" />
-    <Property Name="product_color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="product_size" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="product_detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="product_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="product_option" Type="Boolean" />
-    <Property Name="product_sale" Type="Decimal" Precision="19" Scale="4" />
-    <Property Name="product_amount" Type="Int32" />
-    <Property Name="product_dateedit" Type="DateTime" Precision="3" />
-    <Property Name="seller_id" Type="Int32" />
-    <Property Name="category_id" Type="Int32" />
-    <Property Name="subcategory_id" Type="Int32" />
-    <Property Name="banner_id" Type="Int32" />
-    <Property Name="collection_id" Type="Int32" />
-    <Property Name="gsmail_id" Type="Int32" />
-    <Property Name="product_bin" Type="Boolean" />
-    <Property Name="product_related" Type="Int32" />
-    <Property Name="user_id" Type="Int32" />
-    <Property Name="csc_id" Type="Int32" />
-    <NavigationProperty Name="Banner" Relationship="Self.FK_Product_Banner" FromRole="Product" ToRole="Banner" />
-    <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
-    <NavigationProperty Name="ClassificationSubCategory" Relationship="Self.FK_Product_ClassificationSubCategory" FromRole="Product" ToRole="ClassificationSubCategory" />
-    <NavigationProperty Name="Collection" Relationship="Self.FK_Product_Collection" FromRole="Product" ToRole="Collection" />
-    <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Product" FromRole="Product" ToRole="Comment" />
-    <NavigationProperty Name="Favourite" Relationship="Self.FK_Favourite_Product" FromRole="Product" ToRole="Favourite" />
-    <NavigationProperty Name="GSMall" Relationship="Self.FK_Product_GSMall1" FromRole="Product" ToRole="GSMall" />
-    <NavigationProperty Name="Like" Relationship="Self.FK_Like_Product" FromRole="Product" ToRole="Like" />
-    <NavigationProperty Name="PayDetail" Relationship="Self.FK_PayDetail_Product" FromRole="Product" ToRole="PayDetail" />
-    <NavigationProperty Name="Seller" Relationship="Self.FK_Product_Seller1" FromRole="Product" ToRole="Seller" />
-    <NavigationProperty Name="SubCategory" Relationship="Self.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Product_User" FromRole="Product" ToRole="User" />
-    <NavigationProperty Name="User1" Relationship="Self.FK_Product_User1" FromRole="Product" ToRole="User" />
-    <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Product" FromRole="Product" ToRole="ReplyComment" />
-    <NavigationProperty Name="ReplyComment1" Relationship="Self.FK_ReplyComment_Product1" FromRole="Product" ToRole="ReplyComment" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_PayDetail_Product" FromRole="PayDetail" ToRole="Product" />
   </EntityType>
   <EntityType Name="ReplyComment">
     <Key>
@@ -244,10 +196,10 @@
     <Property Name="comment_id" Type="Int32" />
     <NavigationProperty Name="Comment" Relationship="Self.FK_ReplyComment_Comment" FromRole="ReplyComment" ToRole="Comment" />
     <NavigationProperty Name="Like" Relationship="Self.FK_Like_ReplyComment" FromRole="ReplyComment" ToRole="Like" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_ReplyComment_Product" FromRole="ReplyComment" ToRole="Product" />
-    <NavigationProperty Name="Product1" Relationship="Self.FK_ReplyComment_Product1" FromRole="ReplyComment" ToRole="Product" />
     <NavigationProperty Name="Seller" Relationship="Self.FK_ReplyComment_Seller" FromRole="ReplyComment" ToRole="Seller" />
     <NavigationProperty Name="User" Relationship="Self.FK_ReplyComment_User1" FromRole="ReplyComment" ToRole="User" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_ReplyComment_Product" FromRole="ReplyComment" ToRole="Product" />
+    <NavigationProperty Name="Product1" Relationship="Data_GSShopModel.FK_ReplyComment_Product1" FromRole="ReplyComment" ToRole="Product" />
   </EntityType>
   <EntityType Name="Seller">
     <Key>
@@ -278,8 +230,8 @@
     <Property Name="seller_district" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="seller_bin" Type="Boolean" />
     <NavigationProperty Name="Collection" Relationship="Self.FK_Collection_Seller1" FromRole="Seller" ToRole="Collection" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Product_Seller1" FromRole="Seller" ToRole="Product" />
     <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_Seller" FromRole="Seller" ToRole="ReplyComment" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_Seller1" FromRole="Seller" ToRole="Product" />
   </EntityType>
   <EntityType Name="SubCategory">
     <Key>
@@ -295,7 +247,7 @@
     <Property Name="subcategory_bin" Type="Boolean" />
     <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
     <NavigationProperty Name="ClassificationSubCategory" Relationship="Self.FK_ClassificationSubCategory_SubCategory" FromRole="SubCategory" ToRole="ClassificationSubCategory" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -321,22 +273,10 @@
     <NavigationProperty Name="Favourite" Relationship="Self.FK_Favourite_User" FromRole="User" ToRole="Favourite" />
     <NavigationProperty Name="Like" Relationship="Self.FK_Like_User1" FromRole="User" ToRole="Like" />
     <NavigationProperty Name="PayDetail" Relationship="Self.FK_PayDetail_User1" FromRole="User" ToRole="PayDetail" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Product_User" FromRole="User" ToRole="Product" />
-    <NavigationProperty Name="Product1" Relationship="Self.FK_Product_User1" FromRole="User" ToRole="Product" />
     <NavigationProperty Name="ReplyComment" Relationship="Self.FK_ReplyComment_User1" FromRole="User" ToRole="ReplyComment" />
+    <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_User" FromRole="User" ToRole="Product" />
+    <NavigationProperty Name="Product1" Relationship="Data_GSShopModel.FK_Product_User1" FromRole="User" ToRole="Product" />
   </EntityType>
-  <Association Name="FK_Product_Banner">
-    <End Role="Banner" Type="Self.Banner" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Banner">
-        <PropertyRef Name="banner_id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="banner_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Bill_User">
     <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
@@ -373,18 +313,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Product_Category">
-    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Category">
-        <PropertyRef Name="category_id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="category_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_SubCategory_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
@@ -409,18 +337,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Product_ClassificationSubCategory">
-    <End Role="ClassificationSubCategory" Type="Self.ClassificationSubCategory" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ClassificationSubCategory">
-        <PropertyRef Name="csc_id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="csc_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Collection_Seller1">
     <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
     <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
@@ -430,30 +346,6 @@
       </Principal>
       <Dependent Role="Collection">
         <PropertyRef Name="seller_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Product_Collection">
-    <End Role="Collection" Type="Self.Collection" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Collection">
-        <PropertyRef Name="collection_id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="collection_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Comment_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="product_id" />
-      </Principal>
-      <Dependent Role="Comment">
-        <PropertyRef Name="product_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -493,18 +385,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Favourite_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-    <End Role="Favourite" Type="Self.Favourite" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="product_id" />
-      </Principal>
-      <Dependent Role="Favourite">
-        <PropertyRef Name="product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Favourite_User">
     <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="Favourite" Type="Self.Favourite" Multiplicity="*" />
@@ -513,30 +393,6 @@
         <PropertyRef Name="user_id" />
       </Principal>
       <Dependent Role="Favourite">
-        <PropertyRef Name="user_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Product_GSMall1">
-    <End Role="GSMall" Type="Self.GSMall" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GSMall">
-        <PropertyRef Name="gsmall_id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="gsmail_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Like_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-    <End Role="Like" Type="Self.Like" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="product_id" />
-      </Principal>
-      <Dependent Role="Like">
         <PropertyRef Name="user_id" />
       </Dependent>
     </ReferentialConstraint>
@@ -565,18 +421,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PayDetail_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-    <End Role="PayDetail" Type="Self.PayDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="product_id" />
-      </Principal>
-      <Dependent Role="PayDetail">
-        <PropertyRef Name="product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PayDetail_User1">
     <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="PayDetail" Type="Self.PayDetail" Multiplicity="*" />
@@ -586,78 +430,6 @@
       </Principal>
       <Dependent Role="PayDetail">
         <PropertyRef Name="user_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Product_Seller1">
-    <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Seller">
-        <PropertyRef Name="seller_id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="seller_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Product_SubCategory">
-    <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SubCategory">
-        <PropertyRef Name="subcategory_id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="subcategory_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Product_User">
-    <End Role="User" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="user_id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="user_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Product_User1">
-    <End Role="User" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="user_id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="user_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ReplyComment_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-    <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="product_id" />
-      </Principal>
-      <Dependent Role="ReplyComment">
-        <PropertyRef Name="product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ReplyComment_Product1">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-    <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="product_id" />
-      </Principal>
-      <Dependent Role="ReplyComment">
-        <PropertyRef Name="product_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -698,15 +470,10 @@
     <EntitySet Name="GSMall" EntityType="Self.GSMall" />
     <EntitySet Name="Like" EntityType="Self.Like" />
     <EntitySet Name="PayDetail" EntityType="Self.PayDetail" />
-    <EntitySet Name="Product" EntityType="Self.Product" />
     <EntitySet Name="ReplyComment" EntityType="Self.ReplyComment" />
     <EntitySet Name="Seller" EntityType="Self.Seller" />
     <EntitySet Name="SubCategory" EntityType="Self.SubCategory" />
     <EntitySet Name="User" EntityType="Self.User" />
-    <AssociationSet Name="FK_Product_Banner" Association="Self.FK_Product_Banner">
-      <End Role="Banner" EntitySet="Banner" />
-      <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
     <AssociationSet Name="FK_Bill_User" Association="Self.FK_Bill_User">
       <End Role="User" EntitySet="User" />
       <End Role="Bill" EntitySet="Bill" />
@@ -719,10 +486,6 @@
       <End Role="Bill" EntitySet="Bill" />
       <End Role="PayDetail" EntitySet="PayDetail" />
     </AssociationSet>
-    <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
-      <End Role="Category" EntitySet="Category" />
-      <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
     <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="SubCategory" EntitySet="SubCategory" />
@@ -731,21 +494,9 @@
       <End Role="SubCategory" EntitySet="SubCategory" />
       <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
     </AssociationSet>
-    <AssociationSet Name="FK_Product_ClassificationSubCategory" Association="Self.FK_Product_ClassificationSubCategory">
-      <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
-      <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
     <AssociationSet Name="FK_Collection_Seller1" Association="Self.FK_Collection_Seller1">
       <End Role="Seller" EntitySet="Seller" />
       <End Role="Collection" EntitySet="Collection" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_Collection" Association="Self.FK_Product_Collection">
-      <End Role="Collection" EntitySet="Collection" />
-      <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Comment_Product" Association="Self.FK_Comment_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="Comment" EntitySet="Comment" />
     </AssociationSet>
     <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
       <End Role="User" EntitySet="User" />
@@ -759,21 +510,9 @@
       <End Role="Comment" EntitySet="Comment" />
       <End Role="ReplyComment" EntitySet="ReplyComment" />
     </AssociationSet>
-    <AssociationSet Name="FK_Favourite_Product" Association="Self.FK_Favourite_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="Favourite" EntitySet="Favourite" />
-    </AssociationSet>
     <AssociationSet Name="FK_Favourite_User" Association="Self.FK_Favourite_User">
       <End Role="User" EntitySet="User" />
       <End Role="Favourite" EntitySet="Favourite" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_GSMall1" Association="Self.FK_Product_GSMall1">
-      <End Role="GSMall" EntitySet="GSMall" />
-      <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Like_Product" Association="Self.FK_Like_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="Like" EntitySet="Like" />
     </AssociationSet>
     <AssociationSet Name="FK_Like_ReplyComment" Association="Self.FK_Like_ReplyComment">
       <End Role="ReplyComment" EntitySet="ReplyComment" />
@@ -783,37 +522,9 @@
       <End Role="User" EntitySet="User" />
       <End Role="Like" EntitySet="Like" />
     </AssociationSet>
-    <AssociationSet Name="FK_PayDetail_Product" Association="Self.FK_PayDetail_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="PayDetail" EntitySet="PayDetail" />
-    </AssociationSet>
     <AssociationSet Name="FK_PayDetail_User1" Association="Self.FK_PayDetail_User1">
       <End Role="User" EntitySet="User" />
       <End Role="PayDetail" EntitySet="PayDetail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_Seller1" Association="Self.FK_Product_Seller1">
-      <End Role="Seller" EntitySet="Seller" />
-      <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_SubCategory" Association="Self.FK_Product_SubCategory">
-      <End Role="SubCategory" EntitySet="SubCategory" />
-      <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_User" Association="Self.FK_Product_User">
-      <End Role="User" EntitySet="User" />
-      <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_User1" Association="Self.FK_Product_User1">
-      <End Role="User" EntitySet="User" />
-      <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ReplyComment_Product" Association="Self.FK_ReplyComment_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="ReplyComment" EntitySet="ReplyComment" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ReplyComment_Product1" Association="Self.FK_ReplyComment_Product1">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="ReplyComment" EntitySet="ReplyComment" />
     </AssociationSet>
     <AssociationSet Name="FK_ReplyComment_Seller" Association="Self.FK_ReplyComment_Seller">
       <End Role="Seller" EntitySet="Seller" />
@@ -823,5 +534,305 @@
       <End Role="User" EntitySet="User" />
       <End Role="ReplyComment" EntitySet="ReplyComment" />
     </AssociationSet>
+    <EntitySet Name="Product" EntityType="Data_GSShopModel.Product" />
+    <EntitySet Name="sysdiagrams" EntityType="Data_GSShopModel.sysdiagrams" />
+    <AssociationSet Name="FK_Product_Banner" Association="Data_GSShopModel.FK_Product_Banner">
+      <End Role="Banner" EntitySet="Banner" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Category" Association="Data_GSShopModel.FK_Product_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ClassificationSubCategory" Association="Data_GSShopModel.FK_Product_ClassificationSubCategory">
+      <End Role="ClassificationSubCategory" EntitySet="ClassificationSubCategory" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Collection" Association="Data_GSShopModel.FK_Product_Collection">
+      <End Role="Collection" EntitySet="Collection" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Product" Association="Data_GSShopModel.FK_Comment_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favourite_Product" Association="Data_GSShopModel.FK_Favourite_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Favourite" EntitySet="Favourite" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_GSMall1" Association="Data_GSShopModel.FK_Product_GSMall1">
+      <End Role="GSMall" EntitySet="GSMall" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Like_Product" Association="Data_GSShopModel.FK_Like_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Like" EntitySet="Like" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PayDetail_Product" Association="Data_GSShopModel.FK_PayDetail_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="PayDetail" EntitySet="PayDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Seller1" Association="Data_GSShopModel.FK_Product_Seller1">
+      <End Role="Seller" EntitySet="Seller" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_SubCategory" Association="Data_GSShopModel.FK_Product_SubCategory">
+      <End Role="SubCategory" EntitySet="SubCategory" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_User" Association="Data_GSShopModel.FK_Product_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_User1" Association="Data_GSShopModel.FK_Product_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReplyComment_Product" Association="Data_GSShopModel.FK_ReplyComment_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ReplyComment" EntitySet="ReplyComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReplyComment_Product1" Association="Data_GSShopModel.FK_ReplyComment_Product1">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ReplyComment" EntitySet="ReplyComment" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="product_image" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="product_datecreated" Type="DateTime" Precision="3" />
+    <Property Name="product_active" Type="Boolean" />
+    <Property Name="product_note" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="product_price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="product_ship" Type="Boolean" />
+    <Property Name="product_view" Type="Int32" />
+    <Property Name="product_love" Type="Int32" />
+    <Property Name="product_color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="product_size" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="product_detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="product_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="product_option" Type="Boolean" />
+    <Property Name="product_sale" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="product_amount" Type="Int32" />
+    <Property Name="product_dateedit" Type="DateTime" Precision="3" />
+    <Property Name="seller_id" Type="Int32" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="subcategory_id" Type="Int32" />
+    <Property Name="banner_id" Type="Int32" />
+    <Property Name="collection_id" Type="Int32" />
+    <Property Name="gsmail_id" Type="Int32" />
+    <Property Name="product_bin" Type="Boolean" />
+    <Property Name="product_related" Type="Int32" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="csc_id" Type="Int32" />
+    <NavigationProperty Name="Banner" Relationship="Data_GSShopModel.FK_Product_Banner" FromRole="Product" ToRole="Banner" />
+    <NavigationProperty Name="Category" Relationship="Data_GSShopModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="ClassificationSubCategory" Relationship="Data_GSShopModel.FK_Product_ClassificationSubCategory" FromRole="Product" ToRole="ClassificationSubCategory" />
+    <NavigationProperty Name="Collection" Relationship="Data_GSShopModel.FK_Product_Collection" FromRole="Product" ToRole="Collection" />
+    <NavigationProperty Name="Comment" Relationship="Data_GSShopModel.FK_Comment_Product" FromRole="Product" ToRole="Comment" />
+    <NavigationProperty Name="Favourite" Relationship="Data_GSShopModel.FK_Favourite_Product" FromRole="Product" ToRole="Favourite" />
+    <NavigationProperty Name="GSMall" Relationship="Data_GSShopModel.FK_Product_GSMall1" FromRole="Product" ToRole="GSMall" />
+    <NavigationProperty Name="Like" Relationship="Data_GSShopModel.FK_Like_Product" FromRole="Product" ToRole="Like" />
+    <NavigationProperty Name="PayDetail" Relationship="Data_GSShopModel.FK_PayDetail_Product" FromRole="Product" ToRole="PayDetail" />
+    <NavigationProperty Name="Seller" Relationship="Data_GSShopModel.FK_Product_Seller1" FromRole="Product" ToRole="Seller" />
+    <NavigationProperty Name="SubCategory" Relationship="Data_GSShopModel.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
+    <NavigationProperty Name="User" Relationship="Data_GSShopModel.FK_Product_User" FromRole="Product" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="Data_GSShopModel.FK_Product_User1" FromRole="Product" ToRole="User" />
+    <NavigationProperty Name="ReplyComment" Relationship="Data_GSShopModel.FK_ReplyComment_Product" FromRole="Product" ToRole="ReplyComment" />
+    <NavigationProperty Name="ReplyComment1" Relationship="Data_GSShopModel.FK_ReplyComment_Product1" FromRole="Product" ToRole="ReplyComment" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Product_Banner">
+    <End Type="Data_GSShopModel.Banner" Role="Banner" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banner">
+        <PropertyRef Name="banner_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="banner_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Category">
+    <End Type="Data_GSShopModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_ClassificationSubCategory">
+    <End Type="Data_GSShopModel.ClassificationSubCategory" Role="ClassificationSubCategory" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassificationSubCategory">
+        <PropertyRef Name="csc_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="csc_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Collection">
+    <End Type="Data_GSShopModel.Collection" Role="Collection" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Collection">
+        <PropertyRef Name="collection_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="collection_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Product">
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favourite_Product">
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Favourite" Role="Favourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="Favourite">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_GSMall1">
+    <End Type="Data_GSShopModel.GSMall" Role="GSMall" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GSMall">
+        <PropertyRef Name="gsmall_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="gsmail_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Like_Product">
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Like" Role="Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PayDetail_Product">
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.PayDetail" Role="PayDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="PayDetail">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Seller1">
+    <End Type="Data_GSShopModel.Seller" Role="Seller" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seller">
+        <PropertyRef Name="seller_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="seller_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_SubCategory">
+    <End Type="Data_GSShopModel.SubCategory" Role="SubCategory" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="subcategory_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="subcategory_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_User">
+    <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_User1">
+    <End Type="Data_GSShopModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReplyComment_Product">
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.ReplyComment" Role="ReplyComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="ReplyComment">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReplyComment_Product1">
+    <End Type="Data_GSShopModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="Data_GSShopModel.ReplyComment" Role="ReplyComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="ReplyComment">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

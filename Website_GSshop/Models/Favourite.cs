@@ -20,7 +20,7 @@ namespace Website_GSshop.Models
         public Nullable<int> product_id { get; set; }
         public Nullable<int> user_id { get; set; }
     
-        public virtual Product Product { get; set; }
         public virtual User User { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

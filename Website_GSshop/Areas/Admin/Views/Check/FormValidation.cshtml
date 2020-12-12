@@ -155,8 +155,13 @@
                             prompt: 'Tên bộ sưu tập không được để trống.'
                         },
                         {
-                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
-                            prompt: 'Vui lòng nhập tên bộ sưu tập 4-16 chữ cái.'
+                            type: 'minLength[4]',
+                            prompt: 'Vui lòng tên bộ suư tập từ 4-16 chữ cái.'
+                        }
+                        ,
+                        {
+                            type: 'maxLength[50]',
+                            prompt: 'Vui lòng nhập tên bổ sưu tập từ 4-50 chữ cái.'
                         }
                     ]
                 },
@@ -249,7 +254,11 @@
                             prompt: 'Tên danh mục chính không được để trống.'
                         },
                         {
-                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            type: 'minLength[4]',
+                            prompt: 'Vui lòng nhập tên danh mục chính 4-16 chữ cái.'
+                        },
+                        {
+                            type: 'maxLength[16]',
                             prompt: 'Vui lòng nhập tên danh mục chính 4-16 chữ cái.'
                         }
                     ]
@@ -273,8 +282,12 @@
                             prompt: 'Tên danh mục phụ không được để trống.'
                         },
                         {
-                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
-                            prompt: 'Vui lòng nhập tên danh mục phụ 4-16 chữ cái.'
+                            type: 'minLength[4]',
+                            prompt: 'Vui lòng nhập tên danh mục chính 4-16 chữ cái.'
+                        },
+                        {
+                            type: 'maxLength[16]',
+                            prompt: 'Vui lòng nhập tên danh mục chính 4-16 chữ cái.'
                         }
                     ]
                 },
@@ -297,7 +310,12 @@
                             prompt: 'Tên danh mục con không được để trống.'
                         },
                         {
-                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
+                            type: 'minLength[4]',
+                            prompt: 'Vui lòng nhập tên danh mục con 4-16 chữ cái.'
+                        }
+                        ,
+                        {
+                            type: 'maxLength[16]',
                             prompt: 'Vui lòng nhập tên danh mục con 4-16 chữ cái.'
                         }
                     ]
@@ -387,8 +405,13 @@
                             prompt: 'Tên người dùng không được để trống.'
                         },
                         {
-                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
-                            prompt: 'Vui lòng nhập họ và tên 4-16 chữ cái.'
+                            type: 'minLength[4]',
+                            prompt: 'Vui lòng nhập nickname 4-16 chữ cái.'
+                        }
+                        ,
+                        {
+                            type: 'maxLength[50]',
+                            prompt: 'Vui lòng nhập nickname 4-50 chữ cái.'
                         }
                     ]
                 },
@@ -459,8 +482,13 @@
                             prompt: 'Tên shop không được để trống.'
                         },
                         {
-                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
-                            prompt: 'Vui lòng nhập tên shop 4-16 chữ cái.'
+                            type: 'minLength[4]',
+                            prompt: 'Vui lòng nhập tên shop con 4-16 chữ cái.'
+                        }
+                        ,
+                        {
+                            type: 'maxLength[50]',
+                            prompt: 'Vui lòng nhập tên shop con 4-50 chữ cái.'
                         }
                     ]
                 },
@@ -493,8 +521,13 @@
                             prompt: 'Tên seller không được để trống.'
                         },
                         {
-                            type: 'regExp[/^[a-z0-9_-]{4,16}$/]',
-                            prompt: 'Vui lòng nhập tên shop 4-16 chữ cái.'
+                            type: 'minLength[4]',
+                            prompt: 'Vui lòng nhập nickname con 4-16 chữ cái.'
+                        }
+                        ,
+                        {
+                            type: 'maxLength[50]',
+                            prompt: 'Vui lòng nhập nickname con 4-50 chữ cái.'
                         }
                     ]
                 },

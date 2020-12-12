@@ -19,7 +19,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var subCategory = db.SubCategory.Include(s => s.Category);
-            return View(subCategory.Where(s => s.subcategory_bin == true).ToList());
+            return View(subCategory.Where(s => s.subcategory_bin == true).OrderByDescending(n=>n.subcategory_datecreated).ToList());
         }
 
         // GET: Admin/SubCategories/Details/5
@@ -50,34 +50,30 @@ namespace Website_GSshop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id,subcategory_level,subcategory_bin")] SubCategory subCategory, HttpPostedFileBase fileUpload)
         {
+            Random random = new Random();
+            ViewBag.random = random.Next(0, 1000);
+
             // Tên file ảnh sản phẩm
             var fileimg_edit = Path.GetFileName(fileUpload.FileName);
             // Đưa tên ảnh vào đúng file
-            var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit);
+            var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit);
             // Ảnh trống
             if (fileUpload == null)
             {
                 ViewBag.ThongBao = "Ảnh trống !";
-                return View(subCategory);
-            }
-            //Nếu tên ảnh trùng
-            else if (System.IO.File.Exists(pa_eidt))
-            {
-                ViewBag.ThongBao = "Ảnh đã tồn tại";
-                return View(subCategory);
             }
             //Lưu pa vào name fileUpload
             else
             {
                 fileUpload.SaveAs(pa_eidt);
                 db.SubCategory.Add(subCategory);
-                subCategory.subcategory_image = fileUpload.FileName;
+                subCategory.subcategory_image = ViewBag.random + fileUpload.FileName;
                 subCategory.subcategory_datecreated = DateTime.Now;
-                subCategory.subcategory_active = true;
                 subCategory.subcategory_bin = true;
                 db.SaveChanges();
                 return Redirect(admin_qldmp);
             }
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         // GET: Admin/SubCategories/Edit/5
@@ -100,39 +96,34 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id,subcategory_level,subcategory_bin")] SubCategory subCategory, HttpPostedFileBase fileUpload)
+        public ActionResult Edit([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id,subcategory_level,subcategory_bin")] SubCategory subCategory, HttpPostedFileBase img)
         {
+            Random random = new Random();
+            ViewBag.random = random.Next(0, 1000);
+
             db.Entry(subCategory).State = EntityState.Modified;
-            if (fileUpload == null)
+            if (img == null)
             {
-                SubCategory subCategorys = db.SubCategory.Find(Int32.Parse(subCategory.subcategory_id.ToString()));
                 db.SaveChanges();
                 return Redirect(admin_qldmp);
             }
             else
             {
                 // Tên file ảnh sản phẩm
-                var fileimg_edit = Path.GetFileName(fileUpload.FileName);
+                var fileimg_edit = Path.GetFileName(img.FileName);
                 // Đưa tên ảnh vào đúng file
-                var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit);
+                var pa_eidt = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit);
                 // Ảnh trống
-                if (fileUpload == null)
+                if (img == null)
                 {
                     ViewBag.ThongBao = "Ảnh trống !";
-                    return View(subCategory);
-                }
-                //Nếu tên ảnh trùng
-                else if (System.IO.File.Exists(pa_eidt))
-                {
-                    ViewBag.ThongBao = "Ảnh đã tồn tại";
                     return View(subCategory);
                 }
                 //Lưu pa vào name fileUpload
                 else
                 {
-                    fileUpload.SaveAs(pa_eidt);
-                    subCategory.subcategory_image = fileUpload.FileName;
-                    subCategory.subcategory_datecreated = DateTime.Now;
+                    img.SaveAs(pa_eidt);
+                    subCategory.subcategory_image = ViewBag.random + img.FileName;
                     db.SaveChanges();
                     return Redirect(admin_qldmp);
                 }
@@ -159,7 +150,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(SubCategory category)
         {
             SubCategory sub = db.SubCategory.Find(Int32.Parse(category.subcategory_id.ToString()));
-            sub.subcategory_active = false;
             sub.subcategory_bin = false;
             db.SaveChanges();
             return Redirect(admin_qldmp);

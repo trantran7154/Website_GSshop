@@ -19,29 +19,42 @@
         min-height: 10vh;
     }
 </style>
-@Html.Action("CSS_Sematic", "Home")
-<script>
-    var app = angular
-        .module("myModule", [])
-        .controller("myController", function ($scope) {
+@Html.Action("CSS_Sematic", "Home")>
 
-            var gs = [
+<script>
+    var todos = angular.module('myModule', ['ui.bootstrap']);
+
+    todos.controller('myControllerg', function ($scope) {
+        $scope.filteredTodos = []
+            , $scope.currentPage = 1
+            , $scope.numPerPage = 8
+            , $scope.maxSize = 5;
+
+        $scope.makeTodos = function () {
+            $scope.todos = [
                 @foreach (var item in Model)
                 {
                     @: {id: @item.gsmall_id, name: "@Html.Raw(item.gsmall_name)", slogan: "@Html.Raw(item.gsmall_slogan)", ac: "@item.gsmall_active", bin: "@item.gsmall_bin", day: "@item.gsmall_datecreate.Value.Day", month: "@item.gsmall_datecreate.Value.Month", year: "@item.gsmall_datecreate.Value.Year", bg: "@item.gsmall_bg", img: "@item.gsmall_image", img1: "@item.gsmall_img1", img2: "@item.gsmall_img2", img3: "@item.gsmall_img3", img4: "@item.gsmall_img4", img5: "@item.gsmall_img5", img6: "@item.gsmall_img6", img7: "@item.gsmall_img7", date: "@item.gsmall_datecreate.Value.Year-@(item.gsmall_datecreate.Value.Month < 10 ? "0" + item.gsmall_datecreate.Value.Month.ToString() : item.gsmall_datecreate.Value.Month.ToString())-@(item.gsmall_datecreate.Value.Day < 10 ? "0" + item.gsmall_datecreate.Value.Day.ToString() : item.gsmall_datecreate.Value.Day.ToString())" },
                 }
             ];
 
-            $scope.gs = gs;
-        });
-</script>
+        };
+        $scope.makeTodos();
 
+        $scope.$watch('currentPage + numPerPage', function () {
+            var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+                , end = begin + $scope.numPerPage;
+
+            $scope.filteredTodos = $scope.todos.slice(begin, end);
+        });
+    });
+</script>
 <a href="/Admin/Home/Index">
     <svg height="40" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="-85.197" x2="367.494" y1="397.197" y2="-55.494" data-name="New Gradient Swatch 1"><stop offset="0" stop-color="#003f8a" /><stop offset=".518" stop-color="#00d7df" /><stop offset="1" stop-color="#006df0" /></linearGradient><linearGradient id="b" x1="114.803" x2="567.494" xlink:href="#a" y1="597.197" y2="144.506" /><linearGradient id="c" x1="-126.618" x2="326.073" xlink:href="#a" y1="355.775" y2="-96.915" /><linearGradient id="d" x1="156.225" x2="608.915" xlink:href="#a" y1="638.618" y2="185.928" /><linearGradient id="e" x1="14.803" x2="467.494" xlink:href="#a" y1="497.197" y2="44.506" /><g><path d="m280 56a24 24 0 1 0 -24 24 24.027 24.027 0 0 0 24-24zm-32 0a8 8 0 1 1 8 8 8.009 8.009 0 0 1 -8-8z" fill="url(#a)" /><path d="m232 456a24 24 0 1 0 24-24 24.028 24.028 0 0 0 -24 24zm32 0a8 8 0 1 1 -8-8 8.009 8.009 0 0 1 8 8z" fill="url(#b)" /><path d="m131.55 97.608a23.988 23.988 0 1 0 0 33.941 24.03 24.03 0 0 0 -.001-33.941zm-11.314 22.627a8 8 0 1 1 0-11.313 8.01 8.01 0 0 1 0 11.313z" fill="url(#c)" /><path d="m380.45 414.392a24 24 0 1 0 0-33.942 23.929 23.929 0 0 0 .001 33.943zm11.314-22.627a8 8 0 1 1 0 11.313 8.011 8.011 0 0 1 0-11.313z" fill="url(#d)" /><g fill="url(#e)"><path d="m397.422 138.567a23.928 23.928 0 0 0 16.97-7.017 24.03 24.03 0 1 0 -16.971 7.018zm-5.658-29.645a8 8 0 1 1 0 11.314 7.974 7.974 0 0 1 0-11.314z" /><path d="m97.608 380.45a24 24 0 1 0 33.942 0 24.03 24.03 0 0 0 -33.943.001zm22.628 22.628a8 8 0 1 1 0-11.314 8.012 8.012 0 0 1 0 11.314z" /><path d="m456 208a48.069 48.069 0 0 0 -47.32 40h-32.95a119.443 119.443 0 0 0 -29.45-70.96l23.34-23.34a48 48 0 1 0 -11.32-11.32l-23.34 23.34a119.443 119.443 0 0 0 -70.96-29.45v-32.95a48 48 0 1 0 -16 0v32.95a119.443 119.443 0 0 0 -70.96 29.45l-23.34-23.34a47.95 47.95 0 1 0 -11.32 11.32l23.34 23.34a119.443 119.443 0 0 0 -29.45 70.96h-32.95a48 48 0 1 0 0 16h32.95a119.443 119.443 0 0 0 29.45 70.96l-23.34 23.34a48 48 0 1 0 11.32 11.32l23.34-23.34a119.443 119.443 0 0 0 70.96 29.45v32.95a48 48 0 1 0 16 0v-32.95a119.443 119.443 0 0 0 70.96-29.45l23.34 23.34a48 48 0 1 0 11.32-11.32l-23.34-23.34a119.443 119.443 0 0 0 29.45-70.96h32.95a48 48 0 1 0 47.32-56zm-81.21-116.05a32 32 0 1 1 0 45.26 31.913 31.913 0 0 1 0-45.26zm-237.58 45.26a31.99 31.99 0 1 1 0-45.26 32.055 32.055 0 0 1 0 45.26zm-81.21 150.79a32 32 0 1 1 32-32 32.042 32.042 0 0 1 -32 32zm81.21 132.05a32 32 0 1 1 -.01-45.26h.01v.01a32.043 32.043 0 0 1 0 45.25zm237.58-45.25v-.01h.01a32 32 0 1 1 -.01.01zm-150.79-318.8a32 32 0 1 1 32 32 32.036 32.036 0 0 1 -32-32zm64 400a32 32 0 1 1 -32-32 32.042 32.042 0 0 1 32 32zm-32-96a104 104 0 1 1 104-104 104.112 104.112 0 0 1 -104 104zm200-72a32 32 0 1 1 32-32 32.042 32.042 0 0 1 -32 32z" /><path d="m256 168a88 88 0 1 0 88 88 88.1 88.1 0 0 0 -88-88zm0 160a71.7 71.7 0 0 1 -47.82-18.24 16.006 16.006 0 0 1 15.82-13.76 8.081 8.081 0 0 0 3.58-.84l16-8a8.011 8.011 0 0 0 4.42-7.16v-14.12a7.968 7.968 0 0 0 -2.67-5.96 16.01 16.01 0 0 1 -5.33-11.92v-16a16 16 0 1 1 32 0v16a16.01 16.01 0 0 1 -5.33 11.92 7.968 7.968 0 0 0 -2.67 5.96v14.12a8.011 8.011 0 0 0 4.42 7.16l16 8a8.081 8.081 0 0 0 3.58.84 16.006 16.006 0 0 1 15.82 13.76 71.7 71.7 0 0 1 -47.82 18.24zm59.76-31.89a32.037 32.037 0 0 0 -25.75-16.05l-10.01-5v-5.9a32.046 32.046 0 0 0 8-21.16v-16a32 32 0 0 0 -64 0v16a32.046 32.046 0 0 0 8 21.16v5.9l-10.01 5a32.037 32.037 0 0 0 -25.75 16.05 72 72 0 1 1 119.52 0z" /></g><path d="m456 232a24 24 0 1 0 24 24 24.028 24.028 0 0 0 -24-24zm0 32a8 8 0 1 1 8-8 8.009 8.009 0 0 1 -8 8z" fill="url(#b)" /><path d="m56 232a24 24 0 1 0 24 24 24.028 24.028 0 0 0 -24-24zm0 32a8 8 0 1 1 8-8 8.009 8.009 0 0 1 -8 8z" fill="url(#a)" /></g></svg>
 </a>
 <p class="btn btn-warning float-right" data-toggle="modal" data-target="#gs_create"> THÊM MỚI</p>
 <div ng-app="myModule">
-    <div ng-controller="myController">
+    <div ng-controller="myControllerg">
         <div class="card mt-3" style="padding: 10px">
             <div class="row">
                 <div class="col-lg-3">
@@ -152,31 +165,31 @@
                     <span><i class="fa fa-cogs"></i> Công cụ</span>
                 </th>
             </tr>
-            <tr ng-repeat="gs in gs | filter: searchText">
+            <tr ng-repeat="todo in filteredTodos | filter: searchText">
                 <td class="text-center">
-                    {{gs.name}}
+                    {{todo.name}}
                 </td>
                 <td class="text-center">
-                    {{gs.slogan}}
+                    {{todo.slogan}}
                 </td>
                 <td class="text-center">
-                    {{gs.ac}}
+                    {{todo.ac}}
                 </td>
                 <td class="text-center">
-                    {{gs.day}}/{{gs.month}}/{{gs.year}}
+                    {{todo.day}}/{{todo.month}}/{{todo.year}}
                 </td>
                 <td class="text-center">
-                    <img src="~/Content/Layout/images/{{gs.bg}}" height="100" width="100" />
+                    <img src="~/Content/Layout/images/{{todo.bg}}" height="100" width="100" />
                 </td>
                 <td class="text-center">
-                    <img src="~/Content/Layout/images/{{gs.img}}" height="100" width="100" />
+                    <img src="~/Content/Layout/images/{{todo.img}}" height="100" width="100" />
                 </td>
                 <td class="text-center">
-                    {{gs.bin}}
+                    {{todo.bin}}
                 </td>
                 <td width="120">
                     <div class="text-center">
-                        <a href="/Admin/GSMalls/Edit/{{gs.id}}" data-toggle="modal" data-target="#@gs_edit{{gs.id}}">
+                        <a href="/Admin/GSMalls/Edit/{{todo.id}}" data-toggle="modal" data-target="#@gs_edit{{todo.id}}">
                             <svg height="20" viewBox="0 -1 401.5411 401" width="20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="m381.289062 32.242188c13.671876 13.664062 13.671876 35.824218 0 49.488281l-17.679687 17.679687-61.230469-61.230468 17.679688-17.679688c13.671875-13.667969 35.832031-13.667969 49.5 0zm0 0" fill="#00acea" />
                                 <path d="m363.609375 99.410156-160.148437 160.160156h-.011719l-61.230469-61.230468 160.160156-160.160156zm0 0" fill="#00efd1" />
@@ -187,7 +200,7 @@
                                 </g>
                             </svg>
                         </a> |
-                        <a href="/Admin/GSMalls/Details/{{gs.id}}" data-toggle="modal" data-target="#@gs_detail{{gs.id}}">
+                        <a href="/Admin/GSMalls/Details/{{todo.id}}" data-toggle="modal" data-target="#@gs_detail{{todo.id}}">
                             <svg id="Layer_1" enable-background="new 0 0 512 512" height="20" viewBox="0 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg">
                                 <g>
                                     <g clip-rule="evenodd" fill-rule="evenodd">
@@ -209,7 +222,7 @@
                                 </g>
                             </svg>
                         </a> |
-                        <a href="/Admin/GSMalls/Delete/{{gs.id}}" data-toggle="modal" data-target="#@gs_delete{{gs.id}}">
+                        <a href="/Admin/GSMalls/Delete/{{todo.id}}" data-toggle="modal" data-target="#@gs_delete{{todo.id}}">
                             <svg id="Capa_1" enable-background="new 0 0 512 512" height="20" viewBox="0 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg">
                                 <g>
                                     <g>
@@ -240,204 +253,8 @@
                             </svg>
                         </a>
                     </div>
-                    <!--Thêm Đối Tác-->
-                    <div class="modal fade" id="gs_create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content" style="width: 1000px; margin-left: -10%">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
-                                        <svg height="40" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="-85.197" x2="367.494" y1="397.197" y2="-55.494" data-name="New Gradient Swatch 1"><stop offset="0" stop-color="#003f8a" /><stop offset=".518" stop-color="#00d7df" /><stop offset="1" stop-color="#006df0" /></linearGradient><linearGradient id="b" x1="114.803" x2="567.494" xlink:href="#a" y1="597.197" y2="144.506" /><linearGradient id="c" x1="-126.618" x2="326.073" xlink:href="#a" y1="355.775" y2="-96.915" /><linearGradient id="d" x1="156.225" x2="608.915" xlink:href="#a" y1="638.618" y2="185.928" /><linearGradient id="e" x1="14.803" x2="467.494" xlink:href="#a" y1="497.197" y2="44.506" /><g><path d="m280 56a24 24 0 1 0 -24 24 24.027 24.027 0 0 0 24-24zm-32 0a8 8 0 1 1 8 8 8.009 8.009 0 0 1 -8-8z" fill="url(#a)" /><path d="m232 456a24 24 0 1 0 24-24 24.028 24.028 0 0 0 -24 24zm32 0a8 8 0 1 1 -8-8 8.009 8.009 0 0 1 8 8z" fill="url(#b)" /><path d="m131.55 97.608a23.988 23.988 0 1 0 0 33.941 24.03 24.03 0 0 0 -.001-33.941zm-11.314 22.627a8 8 0 1 1 0-11.313 8.01 8.01 0 0 1 0 11.313z" fill="url(#c)" /><path d="m380.45 414.392a24 24 0 1 0 0-33.942 23.929 23.929 0 0 0 .001 33.943zm11.314-22.627a8 8 0 1 1 0 11.313 8.011 8.011 0 0 1 0-11.313z" fill="url(#d)" /><g fill="url(#e)"><path d="m397.422 138.567a23.928 23.928 0 0 0 16.97-7.017 24.03 24.03 0 1 0 -16.971 7.018zm-5.658-29.645a8 8 0 1 1 0 11.314 7.974 7.974 0 0 1 0-11.314z" /><path d="m97.608 380.45a24 24 0 1 0 33.942 0 24.03 24.03 0 0 0 -33.943.001zm22.628 22.628a8 8 0 1 1 0-11.314 8.012 8.012 0 0 1 0 11.314z" /><path d="m456 208a48.069 48.069 0 0 0 -47.32 40h-32.95a119.443 119.443 0 0 0 -29.45-70.96l23.34-23.34a48 48 0 1 0 -11.32-11.32l-23.34 23.34a119.443 119.443 0 0 0 -70.96-29.45v-32.95a48 48 0 1 0 -16 0v32.95a119.443 119.443 0 0 0 -70.96 29.45l-23.34-23.34a47.95 47.95 0 1 0 -11.32 11.32l23.34 23.34a119.443 119.443 0 0 0 -29.45 70.96h-32.95a48 48 0 1 0 0 16h32.95a119.443 119.443 0 0 0 29.45 70.96l-23.34 23.34a48 48 0 1 0 11.32 11.32l23.34-23.34a119.443 119.443 0 0 0 70.96 29.45v32.95a48 48 0 1 0 16 0v-32.95a119.443 119.443 0 0 0 70.96-29.45l23.34 23.34a48 48 0 1 0 11.32-11.32l-23.34-23.34a119.443 119.443 0 0 0 29.45-70.96h32.95a48 48 0 1 0 47.32-56zm-81.21-116.05a32 32 0 1 1 0 45.26 31.913 31.913 0 0 1 0-45.26zm-237.58 45.26a31.99 31.99 0 1 1 0-45.26 32.055 32.055 0 0 1 0 45.26zm-81.21 150.79a32 32 0 1 1 32-32 32.042 32.042 0 0 1 -32 32zm81.21 132.05a32 32 0 1 1 -.01-45.26h.01v.01a32.043 32.043 0 0 1 0 45.25zm237.58-45.25v-.01h.01a32 32 0 1 1 -.01.01zm-150.79-318.8a32 32 0 1 1 32 32 32.036 32.036 0 0 1 -32-32zm64 400a32 32 0 1 1 -32-32 32.042 32.042 0 0 1 32 32zm-32-96a104 104 0 1 1 104-104 104.112 104.112 0 0 1 -104 104zm200-72a32 32 0 1 1 32-32 32.042 32.042 0 0 1 -32 32z" /><path d="m256 168a88 88 0 1 0 88 88 88.1 88.1 0 0 0 -88-88zm0 160a71.7 71.7 0 0 1 -47.82-18.24 16.006 16.006 0 0 1 15.82-13.76 8.081 8.081 0 0 0 3.58-.84l16-8a8.011 8.011 0 0 0 4.42-7.16v-14.12a7.968 7.968 0 0 0 -2.67-5.96 16.01 16.01 0 0 1 -5.33-11.92v-16a16 16 0 1 1 32 0v16a16.01 16.01 0 0 1 -5.33 11.92 7.968 7.968 0 0 0 -2.67 5.96v14.12a8.011 8.011 0 0 0 4.42 7.16l16 8a8.081 8.081 0 0 0 3.58.84 16.006 16.006 0 0 1 15.82 13.76 71.7 71.7 0 0 1 -47.82 18.24zm59.76-31.89a32.037 32.037 0 0 0 -25.75-16.05l-10.01-5v-5.9a32.046 32.046 0 0 0 8-21.16v-16a32 32 0 0 0 -64 0v16a32.046 32.046 0 0 0 8 21.16v5.9l-10.01 5a32.037 32.037 0 0 0 -25.75 16.05 72 72 0 1 1 119.52 0z" /></g><path d="m456 232a24 24 0 1 0 24 24 24.028 24.028 0 0 0 -24-24zm0 32a8 8 0 1 1 8-8 8.009 8.009 0 0 1 -8 8z" fill="url(#b)" /><path d="m56 232a24 24 0 1 0 24 24 24.028 24.028 0 0 0 -24-24zm0 32a8 8 0 1 1 8-8 8.009 8.009 0 0 1 -8 8z" fill="url(#a)" /></g></svg> THÊM ĐỐI TÁC
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    @using (Html.BeginForm("Create", "GSMalls", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
-                                    {
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Tên đối tác</label>
-                                                <input type="text" name="gsmall_name" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Slogan</label>
-                                                <input type="text" name="gsmall_slogan" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="date" name="gsmall_datecreated" />
-                                            </div>
-                                        </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="gsmall_active">
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Avatar</label>
-                                                <input name="fileUpload1c" type="file" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh nền</label>
-                                                <input name="fileUpload2c" type="file" />
-                                            </div>
-                                        </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ảnh đối tác 1</label>
-                                                <input name="fileUpload3c" type="file" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đối tác 2</label>
-                                                <input name="fileUpload4c" type="file" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đối tác 3</label>
-                                                <input name="fileUpload5c" type="file" />
-                                            </div>
-                                        </div>
-                                        <div class="four fields">
-                                            <div class="field">
-                                                <label>Ảnh đối tác 4</label>
-                                                <input name="fileUpload6c" type="file" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đối tác 5</label>
-                                                <input name="fileUpload7c" type="file" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đối tác 6</label>
-                                                <input name="fileUpload8c" type="file" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đối tác 7</label>
-                                                <input name="fileUpload9c" type="file" />
-                                            </div>
-                                        </div>
-                                        <div class="ui error message">@ViewBag.ThongBao</div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--//Thêm Dối Tác-->
-                    <!--Sửa Bộ Sưu Tập-->
-                    <div class="modal fade" id="@gs_edit{{gs.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content" style="width: 1000px; margin-left: -10%">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
-                                        <svg height="20" viewBox="0 -1 401.5411 401" width="20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="m381.289062 32.242188c13.671876 13.664062 13.671876 35.824218 0 49.488281l-17.679687 17.679687-61.230469-61.230468 17.679688-17.679688c13.671875-13.667969 35.832031-13.667969 49.5 0zm0 0" fill="#00acea" />
-                                            <path d="m363.609375 99.410156-160.148437 160.160156h-.011719l-61.230469-61.230468 160.160156-160.160156zm0 0" fill="#00efd1" />
-                                            <path d="m142.21875 198.339844 61.230469 61.230468-.570313.570313-84.6875 23.460937 23.457032-84.691406zm0 0" fill="#fedb41" />
-                                            <g fill="#083863">
-                                                <path d="m370.589844 250.960938c-5.523438 0-10 4.476562-10 10v88.789062c-.019532 16.5625-13.4375 29.980469-30 30h-280.589844c-16.5625-.019531-29.980469-13.4375-30-30v-260.589844c.019531-16.558594 13.4375-29.980468 30-30h88.789062c5.523438 0 10-4.476562 10-10 0-5.523437-4.476562-10-10-10h-88.789062c-27.601562.03125-49.96875 22.398438-50 50v260.589844c.03125 27.601562 22.398438 49.96875 50 50h280.589844c27.601562-.03125 49.96875-22.398438 50-50v-88.789062c0-5.523438-4.476563-10-10-10zm0 0" />
-                                                <path d="m376.632812 13.429688c-17.589843-17.546876-46.058593-17.546876-63.644531 0l-178.410156 178.410156c-1.21875 1.222656-2.105469 2.738281-2.566406 4.398437l-23.457031 84.691407c-.964844 3.472656.015624 7.191406 2.5625 9.742187 2.550781 2.546875 6.269531 3.527344 9.742187 2.566406l84.691406-23.460937c1.664063-.460938 3.183594-1.347656 4.40625-2.570313l.566407-.570312 177.835937-177.835938c17.574219-17.570312 17.574219-46.058593 0-63.628906zm-229.675781 203.789062 37.613281 37.617188-52.03125 14.414062zm56.5 42.355469v-.007813l6.519531 6.519532zm0-14.140625-47.09375-47.09375 146.015625-146.015625 47.089844 47.085937zm170.761719-170.773438-10.609375 10.609375-47.085937-47.089843 10.609374-10.609376c9.765626-9.746093 25.582032-9.746093 35.351563 0l11.734375 11.746094c9.765625 9.757813 9.765625 25.585938 0 35.34375zm0 0" />
-                                            </g>
-                                        </svg> &nbsp;SỬA ĐỐI TÁC
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    @using (Html.BeginForm("Edit", "GSMalls", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
-                                    {
-                                        <input type="hidden" value="{{gs.id}}" name="gsmall_id" />
-                                        <input value="{{gs.bg}}" name="gsmall_bg" type="hidden" />
-                                        <input value="{{gs.img}}" name="gsmall_image" type="hidden" />
-                                        <input type="hidden" name="gsmall_img1" value="{{gs.img1}}" />
-                                        <input type="hidden" name="gsmall_img2" value="{{gs.img2}}" />
-                                        <input type="hidden" name="gsmall_img3" value="{{gs.img3}}" />
-                                        <input type="hidden" name="gsmall_img4" value="{{gs.img4}}" />
-                                        <input type="hidden" name="gsmall_img5" value="{{gs.img5}}" />
-                                        <input type="hidden" name="gsmall_img6" value="{{gs.img6}}" />
-                                        <input type="hidden" name="gsmall_img7" value="{{gs.img7}}" />
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Tên đối tác</label>
-                                                <input type="text" name="gsmall_name" value="{{gs.name}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Slogan</label>
-                                                <input type="text" name="gsmall_slogan" value="{{gs.slogan}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ngày tạo</label>
-                                                <input type="date" name="gsmall_datecreated" value="{{gs.date}}" />
-                                            </div>
-                                        </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Hoạt động</label>
-                                                <select name="gsmall_active">
-                                                    <option>True</option>
-                                                    <option>False</option>
-                                                </select>
-                                            </div>
-                                            <div class="field">
-                                                <label>Avatar</label>
-                                                <input name="fileUpload1g" type="file" value="{{gs.img}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh nền</label>
-                                                <input name="fileUpload2g" type="file" value="{{gs.bg}}" />
-                                            </div>
-                                        </div>
-                                        <div class="three fields">
-                                            <div class="field">
-                                                <label>Ảnh đối tác 1</label>
-                                                <input name="fileUpload3g" type="file" value="{{gs.img1}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đối tác 2</label>
-                                                <input name="fileUpload4g" type="file" value="{{gs.img2}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đối tác 3</label>
-                                                <input name="fileUpload5g" type="file" value="{{gs.img3}}" />
-                                            </div>
-                                        </div>
-                                        <div class="four fields">
-                                            <div class="field">
-                                                <label>Ảnh đối tác 4</label>
-                                                <input name="fileUpload6g" type="file" value="{{gs.img4}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đối tác 5</label>
-                                                <input name="fileUpload7g" type="file" value="{{gs.img5}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đối tác 6</label>
-                                                <input name="fileUpload8g" type="file" value="{{gs.img5}}" />
-                                            </div>
-                                            <div class="field">
-                                                <label>Ảnh đối tác 7</label>
-                                                <input name="fileUpload9g" type="file" value="{{gs.img7}}" />
-                                            </div>
-                                        </div>
-                                        <div class="ui error message">@ViewBag.ThongBao</div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
-                                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--//Sửa Bộ Sưu Tập-->
                     <!--Xem Bộ Sưu Tập-->
-                    <div class="modal fade" id="@gs_detail{{gs.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="@gs_detail{{todo.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -474,15 +291,15 @@
                                             <div class="three fields">
                                                 <div class="field">
                                                     <label>Tên đối tác</label>
-                                                    <input type="text" name="gsmall_name" value="{{gs.name}}" disabled/>
+                                                    <input type="text" name="gsmall_name" value="{{todo.name}}" disabled />
                                                 </div>
                                                 <div class="field">
                                                     <label>Slogan</label>
-                                                    <input type="text" name="gsmall_slogan" value="{{gs.slogan}}" disabled/>
+                                                    <input type="text" name="gsmall_slogan" value="{{todo.slogan}}" disabled />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ngày tạo</label>
-                                                    <input type="date" name="gsmall_datecreated" value="{{gs.day}}/{{gs.month}}/{{gs.year}}" disabled/>
+                                                    <input type="date" name="gsmall_datecreated" value="{{todo.day}}/{{todo.month}}/{{todo.year}}" disabled />
                                                 </div>
                                             </div>
                                             <div class="three fields">
@@ -495,43 +312,43 @@
                                                 </div>
                                                 <div class="field">
                                                     <label>Avatar</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img}}" height="90" width="100" />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh nền</label>
-                                                    <img src="~/Content/Layout/images/{{gs.bg}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.bg}}" height="90" width="100" />
                                                 </div>
                                             </div>
                                             <div class="three fields">
                                                 <div class="field">
                                                     <label>Ảnh đối tác 1</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img1}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img1}}" height="90" width="100" />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh đối tác 2</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img2}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img2}}" height="90" width="100" />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh đối tác 3</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img3}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img3}}" height="90" width="100" />
                                                 </div>
                                             </div>
                                             <div class="four fields">
                                                 <div class="field">
                                                     <label>Ảnh đối tác 4</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img4}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img4}}" height="90" width="100" />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh đối tác 5</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img5}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img5}}" height="90" width="100" />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh đối tác 6</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img6}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img6}}" height="90" width="100" />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh đối tác 7</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img7}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img7}}" height="90" width="100" />
                                                 </div>
                                             </div>
                                             <div class="ui error message"></div>
@@ -546,7 +363,7 @@
                     </div>
                     <!--//Sửa Bộ Sưu Tập-->
                     <!--Xóa Bộ Sưu Tập-->
-                    <div class="modal fade" id="@gs_delete{{gs.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="@gs_delete{{todo.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -588,19 +405,19 @@
                                     @using (Html.BeginForm("Delete", "GSMalls", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                                     {
                                         <form method="post" class="mb-4 ui form">
-                                            <input type="hidden" value="{{gs.id}}" name="gsmall_id" />
+                                            <input type="hidden" value="{{todo.id}}" name="gsmall_id" />
                                             <div class="three fields">
                                                 <div class="field">
                                                     <label>Tên đối tác</label>
-                                                    <input type="text" name="gsmall_name" value="{{gs.name}}" disabled/>
+                                                    <input type="text" name="gsmall_name" value="{{todo.name}}" disabled />
                                                 </div>
                                                 <div class="field">
                                                     <label>Slogan</label>
-                                                    <input type="text" name="gsmall_slogan" value="{{gs.slogan}}" disabled/>
+                                                    <input type="text" name="gsmall_slogan" value="{{todo.slogan}}" disabled />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ngày tạo</label>
-                                                    <input type="date" name="gsmall_datecreated" value="{{gs.day}}/{{gs.month}}/{{gs.year}}" disabled/>
+                                                    <input type="date" name="gsmall_datecreated" value="{{todo.day}}/{{todo.month}}/{{todo.year}}" disabled />
                                                 </div>
                                             </div>
                                             <div class="three fields">
@@ -613,43 +430,43 @@
                                                 </div>
                                                 <div class="field">
                                                     <label>Avatar</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img}}" height="90" width="100" />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh nền</label>
-                                                    <img src="~/Content/Layout/images/{{gs.bg}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.bg}}" height="90" width="100" />
                                                 </div>
                                             </div>
                                             <div class="three fields">
                                                 <div class="field">
                                                     <label>Ảnh đối tác 1</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img1}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img1}}" height="90" width="100" />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh đối tác 2</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img2}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img2}}" height="90" width="100" />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh đối tác 3</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img3}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img3}}" height="90" width="100" />
                                                 </div>
                                             </div>
                                             <div class="four fields">
                                                 <div class="field">
                                                     <label>Ảnh đối tác 4</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img4}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img4}}" height="90" width="100" />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh đối tác 5</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img5}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img5}}" height="90" width="100" />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh đối tác 6</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img6}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img6}}" height="90" width="100" />
                                                 </div>
                                                 <div class="field">
                                                     <label>Ảnh đối tác 7</label>
-                                                    <img src="~/Content/Layout/images/{{gs.img7}}" height="90" width="100" />
+                                                    <img src="~/Content/Layout/images/{{todo.img7}}" height="90" width="100" />
                                                 </div>
                                             </div>
                                             <div class="ui error message"></div>
@@ -667,6 +484,213 @@
                 </td>
             </tr>
         </table>
+        <center>
+            <pagination ng-model="currentPage"
+                        total-items="todos.length"
+                        max-size="maxSize"
+                        boundary-links="true">
+            </pagination>
+        </center>
     </div>
 </div>
 
+
+<!--Thêm Đối Tác-->
+<div class="modal fade" id="gs_create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 1000px; margin-left: -10%">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <svg height="40" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="-85.197" x2="367.494" y1="397.197" y2="-55.494" data-name="New Gradient Swatch 1"><stop offset="0" stop-color="#003f8a" /><stop offset=".518" stop-color="#00d7df" /><stop offset="1" stop-color="#006df0" /></linearGradient><linearGradient id="b" x1="114.803" x2="567.494" xlink:href="#a" y1="597.197" y2="144.506" /><linearGradient id="c" x1="-126.618" x2="326.073" xlink:href="#a" y1="355.775" y2="-96.915" /><linearGradient id="d" x1="156.225" x2="608.915" xlink:href="#a" y1="638.618" y2="185.928" /><linearGradient id="e" x1="14.803" x2="467.494" xlink:href="#a" y1="497.197" y2="44.506" /><g><path d="m280 56a24 24 0 1 0 -24 24 24.027 24.027 0 0 0 24-24zm-32 0a8 8 0 1 1 8 8 8.009 8.009 0 0 1 -8-8z" fill="url(#a)" /><path d="m232 456a24 24 0 1 0 24-24 24.028 24.028 0 0 0 -24 24zm32 0a8 8 0 1 1 -8-8 8.009 8.009 0 0 1 8 8z" fill="url(#b)" /><path d="m131.55 97.608a23.988 23.988 0 1 0 0 33.941 24.03 24.03 0 0 0 -.001-33.941zm-11.314 22.627a8 8 0 1 1 0-11.313 8.01 8.01 0 0 1 0 11.313z" fill="url(#c)" /><path d="m380.45 414.392a24 24 0 1 0 0-33.942 23.929 23.929 0 0 0 .001 33.943zm11.314-22.627a8 8 0 1 1 0 11.313 8.011 8.011 0 0 1 0-11.313z" fill="url(#d)" /><g fill="url(#e)"><path d="m397.422 138.567a23.928 23.928 0 0 0 16.97-7.017 24.03 24.03 0 1 0 -16.971 7.018zm-5.658-29.645a8 8 0 1 1 0 11.314 7.974 7.974 0 0 1 0-11.314z" /><path d="m97.608 380.45a24 24 0 1 0 33.942 0 24.03 24.03 0 0 0 -33.943.001zm22.628 22.628a8 8 0 1 1 0-11.314 8.012 8.012 0 0 1 0 11.314z" /><path d="m456 208a48.069 48.069 0 0 0 -47.32 40h-32.95a119.443 119.443 0 0 0 -29.45-70.96l23.34-23.34a48 48 0 1 0 -11.32-11.32l-23.34 23.34a119.443 119.443 0 0 0 -70.96-29.45v-32.95a48 48 0 1 0 -16 0v32.95a119.443 119.443 0 0 0 -70.96 29.45l-23.34-23.34a47.95 47.95 0 1 0 -11.32 11.32l23.34 23.34a119.443 119.443 0 0 0 -29.45 70.96h-32.95a48 48 0 1 0 0 16h32.95a119.443 119.443 0 0 0 29.45 70.96l-23.34 23.34a48 48 0 1 0 11.32 11.32l23.34-23.34a119.443 119.443 0 0 0 70.96 29.45v32.95a48 48 0 1 0 16 0v-32.95a119.443 119.443 0 0 0 70.96-29.45l23.34 23.34a48 48 0 1 0 11.32-11.32l-23.34-23.34a119.443 119.443 0 0 0 29.45-70.96h32.95a48 48 0 1 0 47.32-56zm-81.21-116.05a32 32 0 1 1 0 45.26 31.913 31.913 0 0 1 0-45.26zm-237.58 45.26a31.99 31.99 0 1 1 0-45.26 32.055 32.055 0 0 1 0 45.26zm-81.21 150.79a32 32 0 1 1 32-32 32.042 32.042 0 0 1 -32 32zm81.21 132.05a32 32 0 1 1 -.01-45.26h.01v.01a32.043 32.043 0 0 1 0 45.25zm237.58-45.25v-.01h.01a32 32 0 1 1 -.01.01zm-150.79-318.8a32 32 0 1 1 32 32 32.036 32.036 0 0 1 -32-32zm64 400a32 32 0 1 1 -32-32 32.042 32.042 0 0 1 32 32zm-32-96a104 104 0 1 1 104-104 104.112 104.112 0 0 1 -104 104zm200-72a32 32 0 1 1 32-32 32.042 32.042 0 0 1 -32 32z" /><path d="m256 168a88 88 0 1 0 88 88 88.1 88.1 0 0 0 -88-88zm0 160a71.7 71.7 0 0 1 -47.82-18.24 16.006 16.006 0 0 1 15.82-13.76 8.081 8.081 0 0 0 3.58-.84l16-8a8.011 8.011 0 0 0 4.42-7.16v-14.12a7.968 7.968 0 0 0 -2.67-5.96 16.01 16.01 0 0 1 -5.33-11.92v-16a16 16 0 1 1 32 0v16a16.01 16.01 0 0 1 -5.33 11.92 7.968 7.968 0 0 0 -2.67 5.96v14.12a8.011 8.011 0 0 0 4.42 7.16l16 8a8.081 8.081 0 0 0 3.58.84 16.006 16.006 0 0 1 15.82 13.76 71.7 71.7 0 0 1 -47.82 18.24zm59.76-31.89a32.037 32.037 0 0 0 -25.75-16.05l-10.01-5v-5.9a32.046 32.046 0 0 0 8-21.16v-16a32 32 0 0 0 -64 0v16a32.046 32.046 0 0 0 8 21.16v5.9l-10.01 5a32.037 32.037 0 0 0 -25.75 16.05 72 72 0 1 1 119.52 0z" /></g><path d="m456 232a24 24 0 1 0 24 24 24.028 24.028 0 0 0 -24-24zm0 32a8 8 0 1 1 8-8 8.009 8.009 0 0 1 -8 8z" fill="url(#b)" /><path d="m56 232a24 24 0 1 0 24 24 24.028 24.028 0 0 0 -24-24zm0 32a8 8 0 1 1 8-8 8.009 8.009 0 0 1 -8 8z" fill="url(#a)" /></g></svg> THÊM ĐỐI TÁC
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Create", "GSMalls", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                {
+                    <div class="three fields">
+                        <div class="field">
+                            <label>Tên đối tác</label>
+                            <input type="text" name="gsmall_name" />
+                        </div>
+                        <div class="field">
+                            <label>Slogan</label>
+                            <input type="text" name="gsmall_slogan" />
+                        </div>
+                    </div>
+                    <div class="three fields">
+                        <div class="field">
+                            <label>Hoạt động</label>
+                            <select name="gsmall_active">
+                                <option value="true">Hoạt động</option>
+                                <option value="false">Không hoạt động</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Avatar</label>
+                            <input name="fileUpload1c" type="file" />
+                        </div>
+                        <div class="field">
+                            <label>Ảnh nền</label>
+                            <input name="fileUpload2c" type="file" />
+                        </div>
+                    </div>
+                    <div class="three fields">
+                        <div class="field">
+                            <label>Ảnh đối tác 1</label>
+                            <input name="fileUpload3c" type="file" />
+                        </div>
+                        <div class="field">
+                            <label>Ảnh đối tác 2</label>
+                            <input name="fileUpload4c" type="file" />
+                        </div>
+                        <div class="field">
+                            <label>Ảnh đối tác 3</label>
+                            <input name="fileUpload5c" type="file" />
+                        </div>
+                    </div>
+                    <div class="four fields">
+                        <div class="field">
+                            <label>Ảnh đối tác 4</label>
+                            <input name="fileUpload6c" type="file" />
+                        </div>
+                        <div class="field">
+                            <label>Ảnh đối tác 5</label>
+                            <input name="fileUpload7c" type="file" />
+                        </div>
+                        <div class="field">
+                            <label>Ảnh đối tác 6</label>
+                            <input name="fileUpload8c" type="file" />
+                        </div>
+                        <div class="field">
+                            <label>Ảnh đối tác 7</label>
+                            <input name="fileUpload9c" type="file" />
+                        </div>
+                    </div>
+                    <div class="ui error message">@ViewBag.ThongBao</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!--//Thêm Dối Tác-->
+@foreach (var item in Model)
+{
+
+    <!--Sửa Bộ Sưu Tập-->
+    <div class="modal fade" id="@gs_edit@item.gsmall_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="width: 1000px; margin-left: -10%">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <svg height="20" viewBox="0 -1 401.5411 401" width="20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m381.289062 32.242188c13.671876 13.664062 13.671876 35.824218 0 49.488281l-17.679687 17.679687-61.230469-61.230468 17.679688-17.679688c13.671875-13.667969 35.832031-13.667969 49.5 0zm0 0" fill="#00acea" />
+                            <path d="m363.609375 99.410156-160.148437 160.160156h-.011719l-61.230469-61.230468 160.160156-160.160156zm0 0" fill="#00efd1" />
+                            <path d="m142.21875 198.339844 61.230469 61.230468-.570313.570313-84.6875 23.460937 23.457032-84.691406zm0 0" fill="#fedb41" />
+                            <g fill="#083863">
+                                <path d="m370.589844 250.960938c-5.523438 0-10 4.476562-10 10v88.789062c-.019532 16.5625-13.4375 29.980469-30 30h-280.589844c-16.5625-.019531-29.980469-13.4375-30-30v-260.589844c.019531-16.558594 13.4375-29.980468 30-30h88.789062c5.523438 0 10-4.476562 10-10 0-5.523437-4.476562-10-10-10h-88.789062c-27.601562.03125-49.96875 22.398438-50 50v260.589844c.03125 27.601562 22.398438 49.96875 50 50h280.589844c27.601562-.03125 49.96875-22.398438 50-50v-88.789062c0-5.523438-4.476563-10-10-10zm0 0" />
+                                <path d="m376.632812 13.429688c-17.589843-17.546876-46.058593-17.546876-63.644531 0l-178.410156 178.410156c-1.21875 1.222656-2.105469 2.738281-2.566406 4.398437l-23.457031 84.691407c-.964844 3.472656.015624 7.191406 2.5625 9.742187 2.550781 2.546875 6.269531 3.527344 9.742187 2.566406l84.691406-23.460937c1.664063-.460938 3.183594-1.347656 4.40625-2.570313l.566407-.570312 177.835937-177.835938c17.574219-17.570312 17.574219-46.058593 0-63.628906zm-229.675781 203.789062 37.613281 37.617188-52.03125 14.414062zm56.5 42.355469v-.007813l6.519531 6.519532zm0-14.140625-47.09375-47.09375 146.015625-146.015625 47.089844 47.085937zm170.761719-170.773438-10.609375 10.609375-47.085937-47.089843 10.609374-10.609376c9.765626-9.746093 25.582032-9.746093 35.351563 0l11.734375 11.746094c9.765625 9.757813 9.765625 25.585938 0 35.34375zm0 0" />
+                            </g>
+                        </svg> &nbsp;SỬA ĐỐI TÁC
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Edit", "GSMalls", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
+                    {
+                        <input type="hidden" value="@item.gsmall_id" name="gsmall_id" />
+                        <input value="@item.gsmall_bg" name="gsmall_bg" type="hidden" />
+                        <input value="@item.gsmall_image" name="gsmall_image" type="hidden" />
+                        <input type="hidden" name="gsmall_img1" value="@item.gsmall_img1" />
+                        <input type="hidden" name="gsmall_img2" value="@item.gsmall_img2" />
+                        <input type="hidden" name="gsmall_img3" value="@item.gsmall_img3" />
+                        <input type="hidden" name="gsmall_img4" value="@item.gsmall_img4" />
+                        <input type="hidden" name="gsmall_img5" value="@item.gsmall_img5" />
+                        <input type="hidden" name="gsmall_img6" value="@item.gsmall_img6" />
+                        <input type="hidden" name="gsmall_img7" value="@item.gsmall_img7" />
+                        <input type="hidden" name="gsmall_datecreate" value="@item.gsmall_datecreate" />
+                        <div class="three fields">
+                            <div class="field">
+                                <label>Tên đối tác</label>
+                                <input type="text" name="gsmall_name" value="@item.gsmall_name" />
+                            </div>
+                            <div class="field">
+                                <label>Slogan</label>
+                                <input type="text" name="gsmall_slogan" value="@item.gsmall_slogan" />
+                            </div>
+                            <div class="field">
+                                <label>Hoạt động</label>
+                                <select name="gsmall_bin">
+                                    <option value="true" @(item.gsmall_bin == true ? "selected" : "")>Không thùng rác</option>
+                                    <option value="false" @(item.gsmall_bin == false ? "selected" : "")>Thùng rác</option>
+                                </select>
+                            </div></div>
+                        <div class="three fields">
+                            <div class="field">
+                                <label>Hoạt động</label>
+                                <select name="gsmall_active">
+                                    <option value="true" @(item.gsmall_active == true ? "selected" : "")>Hoạt động</option>
+                                    <option value="false" @(item.gsmall_active == false ? "selected" : "")>Không hoạt động</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label>Avatar</label>
+                                <input name="efileUpload1g" type="file" />
+                            </div>
+                            <div class="field">
+                                <label>Ảnh nền</label>
+                                <input name="efileUpload2g" type="file" />
+                            </div>
+                        </div>
+                        <div class="three fields">
+                            <div class="field">
+                                <label>Ảnh đối tác 1</label>
+                                <input name="efileUpload3g" type="file"/>
+                            </div>
+                            <div class="field">
+                                <label>Ảnh đối tác 2</label>
+                                <input name="efileUpload4g" type="file"/>
+                            </div>
+                            <div class="field">
+                                <label>Ảnh đối tác 3</label>
+                                <input name="efileUpload5g" type="file" />
+                            </div>
+                        </div>
+                        <div class="four fields">
+                            <div class="field">
+                                <label>Ảnh đối tác 4</label>
+                                <input name="efileUpload6g" type="file"/>
+                            </div>
+                            <div class="field">
+                                <label>Ảnh đối tác 5</label>
+                                <input name="efileUpload7g" type="file" />
+                            </div>
+                            <div class="field">
+                                <label>Ảnh đối tác 6</label>
+                                <input name="efileUpload8g" type="file"  />
+                            </div>
+                            <div class="field">
+                                <label>Ảnh đối tác 7</label>
+                                <input name="efileUpload9g" type="file"  />
+                            </div>
+                        </div>
+                        <div class="ui error message">@ViewBag.ThongBao</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> ĐÓNG</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> ĐĂNG</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--//Sửa Bộ Sưu Tập-->
+}

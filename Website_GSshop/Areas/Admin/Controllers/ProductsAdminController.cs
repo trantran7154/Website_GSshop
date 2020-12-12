@@ -11,15 +11,15 @@ using Website_GSshop.Models;
 
 namespace Website_GSshop.Areas.Admin.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsAdminController : Controller
     {       
         Data_GSShopEntities db = new Data_GSShopEntities();
-        String admin_qlsp = "/Admin/Products/Index";
+        String admin_qlsp = "/Admin/ProductsAdmin/Index";
         // GET: Admin/Products
         public ActionResult Index()
         {
             var product = db.Product.Include(p => p.Seller).Include(p => p.User).Include(p => p.Category);
-            return View(product.Where(n => n.product_bin == true).ToList());
+            return View(product.Where(n => n.product_bin == true).OrderByDescending(n=>n.product_datecreated).ToList());
         }
 
         // GET: Admin/Products/Details/5
@@ -128,17 +128,19 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id,subcategory_id,banner_id,collection_id,gsmall_id,product_bin")] Product product, HttpPostedFileBase image)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id,subcategory_id,banner_id,collection_id,gsmall_id,product_bin")] Product product, HttpPostedFileBase imgedit)
         {
-            Product pr = db.Product.Find(product.product_id);
-            db.Entry(product).State = EntityState.Modified;
-            if(image == null)
+
+            Random random = new Random();
+            ViewBag.random = random.Next(0, 1000);
+
+
+            if (imgedit == null)
             {
-                Product pro = db.Product.Find(Int32.Parse(product.product_id.ToString()));
-                product.product_bin = pr.product_bin;
-                product.product_datecreated = pr.product_datecreated;
-                product.product_dateedit = DateTime.Now;
+                db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
+
                 ViewBag.banner_id = new SelectList(db.Banner, "banner_id", "banner_name");
                 ViewBag.category_id = new SelectList(db.Category, "category_id", "category_name");
                 ViewBag.csc_id = new SelectList(db.ClassificationSubCategory, "csc_id", "csc_name");
@@ -153,11 +155,11 @@ namespace Website_GSshop.Areas.Admin.Controllers
             else
             {
                 // Tên file ảnh sản phẩm
-                var fileimg = Path.GetFileName(image.FileName);
+                var fileimg = Path.GetFileName(imgedit.FileName);
                 // Đưa tên ảnh vào đúng file
-                var pa = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg);
+                var pa = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg);
                 // Ảnh trống
-                if (image == null)
+                if (imgedit == null)
                 {
                     ViewBag.ThongBao = "Ảnh trống !";
                     return View(product);
@@ -171,10 +173,16 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 //Lưu pa vào name fileUpload
                 else
                 {
-                    image.SaveAs(pa);
-                    product.product_image = image.FileName;
-                    product.product_bin = true;
+                    imgedit.SaveAs(pa);
+
+                    product.product_image = ViewBag.random + imgedit.FileName;
+
+                    db.Entry(product).State = EntityState.Modified;
                     db.SaveChanges();
+
+
+
+
                     ViewBag.banner_id = new SelectList(db.Banner, "banner_id", "banner_name");
                     ViewBag.category_id = new SelectList(db.Category, "category_id", "category_name");
                     ViewBag.csc_id = new SelectList(db.ClassificationSubCategory, "csc_id", "csc_name");

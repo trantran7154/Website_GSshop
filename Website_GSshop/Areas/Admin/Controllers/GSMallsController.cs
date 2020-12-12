@@ -48,70 +48,73 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "gsmall_id,gsmall_name,gsmall_slogan,gsmall_active,gsmall_datecreate,gsmall_bg,gsmall_image,gsmall_bin,gsmall_img1,gsmall_img2,gsmall_img3,gsmall_img4,gsmall_img5,gsmall_img6,gsmall_img7")] GSMall gSMall, HttpPostedFileBase fileUpload1c, HttpPostedFileBase fileUpload2c, HttpPostedFileBase fileUpload3c, HttpPostedFileBase fileUpload4c, HttpPostedFileBase fileUpload5c, HttpPostedFileBase fileUpload6c, HttpPostedFileBase fileUpload7c, HttpPostedFileBase fileUpload8c, HttpPostedFileBase fileUpload9c)
+        public ActionResult Create([Bind(Include = "gsmall_id,gsmall_name,gsmall_slogan,gsmall_active,gsmall_datecreate,gsmall_bg,gsmall_image,gsmall_bin,gsmall_img1,gsmall_img2,gsmall_img3,gsmall_img4,gsmall_img5,gsmall_img6,gsmall_img7")] GSMall gSMall, HttpPostedFileBase efileUpload1c, HttpPostedFileBase efileUpload2c, HttpPostedFileBase efileUpload3c, HttpPostedFileBase efileUpload4c, HttpPostedFileBase efileUpload5c, HttpPostedFileBase efileUpload6c, HttpPostedFileBase efileUpload7c, HttpPostedFileBase efileUpload8c, HttpPostedFileBase efileUpload9c)
         {
+            Random random = new Random();
+            ViewBag.random = random.Next(0, 1000);
+
             // Tên file ảnh sản phẩm
-            var fileimg_edit1 = Path.GetFileName(fileUpload1c.FileName);
-            var fileimg_edit2 = Path.GetFileName(fileUpload2c.FileName);
-            var fileimg_edit3 = Path.GetFileName(fileUpload3c.FileName);
-            var fileimg_edit4 = Path.GetFileName(fileUpload4c.FileName);
-            var fileimg_edit5 = Path.GetFileName(fileUpload5c.FileName);
-            var fileimg_edit6 = Path.GetFileName(fileUpload6c.FileName);
-            var fileimg_edit7 = Path.GetFileName(fileUpload7c.FileName);
-            var fileimg_edit8 = Path.GetFileName(fileUpload8c.FileName);
-            var fileimg_edit9 = Path.GetFileName(fileUpload9c.FileName);
+            var fileimg_edit1 = Path.GetFileName(efileUpload1c.FileName);
+            var fileimg_edit2 = Path.GetFileName(efileUpload2c.FileName);
+            var fileimg_edit3 = Path.GetFileName(efileUpload3c.FileName);
+            var fileimg_edit4 = Path.GetFileName(efileUpload4c.FileName);
+            var fileimg_edit5 = Path.GetFileName(efileUpload5c.FileName);
+            var fileimg_edit6 = Path.GetFileName(efileUpload6c.FileName);
+            var fileimg_edit7 = Path.GetFileName(efileUpload7c.FileName);
+            var fileimg_edit8 = Path.GetFileName(efileUpload8c.FileName);
+            var fileimg_edit9 = Path.GetFileName(efileUpload9c.FileName);
             // Đưa tên ảnh vào đúng file
-            var pa_eidt1 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit1);
-            var pa_eidt2 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit2);
-            var pa_eidt3 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit3);
-            var pa_eidt4 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit4);
-            var pa_eidt5 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit5);
-            var pa_eidt6 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit6);
-            var pa_eidt7 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit7);
-            var pa_eidt8 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit8);
-            var pa_eidt9 = Path.Combine(Server.MapPath("~/Content/Layout/images"), fileimg_edit9);
+            var pa_eidt1 = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit1);
+            var pa_eidt2 = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit2);
+            var pa_eidt3 = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit3);
+            var pa_eidt4 = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit4);
+            var pa_eidt5 = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit5);
+            var pa_eidt6 = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit6);
+            var pa_eidt7 = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit7);
+            var pa_eidt8 = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit8);
+            var pa_eidt9 = Path.Combine(Server.MapPath("~/Content/Layout/images"), ViewBag.random + fileimg_edit9);
             // Ảnh trống
-            if (fileUpload1c == null)
+            if (efileUpload1c == null)
             {
                 ViewBag.ThongBao = "Ảnh 1 trống !";
                 return View(gSMall);
             }
-            else if (fileUpload2c == null)
+            else if (efileUpload2c == null)
             {
                 ViewBag.ThongBao = "Ảnh 2 trống !";
                 return View(gSMall);
             }
-            else if (fileUpload3c == null)
+            else if (efileUpload3c == null)
             {
                 ViewBag.ThongBao = "Ảnh 3 trống !";
                 return View(gSMall);
             }
-            else if (fileUpload4c == null)
+            else if (efileUpload4c == null)
             {
                 ViewBag.ThongBao = "Ảnh 4 trống !";
                 return View(gSMall);
             }
-            else if (fileUpload5c == null)
+            else if (efileUpload5c == null)
             {
                 ViewBag.ThongBao = "Ảnh 5 trống !";
                 return View(gSMall);
             }
-            else if (fileUpload6c == null)
+            else if (efileUpload6c == null)
             {
                 ViewBag.ThongBao = "Ảnh 6 trống !";
                 return View(gSMall);
             }
-            else if (fileUpload7c == null)
+            else if (efileUpload7c == null)
             {
                 ViewBag.ThongBao = "Ảnh 7 trống !";
                 return View(gSMall);
             }
-            else if (fileUpload8c == null)
+            else if (efileUpload8c == null)
             {
                 ViewBag.ThongBao = "Ảnh 8 trống !";
                 return View(gSMall);
             }
-            else if (fileUpload9c == null)
+            else if (efileUpload9c == null)
             {
                 ViewBag.ThongBao = "Ảnh 9 trống !";
                 return View(gSMall);
@@ -165,27 +168,26 @@ namespace Website_GSshop.Areas.Admin.Controllers
             //Lưu pa vào name fileUpload
             else
             {
-                fileUpload1c.SaveAs(pa_eidt1);
-                fileUpload2c.SaveAs(pa_eidt2);
-                fileUpload3c.SaveAs(pa_eidt3);
-                fileUpload4c.SaveAs(pa_eidt4);
-                fileUpload5c.SaveAs(pa_eidt5);
-                fileUpload6c.SaveAs(pa_eidt6);
-                fileUpload7c.SaveAs(pa_eidt7);
-                fileUpload8c.SaveAs(pa_eidt8);
-                fileUpload9c.SaveAs(pa_eidt9);
+                efileUpload1c.SaveAs(pa_eidt1);
+                efileUpload2c.SaveAs(pa_eidt2);
+                efileUpload3c.SaveAs(pa_eidt3);
+                efileUpload4c.SaveAs(pa_eidt4);
+                efileUpload5c.SaveAs(pa_eidt5);
+                efileUpload6c.SaveAs(pa_eidt6);
+                efileUpload7c.SaveAs(pa_eidt7);
+                efileUpload8c.SaveAs(pa_eidt8);
+                efileUpload9c.SaveAs(pa_eidt9);
                 db.GSMall.Add(gSMall);
-                gSMall.gsmall_bg = fileUpload1c.FileName;
-                gSMall.gsmall_image = fileUpload2c.FileName;
-                gSMall.gsmall_img1 = fileUpload3c.FileName;
-                gSMall.gsmall_img2 = fileUpload4c.FileName;
-                gSMall.gsmall_img3 = fileUpload5c.FileName;
-                gSMall.gsmall_img4 = fileUpload6c.FileName;
-                gSMall.gsmall_img5 = fileUpload7c.FileName;
-                gSMall.gsmall_img6 = fileUpload8c.FileName;
-                gSMall.gsmall_img7 = fileUpload9c.FileName;
+                gSMall.gsmall_bg = ViewBag.random +  efileUpload1c.FileName;
+                gSMall.gsmall_image = ViewBag.random + efileUpload2c.FileName;
+                gSMall.gsmall_img1 = ViewBag.random + efileUpload3c.FileName;
+                gSMall.gsmall_img2 = ViewBag.random + efileUpload4c.FileName;
+                gSMall.gsmall_img3 = ViewBag.random + efileUpload5c.FileName;
+                gSMall.gsmall_img4 = ViewBag.random + efileUpload6c.FileName;
+                gSMall.gsmall_img5 = ViewBag.random + efileUpload7c.FileName;
+                gSMall.gsmall_img6 = ViewBag.random + efileUpload8c.FileName;
+                gSMall.gsmall_img7 = ViewBag.random + efileUpload9c.FileName;
                 gSMall.gsmall_datecreate = DateTime.Now;
-                gSMall.gsmall_active = true;
                 gSMall.gsmall_bin = true;
                 db.SaveChanges();
                 return Redirect(Request.UrlReferrer.ToString());
@@ -246,93 +248,75 @@ namespace Website_GSshop.Areas.Admin.Controllers
                 if (fileUpload1g == null && fileUpload2g != null && fileUpload3g != null && fileUpload4g != null && fileUpload5g != null && fileUpload6g != null && fileUpload7g != null && fileUpload8g != null && fileUpload9g != null)
                 {
                     ViewBag.ThongBao = "Ảnh nền trống !";
-                    return View(gSMall);
                 }
                 else if (fileUpload1g != null && fileUpload2g == null && fileUpload3g != null && fileUpload4g != null && fileUpload5g != null && fileUpload6g != null && fileUpload7g != null && fileUpload8g != null && fileUpload9g != null)
                 {
                     ViewBag.ThongBao = "Ảnh đại diện trống trống !";
-                    return View(gSMall);
                 }
                 else if (fileUpload1g != null && fileUpload2g != null && fileUpload3g == null && fileUpload4g != null && fileUpload5g != null && fileUpload6g != null && fileUpload7g != null && fileUpload8g != null && fileUpload9g != null)
                 {
                     ViewBag.ThongBao = "Ảnh 1 trống !";
-                    return View(gSMall);
                 }
                 else if (fileUpload1g != null && fileUpload2g != null && fileUpload3g != null && fileUpload4g == null && fileUpload5g != null && fileUpload6g != null && fileUpload7g != null && fileUpload8g != null && fileUpload9g != null)
                 {
                     ViewBag.ThongBao = "Ảnh 2 trống !";
-                    return View(gSMall);
                 }
                 else if (fileUpload1g != null && fileUpload2g != null && fileUpload3g != null && fileUpload4g != null && fileUpload5g == null && fileUpload6g != null && fileUpload7g != null && fileUpload8g != null && fileUpload9g != null)
                 {
                     ViewBag.ThongBao = "Ảnh 3 trống !";
-                    return View(gSMall);
                 }
                 else if (fileUpload1g != null && fileUpload2g != null && fileUpload3g != null && fileUpload4g != null && fileUpload5g != null && fileUpload6g == null && fileUpload7g != null && fileUpload8g != null && fileUpload9g != null)
                 {
                     ViewBag.ThongBao = "Ảnh 4 trống !";
-                    return View(gSMall);
                 }
                 else if (fileUpload1g != null && fileUpload2g != null && fileUpload3g != null && fileUpload4g != null && fileUpload5g != null && fileUpload6g != null && fileUpload7g == null && fileUpload8g != null && fileUpload9g != null)
                 {
                     ViewBag.ThongBao = "Ảnh 5 trống !";
-                    return View(gSMall);
                 }
                 else if (fileUpload1g != null && fileUpload2g != null && fileUpload3g != null && fileUpload4g != null && fileUpload5g != null && fileUpload6g != null && fileUpload7g != null && fileUpload8g == null && fileUpload9g != null)
                 {
                     ViewBag.ThongBao = "Ảnh 6 trống !";
-                    return View(gSMall);
                 }
                 else if (fileUpload1g != null && fileUpload2g != null && fileUpload3g != null && fileUpload4g != null && fileUpload5g != null && fileUpload6g != null && fileUpload7g != null && fileUpload8g != null && fileUpload9g == null)
                 {
                     ViewBag.ThongBao = "Ảnh 7 trống !";
-                    return View(gSMall);
                 }
                 //Nếu tên ảnh trùng
                 else if (System.IO.File.Exists(pa_eidt1))
                 {
                     ViewBag.ThongBao = "Ảnh nền đã tồn tại";
-                    return View(gSMall);
                 }
                 else if (System.IO.File.Exists(pa_eidt2))
                 {
                     ViewBag.ThongBao = "Ảnh đại diện đã tồn tại";
-                    return View(gSMall);
                 }
                 else if (System.IO.File.Exists(pa_eidt3))
                 {
                     ViewBag.ThongBao = "Ảnh 1 đã tồn tại";
-                    return View(gSMall);
                 }
                 else if (System.IO.File.Exists(pa_eidt4))
                 {
                     ViewBag.ThongBao = "Ảnh 2 đã tồn tại";
-                    return View(gSMall);
                 }
                 else if (System.IO.File.Exists(pa_eidt5))
                 {
                     ViewBag.ThongBao = "Ảnh 3 đã tồn tại";
-                    return View(gSMall);
                 }
                 else if (System.IO.File.Exists(pa_eidt6))
                 {
                     ViewBag.ThongBao = "Ảnh 4 đã tồn tại";
-                    return View(gSMall);
                 }
                 else if (System.IO.File.Exists(pa_eidt7))
                 {
                     ViewBag.ThongBao = "Ảnh 5 đã tồn tại";
-                    return View(gSMall);
                 }
                 else if (System.IO.File.Exists(pa_eidt8))
                 {
                     ViewBag.ThongBao = "Ảnh 6 đã tồn tại";
-                    return View(gSMall);
                 }
                 else if (System.IO.File.Exists(pa_eidt9))
                 {
                     ViewBag.ThongBao = "Ảnh 7 đã tồn tại";
-                    return View(gSMall);
                 }
                 //Lưu pa vào name fileUpload
                 else
@@ -362,6 +346,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
                     db.SaveChanges();
                     return Redirect(admin_qldt);
                 }
+                return Redirect(Request.UrlReferrer.ToString());
             }
         }
 
@@ -386,7 +371,6 @@ namespace Website_GSshop.Areas.Admin.Controllers
         {
             GSMall gs = db.GSMall.Find(Int32.Parse(gSMall.gsmall_id.ToString()));
             gs.gsmall_bin = false;
-            gs.gsmall_active = false;
             db.SaveChanges();
             return Redirect(admin_qldt);
         }
