@@ -2,15 +2,16 @@
 @model List<Product>
 @{
     User sesus = (User)Session["user"];
+
     Data_GSShopEntities db = new Data_GSShopEntities();
 }
 @{
     List<Favourite> fa = db.Favourite.ToList();
 }
-<script src="~/Scripts/jquery-3.4.1.min.js">
-</script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.js">
-</script>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
 <div class="container-fluid">
     <h2 class="article-list__heading"><img src="~/Content/Layout/images/icons8-fire-48.png" width="40" /><a href="#">Tìm kiếm phổ biến</a></h2>
 </div>
@@ -57,9 +58,9 @@
                                 <img src="~/Content/Layout/images/@item.product_image" width="250" style="border: 1px solid #f999" />
                             </div>
                             <div class="row">
-                                <a href="@Url.Action("MostPopularDetail","View", new {@id = item.product_id})" class="pnl-label mt-1 ml-2"><h5>@item.product_name</h5></a>
+                                <a href="@Url.Action("MostPopularDetail","View", new {@id = item.product_id})" class="pnl-label mt-1 ml-2"><h5>@item.ClassificationSubCategory.csc_name</h5></a>
                                 <div class="col-md-9">
-                                    <h6 class="text-dark font-weight-700">@item.product_amount sản phẩm</h6>
+                                    <h6 class="text-dark font-weight-700">@Model.Where(n => n.csc_id == item.csc_id).Count() sản phẩm</h6>
                                 </div>
                                 <div class="col-md-3">
                                     <a href="@Url.Action("MostPopularDetail","View", new {@id = item.product_id})" class="float-right">

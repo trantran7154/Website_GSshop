@@ -53,7 +53,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id,subcategory_id,banner_id,collection_id,gsmall_id,product_bin")] Product product, HttpPostedFileBase fileUpload)
+        public ActionResult Create([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,category_id,subcategory_id,banner_id,collection_id,gsmail_id,product_bin,product_related,user_id,csc_id,product_percent,product_popular")] Product product, HttpPostedFileBase fileUpload)
         {
 
             Random random = new Random();
@@ -129,7 +129,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,user_id,category_id,subcategory_id,banner_id,collection_id,gsmall_id,product_bin")] Product product, HttpPostedFileBase imgedit)
+        public ActionResult Edit([Bind(Include = "product_id,product_name,product_image,product_datecreated,product_active,product_note,product_price,product_ship,product_view,product_love,product_color,product_size,product_detail,product_description,product_option,product_sale,product_amount,product_dateedit,seller_id,category_id,subcategory_id,banner_id,collection_id,gsmail_id,product_bin,product_related,user_id,csc_id,product_percent,product_popular")] Product product, HttpPostedFileBase imgedit)
         {
 
             Random random = new Random();

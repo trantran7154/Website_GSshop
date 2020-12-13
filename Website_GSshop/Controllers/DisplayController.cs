@@ -28,7 +28,7 @@ namespace Website_GSshop.Controllers
         // Hiển thị tìm kiếm phổ biến
         public PartialViewResult MostPopular()
         {
-            return PartialView(db.Product.Where(n => n.product_active == true && n.product_bin == true).OrderByDescending(n => n.product_datecreated).Take(6).ToList());
+            return PartialView(db.Product.Where(n => n.product_active == true && n.product_bin == true).OrderByDescending(n => n.product_view).Take(6).ToList());
         }
         // Hiển thị bộ sưu tập
         public PartialViewResult Collections()

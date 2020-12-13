@@ -29,7 +29,7 @@
             $scope.todos = [
                 @foreach (var item in Model)
                 {
-                    @: {id: @item.product_id,name: "@Html.Raw(item.product_name)",ac: "@item.product_active",email: "@item.Seller.seller_email", price: "@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫", view: "@item.product_view", like: "@item.product_love", option: "@item.product_option", sale: "@{float sale = (float)item.product_sale;}@sale.ToString("#,##0") ₫", amount: "@item.product_amount", bin: "@item.product_bin", img: "@item.product_image",cate: "@item.Category.category_name",sub: "@item.SubCategory.subcategory_name",date: "@item.product_datecreated.Value.Day",month: "@item.product_datecreated.Value.Month",year: "@item.product_datecreated.Value.Year" },
+                    @: {id: @item.product_id,name: "@Html.Raw(item.product_name)",ac: "@item.product_active",email: "@item.Seller.seller_email", price: "@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫", view: "@item.product_view", like: "@item.product_love", option: "@item.product_option", sale: "@{float sale = ((float)item.product_price * (1 - ((float)item.product_percent / 100)));}@sale.ToString("#,##0") ₫", amount: "@item.product_amount", bin: "@item.product_bin", img: "@item.product_image",cate: "@item.Category.category_name",sub: "@item.SubCategory.subcategory_name",date: "@item.product_datecreated.Value.Day",month: "@item.product_datecreated.Value.Month",year: "@item.product_datecreated.Value.Year" },
                 }
             ];
 

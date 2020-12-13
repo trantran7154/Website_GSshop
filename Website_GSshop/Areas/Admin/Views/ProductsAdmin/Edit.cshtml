@@ -55,12 +55,6 @@
             @Html.DropDownList("gsmail_id", null, htmlAttributes: new { @class = "form-control" })
         </div>
         <div class="field">
-            <div class="field">
-                <label>Mã sản phẩm liên quan</label>
-                <input name="product_related" value="@Model.product_related" type="text">
-            </div>
-        </div>
-        <div class="field">
             <label>Hoạt động</label>
             <select name="product_active">
                 <option value="true" @(Model.product_ship == true ? "selected" : "")>Hoạt động</option>
@@ -90,6 +84,12 @@
         <div class="field">
             <label>Người bán</label>
             @Html.DropDownList("seller_id", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="field">
+            <div class="field">
+                <label>Mã sản phẩm liên quan</label>
+                <input name="product_related" value="@Model.product_related" type="text">
+            </div>
         </div>
     </div>
     <div class="field">
@@ -141,6 +141,12 @@
         <div class="field">
             <label>Kích cỡ</label>
             <input type="text" name="product_size" value="@Model.product_size" />
+        </div>
+    </div>
+    <div class="four fields">
+        <div class="field">
+            <label>Phần trăm SALE</label>
+            <input name="product_percent" type="text">
         </div>
     </div>
     <div>

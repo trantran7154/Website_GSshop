@@ -74,6 +74,13 @@
             </select>
         </div>
         <div class="field">
+            <label>Tùy chọn</label>
+            <select name="product_option">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+        </div>
+        <div class="field">
             <label>Người bán</label>
             @Html.DropDownList("seller_id", null, htmlAttributes: new { @class = "form-control" })
         </div>
@@ -110,11 +117,8 @@
     </div>
     <div class="four fields">
         <div class="field">
-            <label>Tùy chọn</label>
-            <select name="product_option">
-                <option value="true">True</option>
-                <option value="false">False</option>
-            </select>
+            <label>Phần trăm SALE</label>
+            <input name="product_percent" type="text">
         </div>
         <div class="field">
             <label>Số lượng</label>
@@ -127,6 +131,15 @@
         <div class="field">
             <label>Kích cỡ</label>
             <input type="text" name="product_size" />
+        </div>
+    </div>
+    <div class="four fields">
+        <div class="field">
+            <label>Thùng rác</label>
+            <select name="product_bin">
+                <option value="true">Không thùng rác</option>
+                <option value="false">Thùng rác</option>
+            </select>
         </div>
     </div>
     <div>

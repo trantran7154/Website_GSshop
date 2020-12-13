@@ -12,20 +12,27 @@ namespace Website_GSshop.Controllers
         Data_GSShopEntities db = new Data_GSShopEntities();
         // GET: View
         // Xem chi tiết các sản phẩm tìm kiếm phổ biến
-        public ActionResult MostPopularDetail()
+        public ActionResult MostPopularDetail(int? id)
         {
-            return View(db.Product.Where(n => n.product_active == true && n.product_bin == true).Take(40).ToList());
+            Product product = db.Product.SingleOrDefault(n => n.csc_id == id);
+            if (product == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            db.SaveChanges();
+            return View(product);
         }
         // Xem chi tiết sản phẩm của các bộ sưu tập
         public ActionResult CollectionsDetail(int? id)
         {
-            Product product = db.Product.SingleOrDefault(n => n.product_id == id);
-            if(product == null)
+            Collection collection = db.Collection.SingleOrDefault(n => n.collection_id == id);
+            if (collection == null)
             {
                 ViewBag.Note = "Chưa có sản phẩm nào đang SALE. Bạn có thể tham khảo các Bộ Sưu Tập khác!";
             }
             db.SaveChanges();
-            return View(product);
+            return View(collection);
         }
         // Xem chi tiết các sản phẩm sale mạnh
         public ActionResult FlashSaleDetail(int ? id)
