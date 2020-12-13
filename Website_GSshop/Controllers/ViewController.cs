@@ -14,7 +14,7 @@ namespace Website_GSshop.Controllers
         // Xem chi tiết các sản phẩm tìm kiếm phổ biến
         public ActionResult MostPopularDetail()
         {
-            return View(db.Product.Where(n => n.product_active == true).Take(40).ToList());
+            return View(db.Product.Where(n => n.product_active == true && n.product_bin == true).Take(40).ToList());
         }
         // Xem chi tiết sản phẩm của các bộ sưu tập
         public ActionResult CollectionsDetail(int? id)
@@ -22,8 +22,7 @@ namespace Website_GSshop.Controllers
             Product product = db.Product.SingleOrDefault(n => n.product_id == id);
             if(product == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                ViewBag.Note = "Chưa có sản phẩm nào đang SALE. Bạn có thể tham khảo các Bộ Sưu Tập khác!";
             }
             db.SaveChanges();
             return View(product);

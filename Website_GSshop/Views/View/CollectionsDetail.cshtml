@@ -10,9 +10,9 @@
 }
 <div class="collection-product">
     <div class="collection-product-banner J_banner" data-spm-anchor-id="a2o4n.col_prod_list.0.i0.6cd1233dOrKToa" style="background-image: url('../../Content/Layout/images/collection.jpg');">
-        <div class="title J_title">Phụ Kiện Sành Điệu</div>
+        <div class="title J_title mt-1">@Model.Collection.collection_name</div>
         <br />
-        <div class="subtitle J_Subtitle"> Sale Cực Lớn Đến 70%</div>
+        <div class="subtitle J_Subtitle ml-2"> Sale Cực Lớn Đến 70%</div>
         <br />
     </div>
 </div>
@@ -34,9 +34,12 @@
                         <div class="p-desc">
                             <a href="@Url.Action("ProductDetail", "View", new { @id = item.product_id })"><h3 class="p-category">@item.product_name</h3></a>
                             <h5 class="text-danger">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</h5>
-                            <h5><s>@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</s> -10%</h5>
+                            @{
+                                float sale = ((float)Model.product_price * (1 - ((float)Model.product_percent / 100)));
+                            }
+                            <h5><s>@sale.ToString("#,##0") ₫</s> &nbsp;-@item.product_percent%</h5>
                         </div>
-                        <div class="row">
+                        <div class="row mt-1 mb-1">
                             <div class="col-md-6">
                                 <div class="p-price">
                                     <div class="p-stars">
@@ -58,10 +61,12 @@
                 </div>
             }
         </div>
-    </div>
-    <div class="card-jfy-load-more J_LoadMore">
-        <a class="button J_LoadMoreButton text-info">TẢI THÊM</a>
+        @ViewBag.Note
+        <div class="card-jfy-load-more J_LoadMore">
+            <a class="button J_LoadMoreButton text-info">TẢI THÊM</a>
+        </div>
     </div>
 </center>
+<hr />
 
 

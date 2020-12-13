@@ -42,6 +42,5 @@ namespace Website_GSshop.Models
         public virtual DbSet<SubCategory> SubCategory { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }
