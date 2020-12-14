@@ -4,6 +4,8 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 
     Data_GSShopEntities db = new Data_GSShopEntities();
+
+    Seller sesse = (Seller)Session["seller"];
 }
 @{
     List<Product> products = db.Product.ToList();
@@ -17,6 +19,7 @@
     List<Seller> sellers = db.Seller.ToList();
     List<Comment> cmt = db.Comment.ToList();
     List<ReplyComment> rp = db.ReplyComment.ToList();
+    List<Product> sepr = db.Product.Where(n => n.seller_id == sesse.seller_id).ToList();
 }
 <!-- QUẢN LÝ HÓA ĐƠN -->
 <div class="statistics mt-4">
@@ -334,7 +337,7 @@
                                     <a href="/Admin/Seller_Product/Index">
                                         <h6>SẢN PHẨM</h6>
                                     </a>
-                                    <h3>???</h3>
+                                    <h3>@sepr.Count</h3>
                                 </div>
                             </div>
                         </div>
