@@ -25,5 +25,9 @@ namespace Website_GSshop.Areas.Admin.Controllers
         {
             return PartialView();
         }
+        public ActionResult Static()
+        {
+            return View();
+        }
     }
 }

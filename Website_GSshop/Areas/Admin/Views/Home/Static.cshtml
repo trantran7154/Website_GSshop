@@ -1,0 +1,118 @@
+﻿@using Website_GSshop.Models;
+@{
+    Data_GSShopEntities db = new Data_GSShopEntities();
+    ViewBag.Title = "Static";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{ 
+    List<Product> countpr = db.Product.ToList();
+    List<Category> categories = db.Category.ToList();
+    List<SubCategory> subCategories = db.SubCategory.ToList();
+    List<ClassificationSubCategory> classificationSubCategories = db.ClassificationSubCategory.ToList();
+    List<User> users = db.User.ToList();
+    List<Seller> sellers = db.Seller.ToList();
+    List<AdminData> adminDatas = db.AdminData.ToList();
+    List<Bill> bills = db.Bill.ToList();
+    List<PayDetail> payDetails = db.PayDetail.ToList();
+}
+<div class="card">
+    <div class="row">
+        <div class="col-lg-12">
+            <div style="padding: 10px">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#a" role="tab" aria-controls="nav-home" aria-selected="true">Sản phẩm</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#b" role="tab" aria-controls="nav-profile" aria-selected="false">Danh mục</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#c" role="tab" aria-controls="nav-contact" aria-selected="false">Danh mục con</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#d" role="tab" aria-controls="nav-contact" aria-selected="false">Danh mục con con</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#e" role="tab" aria-controls="nav-contact" aria-selected="false">Người dùng</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#f" role="tab" aria-controls="nav-contact" aria-selected="false">Lượt xem sản phẩm</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#g" role="tab" aria-controls="nav-contact" aria-selected="false">Hóa đơn</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="a" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <br />
+                        <h3 class="text-danger">Thống kê sản phẩm</h3>
+                        <ul>
+                            <li><b>Tổng sản phẩm: </b><span style="font-size: 23px" class="float-right">@countpr.Count sp</span></li>
+                            <li><b>Tổng sản phẩm hoạt động: </b><span style="font-size: 23px" class="float-right">@countpr.Where(n => n.product_active == true).ToList().Count sp</span></li>
+                            <li><b>Tổng sản phẩm <b class="text-success">không</b> hoạt động: </b><span style="font-size: 23px" class="float-right">@countpr.Where(n => n.product_active == false).ToList().Count sp</span></li>
+                            <li><b>Tổng sản phẩm thùng rác: </b><span style="font-size: 23px" class="float-right">@countpr.Where(n => n.product_bin == false).ToList().Count sp</span></li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="b" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <br />
+                        <h3 class="text-danger">Thống kê danh mục sản phẩm</h3>
+                        <ul>
+                            @foreach (var item in categories)
+                            {
+                                <li><b>@item.category_name : </b> <span style="font-size: 23px" class="float-right">@countpr.Where(n => n.category_id == item.category_id).ToList().Count sp</span></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="c" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <br />
+                        <h3 class="text-danger">Thống kê danh mục con</h3>
+                        <ul>
+                            @foreach (var item in subCategories)
+                            {
+                                <li><b>@item.subcategory_name : </b> <span style="font-size: 23px" class="float-right">@countpr.Where(n => n.subcategory_id == item.subcategory_id).ToList().Count sp</span></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="d" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <br />
+                        <h3 class="text-danger">Thống kê danh mục con</h3>
+                        <ul>
+                            @foreach (var item in classificationSubCategories)
+                            {
+                                <li><b>@item.csc_name : </b> <span style="font-size: 23px" class="float-right">@countpr.Where(n => n.csc_id == item.csc_id).ToList().Count sp</span></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="e" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <br />
+                        <h3 class="text-danger">Người dùng</h3>
+                        <ul>
+                            <li><b>Tổng người dùng: </b><span style="font-size: 23px" class="float-right">@(users.Count + sellers.Count + adminDatas.Count)</span></li>
+                            <li><b>Tổng khách hàng: </b><span style="font-size: 23px" class="float-right">@(users.Count)</span></li>
+                            <li><b>Tổng người bán: </b><span style="font-size: 23px" class="float-right">@(sellers.Count)</span></li>
+                            <li><b>Tổng admin: </b><span style="font-size: 23px" class="float-right">@(adminDatas.Count)</span></li>
+                            <li><b>Tổng người dùng: </b><span style="font-size: 23px" class="float-right">@(users.Count + sellers.Count + adminDatas.Count)</span></li>
+                            <li><b>Tổng người dùng: </b><span style="font-size: 23px" class="float-right">@(users.Count + sellers.Count + adminDatas.Count)</span></li>
+                            <li><b>Tổng người dùng: </b><span style="font-size: 23px" class="float-right">@(users.Count + sellers.Count + adminDatas.Count)</span></li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="f" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <br />
+                        <h3 class="text-danger">Top 20 sản phâm có lượt xem nhiều nhất (@countpr.OrderByDescending(n => n.product_view).Take(20).Sum(n => n.product_view))</h3>
+                        @foreach (var item in countpr.OrderByDescending(n => n.product_view).Take(20))
+                        {
+                            @item.product_name
+                             <b>@((item.product_view * 100)/ (countpr.OrderByDescending(n => n.product_view).Take(20).Sum(n => n.product_view))) %</b>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: @((item.product_view * 100)/ (countpr.OrderByDescending(n => n.product_view).Take(20).Sum(n => n.product_view)))%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="tab-pane fade" id="g" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <br />
+                        <h3 class="text-danger">Thống kê hóa đơn</h3>
+                        <ul>
+                            <li><b>Tổng hóa đơn:</b> @bills.Count</li>
+                            <li><b>Tổng sản phẩm được bán:</b> @payDetails.Count</li>
+                            <li><b>Doanh thu hóa đơn: @bills.Sum(n=>n.bill_sum) vnđ</b></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+
+
