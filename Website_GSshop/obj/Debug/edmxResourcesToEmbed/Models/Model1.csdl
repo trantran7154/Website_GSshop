@@ -248,6 +248,7 @@
     <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
     <NavigationProperty Name="ClassificationSubCategory" Relationship="Self.FK_ClassificationSubCategory_SubCategory" FromRole="SubCategory" ToRole="ClassificationSubCategory" />
     <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+    <Property Name="subcategory_view" Type="Int32" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -535,7 +536,6 @@
       <End Role="ReplyComment" EntitySet="ReplyComment" />
     </AssociationSet>
     <EntitySet Name="Product" EntityType="Data_GSShopModel.Product" />
-    <EntitySet Name="sysdiagrams" EntityType="Data_GSShopModel.sysdiagrams" />
     <AssociationSet Name="FK_Product_Banner" Association="Data_GSShopModel.FK_Product_Banner">
       <End Role="Banner" EntitySet="Banner" />
       <End Role="Product" EntitySet="Product" />
@@ -644,16 +644,7 @@
     <NavigationProperty Name="User1" Relationship="Data_GSShopModel.FK_Product_User1" FromRole="Product" ToRole="User" />
     <NavigationProperty Name="ReplyComment" Relationship="Data_GSShopModel.FK_ReplyComment_Product" FromRole="Product" ToRole="ReplyComment" />
     <NavigationProperty Name="ReplyComment1" Relationship="Data_GSShopModel.FK_ReplyComment_Product1" FromRole="Product" ToRole="ReplyComment" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="product_percent" Type="Int32" />
   </EntityType>
   <Association Name="FK_Product_Banner">
     <End Type="Data_GSShopModel.Banner" Role="Banner" Multiplicity="0..1" />

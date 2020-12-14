@@ -3,13 +3,16 @@
 @{
     ViewBag.Title = "MostPopularDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var img = "change_image(this)";
+
+    Data_GSShopEntities db = new Data_GSShopEntities();
 }
+
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <link href="~/Content/Semantic-UI-CSS-master/semantic.min.css" rel="stylesheet" />
 <script src="~/Content/Semantic-UI-CSS-master/semantic.min.js"></script>
 <link href="~/Content/CSS/sortlist.css" rel="stylesheet" />
+
 <div class="container-fluid">
     <br />
     <nav aria-label="breadcrumb">
@@ -281,7 +284,7 @@
         <section id="content">
             <div class="container">
                 <div class="section-sort clearfix">
-                    <b class="mt-5">171551 mặt hàng được tìm thấy theo "Quạt Mini"</b>
+                    <b class="mt-5">Tìm thấy @Model.Count mặt hàng được tìm thấy theo "@ViewBag.name"</b>
                     <ul class="tiles-swap clearfix block-sm">
                         <li class="swap-list">
                             <select class="form-control-static" style="height: 10px; font-size: 16px; width: 173px;">
@@ -314,18 +317,15 @@
                                 </div>
                                 <div class="text-center p-4">
                                     <img id="main-image" src="~/Content/Layout/images/@item.product_image" width="300" height="300" />
-                                    <div class="thumbnail1 text-center" id="lightSlider">
-                                        @foreach (var item1 in Model.Where(n => n.product_related == item.product_related).Take(3))
-                                        {
-                                            <img onclick="@img" src="~/Content/Layout/images/@item.product_image" width="70" style="height: 48px; width: 48px">
-                                        }
-                                    </div>
                                     <div class="mt-3">
                                         <a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})"><span class="p-category">@item.product_name</span></a>
                                         <br />
-                                        <small class="text-danger">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</small>
+                                        @{
+                                            float sale = ((float)item.product_price * (1 - ((float)item.product_percent / 100)));
+                                        }
+                                        <small class="text-danger">@sale.ToString("#,##0") ₫</small>
                                         <br />
-                                        <small><s>@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</s> -10%</small>
+                                        <small><s>@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</s> &nbsp;-@item.product_percent%</small>
                                     </div>
                                 </div>
                             </div>
@@ -333,27 +333,11 @@
                         </div>
                     }
                 </div>
+                @ViewBag.Note
             </center>
         </div>
     </div>
     <!-- //product right -->
-    <nav aria-label="Page navigation example" class="text-right">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 </div>
 <script>
     function increaseValue() {

@@ -1,16 +1,17 @@
 ﻿@using Website_GSshop.Models
-@model List<Product>
+@model List<SubCategory>
 @{
     User sesus = (User)Session["user"];
+
     Data_GSShopEntities db = new Data_GSShopEntities();
 }
 @{
     List<Favourite> fa = db.Favourite.ToList();
 }
-<script src="~/Scripts/jquery-3.4.1.min.js">
-</script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.js">
-</script>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
 <div class="container-fluid">
     <h2 class="article-list__heading"><img src="~/Content/Layout/images/icons8-fire-48.png" width="40" /><a href="#">Tìm kiếm phổ biến</a></h2>
 </div>
@@ -23,46 +24,21 @@
                     <div class="col-md-2">
                         <div class="card-1">
                             <div class="d-flex justify-content-between align-items-center ml-2">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    @if (sesus != null)
-                                    {
-                                        // Đếm yêu thích
-                                        var pc = fa.Where(n => n.product_id == item.product_id && n.fa_bin == false && n.user_id == sesus.user_id).ToList();
-                                        ViewBag.pc = pc.Count;
-                                        if (ViewBag.pc != 0)
-                                        {
-                                            foreach (var item1 in fa.Where(n => n.product_id == item.product_id && n.fa_bin == false && n.user_id == sesus.user_id))
-                                            {
-                                                <a href="@Url.Action("FavouriteIndexDelete","Favourite",new {id = item1.fa_id})" class="pr-3 row justify-content-end">
-                                                    <div class="fa fa-heart-o like bg-success"></div>
-                                                </a>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <div class="pr-3 row justify-content-end">
-                                                <div class="fa fa-heart-o like"></div>
-                                            </div>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <div class="pr-3 row justify-content-end text-right">
-                                            <div class="fa fa-heart-o like"></div>
-                                        </div>
-                                    }
-                                </div>
+                                <div class="d-flex justify-content-between align-items-center"></div>
                             </div>
                             <div class="text-center mt-2">
-                                <img src="~/Content/Layout/images/@item.product_image" width="250" style="border: 1px solid #f999" />
+                                <img src="~/Content/Layout/images/@item.subcategory_image" style="border: 1px solid #f999; height: 160px; width: 200px" />
                             </div>
                             <div class="row">
-                                <a href="@Url.Action("MostPopularDetail","View", new {@id = item.product_id})" class="pnl-label mt-1 ml-2"><h5>@item.product_name</h5></a>
+                                <a href="@Url.Action("MostPopularDetail","View", new {@id = item.subcategory_id})" class="pnl-label mt-1 ml-2"><h5>@item.subcategory_name</h5></a>
+                                @{ 
+                                    List<Product> products = db.Product.ToList();
+                                }
                                 <div class="col-md-9">
-                                    <h6 class="text-dark font-weight-700">@item.product_amount sản phẩm</h6>
+                                    <h6 class="text-dark font-weight-700">@products.Where(n => n.subcategory_id == item.subcategory_id).Count() sản phẩm</h6>
                                 </div>
                                 <div class="col-md-3">
-                                    <a href="@Url.Action("MostPopularDetail","View", new {@id = item.product_id})" class="float-right">
+                                    <a href="@Url.Action("MostPopularDetail","View", new {@id = item.subcategory_id})" class="float-right">
                                         <?xml version="1.0" encoding="iso-8859-1" ?>
                                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" height="25" width="25">
                                         <path style="fill:#4DBBEB;" d="M493.21,450.79c11.72,11.71,11.72,30.71,0,42.42c-5.86,5.86-13.53,8.79-21.21,8.79s-15.35-2.93-21.21-8.79l-96.57-96.57c15.77-12.4,30.02-26.65,42.42-42.42L493.21,450.79z" />

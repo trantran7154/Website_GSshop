@@ -251,9 +251,6 @@
     <Compile Include="Models\SubCategory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -309,6 +306,7 @@
     <Content Include="Content\CSS\banner.css" />
     <Content Include="Content\CSS\categorydetail.css" />
     <Content Include="Content\CSS\CSSLayout.css" />
+    <Content Include="Content\CSS\grand.css" />
     <Content Include="Content\CSS\login.css" />
     <Content Include="Content\CSS\loginadmin.css" />
     <Content Include="Content\CSS\manage.css" />
@@ -1046,7 +1044,6 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

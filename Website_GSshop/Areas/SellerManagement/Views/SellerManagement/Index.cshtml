@@ -1,7 +1,15 @@
-﻿
+﻿@using Website_GSshop.Models
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/SellerManagement/Views/Shared/_LayoutSeller.cshtml";
+
+    Data_GSShopEntities db = new Data_GSShopEntities();
+
+    Seller sesse = (Seller)Session["seller"];
+}
+@{ 
+    List<Product> products = db.Product.Where(n => n.seller_id == sesse.seller_id).ToList();
+    List<Collection> collections = db.Collection.Where(n => n.seller_id == sesse.seller_id).ToList();
 }
 <!-- QUẢN LÝ SẢN PHẨM -->
 <div class="statistics mt-4 mb-4">
@@ -18,7 +26,7 @@
                                     <a href="/SellerManagement/Products/Index">
                                         <h6>SẢN PHẨM CHÍNH</h6>
                                     </a>
-                                    <h3>6,000</h3>
+                                    <h3>@products.Count</h3>
                                 </div>
                             </div>
                         </div>
@@ -38,7 +46,7 @@
                                     <a href="/SellerManagement/Collections/Index">
                                         <h6>BỘ SƯU TẬP</h6>
                                     </a>
-                                    <h3>6,000</h3>
+                                    <h3>@collections.Count</h3>
                                 </div>
                             </div>
                         </div>

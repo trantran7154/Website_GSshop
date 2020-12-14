@@ -1,5 +1,8 @@
 ﻿@using Website_GSshop.Models
 @model List<Collection>
+@{ 
+    Data_GSShopEntities db = new Data_GSShopEntities();
+}
 <div class="container-fluid">
     <h2 class="article-list__heading"><img src="~/Content/Layout/images/icons8-fire-48.png" width="40" /><a href="#">Bộ sưu tập</a></h2>
 </div>
@@ -11,9 +14,12 @@
                 {
                     <div class="item1">
                         <center>
-                            <a href="@Url.Action("CollectionsDetail","View", new {@id = item.collection_id})"><span style="color: black">@item.collection_name ></span></a>
+                            <a href="@Url.Action("CollectionsDetail","View", new {id = item.collection_id})"><span style="color: black">@item.collection_name ></span></a>
                             <br />
-                            <small>15 sp</small>
+                            @{
+                                List<Product> products = db.Product.Where(n => n.collection_id == item.collection_id && n.product_bin == true && n.product_active == true && n.product_percent > 60).ToList();
+                            }
+                            <small>@products.Count sp</small>
                             <br />
                             <br />
                         </center>

@@ -1,85 +1,68 @@
 ﻿@using Website_GSshop.Models;
-@model Product
+@model List<Product>
 @{
     ViewBag.Title = "CategoryDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Data_GSShopEntities db = new Data_GSShopEntities();
 }
-@{
-    List<Product> pr = db.Product.ToList();
-}
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<link href="~/Content/Semantic-UI-CSS-master/semantic.min.css" rel="stylesheet" />
+<script src="~/Content/Semantic-UI-CSS-master/semantic.min.js"></script>
+<link href="~/Content/CSS/sortlist.css" rel="stylesheet" />
+
 <div class="container-fluid">
     <br />
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style="background-color: #fff">
             <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="#">Voucher & Dịch vụ</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Lazada Gift Cards</li>
+            <li class="breadcrumb-item active" aria-current="page">Kết quả tìm kiếm</li>
         </ol>
     </nav>
     <hr />
-    <div data-spm="card" data-spm-max-idx="7">
-        <div class="c3AZOx">
-            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
-                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
-                    <img src="~/Content/Layout/images/@Model.GSMall.gsmall_img1" class="c36f5Z">
-                    <div class="c1DxTe"></div>
-                </div>
-            </a>
-            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
-                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
-                    <img src="~/Content/Layout/images/@Model.GSMall.gsmall_img2" class="c36f5Z">
-                    <div class="c1DxTe"></div>
-                </div>
-            </a>
-            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
-                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
-                    <img src="~/Content/Layout/images/@Model.GSMall.gsmall_img3" class="c36f5Z">
-                    <div class="c1DxTe"></div>
-                </div>
-            </a>
-            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
-                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
-                    <img src="~/Content/Layout/images/@Model.GSMall.gsmall_img4" class="c36f5Z">
-                    <div class="c1DxTe"></div>
-                </div>
-            </a>
-            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
-                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
-                    <img src="~/Content/Layout/images/@Model.GSMall.gsmall_img5" class="c36f5Z">
-                    <div class="c1DxTe"></div>
-                </div>
-            </a>
-            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
-                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
-                    <img src="~/Content/Layout/images/@Model.GSMall.gsmall_img6" class="c36f5Z">
-                    <div class="c1DxTe"></div>
-                </div>
-            </a>
-            <a href="#" class="cVzttM" data-spm-anchor-id="a2o4n.searchlistcategory.card.1" style="width: 14.28%;">
-                <div class="c1zjMN" data-spm-anchor-id="a2o4n.searchlistcategory.card.i0.4fc337469WdpuP">
-                    <img src="~/Content/Layout/images/@Model.GSMall.gsmall_img7" class="c36f5Z">
-                    <div class="c1DxTe"></div>
-                </div>
-            </a>
-        </div>
-        <br />
-    </div>
     <!-- product left -->
     <div class="side-bar col-md-3">
+        <div class="search-hotel">
+            <h3 class="agileits-sear-head">Tìm kiếm</h3>
+            <form action="#" method="post">
+                <input type="search" placeholder="Nhập tên sản phẩm ..." name="search" required="" />
+                <input type="submit" value=" " />
+            </form>
+        </div>
         <div class="range">
             <h3 class="agileits-sear-head">Danh mục liên quan</h3>
-            <h4 class="mt-3 text-left">Lazada Gift Cards</h4>
+            <ul style="list-style: none; color: #808080">
+                <li>Túi đeo chéo & Túi đeo vai nữ</li>
+                <li>Túi xách tay nữ</li>
+                <li>Ba lô nữ</li>
+                <li>Ví nữ</li>
+                <li>Túi đeo chéo nam</li>
+                <li>Túi tote nữ</li>
+                <li>Ba lô nam</li>
+                <li>Đồng hồ nữ sang trọng</li>
+                <li class="text-primary">Xem thêm</li>
+            </ul>
         </div>
         <div class="left-side">
-            <h3 class="agileits-sear-head">Nhà cung cấp</h3>
+            <h3 class="agileits-sear-head">Thương hiệu</h3>
             <ul>
                 <li>
                     <input type="checkbox" class="checked" />
-                    <span class="span">No Brand</span>
+                    <span class="span">Lita</span>
                 </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">pinfect</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">EOM</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">MOJOYCE</span>
+                </li>
+                <li class="text-primary">Xem thêm</li>
             </ul>
         </div>
         <hr />
@@ -90,9 +73,34 @@
                     <input type="checkbox" class="checked" />
                     <span class="span">Giao hàng miễn phí</span>
                 </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">GSGlobal</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Thanh toán khi nhận hàng</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Xử lý đơn hàng bởi GS</span>
+                </li>
             </ul>
         </div>
         <hr />
+        <div class="left-side">
+            <h3 class="agileits-sear-head">Địa điểm</h3>
+            <ul>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Nội địa</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Nước ngoài</span>
+                </li>
+            </ul>
+        </div>
         <hr />
         <div class="left-side">
             <h3 class="agileits-sear-head">Giá</h3>
@@ -168,80 +176,154 @@
         </div>
         <hr />
         <div class="left-side">
-            <h3 class="agileits-sear-head">SMS hoặc Email</h3>
+            <h3 class="agileits-sear-head">Nhóm màu</h3>
             <ul>
                 <li>
                     <input type="checkbox" class="checked" />
-                    <span class="span">Email</span>
+                    <span class="span">Màu đen</span>
                 </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Màu hồng</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">White</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Màu đỏ</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Màu vàng</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Màu xám</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Green</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Màu nâu</span>
+                </li>
+                <li class="text-primary">Xem thêm</li>
+            </ul>
+        </div>
+        <hr />
+        <div class="left-side">
+            <h3 class="agileits-sear-head">Chất liệu vải</h3>
+            <ul>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Chất liệu khác</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Polyester</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Nhung</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Vải cotton</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Thun 4 chiều</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">SATIN</span>
+                </li>
+                <li class="text-primary">Xem thêm</li>
+            </ul>
+        </div>
+        <hr />
+        <div class="left-side">
+            <h3 class="agileits-sear-head">Họa tiết</h3>
+            <ul>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Trơn</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Họa tiết</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Hoạt hình</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Vải cotton</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">Thun 4 chiều</span>
+                </li>
+                <li>
+                    <input type="checkbox" class="checked" />
+                    <span class="span">SATIN</span>
+                </li>
+                <li class="text-primary">Xem thêm</li>
             </ul>
         </div>
     </div>
     <!-- //product left -->
     <!-- product right -->
     <div class="agileinfo-ads-display col-md-9">
-        <div class="row">
-            <div class="col-md-5">
-                <b class="mt-5">171551 mặt hàng được tìm thấy theo "Quạt Mini"</b>
-            </div>
-            <div class="col-md-7">
-                <div class="col-md-2">
-                    Sắp xếp theo:
-                </div>
-                <div class="col-md-4">
-                    <select class="form-control-static">
-                        <option>Phù hợp nhất</option>
-                        <option>Giá từ thấp đến cao</option>
-                        <option>Giá từ cao xuống thấp</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <a href="@Url.Action("Table","Ajax")" class="text-dark" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace" style="padding: 17px"><i class="fa fa-table" style="font-size: 25px"></i></a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="@Url.Action("TableList","Ajax")" class="text-dark" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace" data-loading-text="#divLoad" style="padding: 5px"><i class="fa fa-th-list" style="font-size: 25px"></i></a>
-                        </div>
-                    </div>
+        <section id="content">
+            <div class="container">
+                <div class="section-sort clearfix">
+                    <b class="mt-5">Tìm thấy @Model.Count mặt hàng được tìm thấy theo "@ViewBag.name"</b>
+                    <ul class="tiles-swap clearfix block-sm">
+                        <li class="swap-list">
+                            <select class="form-control-static" style="height: 10px; font-size: 16px; width: 173px;">
+                                <option>Phù hợp nhất</option>
+                                <option>Giá từ thấp đến cao</option>
+                                <option>Giá từ cao xuống thấp</option>
+                            </select>
+                        </li>
+                        <li class="swap-grid active">
+                            <a href="@Url.Action("Table","Ajax")" class="text-dark" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace"><i class="fa fa-table" style="font-size: 25px"></i></a>
+                        </li>
+                        <li class="swap-block">
+                            <a href="@Url.Action("TableList","Ajax")" class="text-dark" data-ajax="true" data-ajax-method="GET" data-ajax-update="#change" data-ajax-mode="replace" data-loading-text="#divLoad"><i class="fa fa-th-list" style="font-size: 25px"></i></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
+        </section>
         <hr />
         <div class="layout">
             <center>
                 <div class="row" id="change">
-                    @foreach (var item in pr.Where(n => n.gsmail_id == Model.gsmail_id))
+                    @foreach (var item in Model)
                     {
                         <div class="col-md-3">
                             <div class="p-box">
                                 <div class="p-top">
-                                    <span class="label1 best-seller-label test mt-2 ml-2">Best seller</span>
-                                    <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 p-heart mt-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 25.7143px; height: 16px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
+                                    <span class="label1 best-seller-label test mt-5 ml-2">Best seller</span>
+                                    <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 p-heart mt-3" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 25.7143px; height: 16px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
                                 </div>
                                 <div class="text-center p-4">
-                                    <img id="main-image" src="~/Content/Layout/images/@item.product_image" width="300" />
-                                </div>
-                                <div class="p-desc">
-                                    <a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})"><h3 class="p-category">@item.product_name</h3></a>
-                                    <h5 class="text-danger">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</h5>
-                                    <h5><s>@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</s> -10%</h5>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="p-price">
-                                            <div class="p-stars">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <small class="text-dark">(6)</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="pill1 text-right">&nbsp;&nbsp;&nbsp;&nbsp;<b>Việt Nam</b>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <img id="main-image" src="~/Content/Layout/images/@item.product_image" width="300" height="300" />
+                                    <div class="mt-3">
+                                        <a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})"><span class="p-category">@item.product_name</span></a>
+                                        <br />
+                                        <small class="text-danger">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</small>
+                                        <br />
+                                        @{
+                                            float sale = ((float)item.product_price * (1 - ((float)item.product_percent / 100)));
+                                        }
+                                        <small><s>@sale.ToString("#,##0") ₫</s> &nbsp;-@item.product_percent%</small>
                                     </div>
                                 </div>
                             </div>
@@ -249,24 +331,29 @@
                         </div>
                     }
                 </div>
+                @ViewBag.Note
             </center>
         </div>
     </div>
     <!-- //product right -->
-    <nav aria-label="..." class="text-right">
-        <ul class="pagination">
-            <li class="page-item disabled">
-                <span class="page-link"><</span>
-            </li>
-            <li class="page-item active">
-                <span class="page-link">
-                    1
-                    <span class="sr-only">(current)</span>
-                </span>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="#">></a>
-            </li>
-        </ul>
-    </nav>
 </div>
+<script>
+    function increaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('number').value = value;
+    }
+    function decreaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById('number').value = value;
+    }
+    function change_image(image) {
+        var image_container = document.getElementById("main-image");
+        image_container.src = image.src;
+    }
+</script>
+

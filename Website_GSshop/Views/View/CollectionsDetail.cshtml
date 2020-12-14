@@ -1,18 +1,15 @@
 ﻿@using Website_GSshop.Models
-@model Product
+@model List<Product>
 @{
     ViewBag.Title = "CollectionsDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Data_GSShopEntities db = new Data_GSShopEntities();
 }
-@{ 
-    List<Product> pr = db.Product.ToList();
-}
 <div class="collection-product">
     <div class="collection-product-banner J_banner" data-spm-anchor-id="a2o4n.col_prod_list.0.i0.6cd1233dOrKToa" style="background-image: url('../../Content/Layout/images/collection.jpg');">
-        <div class="title J_title">Phụ Kiện Sành Điệu</div>
+        <div class="title J_title mt-1">@ViewBag.name</div>
         <br />
-        <div class="subtitle J_Subtitle"> Sale Cực Lớn Đến 70%</div>
+        <div class="subtitle J_Subtitle ml-2"> Sale Cực Lớn Đến 70%</div>
         <br />
     </div>
 </div>
@@ -20,7 +17,7 @@
 <center>
     <div class="container-fluid">
         <div class="row">
-            @foreach (var item in pr.Where(n => n.collection_id == Model.collection_id))
+            @foreach (var item in Model.Where(n => n.product_percent > 60))
             {
                 <div class="col-md-2">
                     <div class="p-box">
@@ -33,10 +30,13 @@
                         </div>
                         <div class="p-desc">
                             <a href="@Url.Action("ProductDetail", "View", new { @id = item.product_id })"><h3 class="p-category">@item.product_name</h3></a>
-                            <h5 class="text-danger">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</h5>
-                            <h5><s>@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</s> -10%</h5>
+                            @{
+                                float sale = ((float)item.product_price * (1 - ((float)item.product_percent / 100)));
+                            }
+                            <h5 class="text-danger">@sale.ToString("#,##0") ₫</h5>
+                            <h5><s>@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</s> &nbsp;-@item.product_percent%</h5>
                         </div>
-                        <div class="row">
+                        <div class="row mt-1 mb-1">
                             <div class="col-md-6">
                                 <div class="p-price">
                                     <div class="p-stars">
@@ -58,10 +58,12 @@
                 </div>
             }
         </div>
-    </div>
-    <div class="card-jfy-load-more J_LoadMore">
-        <a class="button J_LoadMoreButton text-info">TẢI THÊM</a>
+        @ViewBag.Note
+        <div class="card-jfy-load-more J_LoadMore">
+            <a class="button J_LoadMoreButton text-info">TẢI THÊM</a>
+        </div>
     </div>
 </center>
+<hr />
 
 

@@ -70,7 +70,7 @@
                     <div class="col-md-2">
                         <div class="card-1">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row align-items-center time"><small><span class="product-new-label1"><b class="test">- 40%</b></span></small> </div>
+                                <div class="d-flex flex-row align-items-center time"><small><span class="product-new-label1"><b class="test">- @item.product_percent%</b></span></small> </div>
                                 @if (sesus != null)
                                 {
                                     // Đếm yêu thích
@@ -100,10 +100,13 @@
                                 }
                             </div>
                             <div class="text-center mt-2">
-                                <img src="~/Content/Layout/images/@item.product_image" width="250"/>
+                                <img src="~/Content/Layout/images/@item.product_image" width="250" />
                             </div>
                             <a href="@Url.Action("FlashSaleDetail","View", new {@id = item.product_id})" class="text-left text-dark"><h5 class="text-left mt-2 p-0">@item.product_name</h5></a>
-                            <span class="text-success">@{float pricesale = (float)item.product_sale;} @pricesale.ToString("#,##0") ₫</span> <i class="ic-dynamic-badge ic-dynamic-badge-freeShipping ic-dynamic-group-2 mt-1 ml-2" style="background-image: url(&quot;//laz-img-cdn.alicdn.com/tfs/TB1QTkMXG67gK0jSZFHXXa9jVXa-45-28.png&quot;); width: 20px; height: 20px;" data-spm-anchor-id="a2o4n.searchlistcategory.list.i36.58b95752VuSb8Z"></i>
+                            @{
+                                float sale = ((float)item.product_price * (1 - ((float)item.product_percent / 100)));
+                            }
+                            <span class="text-success"> @sale.ToString("#,##0") đ</span>
                             <br />
                             <s class="text-gray">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</s>
                             <a href="@Url.Action("FlashSaleDetail","View", new {@id = item.product_id})">

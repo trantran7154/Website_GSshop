@@ -53,6 +53,7 @@ namespace Website_GSshop.Models
         public Nullable<int> product_related { get; set; }
         public Nullable<int> user_id { get; set; }
         public Nullable<int> csc_id { get; set; }
+        public Nullable<int> product_percent { get; set; }
     
         public virtual Banner Banner { get; set; }
         public virtual Category Category { get; set; }

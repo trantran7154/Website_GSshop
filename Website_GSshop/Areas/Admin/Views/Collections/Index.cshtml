@@ -304,24 +304,24 @@
                                             <input type="hidden" value="{{todo.id}}" name="collection_id" />
                                             <div class="field">
                                                 <label>Tên bô sưu tập</label>
-                                                <input type="text" name="collection_name" value="{{todo.name}}" disabled=disabled disabled=disabled disabled=disabled disabled=disabled />
+                                                <input type="text" name="collection_name" value="{{todo.name}}" disabled />
                                             </div>
                                             <div class="three fields">
                                                 <div class="field">
                                                     <label>Ngày tạo</label>
-                                                    <input type="text" name="collection_datecreated" value="{{todo.day}}/{{todo.month}}/{{todo.year}}" disabled=disabled disabled=disabled disabled=disabled disabled=disabled />
+                                                    <input type="text" name="collection_datecreated" value="{{todo.day}}/{{todo.month}}/{{todo.year}}" disabled />
                                                 </div>
                                                 <div class="field">
                                                     <label>Tên người bán</label>
                                                     <div class="field">
-                                                        <select name="seller_id" disabled=disabled disabled=disabled disabled=disabled disabled=disabled>
+                                                        <select name="seller_id" disabled>
                                                             <option>{{todo.name}}</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="field">
                                                     <label>Hoạt động</label>
-                                                    <select name="collection_active" value="{{todo.ac}}" disabled=disabled disabled=disabled disabled=disabled disabled=disabled>
+                                                    <select name="collection_active" value="{{todo.ac}}" disabled>
                                                         <option>True</option>
                                                         <option>False</option>
                                                     </select>
@@ -398,17 +398,17 @@
                                             <input type="hidden" value="{{todo.id}}" name="collection_id" />
                                             <div class="field">
                                                 <label>Tên bô sưu tập</label>
-                                                <input type="text" name="collection_name" value="{{todo.name}}" disabled=disabled disabled=disabled disabled=disabled disabled=disabled />
+                                                <input type="text" name="collection_name" value="{{todo.name}}" disabled />
                                             </div>
                                             <div class="three fields">
                                                 <div class="field">
                                                     <label>Ngày tạo</label>
-                                                    <input type="text" name="collection_datecreated" value="{{todo.day}}/{{todo.month}}/{{todo.year}}" disabled=disabled disabled=disabled disabled=disabled disabled=disabled />
+                                                    <input type="text" name="collection_datecreated" value="{{todo.day}}/{{todo.month}}/{{todo.year}}" disabled />
                                                 </div>
                                                 <div class="field">
                                                     <label>Tên người bán</label>
                                                     <div class="field">
-                                                        <select name="seller_id" disabled=disabled disabled=disabled disabled=disabled disabled=disabled>
+                                                        <select name="seller_id" disabled>
                                                             <option>{{todo.seller}}</option>
                                                         </select>
                                                     </div>
@@ -416,7 +416,7 @@
                                                 <div class="field">
                                                     <label>Hoạt động</label>
                                                     <div class="field">
-                                                        <select name="collection_active" value="{{todo.ac}}" disabled=disabled disabled=disabled disabled=disabled disabled=disabled>
+                                                        <select name="collection_active" value="{{todo.ac}}" disabled>
                                                             <option>True</option>
                                                             <option>False</option>
                                                         </select>
@@ -461,8 +461,6 @@
         </center>
     </div>
 </div>
-
-
 <!--Thêm Bộ Sưu Tập-->
 <div class="modal fade" id="create_collection" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">

@@ -12,20 +12,23 @@ namespace Website_GSshop.Controllers
         Data_GSShopEntities db = new Data_GSShopEntities();
         // GET: View
         // Xem chi tiết các sản phẩm tìm kiếm phổ biến
-        public ActionResult MostPopularDetail()
+        public ActionResult MostPopularDetail(int? id)
         {
-            return View(db.Product.Where(n => n.product_active == true).Take(40).ToList());
+            List<Product> products = db.Product.Where(n => n.subcategory_id == id && n.product_bin == true && n.product_active == true).ToList();
+            SubCategory subCategory = db.SubCategory.Find(id);
+            ViewBag.name = subCategory.subcategory_name;
+            return View(products);
         }
         // Xem chi tiết sản phẩm của các bộ sưu tập
         public ActionResult CollectionsDetail(int? id)
         {
-            Product product = db.Product.SingleOrDefault(n => n.product_id == id);
-            if(product == null)
+            List<Product> product = db.Product.Where(n => n.collection_id == id).ToList();
+            Collection name = db.Collection.Find(id);
+            ViewBag.name = name.collection_name;
+            if (product == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                ViewBag.Note = "Chưa có sản phẩm nào đang SALE. Bạn có thể tham khảo các Bộ Sưu Tập khác!";
             }
-            db.SaveChanges();
             return View(product);
         }
         // Xem chi tiết các sản phẩm sale mạnh
@@ -54,8 +57,10 @@ namespace Website_GSshop.Controllers
         // Xem chi tiết các sản phẩm danh mục hàng
         public ActionResult CategoryDetail(int? id)
         {
-            Product pr = db.Product.SingleOrDefault(n => n.product_id == id);
-            return View(pr);
+            List<Product> products = db.Product.Where(n => n.subcategory_id == id && n.product_bin == true && n.product_active == true && n.product_percent > 40).ToList();
+            SubCategory subCategory = db.SubCategory.Find(id);
+            ViewBag.name = subCategory.subcategory_name;
+            return View(products);
         }
         // Xem chi tiết sản phẩm của các cửa hàng kinh doanh
         public ActionResult GSMallDetail(int? id)
