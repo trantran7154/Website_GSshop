@@ -217,6 +217,7 @@
     <EntitySetMapping Name="SubCategory">
       <EntityTypeMapping TypeName="Data_GSShopModel.SubCategory">
         <MappingFragment StoreEntitySet="SubCategory">
+          <ScalarProperty Name="subcategory_view" ColumnName="subcategory_view" />
           <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
           <ScalarProperty Name="subcategory_name" ColumnName="subcategory_name" />
           <ScalarProperty Name="subcategory_image" ColumnName="subcategory_image" />

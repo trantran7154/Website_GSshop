@@ -31,14 +31,14 @@
     todos.controller('myControllersub', function ($scope) {
         $scope.filteredTodos = []
             , $scope.currentPage = 1
-            , $scope.numPerPage = 8
-            , $scope.maxSize = 5;
+            , $scope.numPerPage = 15
+            , $scope.maxSize = 3;
 
         $scope.makeTodos = function () {
             $scope.todos = [
                 @foreach (var item in Model)
                 {
-                    @: {id: @item.subcategory_id, name: "@Html.Raw(item.subcategory_name)", img: "@item.subcategory_image", day: "@item.subcategory_datecreated.Value.Day", month: "@item.subcategory_datecreated.Value.Month", year: "@item.subcategory_datecreated.Value.Year", ac: "@item.subcategory_active", bin: "@item.subcategory_bin", cate: "@item.Category.category_name", date: "@item.subcategory_datecreated.Value.Year-@(item.subcategory_datecreated.Value.Month < 10 ? "0" + item.subcategory_datecreated.Value.Month.ToString() : item.subcategory_datecreated.Value.Month.ToString())-@(item.subcategory_datecreated.Value.Day < 10 ? "0" + item.subcategory_datecreated.Value.Day.ToString() : item.subcategory_datecreated.Value.Day.ToString())" },
+                    @: {id: @item.subcategory_id, view:"@item.subcategory_view", level: "@item.subcategory_level", name: "@Html.Raw(item.subcategory_name)", img: "@item.subcategory_image", day: "@item.subcategory_datecreated.Value.Day", month: "@item.subcategory_datecreated.Value.Month", year: "@item.subcategory_datecreated.Value.Year", ac: "@item.subcategory_active", bin: "@item.subcategory_bin", cate: "@item.Category.category_name", date: "@item.subcategory_datecreated.Value.Year-@(item.subcategory_datecreated.Value.Month < 10 ? "0" + item.subcategory_datecreated.Value.Month.ToString() : item.subcategory_datecreated.Value.Month.ToString())-@(item.subcategory_datecreated.Value.Day < 10 ? "0" + item.subcategory_datecreated.Value.Day.ToString() : item.subcategory_datecreated.Value.Day.ToString())" },
                 }
             ];
 
@@ -53,6 +53,7 @@
         });
     });
 </script>
+
 <a href="/Admin/Home/Index">
     <svg height="40" viewBox="0 0 512 512.0005" width="40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1=".001" x2="512.001" y1="256" y2="256"><stop offset="0" stop-color="#80d8ff" /><stop offset="1" stop-color="#ea80fc" /></linearGradient><path d="m220 0h-200c-11.046875 0-20 8.953125-20 20v200c0 11.046875 8.953125 20 20 20h200c11.046875 0 20-8.953125 20-20v-200c0-11.046875-8.953125-20-20-20zm-20 200h-160v-160h160zm299.65625 73.523438c-7.472656-3.097657-16.078125-1.386719-21.796875 4.332031l-200 200c-5.722656 5.722656-7.433594 14.324219-4.335937 21.796875 3.097656 7.476562 10.386718 12.347656 18.476562 12.347656h200c11.046875 0 20-8.953125 20-20v-200c0-8.089844-4.871094-15.382812-12.34375-18.476562zm-27.65625 198.476562h-131.714844l131.714844-131.714844zm-80-232c66.167969 0 120-53.832031 120-120s-53.832031-120-120-120-120 53.832031-120 120 53.832031 120 120 120zm0-200c44.113281 0 80 35.886719 80 80s-35.886719 80-80 80-80-35.886719-80-80 35.886719-80 80-80zm-157.859375 266.144531-85.855469 85.855469 85.855469 85.855469c7.8125 7.8125 7.8125 20.476562 0 28.285156-7.808594 7.808594-20.472656 7.8125-28.28125 0l-85.859375-85.855469-85.859375 85.859375c-7.808594 7.808594-20.472656 7.808594-28.28125 0-7.8125-7.8125-7.8125-20.476562 0-28.285156l85.855469-85.859375-85.855469-85.855469c-7.8125-7.8125-7.8125-20.476562 0-28.285156 7.808594-7.8125 20.472656-7.8125 28.28125 0l85.859375 85.855469 85.859375-85.859375c7.808594-7.808594 20.472656-7.808594 28.28125 0 7.8125 7.8125 7.8125 20.476562 0 28.289062zm0 0" fill="url(#a)" /></svg>
 </a>
@@ -238,8 +239,6 @@
                             </svg>
                         </a>
                     </div>
-
-
                     <!--Xem Danh Mục Phụ-->
                     <div class="modal fade" id="@sub_detail{{todo.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
@@ -281,8 +280,10 @@
                                             </div>
                                             <div class="two fields">
                                                 <div class="field">
-                                                    <label>Ngày tạo</label>
-                                                    <input type="text" name="subcategory_datecreated" value="{{todo.day}}/{{todo.month}}/{{todo.year}}" disabled />
+                                                    <label>Level</label>
+                                                    <select name="subcategory_level" disabled>
+                                                        <option value="{{todo.level}}">{{todo.level}}</option>
+                                                    </select>
                                                 </div>
                                                 <div class="field">
                                                     <label>Hoạt động</label>
@@ -292,7 +293,11 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="two fields">
+                                            <div class="three fields">
+                                                <div class="field">
+                                                    <label>Lượt xem</label>
+                                                    <input type="text" name="subcategory_view" value="{{todo.view}}" disabled />
+                                                </div>
                                                 <div class="field">
                                                     <label>Tên danh mục chính</label>
                                                     <select name="category_id" disabled>
@@ -365,8 +370,10 @@
                                             </div>
                                             <div class="two fields">
                                                 <div class="field">
-                                                    <label>Ngày tạo</label>
-                                                    <input type="text" name="subcategory_datecreated" value="{{todo.day}}/{{todo.month}}/{{todo.year}}" disabled />
+                                                    <label>Level</label>
+                                                    <select name="subcategory_level" disabled>
+                                                        <option value="{{todo.level}}">{{todo.level}}</option>
+                                                    </select>
                                                 </div>
                                                 <div class="field">
                                                     <label>Hoạt động</label>
@@ -377,6 +384,10 @@
                                                 </div>
                                             </div>
                                             <div class="two fields">
+                                                <div class="field">
+                                                    <label>Lượt xem</label>
+                                                    <input name="category_view" value="{{todo.view}}" type="text" disabled>
+                                                </div>
                                                 <div class="field">
                                                     <label>Tên danh mục chính</label>
                                                     <select name="category_id" disabled>
@@ -428,9 +439,18 @@
                 @using (Html.BeginForm("Create", "SubCategories", FormMethod.Post, new { @class = "ui form segment", @enctype = "multipart/form-data" }))
                 {
                     <form method="post" class="mb-4 ui form">
-                        <div class="field">
-                            <label>Tên danh mục phụ</label>
-                            <input type="text" name="subcategory_name" />
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Tên danh mục phụ</label>
+                                <input type="text" name="subcategory_name" />
+                            </div>
+                            <div class="field">
+                                <label>Level</label>
+                                <select name="subcategory_level">
+                                    <option value="true">Level</option>
+                                    <option value="false">Không level</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="two fields">
                             <div class="field">
@@ -447,12 +467,23 @@
                                 <input name="fileUpload" type="file">
                             </div>
                         </div>
-                        <div class="two fields">
+                        <div class="three fields">
+                            <div class="field">
+                                <label>Lượt xem</label>
+                                <input name="category_view" type="text">
+                            </div>
                             <div class="field">
                                 <label>Hoạt động</label>
                                 <select name="subcategory_active">
                                     <option value="true">Hoạt động</option>
                                     <option value="false">Không hoạt động</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label>Thùng rác</label>
+                                <select name="subcategory_bin">
+                                    <option value="true">Không thùng rác</option>
+                                    <option value="false">Thùng rác</option>
                                 </select>
                             </div>
                         </div>
@@ -497,16 +528,27 @@
                             <input type="hidden" value="@item.subcategory_id" name="subcategory_id" />
                             <input type="hidden" value="@item.subcategory_image" name="subcategory_image" />
                             <input type="hidden" value="@item.subcategory_datecreated" name="subcategory_datecreated" />
-                            <div class="field">
-                                <label>Tên danh mục phụ</label>
-                                <input type="text" name="subcategory_name" value="@item.subcategory_name" />
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>Tên danh mục phụ</label>
+                                    <input type="text" name="subcategory_name" value="@item.subcategory_name" />
+                                </div>
+                                <div class="field">
+                                    <label>Tên danh mục chính</label>
+                                    <select name="category_id">
+                                        @foreach (var item1 in categories)
+                                        {
+                                            <option value="@item1.category_id" @(item1.category_id == item.category_id ? "selected" : "")>@item1.category_name</option>
+                                        }
+                                    </select>
+                                </div>
                             </div>
                             <div class="two fields">
                                 <div class="field">
                                     <label>Thùng rác</label>
                                     <select name="subcategory_bin">
-                                        <option value="@(item.subcategory_bin == true ? "selected" : "")">Không thùng rác</option>
-                                        <option value="@(item.subcategory_bin == false ? "selected" : "")">Thùng rác</option>
+                                        <option value="true" @(item.subcategory_bin == true ? "selected" : "")>Không thùng rác</option>
+                                        <option value="false" @(item.subcategory_bin == false ? "selected" : "")>Thùng rác</option>
                                     </select>
                                 </div>
                                 <div class="field">
@@ -517,14 +559,16 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="two fields">
+                            <div class="three fields">
                                 <div class="field">
-                                    <label>Tên danh mục chính</label>
-                                    <select name="category_id">
-                                        @foreach (var item1 in categories)
-                                        {
-                                            <option value="@item1.category_id" @(item1.category_id == item.category_id ? "selected" : "")>@item1.category_name</option>
-                                        }
+                                    <label>Lượt xem</label>
+                                    <input name="subcategory_view" value="@item.subcategory_view" type="text">
+                                </div>
+                                <div class="field">
+                                    <label>Level</label>
+                                    <select name="subcategory_level">
+                                        <option value="true" @(item.subcategory_active == true ? "selected" : "")>Level</option>
+                                        <option value="false" @(item.subcategory_active == false ? "selected" : "")>Không level</option>
                                     </select>
                                 </div>
                                 <div class="field">

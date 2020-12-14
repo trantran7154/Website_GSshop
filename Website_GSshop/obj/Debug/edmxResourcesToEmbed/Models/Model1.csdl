@@ -248,6 +248,7 @@
     <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
     <NavigationProperty Name="ClassificationSubCategory" Relationship="Self.FK_ClassificationSubCategory_SubCategory" FromRole="SubCategory" ToRole="ClassificationSubCategory" />
     <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+    <Property Name="subcategory_view" Type="Int32" />
   </EntityType>
   <EntityType Name="User">
     <Key>

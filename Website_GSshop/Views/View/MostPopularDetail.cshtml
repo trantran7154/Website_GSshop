@@ -1,15 +1,10 @@
 ﻿@using Website_GSshop.Models
-@model Product
+@model List<Product>
 @{
     ViewBag.Title = "MostPopularDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var img = "change_image(this)";
-
     Data_GSShopEntities db = new Data_GSShopEntities();
-}
-@{
-    List<Product> products = db.Product.Where(n => n.product_popular == Model.product_popular).ToList();
 }
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
@@ -289,7 +284,7 @@
         <section id="content">
             <div class="container">
                 <div class="section-sort clearfix">
-                    <b class="mt-5">171551 mặt hàng được tìm thấy theo "Quạt Mini"</b>
+                    <b class="mt-5">Tìm thấy @Model.Count mặt hàng được tìm thấy theo "@ViewBag.name"</b>
                     <ul class="tiles-swap clearfix block-sm">
                         <li class="swap-list">
                             <select class="form-control-static" style="height: 10px; font-size: 16px; width: 173px;">
@@ -312,7 +307,7 @@
         <div class="layout">
             <center>
                 <div class="row" id="change">
-                    @foreach (var item in products)
+                    @foreach (var item in Model)
                     {
                         <div class="col-md-3">
                             <div class="p-box">
@@ -325,12 +320,12 @@
                                     <div class="mt-3">
                                         <a href="@Url.Action("ProductDetail","View", new {@id = item.product_id})"><span class="p-category">@item.product_name</span></a>
                                         <br />
-                                        <small class="text-danger">@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</small>
-                                        <br />
                                         @{
-                                            float sale = ((float)Model.product_price * (1 - ((float)Model.product_percent / 100)));
+                                            float sale = ((float)item.product_price * (1 - ((float)item.product_percent / 100)));
                                         }
-                                        <small><s>@sale.ToString("#,##0") ₫</s> &nbsp;-@item.product_percent%</small>
+                                        <small class="text-danger">@sale.ToString("#,##0") ₫</small>
+                                        <br />
+                                        <small><s>@{float price = (float)item.product_price;} @price.ToString("#,##0") ₫</s> &nbsp;-@item.product_percent%</small>
                                     </div>
                                 </div>
                             </div>
@@ -338,27 +333,11 @@
                         </div>
                     }
                 </div>
+                @ViewBag.Note
             </center>
         </div>
     </div>
     <!-- //product right -->
-    <nav aria-label="Page navigation example" class="text-right">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 </div>
 <script>
     function increaseValue() {

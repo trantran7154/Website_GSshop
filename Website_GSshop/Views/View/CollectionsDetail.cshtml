@@ -1,16 +1,13 @@
 ﻿@using Website_GSshop.Models
-@model Collection
+@model List<Product>
 @{
     ViewBag.Title = "CollectionsDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Data_GSShopEntities db = new Data_GSShopEntities();
 }
-@{ 
-    List<Product> pr = db.Product.ToList();
-}
 <div class="collection-product">
     <div class="collection-product-banner J_banner" data-spm-anchor-id="a2o4n.col_prod_list.0.i0.6cd1233dOrKToa" style="background-image: url('../../Content/Layout/images/collection.jpg');">
-        <div class="title J_title mt-1">@Model.collection_name</div>
+        <div class="title J_title mt-1">@ViewBag.name</div>
         <br />
         <div class="subtitle J_Subtitle ml-2"> Sale Cực Lớn Đến 70%</div>
         <br />
@@ -20,7 +17,7 @@
 <center>
     <div class="container-fluid">
         <div class="row">
-            @foreach (var item in pr.Where(n => n.collection_id == Model.collection_id && n.product_percent > 60))
+            @foreach (var item in Model.Where(n => n.product_percent > 60))
             {
                 <div class="col-md-2">
                     <div class="p-box">

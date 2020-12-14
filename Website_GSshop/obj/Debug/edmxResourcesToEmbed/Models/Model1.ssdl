@@ -245,6 +245,7 @@
     <Property Name="category_id" Type="int" />
     <Property Name="subcategory_level" Type="bit" />
     <Property Name="subcategory_bin" Type="bit" />
+    <Property Name="subcategory_view" Type="int" />
   </EntityType>
   <EntityType Name="User">
     <Key>

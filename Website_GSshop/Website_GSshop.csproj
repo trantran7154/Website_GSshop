@@ -306,6 +306,7 @@
     <Content Include="Content\CSS\banner.css" />
     <Content Include="Content\CSS\categorydetail.css" />
     <Content Include="Content\CSS\CSSLayout.css" />
+    <Content Include="Content\CSS\grand.css" />
     <Content Include="Content\CSS\login.css" />
     <Content Include="Content\CSS\loginadmin.css" />
     <Content Include="Content\CSS\manage.css" />

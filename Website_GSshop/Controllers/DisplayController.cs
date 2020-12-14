@@ -28,7 +28,7 @@ namespace Website_GSshop.Controllers
         // Hiển thị tìm kiếm phổ biến
         public PartialViewResult MostPopular()
         {
-            return PartialView(db.Product.Where(n => n.product_active == true && n.product_bin == true).OrderByDescending(n => n.product_view).Take(6).ToList());
+            return PartialView(db.SubCategory.Where(n => n.subcategory_active == true && n.subcategory_bin == true).OrderByDescending(n => n.subcategory_view).Take(6).ToList());
         }
         // Hiển thị bộ sưu tập
         public PartialViewResult Collections()
@@ -43,7 +43,7 @@ namespace Website_GSshop.Controllers
         // Hiển thị danh mục ngành hàng
         public PartialViewResult Categories()
         {
-            return PartialView(db.Product.Where(n => n.product_active == true && n.product_bin == true).OrderByDescending(n => n.product_datecreated).ToList());
+            return PartialView(db.SubCategory.Where(n => n.subcategory_active == true && n.subcategory_bin == true).OrderByDescending(n => n.subcategory_datecreated).ToList());
         }
         // Dành riêng cho bạn
         public PartialViewResult JustForYou()

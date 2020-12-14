@@ -250,6 +250,7 @@
           <Property Name="category_id" Type="int" />
           <Property Name="subcategory_level" Type="bit" />
           <Property Name="subcategory_bin" Type="bit" />
+          <Property Name="subcategory_view" Type="int" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1022,6 +1023,7 @@
           <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
           <NavigationProperty Name="ClassificationSubCategory" Relationship="Self.FK_ClassificationSubCategory_SubCategory" FromRole="SubCategory" ToRole="ClassificationSubCategory" />
           <NavigationProperty Name="Product" Relationship="Data_GSShopModel.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+          <Property Name="subcategory_view" Type="Int32" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1821,6 +1823,7 @@
           <EntitySetMapping Name="SubCategory">
             <EntityTypeMapping TypeName="Data_GSShopModel.SubCategory">
               <MappingFragment StoreEntitySet="SubCategory">
+                <ScalarProperty Name="subcategory_view" ColumnName="subcategory_view" />
                 <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
                 <ScalarProperty Name="subcategory_name" ColumnName="subcategory_name" />
                 <ScalarProperty Name="subcategory_image" ColumnName="subcategory_image" />

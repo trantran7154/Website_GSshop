@@ -19,7 +19,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var subCategory = db.SubCategory.Include(s => s.Category);
-            return View(subCategory.Where(s => s.subcategory_bin == true).OrderByDescending(n=>n.subcategory_datecreated).ToList());
+            return View(subCategory.Where(s => s.subcategory_bin == true).ToList());
         }
 
         // GET: Admin/SubCategories/Details/5
@@ -48,7 +48,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id,subcategory_level,subcategory_bin")] SubCategory subCategory, HttpPostedFileBase fileUpload)
+        public ActionResult Create([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id,subcategory_level,subcategory_bin,subcategory_view")] SubCategory subCategory, HttpPostedFileBase fileUpload)
         {
             Random random = new Random();
             ViewBag.random = random.Next(0, 1000);
@@ -96,7 +96,7 @@ namespace Website_GSshop.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id,subcategory_level,subcategory_bin")] SubCategory subCategory, HttpPostedFileBase img)
+        public ActionResult Edit([Bind(Include = "subcategory_id,subcategory_name,subcategory_image,subcategory_datecreated,subcategory_active,category_id,subcategory_level,subcategory_bin,subcategory_view")] SubCategory subCategory, HttpPostedFileBase img)
         {
             Random random = new Random();
             ViewBag.random = random.Next(0, 1000);
