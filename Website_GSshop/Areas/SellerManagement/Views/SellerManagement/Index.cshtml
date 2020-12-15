@@ -10,6 +10,7 @@
 @{ 
     List<Product> products = db.Product.Where(n => n.seller_id == sesse.seller_id).ToList();
     List<Collection> collections = db.Collection.Where(n => n.seller_id == sesse.seller_id).ToList();
+    List<PayDetail> pd = db.PayDetail.ToList();
 }
 <!-- QUẢN LÝ SẢN PHẨM -->
 <div class="statistics mt-4 mb-4">
@@ -66,7 +67,7 @@
                                     <a href="/SellerManagement/SellerPayDetails/Index">
                                         <h6>QUẢN LÝ HÓA ĐƠN</h6>
                                     </a>
-                                    <h3>6,000</h3>
+                                    <h3>@pd.Count</h3>
                                 </div>
                             </div>
                         </div>

@@ -22,9 +22,9 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#a" role="tab" aria-controls="nav-home" aria-selected="true">Sản phẩm</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#b" role="tab" aria-controls="nav-profile" aria-selected="false">Danh mục</a>
-                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#c" role="tab" aria-controls="nav-contact" aria-selected="false">Danh mục con</a>
-                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#d" role="tab" aria-controls="nav-contact" aria-selected="false">Danh mục con con</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#b" role="tab" aria-controls="nav-profile" aria-selected="false">Danh mục chính</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#c" role="tab" aria-controls="nav-contact" aria-selected="false">Danh mục phụ</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#d" role="tab" aria-controls="nav-contact" aria-selected="false">Danh mục con</a>
                         <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#e" role="tab" aria-controls="nav-contact" aria-selected="false">Người dùng</a>
                         <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#f" role="tab" aria-controls="nav-contact" aria-selected="false">Lượt xem sản phẩm</a>
                         <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#g" role="tab" aria-controls="nav-contact" aria-selected="false">Hóa đơn</a>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="tab-pane fade" id="c" role="tabpanel" aria-labelledby="nav-contact-tab">
                         <br />
-                        <h3 class="text-danger">Thống kê danh mục con</h3>
+                        <h3 class="text-danger">Thống kê danh mục phụ</h3>
                         <ul>
                             @foreach (var item in subCategories)
                             {
@@ -86,7 +86,7 @@
                     </div>
                     <div class="tab-pane fade" id="f" role="tabpanel" aria-labelledby="nav-contact-tab">
                         <br />
-                        <h3 class="text-danger">Top 20 sản phâm có lượt xem nhiều nhất (@countpr.OrderByDescending(n => n.product_view).Take(20).Sum(n => n.product_view))</h3>
+                        <h3 class="text-danger">Top 20 sản phẩm có lượt xem nhiều nhất (@countpr.OrderByDescending(n => n.product_view).Take(20).Sum(n => n.product_view))</h3>
                         @foreach (var item in countpr.OrderByDescending(n => n.product_view).Take(20))
                         {
                             @item.product_name
